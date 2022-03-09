@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.github.ashutoshgngwr.noice",
+      "sha256_cert_fingerprints": [
+        "0A:73:4B:92:D9:71:FD:94:E0:09:7B:24:31:BF:E8:B0:0A:D4:46:C8:83:D3:5E:0F:FB:AF:8F:96:AE:10:6E:0B",
+        "55:2A:E0:7C:EA:BD:E3:BA:10:27:D3:FA:B3:69:D5:1E:4D:E0:3D:7E:2D:2F:5C:72:AD:1E:D5:CD:A5:10:AC:45"
+      ]
+    }
+  }
+]
