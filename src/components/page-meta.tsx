@@ -14,25 +14,34 @@ const query = graphql`
   }
 `;
 
-export default function PageMeta({ description, meta, title }) {
+interface PageMetaProps {
+  description?: string;
+  meta?: React.DetailedHTMLProps<
+    React.MetaHTMLAttributes<HTMLMetaElement>,
+    HTMLMetaElement
+  >[];
+  title?: string;
+}
+
+export default function PageMeta(props: PageMetaProps) {
   const { site } = useStaticQuery(query);
   const { defaultTitle, defaultDescription, twitter } = site.siteMetadata;
-  description = description || defaultDescription;
+  const description = props.description || defaultDescription;
 
   return (
     <Helmet
       htmlAttributes={{ lang: "en" }}
-      title={title}
+      title={props.title}
       titleTemplate={`%s &ndash; ${defaultTitle}`}
       defaultTitle={defaultTitle}
-      meta={[
+      meta={(props.meta || []).concat([
         {
           name: "description",
           content: description,
         },
         {
           property: "og:title",
-          content: title,
+          content: props.title || defaultTitle,
         },
         {
           property: "og:description",
@@ -52,13 +61,13 @@ export default function PageMeta({ description, meta, title }) {
         },
         {
           name: "twitter:title",
-          content: title,
+          content: props.title || defaultTitle,
         },
         {
           name: "twitter:description",
           content: description,
         },
-      ].concat(meta || [])}
+      ])}
     />
   );
 }

@@ -1,3 +1,4 @@
+/** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
   siteMetadata: {
     title: "Noice: Natural calming noise",
