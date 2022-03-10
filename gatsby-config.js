@@ -1,9 +1,14 @@
+const name = "Noice: Natural calming noise";
+const short_name = "Noice";
+
 /** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
   siteMetadata: {
-    title: "Noice: Natural calming noise",
+    name: name,
+    short_name: short_name,
     description: "Relax and boost productivity with minimal background noise.",
-    twitterUsername: "@trynoice",
+    twitter: "@trynoice",
+    site_url: "https://trynoice.com",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -11,13 +16,13 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "Noice: Natural calming noise",
-        short_name: "Noice",
+        name: name,
+        short_name: short_name,
         start_url: "/",
         background_color: "#ffffff",
         theme_color: "#23232d",
         display: "browser",
-        icon: "src/assets/favicon.png",
+        icon: "src/assets/icon-round.png",
         crossOrigin: "anonymous",
       },
     },
