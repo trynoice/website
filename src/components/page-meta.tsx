@@ -1,5 +1,5 @@
 import { useStaticQuery, graphql } from "gatsby";
-import React from "react";
+import React, { ReactElement } from "react";
 import Helmet from "react-helmet";
 import DefaultIcon from "../assets/icon-square.png";
 
@@ -13,7 +13,7 @@ interface PageMetaProps {
   image?: any;
 }
 
-export default function PageMeta(props: PageMetaProps) {
+export default function PageMeta(props: PageMetaProps): ReactElement {
   const { site } = useStaticQuery(graphql`
     query HEAD {
       site {

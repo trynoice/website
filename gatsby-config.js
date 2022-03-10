@@ -12,7 +12,6 @@ module.exports = {
   },
   plugins: [
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sass",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
@@ -27,5 +26,13 @@ module.exports = {
       },
     },
     "gatsby-plugin-offline",
+    "gatsby-plugin-emotion",
+    {
+      resolve: "@chakra-ui/gatsby-plugin",
+      options: {
+        resetCSS: true,
+        isUsingColorMode: false,
+      },
+    },
   ],
 };
