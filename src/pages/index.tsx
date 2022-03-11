@@ -1,13 +1,15 @@
+import { Box, Center } from "@chakra-ui/react";
 import { ReactElement } from "react";
+import NavBar from "../components/nav-bar";
 import PageMeta from "../components/page-meta";
-import { Center } from "@chakra-ui/react";
 
 export default function Home(): ReactElement {
   return (
-    <div>
+    <Box maxW={"full"} bg={"gray.50"}>
       <PageMeta />
+      <NavBar />
       <Hero />
-    </div>
+    </Box>
   );
 }
 

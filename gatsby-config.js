@@ -9,6 +9,8 @@ module.exports = {
     description: "Relax and boost productivity with minimal background noise.",
     twitter: "@trynoice",
     site_url: "https://trynoice.com",
+    playstore_url:
+      "https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -31,7 +33,6 @@ module.exports = {
       resolve: "@chakra-ui/gatsby-plugin",
       options: {
         resetCSS: true,
-        isUsingColorMode: false,
       },
     },
   ],

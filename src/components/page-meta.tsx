@@ -1,4 +1,4 @@
-import { useStaticQuery, graphql } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import React, { ReactElement } from "react";
 import Helmet from "react-helmet";
 import DefaultIcon from "../assets/icon-square.png";
