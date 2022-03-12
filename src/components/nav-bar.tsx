@@ -84,6 +84,7 @@ export default function NavBar(): ReactElement {
         <Button
           as={"a"}
           size={useBreakpointValue({ base: "sm", md: "md" })}
+          colorScheme={"primary"}
           href={site.siteMetadata.playstore_url}
           textTransform={"capitalize"}
         >
