@@ -42,7 +42,7 @@ export default function NavBar(): ReactElement {
       site {
         siteMetadata {
           name
-          short_name
+          tagline
           playstore_url
         }
       }
@@ -63,13 +63,20 @@ export default function NavBar(): ReactElement {
     >
       <HStack align={"center"} spacing={2}>
         <HamburgerNavMenu />
-        <ChakraLink as={GatsbyLink} to="/" _focus={{ boxShadow: "none" }}>
-          <Image
-            src={AppIcon}
-            alt={site.siteMetadata.name}
-            boxSize={[10, 12, 14]}
-          />
-        </ChakraLink>
+        <IconButton
+          as={GatsbyLink}
+          to="/"
+          variant={"link"}
+          _focus={{ boxShadow: "none" }}
+          aria-label={"Go to homepage"}
+          icon={
+            <Image
+              src={AppIcon}
+              alt={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
+              boxSize={[10, 12, 14]}
+            />
+          }
+        />
 
         <Spacer minW={8} />
         <HorizontalNavMenu />
@@ -81,7 +88,7 @@ export default function NavBar(): ReactElement {
           href={site.siteMetadata.playstore_url}
           textTransform={"capitalize"}
         >
-          {`Try ${site.siteMetadata.short_name}`}
+          {`Try ${site.siteMetadata.name}`}
         </Button>
       </HStack>
     </Section>

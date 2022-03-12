@@ -19,7 +19,7 @@ export default function PageMeta(props: PageMetaProps): ReactElement {
       site {
         siteMetadata {
           name
-          short_name
+          tagline
           description
           twitter
           site_url
@@ -28,16 +28,16 @@ export default function PageMeta(props: PageMetaProps): ReactElement {
     }
   `);
 
-  const { name, short_name, description, twitter, site_url } =
-    site.siteMetadata;
+  const { name, tagline, description, twitter, site_url } = site.siteMetadata;
+  const longName = `${name}: ${tagline}`
   const image = `${site_url}${props.image || DefaultIcon}`;
 
   return (
     <Helmet
       htmlAttributes={{ lang: "en" }}
       title={props.title}
-      titleTemplate={`%s &ndash; ${short_name}`}
-      defaultTitle={name}
+      titleTemplate={`%s &ndash; ${name}`}
+      defaultTitle={longName}
       meta={(props.meta || []).concat([
         {
           name: "description",
@@ -45,7 +45,7 @@ export default function PageMeta(props: PageMetaProps): ReactElement {
         },
         {
           property: "og:site_name",
-          content: short_name,
+          content: longName,
         },
         {
           property: "og:image",
@@ -53,7 +53,7 @@ export default function PageMeta(props: PageMetaProps): ReactElement {
         },
         {
           property: "og:title",
-          content: props.title || name,
+          content: props.title || longName,
         },
         {
           property: "og:description",
@@ -81,7 +81,7 @@ export default function PageMeta(props: PageMetaProps): ReactElement {
         },
         {
           name: "twitter:title",
-          content: props.title || name,
+          content: props.title || longName,
         },
         {
           name: "twitter:description",

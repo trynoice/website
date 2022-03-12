@@ -1,11 +1,11 @@
-const name = "Noice: Natural calming noise";
-const short_name = "Noice";
+const name = "Noice";
+const tagline = "Natural calming noise";
 
 /** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
   siteMetadata: {
     name: name,
-    short_name: short_name,
+    tagline: tagline,
     description: "Relax and boost productivity with minimal background noise.",
     twitter: "@trynoice",
     site_url: "https://trynoice.com",
@@ -17,8 +17,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: name,
-        short_name: short_name,
+        name: `${name}: ${tagline}`,
+        short_name: name,
         start_url: "/",
         background_color: "#ffffff",
         theme_color: "#23232d",
