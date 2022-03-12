@@ -79,7 +79,7 @@ function HeroInfo(props: StackProps): ReactElement {
         textAlign={{ base: "center", md: "left" }}
       >
         <Text as={"span"}>{descriptionStart.join(" ")}</Text>
-        <Text as={"span"} textColor={"green.400"}>
+        <Text as={"span"} textColor={"primary.500"}>
           {` ${descriptionEnd.join(" ")}`}
         </Text>
       </Heading>

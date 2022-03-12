@@ -84,7 +84,6 @@ export default function NavBar(): ReactElement {
         <Button
           as={"a"}
           size={useBreakpointValue({ base: "sm", md: "md" })}
-          colorScheme={"green"}
           href={site.siteMetadata.playstore_url}
           textTransform={"capitalize"}
         >
@@ -186,7 +185,7 @@ function NavMenuItem(props: NavMenuItemProps): ReactElement {
       }}
       sx={{
         "&.active": {
-          color: "green.500",
+          color: "primary.500",
         },
       }}
     >
