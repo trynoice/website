@@ -13,7 +13,7 @@ import Section from "./section";
 
 export default function Footer() {
   const fgColor = "gray.300";
-  const bgColor = "gray.700";
+  const bgColor = "gray.900";
   const year = new Date().getFullYear();
 
   return (
@@ -96,16 +96,19 @@ export default function Footer() {
             icon={<FaTwitter />}
             label={"Twitter"}
             href={"https://twitter.com/trynoice"}
+            brandColor={"#1DA1F2"}
           />
           <SocialIcon
             icon={<FaInstagram />}
             label={"Instagram"}
             href={"https://instagram.com/trynoice"}
+            brandColor={"#E1306C"}
           />
           <SocialIcon
             icon={<FaGithub />}
             label={"GitHub"}
             href={"https://github.com/trynoice"}
+            brandColor={"gray.50"}
           />
         </Stack>
       </Stack>
@@ -121,11 +124,20 @@ interface SocialIconProps {
   icon: ReactElement;
   href: string;
   label: string;
+  brandColor: string;
 }
 
 function SocialIcon(props: SocialIconProps): ReactElement {
   return (
-    <ChakraLink href={props.href} aria-label={props.label} fontSize={"2xl"}>
+    <ChakraLink
+      href={props.href}
+      aria-label={props.label}
+      fontSize={"2xl"}
+      textColor={"inherit"}
+      _hover={{
+        textColor: props.brandColor,
+      }}
+    >
       {props.icon}
     </ChakraLink>
   );
