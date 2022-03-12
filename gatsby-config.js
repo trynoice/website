@@ -6,11 +6,13 @@ module.exports = {
   siteMetadata: {
     name: name,
     tagline: tagline,
-    description: "Relax and boost productivity with minimal background noise.",
+    description: "Relax and boost productivity with natural calming noise.",
     twitter: "@trynoice",
     site_url: "https://trynoice.com",
     playstore_url:
       "https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice",
+    fdroid_url:
+      "https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
