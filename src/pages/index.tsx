@@ -11,6 +11,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
 import HeroIllustration from "../assets/hero-illustration.svg";
 import { FDroidBadge, PlayStoreBadge } from "../components/app-store-badge";
+import Footer from "../components/footer";
 import NavBar from "../components/nav-bar";
 import PageMeta from "../components/page-meta";
 import Section from "../components/section";
@@ -21,6 +22,7 @@ export default function Home(): ReactElement {
       <PageMeta />
       <NavBar />
       <Hero />
+      <Footer />
     </Box>
   );
 }
