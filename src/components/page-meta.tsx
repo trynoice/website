@@ -29,7 +29,7 @@ export default function PageMeta(props: PageMetaProps): ReactElement {
   `);
 
   const { name, tagline, description, twitter, site_url } = site.siteMetadata;
-  const longName = `${name}: ${tagline}`
+  const longName = `${name}: ${tagline}`;
   const image = `${site_url}${props.image || DefaultIcon}`;
 
   return (
