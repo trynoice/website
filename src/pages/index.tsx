@@ -68,7 +68,7 @@ function Hero(props: HeroProps): ReactElement {
         direction={{ base: "column", md: "row" }}
         align={"center"}
         spacing={24}
-        py={{ base: 18, md: 36 }}
+        py={{ base: 20, md: 36 }}
       >
         <VStack
           flex={1}
@@ -137,7 +137,7 @@ function Pricing(props: PricingProps): ReactElement {
   );
 
   return (
-    <Section id="pricing" py={{ base: 18, md: 36 }}>
+    <Section id="pricing" py={{ base: 20, md: 36 }}>
       <Stack
         mb={8}
         direction={{ base: "column", md: "row" }}
