@@ -7,6 +7,7 @@ import {
   ListIcon,
   ListItem,
   Stack,
+  StackDivider,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -67,7 +68,7 @@ function Hero(props: HeroProps): ReactElement {
         direction={{ base: "column", md: "row" }}
         align={"center"}
         spacing={24}
-        py={{ base: 16, md: 36 }}
+        py={{ base: 18, md: 36 }}
       >
         <VStack
           flex={1}
@@ -126,7 +127,7 @@ function Pricing(props: PricingProps): ReactElement {
   );
 
   return (
-    <Section id="pricing" py={{ base: 16, md: 36 }}>
+    <Section id="pricing" py={{ base: 18, md: 36 }}>
       <Stack
         mb={8}
         direction={{ base: "column", md: "row" }}
@@ -136,7 +137,7 @@ function Pricing(props: PricingProps): ReactElement {
       >
         <Heading
           width={{ base: "100%", md: "40%" }}
-          size={"lg"}
+          size={"xl"}
           lineHeight={1.33}
           textAlign={"center"}
         >
@@ -177,6 +178,7 @@ function Pricing(props: PricingProps): ReactElement {
         ]}
         monthlyPricesInr={monthlyPricesInr}
       />
+      <PremiumPlanPricing plans={props.premiumPlans} />
     </Section>
   );
 }
@@ -195,7 +197,6 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
 
 function TierInfo(props: TierInfoProps): ReactElement {
   const minMonthlyPrice = Math.min(...props.monthlyPricesInr);
-  const maxMonthlyPrice = Math.max(...props.monthlyPricesInr);
 
   return (
     <Stack
@@ -223,16 +224,77 @@ function TierInfo(props: TierInfoProps): ReactElement {
 
       {props.monthlyPricesInr.length > 0 ? (
         <Text flex={1} fontSize={{ base: "lg", md: "xl" }}>
-          <Text as="span" fontSize={{ base: "2xl", md: "3xl" }}>
-            {numberFormatter.format(minMonthlyPrice)}
-            {" - "}
-            {numberFormatter.format(maxMonthlyPrice)}
-          </Text>{" "}
-          per month
+          Starts at {numberFormatter.format(minMonthlyPrice)}/month
         </Text>
       ) : (
         <Box flex={1} />
       )}
     </Stack>
+  );
+}
+
+interface PremiumPlanPricingProps {
+  plans: PremiumPlan[];
+}
+
+function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
+  props.plans.sort((a, b) =>
+    a.billingPeriodMonths > b.billingPeriodMonths ? -1 : 1
+  );
+
+  return (
+    <VStack py={{ base: 12, md: 24 }}>
+      <Heading mb={8} color={"purple.500"} size={"lg"} textAlign={"center"}>
+        Premium Plans
+      </Heading>
+      <Stack
+        w={"full"}
+        maxW={{ base: "sm", lg: "full" }}
+        direction={{ base: "column", lg: "row" }}
+        shadow="base"
+        borderWidth="1px"
+        borderColor={"gray.200"}
+        borderRadius={"xl"}
+        spacing={0}
+        divider={<StackDivider borderColor={"gray.200"} />}
+      >
+        {props.plans.map((plan, i) => (
+          <VStack
+            p={8}
+            flex={1}
+            spacing={6}
+            alignItems={"center"}
+            textAlign={"center"}
+          >
+            <Text fontSize={"2xl"}>
+              {plan.billingPeriodMonths == 1
+                ? "Monthly"
+                : plan.billingPeriodMonths == 3
+                ? "Quarterly"
+                : plan.billingPeriodMonths == 6
+                ? "Bi-yearly"
+                : plan.billingPeriodMonths == 12
+                ? "Yearly"
+                : `Every ${plan.billingPeriodMonths} months`}
+            </Text>
+            <Text>
+              <Text as="span" fontSize={"5xl"}>
+                {numberFormatter.format(
+                  plan.priceInIndianPaise / plan.billingPeriodMonths / 100
+                )}
+              </Text>
+              /month
+              <br />
+              for {numberFormatter.format(plan.priceInIndianPaise / 100)}
+              <br />
+              every{" "}
+              {plan.billingPeriodMonths == 1
+                ? "month"
+                : `${plan.billingPeriodMonths} months`}
+            </Text>
+          </VStack>
+        ))}
+      </Stack>
+    </VStack>
   );
 }
