@@ -117,13 +117,23 @@ interface PricingProps {
   premiumPlans: PremiumPlan[];
 }
 
+const numberFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "INR",
+  minimumFractionDigits: 0,
+});
+
 function Pricing(props: PricingProps): ReactElement {
   const maxTrialPeriod = Math.max(
     ...props.premiumPlans.map((p) => p.trialPeriodDays)
   );
 
-  const monthlyPricesInr = props.premiumPlans.map(
-    (p) => p.priceInIndianPaise / 100 / p.billingPeriodMonths
+  const minMonthlyPrice = numberFormatter.format(
+    Math.min(
+      ...props.premiumPlans.map(
+        (p) => p.priceInIndianPaise / 100 / p.billingPeriodMonths
+      )
+    )
   );
 
   return (
@@ -165,7 +175,6 @@ function Pricing(props: PricingProps): ReactElement {
           "LQ/MQ audio streaming",
           "Sleep/Wake timers on Android",
         ]}
-        monthlyPricesInr={[]}
       />
       <Divider />
       <TierInfo
@@ -176,7 +185,7 @@ function Pricing(props: PricingProps): ReactElement {
           "HQ/UHQ audio streaming",
           "Offline Playback on Android",
         ]}
-        monthlyPricesInr={monthlyPricesInr}
+        pricing={`Starts at ${minMonthlyPrice}/month`}
       />
       <PremiumPlanPricing plans={props.premiumPlans} />
     </Section>
@@ -186,18 +195,10 @@ function Pricing(props: PricingProps): ReactElement {
 interface TierInfoProps {
   tier: string;
   benefits: string[];
-  monthlyPricesInr: number[];
+  pricing?: string;
 }
 
-const numberFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "INR",
-  minimumFractionDigits: 0,
-});
-
 function TierInfo(props: TierInfoProps): ReactElement {
-  const minMonthlyPrice = Math.min(...props.monthlyPricesInr);
-
   return (
     <Stack
       my={8}
@@ -221,14 +222,9 @@ function TierInfo(props: TierInfoProps): ReactElement {
           </ListItem>
         ))}
       </List>
-
-      {props.monthlyPricesInr.length > 0 ? (
-        <Text flex={1} fontSize={{ base: "lg", md: "xl" }}>
-          Starts at {numberFormatter.format(minMonthlyPrice)}/month
-        </Text>
-      ) : (
-        <Box flex={1} />
-      )}
+      <Text flex={1} fontSize={{ base: "lg", md: "xl" }}>
+        {props.pricing}
+      </Text>
     </Stack>
   );
 }
