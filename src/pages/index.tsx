@@ -6,6 +6,7 @@ import {
   List,
   ListIcon,
   ListItem,
+  SimpleGrid,
   Stack,
   StackDivider,
   Text,
@@ -64,14 +65,13 @@ function Hero(props: HeroProps): ReactElement {
 
   return (
     <Section>
-      <Stack
-        direction={{ base: "column", md: "row" }}
-        align={"center"}
+      <SimpleGrid
+        columns={{ base: 1, md: 2 }}
+        alignItems={"center"}
         spacing={24}
         py={{ base: 20, md: 36 }}
       >
         <VStack
-          flex={1}
           spacing={{ base: 6, md: 10 }}
           align={{ base: "center", md: "flex-start" }}
         >
@@ -97,12 +97,11 @@ function Hero(props: HeroProps): ReactElement {
         </VStack>
 
         <Image
-          flex={1}
           src={HeroIllustration}
           w={"full"}
           maxW={{ base: "sm", md: "2xl" }}
         />
-      </Stack>
+      </SimpleGrid>
     </Section>
   );
 }
