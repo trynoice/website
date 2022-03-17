@@ -1,7 +1,9 @@
 import {
   Box,
   Divider,
+  Flex,
   Heading,
+  HStack,
   Image,
   List,
   ListIcon,
@@ -14,13 +16,17 @@ import {
 } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheckCircle, FaMixer } from "react-icons/fa";
+import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
 import HeroIllustration from "../assets/hero-illustration.svg";
+import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import { FDroidBadge, PlayStoreBadge } from "../components/app-store-badge";
 import Footer from "../components/footer";
 import NavBar from "../components/nav-bar";
 import PageMeta from "../components/page-meta";
 import Section from "../components/section";
+
+const sectionPadding = { base: 16, md: 28 };
 
 export default function Home(): ReactElement {
   const { site, allPlans } = useStaticQuery(graphql`
@@ -49,6 +55,7 @@ export default function Home(): ReactElement {
       <PageMeta />
       <NavBar />
       <Hero description={site.siteMetadata.description} />
+      <Features />
       <Pricing premiumPlans={plans} />
       <Footer />
     </Box>
@@ -64,12 +71,11 @@ function Hero(props: HeroProps): ReactElement {
   const descriptionEnd = descriptionStart.splice(-3);
 
   return (
-    <Section>
+    <Section py={sectionPadding}>
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
         alignItems={"center"}
         spacing={24}
-        py={{ base: 20, md: 36 }}
       >
         <VStack
           spacing={{ base: 6, md: 10 }}
@@ -106,6 +112,80 @@ function Hero(props: HeroProps): ReactElement {
   );
 }
 
+function Features(): ReactElement {
+  return (
+    <Section bg={"yellow.100"} py={sectionPadding}>
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        align={"center"}
+        spacing={24}
+      >
+        <Image
+          src={NatureOnScreenIllustration}
+          flex={1}
+          w={"full"}
+          maxW={{ base: "sm", md: "2xl" }}
+        />
+
+        <VStack flex={1} spacing={4} align={"flex-start"}>
+          <Heading size={"xl"} color={"yellow.600"}>
+            An immersive sound experience
+          </Heading>
+
+          <Text>
+            Our 3rd generation sound engine adds random variability to sounds,
+            offering more natural-sounding ambient atmospheres.
+          </Text>
+
+          <VStack
+            spacing={4}
+            align={"flex-start"}
+            divider={<StackDivider borderColor={"yellow.200"} />}
+          >
+            <FeatureItem
+              icon={<MdLibraryMusic />}
+              title={"Diverse sound library"}
+            />
+            <FeatureItem
+              icon={<FaMixer />}
+              title={"Naturally varying sounds"}
+            />
+            <FeatureItem
+              icon={<MdCastConnected />}
+              title={"Chromecast enabled"}
+            />
+          </VStack>
+        </VStack>
+      </Stack>
+    </Section>
+  );
+}
+
+interface FeatureItemProps {
+  title: string;
+  icon: ReactElement;
+}
+
+function FeatureItem(props: FeatureItemProps): ReactElement {
+  return (
+    <HStack align={"center"} spacing={2}>
+      <Flex
+        w={8}
+        h={8}
+        align={"center"}
+        justify={"center"}
+        rounded={"full"}
+        bg={"yellow.200"}
+        color={"yellow.600"}
+        fontSize={"xl"}
+      >
+        {props.icon}
+      </Flex>
+      <Text fontWeight={500}>{props.title}</Text>
+    </HStack>
+  );
+}
+
 interface PremiumPlan {
   billingPeriodMonths: number;
   priceInIndianPaise: number;
@@ -136,7 +216,7 @@ function Pricing(props: PricingProps): ReactElement {
   );
 
   return (
-    <Section id="pricing" py={{ base: 20, md: 36 }}>
+    <Section id="pricing" py={sectionPadding}>
       <Stack
         mb={8}
         direction={{ base: "column", md: "row" }}
@@ -238,7 +318,7 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
   );
 
   return (
-    <VStack py={{ base: 12, md: 24 }}>
+    <VStack py={{ base: 12, md: 16 }}>
       <Heading mb={8} color={"purple.500"} size={"lg"} textAlign={"center"}>
         Premium Plans
       </Heading>
@@ -246,14 +326,14 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
         w={"full"}
         maxW={{ base: "sm", lg: "full" }}
         direction={{ base: "column", lg: "row" }}
-        shadow="base"
-        borderWidth="1px"
+        shadow={"base"}
+        borderWidth={1}
         borderColor={"gray.200"}
         borderRadius={"xl"}
         spacing={0}
         divider={<StackDivider borderColor={"gray.200"} />}
       >
-        {props.plans.map((plan, i) => (
+        {props.plans.map((plan) => (
           <VStack
             p={8}
             flex={1}
