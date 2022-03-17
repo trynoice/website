@@ -133,8 +133,8 @@ function Features(): ReactElement {
           </Heading>
 
           <Text>
-            Our 3rd generation sound engine adds random variability to sounds,
-            offering more natural-sounding ambient atmospheres.
+            Our 3rd generation sound engine brings randomised variability to
+            sounds, offering more natural-sounding ambient atmospheres.
           </Text>
 
           <VStack
@@ -216,7 +216,7 @@ function Pricing(props: PricingProps): ReactElement {
   );
 
   return (
-    <Section id="pricing" py={sectionPadding}>
+    <Section id={"pricing"} py={sectionPadding}>
       <Stack
         mb={8}
         direction={{ base: "column", md: "row" }}

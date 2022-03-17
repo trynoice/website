@@ -54,6 +54,7 @@ export default function NavBar(): ReactElement {
       as="header"
       position={"sticky"}
       top={0}
+      zIndex={1000}
       py={isScrolled ? 3 : 6}
       bg={isScrolled ? "inherit" : "transparent"}
       boxShadow={isScrolled ? "sm" : "none"}
@@ -73,7 +74,7 @@ export default function NavBar(): ReactElement {
             <Image
               src={AppIcon}
               alt={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
-              boxSize={[10, 12, 14]}
+              boxSize={{ base: 10, md: 12 }}
             />
           }
         />
@@ -85,7 +86,7 @@ export default function NavBar(): ReactElement {
           as={"a"}
           size={useBreakpointValue({ base: "sm", md: "md" })}
           colorScheme={"primary"}
-          href={site.siteMetadata.playstore_url}
+          href={"#install-app"}
           textTransform={"capitalize"}
         >
           {`Try ${site.siteMetadata.name}`}

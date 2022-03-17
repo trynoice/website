@@ -67,7 +67,7 @@ export default function Footer() {
           </ChakraLink>
         </Stack>
 
-        <Stack align={"flex-start"}>
+        <Stack id={"install-app"} align={"flex-start"}>
           <ListHeader>Install App</ListHeader>
           <PlayStoreBadge />
           <FDroidBadge />
