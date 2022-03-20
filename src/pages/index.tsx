@@ -322,24 +322,24 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
       <Heading mb={8} color={"purple.500"} size={"lg"} textAlign={"center"}>
         Premium Plans
       </Heading>
-      <Stack
+      <SimpleGrid
         w={"full"}
-        maxW={{ base: "sm", lg: "full" }}
-        direction={{ base: "column", lg: "row" }}
-        shadow={"base"}
-        borderWidth={1}
-        borderColor={"gray.200"}
-        borderRadius={"xl"}
-        spacing={0}
-        divider={<StackDivider borderColor={"gray.200"} />}
+        columns={{ base: 1, md: 2, lg: 4 }}
+        spacing={8}
+        alignItems={"center"}
+        justifyItems={"center"}
       >
         {props.plans.map((plan) => (
           <VStack
+            w={"full"}
+            maxW={"xs"}
             p={8}
-            flex={1}
             spacing={6}
             alignItems={"center"}
             textAlign={"center"}
+            bg={"white"}
+            shadow={"lg"}
+            borderRadius={"lg"}
           >
             <Text fontSize={"2xl"}>
               {plan.billingPeriodMonths == 1
@@ -369,7 +369,7 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
             </Text>
           </VStack>
         ))}
-      </Stack>
+      </SimpleGrid>
     </VStack>
   );
 }
