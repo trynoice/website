@@ -16,6 +16,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
+import { AnchorLink } from "gatsby-plugin-anchor-links";
 import {
   Fragment,
   MouseEventHandler,
@@ -83,10 +84,10 @@ export default function NavBar(): ReactElement {
         <HorizontalNavMenu />
 
         <Button
-          as={"a"}
+          as={AnchorLink}
           size={useBreakpointValue({ base: "sm", md: "md" })}
           colorScheme={"primary"}
-          href={"#install-app"}
+          to={"#install-app"}
           textTransform={"capitalize"}
         >
           {`Try ${site.siteMetadata.name}`}
@@ -101,7 +102,7 @@ interface MenuItem {
   href: string;
 }
 
-const MenuItems: Array<MenuItem> = [
+const menuItems: Array<MenuItem> = [
   {
     title: "Pricing",
     href: "/#pricing",
@@ -143,7 +144,7 @@ function HamburgerNavMenu(): ReactElement {
           <DrawerCloseButton />
           <DrawerBody py={8}>
             <VStack align={"stretch"} spacing={2}>
-              {MenuItems.map((item) => (
+              {menuItems.map((item) => (
                 <NavMenuItem href={item.href} onClick={onClose}>
                   {item.title}
                 </NavMenuItem>
@@ -159,7 +160,7 @@ function HamburgerNavMenu(): ReactElement {
 function HorizontalNavMenu(): ReactElement {
   return (
     <HStack display={{ base: "none", md: "flex" }} spacing={8} px={8}>
-      {MenuItems.map((item) => (
+      {menuItems.map((item) => (
         <NavMenuItem href={item.href}>{item.title}</NavMenuItem>
       ))}
     </HStack>
@@ -175,7 +176,8 @@ interface NavMenuItemProps {
 function NavMenuItem(props: NavMenuItemProps): ReactElement {
   return (
     <ChakraLink
-      as={GatsbyLink}
+      as={props.href.indexOf("#") > 0 ? AnchorLink : GatsbyLink}
+      // @ts-ignore: Ignore the following error because of AnchorLink
       activeClassName={"active"}
       to={props.href}
       onClick={props.onClick}

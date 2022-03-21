@@ -1,6 +1,5 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Divider,
   Flex,
   Heading,
@@ -23,9 +22,7 @@ import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
 import HeroIllustration from "../assets/hero-illustration.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import { FDroidBadge, PlayStoreBadge } from "../components/app-store-badge";
-import Footer from "../components/footer";
-import NavBar from "../components/nav-bar";
-import PageMeta from "../components/page-meta";
+import Page from "../components/page";
 import Section from "../components/section";
 
 const sectionPadding = { base: 16, md: 28 };
@@ -53,15 +50,12 @@ export default function Home(): ReactElement {
 
   const plans: PremiumPlan[] = allPlans.edges.map((e: any) => e["node"]);
   return (
-    <Box maxW={"full"} minH={"100vh"} bg={"gray.50"}>
-      <PageMeta />
-      <NavBar />
+    <Page>
       <Hero description={site.siteMetadata.description} />
       <Features />
       <Reviews />
       <Pricing premiumPlans={plans} />
-      <Footer />
-    </Box>
+    </Page>
   );
 }
 
