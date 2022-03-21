@@ -1,3 +1,4 @@
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 import {
   Box,
   Divider,
@@ -5,6 +6,7 @@ import {
   Heading,
   HStack,
   Image,
+  Link,
   List,
   ListIcon,
   ListItem,
@@ -16,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
-import { FaCheckCircle, FaMixer } from "react-icons/fa";
+import { FaCheckCircle, FaMixer, FaQuoteLeft } from "react-icons/fa";
 import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
 import HeroIllustration from "../assets/hero-illustration.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
@@ -56,6 +58,7 @@ export default function Home(): ReactElement {
       <NavBar />
       <Hero description={site.siteMetadata.description} />
       <Features />
+      <Reviews />
       <Pricing premiumPlans={plans} />
       <Footer />
     </Box>
@@ -186,6 +189,91 @@ function FeatureItem(props: FeatureItemProps): ReactElement {
   );
 }
 
+interface Review {
+  content: string;
+  reviewer: string;
+  googlePlayId: string;
+}
+
+const reviews: Array<Review> = [
+  {
+    content:
+      "Very nicely done app. I have tinnitus and this app helps me concentrate and sleep. In my opinion the UI is great and straight forward to use and the sounds are nice.",
+    reviewer: "Miika Vuorio",
+    googlePlayId:
+      "gp%3AAOqpTOExQCoof8Y2-Pk0kAwTNWmzSiT5X1aEyRRL1-soj0j-PBQ4kocjE4Dw_s06C_kw3c3TCdm2e04ldyaqfQ",
+  },
+  {
+    content:
+      "Great little app, just what I needed. I love mixing sounds and it's easy to use. I like the different themes and think the sleep timer is a nice touch. The recorded sounds are all great quality and loop very smoothly and I love that you can change their frequency and volume individually. No more using YouTube white noise videos for me! One thing I would like would be the option to record or add your own sounds.",
+    reviewer: "Polly F",
+    googlePlayId:
+      "gp%3AAOqpTOHYxIkRO7lmuat42icbdfJw9wvmHWT6yGiGL0tX4_bGU8Klx7qk14MyLg2EpZbrZVPsUDUD8oDaNk7E9Q",
+  },
+  {
+    content:
+      "Noice is the perfect background noise app. I use it for reading, sleeping, or just relaxing after a long day. No ads, infinite loops, and excellent sample quality. I couldn't have asked for anything more!",
+    reviewer: "Will Burton-Edwards",
+    googlePlayId:
+      "gp%3AAOqpTOEW5jVEsjbvOxNTHRYujcei9EDeAvpNy7lDa_9UxUX5VrMjpFxglUp53_tiq9U4XXAsoUQMnQhQE4dbVA",
+  },
+];
+
+function Reviews(): ReactElement {
+  return (
+    <Section py={sectionPadding}>
+      <VStack w={"full"} spacing={16} alignItems={"center"}>
+        <Heading color={"purple.500"}>Loved by people</Heading>
+        {reviews.map((r) => (
+          <ReviewCard review={r} />
+        ))}
+      </VStack>
+    </Section>
+  );
+}
+
+interface ReviewCardProps {
+  review: Review;
+}
+
+function ReviewCard(props: ReviewCardProps) {
+  const cardWidth = "3xl";
+
+  return (
+    <VStack
+      maxW={cardWidth}
+      w={"full"}
+      p={8}
+      rounded={"xl"}
+      bg={"white"}
+      boxShadow={"lg"}
+      position={"relative"}
+    >
+      <Text
+        position={"absolute"}
+        left={8}
+        top={-3}
+        fontSize={"2xl"}
+        color={"purple.500"}
+      >
+        <FaQuoteLeft />
+      </Text>
+      <Text fontWeight={"medium"} pb={4} textAlign={"start"}>
+        {props.review.content}
+      </Text>
+      <Text w={"full"} fontWeight={"bold"} fontSize={"sm"} textAlign={"end"}>
+        &mdash; {props.review.reviewer}
+        <Link
+          href={`https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice&reviewId=${props.review.googlePlayId}`}
+          isExternal
+        >
+          <ExternalLinkIcon verticalAlign={"top"} mx={2} />
+        </Link>
+      </Text>
+    </VStack>
+  );
+}
+
 interface PremiumPlan {
   billingPeriodMonths: number;
   priceInIndianPaise: number;
@@ -231,7 +319,7 @@ function Pricing(props: PricingProps): ReactElement {
           textAlign={"center"}
         >
           Flexible Plans for{" "}
-          <Text as={"span"} color={"purple.500"}>
+          <Text as={"span"} color={"pink.500"}>
             Your Needs
           </Text>
         </Heading>
@@ -295,7 +383,7 @@ function TierInfo(props: TierInfoProps): ReactElement {
             <ListIcon
               as={FaCheckCircle}
               verticalAlign={"middle"}
-              color={"primary.500"}
+              color={"pink.500"}
             />
             {b}
           </ListItem>
@@ -319,7 +407,7 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
 
   return (
     <VStack py={{ base: 12, md: 16 }}>
-      <Heading mb={8} color={"purple.500"} size={"lg"} textAlign={"center"}>
+      <Heading mb={8} color={"pink.500"} size={"lg"} textAlign={"center"}>
         Premium Plans
       </Heading>
       <SimpleGrid
