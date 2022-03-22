@@ -29,7 +29,7 @@ const sectionPadding = { base: 16, md: 28 };
 
 export default function Home(): ReactElement {
   const { site, allPlans } = useStaticQuery(graphql`
-    query HERO {
+    query {
       site {
         siteMetadata {
           description

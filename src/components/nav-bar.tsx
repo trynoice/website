@@ -39,7 +39,7 @@ export default function NavBar(): ReactElement {
   });
 
   const { site } = useStaticQuery(graphql`
-    query NAVBAR {
+    query {
       site {
         siteMetadata {
           name
@@ -55,7 +55,6 @@ export default function NavBar(): ReactElement {
       as="header"
       position={"sticky"}
       top={0}
-      zIndex={1000} // so relatively positioned content doesn't stack above this layer
       py={isScrolled ? 3 : 6}
       bg={isScrolled ? "inherit" : "transparent"}
       boxShadow={isScrolled ? "sm" : "none"}

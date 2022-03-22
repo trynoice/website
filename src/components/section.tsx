@@ -9,7 +9,7 @@ import { ReactElement } from "react";
  */
 export default function Section(props: ContainerProps): ReactElement {
   return (
-    <Container py={4} px={[4, 8, 12]} maxW={"full"} {...props}>
+    <Container py={8} px={[4, 8, 12]} maxW={"full"} {...props}>
       <Container maxW={"6xl"} p={0}>
         {props.children}
       </Container>

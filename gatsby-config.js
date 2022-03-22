@@ -44,5 +44,17 @@ module.exports = {
         duration: 500,
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/content`,
+      },
+    },
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: ["gatsby-remark-copy-linked-files"],
+      },
+    },
   ],
 };

@@ -19,7 +19,7 @@ interface PageProps {
 
 export default function Page(props: PageProps): ReactElement {
   const { site } = useStaticQuery(graphql`
-    query HEAD {
+    query {
       site {
         siteMetadata {
           name
@@ -51,7 +51,7 @@ export default function Page(props: PageProps): ReactElement {
       <Helmet
         htmlAttributes={{ lang: "en" }}
         title={props.title}
-        titleTemplate={`%s &ndash; ${name}`}
+        titleTemplate={`%s – ${name}`}
         defaultTitle={longName}
         meta={(props.meta || []).concat([
           {

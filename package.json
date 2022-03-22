@@ -16,6 +16,7 @@
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "chakra-ui-markdown-renderer": "^4.0.0",
     "framer-motion": "^6.2.8",
     "gatsby": "^4.9.2",
     "gatsby-plugin-anchor-links": "^1.2.1",
@@ -23,10 +24,15 @@
     "gatsby-plugin-manifest": "^4.9.1",
     "gatsby-plugin-offline": "^5.9.1",
     "gatsby-plugin-react-helmet": "^5.9.0",
+    "gatsby-remark-copy-linked-files": "^5.10.0",
+    "gatsby-source-filesystem": "^4.10.0",
+    "gatsby-transformer-remark": "^5.10.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.3.1",
+    "react-markdown": "^8.0.1",
+    "remark-gfm": "^3.0.1",
     "sass": "^1.49.9"
   },
   "devDependencies": {
