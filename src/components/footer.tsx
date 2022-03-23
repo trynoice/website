@@ -68,7 +68,6 @@ export default function Footer() {
         </Stack>
 
         <Stack id={"install-app"} align={"flex-start"}>
-          <ListHeader>Install App</ListHeader>
           <PlayStoreBadge />
           <FDroidBadge />
         </Stack>

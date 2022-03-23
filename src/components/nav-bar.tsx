@@ -6,6 +6,7 @@ import {
   DrawerCloseButton,
   DrawerContent,
   DrawerOverlay,
+  Hide,
   HStack,
   IconButton,
   Image,
@@ -22,22 +23,12 @@ import {
   MouseEventHandler,
   ReactElement,
   ReactNode,
-  useEffect,
   useRef,
-  useState,
 } from "react";
 import AppIcon from "../assets/icon.svg";
 import Section from "./section";
 
 export default function NavBar(): ReactElement {
-  const [isScrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.pageYOffset > 0);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  });
-
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -51,19 +42,12 @@ export default function NavBar(): ReactElement {
   `);
 
   return (
-    <Section
-      as="header"
-      position={"sticky"}
-      top={0}
-      py={isScrolled ? 3 : 6}
-      bg={isScrolled ? "inherit" : "transparent"}
-      boxShadow={isScrolled ? "sm" : "none"}
-      transitionProperty={"box-shadow, padding, background-color"}
-      transitionDuration={"0.5s"}
-      transitionTimingFunction={"cubic-bezier(0.075, 0.82, 0.165, 1)"}
-    >
+    <Section as="header" py={6}>
       <HStack align={"center"} spacing={2}>
-        <HamburgerNavMenu />
+        <Hide above={"md"}>
+          <HamburgerNavMenu />
+        </Hide>
+
         <IconButton
           as={GatsbyLink}
           to="/"
@@ -79,14 +63,18 @@ export default function NavBar(): ReactElement {
           }
         />
 
-        <Spacer minW={8} />
-        <HorizontalNavMenu />
+        <Spacer />
+
+        <Hide below={"md"}>
+          <HorizontalNavMenu />
+        </Hide>
 
         <Button
-          as={AnchorLink}
+          as={"a"}
           size={useBreakpointValue({ base: "sm", md: "md" })}
           colorScheme={"primary"}
-          to={"#install-app"}
+          href={site.siteMetadata.playstore_url}
+          target={"_blank"}
           textTransform={"capitalize"}
         >
           {`Try ${site.siteMetadata.name}`}
@@ -123,7 +111,6 @@ function HamburgerNavMenu(): ReactElement {
   return (
     <Fragment>
       <IconButton
-        display={{ base: "block", md: "none" }}
         icon={<HamburgerIcon boxSize={5} />}
         onClick={onOpen}
         variant={"ghost"}
@@ -158,7 +145,7 @@ function HamburgerNavMenu(): ReactElement {
 
 function HorizontalNavMenu(): ReactElement {
   return (
-    <HStack display={{ base: "none", md: "flex" }} spacing={8} px={8}>
+    <HStack spacing={8} px={8}>
       {menuItems.map((item) => (
         <NavMenuItem href={item.href}>{item.title}</NavMenuItem>
       ))}
