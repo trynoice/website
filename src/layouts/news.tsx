@@ -1,12 +1,13 @@
 import { Divider, Heading, Text, VStack } from "@chakra-ui/react";
 import { graphql } from "gatsby";
-import MarkdownRenderer from "../components/markdown-renderer";
+import { MDXRenderer } from "gatsby-plugin-mdx";
+import ChakraMDXProvider from "../components/chakra-mdx-provider";
 import Page from "../components/page";
 import Section from "../components/section";
 
 export default function NewsLayout({ data }: any) {
-  const { markdownRemark } = data;
-  const { frontmatter, rawMarkdownBody, excerpt } = markdownRemark;
+  const { mdx } = data;
+  const { frontmatter, body, excerpt } = mdx;
   return (
     <Page title={frontmatter.title} description={excerpt}>
       <Section as={"article"} maxW={"4xl"} py={{ base: 12, md: 16 }}>
@@ -17,8 +18,9 @@ export default function NewsLayout({ data }: any) {
           <Text>{frontmatter.date}</Text>
           <Divider />
         </VStack>
-
-        <MarkdownRenderer content={rawMarkdownBody} />
+        <ChakraMDXProvider>
+          <MDXRenderer>{body}</MDXRenderer>
+        </ChakraMDXProvider>
       </Section>
     </Page>
   );
@@ -26,9 +28,9 @@ export default function NewsLayout({ data }: any) {
 
 export const pageQuery = graphql`
   query ($id: String!) {
-    markdownRemark(id: { eq: $id }) {
-      rawMarkdownBody
-      excerpt(format: PLAIN, pruneLength: 160)
+    mdx(id: { eq: $id }) {
+      body
+      excerpt(pruneLength: 160)
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title

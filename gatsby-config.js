@@ -3,6 +3,7 @@ const tagline = "Natural calming noise";
 
 /** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
+  trailingSlash: "never",
   siteMetadata: {
     name: name,
     tagline: tagline,
@@ -50,9 +51,10 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: "gatsby-plugin-mdx",
       options: {
-        plugins: ["gatsby-remark-copy-linked-files"],
+        extensions: [".md", ".mdx"],
+        gatsbyRemarkPlugins: ["gatsby-remark-copy-linked-files"],
       },
     },
   ],
