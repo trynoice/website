@@ -12,7 +12,12 @@ export default function DefaultLayout({ data }: any) {
     <Page title={frontmatter.title} description={excerpt}>
       <Section as={"article"} maxW={"4xl"} py={{ base: 12, md: 16 }}>
         <VStack as={"header"} mb={10} spacing={2} align={"flex-start"}>
-          <Heading as={"h1"} size={"2xl"} color={"primary.500"}>
+          <Heading
+            as={"h1"}
+            size={"2xl"}
+            lineHeight={"shorter"}
+            color={"primary.500"}
+          >
             {frontmatter.title}
           </Heading>
           {frontmatter.date ? <Text>{frontmatter.date}</Text> : null}
