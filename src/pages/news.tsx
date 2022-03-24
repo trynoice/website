@@ -22,12 +22,12 @@ export default function News(): ReactElement {
     {
       allMdx(
         filter: { slug: { glob: "news/**" } }
-        sort: { fields: frontmatter___date, order: DESC }
+        sort: { fields: frontmatter___publishedAt, order: DESC }
       ) {
         nodes {
           slug
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            publishedAt(formatString: "MMMM DD, YYYY")
             title
           }
         }
@@ -37,7 +37,7 @@ export default function News(): ReactElement {
 
   const posts: Array<NewsItem> = allMdx.nodes.map((n: any) => ({
     title: n.frontmatter.title,
-    date: n.frontmatter.date,
+    date: n.frontmatter.publishedAt,
     slug: n.slug,
   }));
 

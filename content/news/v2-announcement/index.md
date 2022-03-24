@@ -1,7 +1,7 @@
 ---
 layout: default
-date: 2021-09-21T18:16:00+05:30
 title: v2 Announcement
+publishedAt: 2021-09-21T18:16:00+05:30
 ---
 
 When we began in 2019, Noice was just under 3 MBs packed with tiny and

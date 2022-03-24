@@ -20,7 +20,15 @@ export default function DefaultLayout({ data }: any) {
           >
             {frontmatter.title}
           </Heading>
-          {frontmatter.date ? <Text>{frontmatter.date}</Text> : null}
+          <Text>
+            {frontmatter.publishedAt ? (
+              <Text as={"span"}>Published on {frontmatter.publishedAt}</Text>
+            ) : null}
+            {frontmatter.updatedAt ? (
+              <Text as={"span"}>, last updated on {frontmatter.updatedAt}</Text>
+            ) : null}
+          </Text>
+
           <Divider />
         </VStack>
         <ChakraMDXProvider>
@@ -37,8 +45,9 @@ export const pageQuery = graphql`
       body
       excerpt(pruneLength: 160)
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
         title
+        publishedAt(formatString: "MMMM DD, YYYY")
+        updatedAt(formatString: "MMMM DD, YYYY")
       }
     }
   }

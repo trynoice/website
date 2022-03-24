@@ -27,7 +27,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
   const result = await graphql(`
     {
-      allMdx(sort: { order: DESC, fields: [frontmatter___date] }) {
+      allMdx {
         nodes {
           id
           slug
@@ -48,7 +48,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   result.data.allMdx.nodes.forEach((node) => {
     createPage({
       path: node.slug,
-      component: path.resolve(`src/layouts/${node.frontmatter.layout}.tsx`),
+      component: path.resolve(
+        `src/layouts/${node.frontmatter.layout || "default"}.tsx`
+      ),
       context: {
         id: node.id,
       },
