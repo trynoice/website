@@ -1,5 +1,15 @@
 import { extendTheme } from "@chakra-ui/react";
 
+const systemSansSerifFonts = `-apple-system, BlinkMacSystemFont, "Segoe UI",
+  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+  "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+  "Segoe UI Symbol"`;
+
+const systemMonoFonts = `"SF Mono", "Menlo", "Monaco", "Cascadia Mono",
+  "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+  "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", "Consolas",
+  "Liberation Mono", "Courier New", monospace`;
+
 export default extendTheme({
   colors: {
     primary: {
@@ -14,5 +24,10 @@ export default extendTheme({
       800: "#106143",
       900: "#093525",
     },
+  },
+  fonts: {
+    body: systemSansSerifFonts,
+    heading: systemSansSerifFonts,
+    mono: systemMonoFonts,
   },
 });

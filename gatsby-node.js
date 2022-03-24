@@ -5,19 +5,18 @@ exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
 }) => {
-  const response = await fetch(
+  const plansResponse = await fetch(
     // Both Stripe and Google Play plans should be identical.
     "https://api.trynoice.com/v1/subscriptions/plans?provider=stripe"
   );
 
-  const data = await response.json();
-  data.forEach((item) => {
+  (await plansResponse.json()).forEach((plan) => {
     createNode({
-      ...item,
-      id: `${item.id}`,
+      ...plan,
+      id: `${plan.id}`,
       internal: {
-        type: "Plans",
-        contentDigest: createContentDigest(item),
+        type: "PremiumPlan",
+        contentDigest: createContentDigest(plan),
       },
     });
   });

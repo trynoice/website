@@ -1,6 +1,7 @@
 import {
   Alert,
   Box,
+  Code,
   Divider,
   Heading,
   HeadingProps,
@@ -10,14 +11,14 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import { MDXProvider } from "@mdx-js/react";
+import { MDXProvider, MDXProviderComponents } from "@mdx-js/react";
 import { Fragment, ReactElement } from "react";
 
 function DefaultHeading(props: HeadingProps): ReactElement {
-  return <Heading {...props} mt={10} mb={4} />;
+  return <Heading mt={10} mb={4} {...props} />;
 }
 
-const MDXComponents = {
+const MDXComponents: MDXProviderComponents = {
   h1: (props: any) => (
     <DefaultHeading as={"h1"} size={"2xl"} color={"primary.500"} {...props} />
   ),
@@ -27,7 +28,10 @@ const MDXComponents = {
   h5: (props: any) => <DefaultHeading as={"h5"} size={"sm"} {...props} />,
   h6: (props: any) => <DefaultHeading as={"h6"} size={"xs"} {...props} />,
   p: (props: any) => <Text my={4} lineHeight={"tall"} {...props} />,
-  strong: (props: any) => <Text as="strong" fontWeight="semibold" {...props} />,
+  strong: (props: any) => (
+    <Text as={"strong"} fontWeight={"semibold"} {...props} />
+  ),
+  inlineCode: (props: any) => <Code {...props} />,
   a: (props: any) => <Link color={"primary.500"} {...props} />,
   ul: (props: any) => <UnorderedList my={4} spacing={2} {...props} />,
   ol: (props: any) => <OrderedList my={4} spacing={2} {...props} />,
@@ -65,9 +69,5 @@ const MDXComponents = {
 };
 
 export default function ChakraMDXProvider(props: any) {
-  return (
-    <MDXProvider components={MDXComponents}>
-      <main {...props} />
-    </MDXProvider>
-  );
+  return <MDXProvider components={MDXComponents} {...props} />;
 }

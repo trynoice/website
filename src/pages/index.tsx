@@ -28,7 +28,7 @@ import Section from "../components/section";
 const sectionPadding = { base: 16, md: 28 };
 
 export default function Home(): ReactElement {
-  const { site, allPlans } = useStaticQuery(graphql`
+  const { site, allPremiumPlan } = useStaticQuery(graphql`
     {
       site {
         siteMetadata {
@@ -36,19 +36,17 @@ export default function Home(): ReactElement {
         }
       }
 
-      allPlans {
-        edges {
-          node {
-            billingPeriodMonths
-            priceInIndianPaise
-            trialPeriodDays
-          }
+      allPremiumPlan {
+        nodes {
+          billingPeriodMonths
+          priceInIndianPaise
+          trialPeriodDays
         }
       }
     }
   `);
 
-  const plans: PremiumPlan[] = allPlans.edges.map((e: any) => e["node"]);
+  const plans: PremiumPlan[] = allPremiumPlan.nodes;
   return (
     <Page>
       <Hero description={site.siteMetadata.description} />
@@ -252,10 +250,10 @@ function ReviewCard(props: ReviewCardProps) {
       >
         <FaQuoteLeft />
       </Text>
-      <Text fontWeight={"medium"} pb={4} textAlign={"start"}>
+      <Text pb={4} textAlign={"start"}>
         {props.review.content}
       </Text>
-      <Text w={"full"} fontWeight={"bold"} fontSize={"sm"} textAlign={"end"}>
+      <Text w={"full"} fontWeight={"medium"} fontSize={"sm"} textAlign={"end"}>
         &mdash; {props.review.reviewer}
         <Link
           href={`https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice&reviewId=${props.review.googlePlayId}`}
@@ -442,12 +440,17 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
               </Text>
               /month
               <br />
-              for {numberFormatter.format(plan.priceInIndianPaise / 100)}
+              for{" "}
+              <Text as={"span"} fontWeight={"medium"}>
+                {numberFormatter.format(plan.priceInIndianPaise / 100)}
+              </Text>
               <br />
               every{" "}
-              {plan.billingPeriodMonths == 1
-                ? "month"
-                : `${plan.billingPeriodMonths} months`}
+              <Text as={"span"} fontWeight={"medium"}>
+                {plan.billingPeriodMonths == 1
+                  ? "month"
+                  : `${plan.billingPeriodMonths} months`}
+              </Text>
             </Text>
           </VStack>
         ))}

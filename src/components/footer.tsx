@@ -42,9 +42,6 @@ export default function Footer() {
 
         <Stack align={"flex-start"}>
           <ListHeader>Community</ListHeader>
-          <ChakraLink as={GatsbyLink} to={"/contributors"}>
-            Contributors
-          </ChakraLink>
           <ChakraLink href={"https://hosted.weblate.org/engage/noice/"}>
             Translations
           </ChakraLink>
@@ -116,7 +113,7 @@ export default function Footer() {
 }
 
 function ListHeader(props: TextProps) {
-  return <Text {...props} fontWeight={"500"} fontSize={"lg"} mb={2} />;
+  return <Text {...props} fontWeight={"500"} fontSize={"md"} mb={2} />;
 }
 
 interface SocialIconProps {
