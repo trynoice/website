@@ -30,7 +30,7 @@ import Section from "./section";
 
 export default function NavBar(): ReactElement {
   const { site } = useStaticQuery(graphql`
-    query {
+    {
       site {
         siteMetadata {
           name

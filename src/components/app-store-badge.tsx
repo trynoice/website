@@ -17,7 +17,7 @@ interface AppStoreBadgeProps {
 
 function AppStoreBadge(props: AppStoreBadgeProps): ReactElement {
   const { site } = useStaticQuery(graphql`
-    query {
+    {
       site {
         siteMetadata {
           playstore_url

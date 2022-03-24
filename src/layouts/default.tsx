@@ -5,17 +5,17 @@ import ChakraMDXProvider from "../components/chakra-mdx-provider";
 import Page from "../components/page";
 import Section from "../components/section";
 
-export default function NewsLayout({ data }: any) {
+export default function DefaultLayout({ data }: any) {
   const { mdx } = data;
   const { frontmatter, body, excerpt } = mdx;
   return (
     <Page title={frontmatter.title} description={excerpt}>
       <Section as={"article"} maxW={"4xl"} py={{ base: 12, md: 16 }}>
         <VStack as={"header"} mb={10} spacing={2} align={"flex-start"}>
-          <Heading as={"h1"} size={"2xl"}>
+          <Heading as={"h1"} size={"2xl"} color={"primary.500"}>
             {frontmatter.title}
           </Heading>
-          <Text>{frontmatter.date}</Text>
+          {frontmatter.date ? <Text>{frontmatter.date}</Text> : null}
           <Divider />
         </VStack>
         <ChakraMDXProvider>

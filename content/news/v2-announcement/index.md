@@ -1,5 +1,5 @@
 ---
-layout: news
+layout: default
 date: 2021-09-21T18:16:00+05:30
 title: v2 Announcement
 ---

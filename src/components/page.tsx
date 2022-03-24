@@ -19,7 +19,7 @@ interface PageProps {
 
 export default function Page(props: PageProps): ReactElement {
   const { site } = useStaticQuery(graphql`
-    query {
+    {
       site {
         siteMetadata {
           name

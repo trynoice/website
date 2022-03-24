@@ -1,5 +1,6 @@
 import {
   Alert,
+  Box,
   Divider,
   Heading,
   HeadingProps,
@@ -8,7 +9,6 @@ import {
   OrderedList,
   Text,
   UnorderedList,
-  VStack,
 } from "@chakra-ui/react";
 import { MDXProvider } from "@mdx-js/react";
 import { Fragment, ReactElement } from "react";
@@ -31,7 +31,7 @@ const MDXComponents = {
   a: (props: any) => <Link color={"primary.500"} {...props} />,
   ul: (props: any) => <UnorderedList my={4} spacing={2} {...props} />,
   ol: (props: any) => <OrderedList my={4} spacing={2} {...props} />,
-  li: (props: any) => <ListItem ml={4} pl={1} {...props} />,
+  li: (props: any) => <ListItem {...props} />,
   hr: (props: any) => <Divider {...props} />,
   blockquote: (props: unknown) => (
     <Alert
@@ -44,19 +44,19 @@ const MDXComponents = {
       {...props}
     />
   ),
-  wrapper: ({ children, ...props }: any) => {
+  wrapper: ({ children }: any) => {
     const updatedChildren = children.map((child: any) => {
       if (child.props.className !== "footnotes") {
         return child;
       }
 
       return (
-        <VStack mt={12} spacing={4} align={"flex-start"}>
-          <Heading as={"h4"} size={"md"}>
+        <Box mt={12} fontSize={"sm"}>
+          <Heading as={"h4"} mb={4} size={"md"}>
             Footnotes
           </Heading>
           {child.props.children}
-        </VStack>
+        </Box>
       );
     });
 
