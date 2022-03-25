@@ -54,7 +54,15 @@ module.exports = {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".md", ".mdx"],
-        gatsbyRemarkPlugins: ["gatsby-remark-copy-linked-files"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: "gatsby-remark-autolink-headers",
+            options: {
+              isIconAfterHeader: true,
+            },
+          },
+          "gatsby-remark-copy-linked-files",
+        ],
       },
     },
   ],
