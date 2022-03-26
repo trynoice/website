@@ -9,7 +9,10 @@ module.exports = {
     tagline: tagline,
     description: "Relax and boost productivity with natural calming noise.",
     twitter: "@trynoice",
-    siteUrl: "https://trynoice.com",
+    siteUrl:
+      (process.env.CONTEXT === "production"
+        ? process.env.URL
+        : process.env.DEPLOY_PRIME_URL) || "http://localhost:8000",
     playstoreUrl:
       "https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice",
     fdroidUrl:
@@ -76,5 +79,6 @@ module.exports = {
         },
       },
     },
+    "gatsby-plugin-netlify",
   ],
 };
