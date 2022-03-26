@@ -12,7 +12,7 @@ import {
   UnorderedList,
 } from "@chakra-ui/react";
 import { MDXProvider, MDXProviderComponents } from "@mdx-js/react";
-import { Fragment, ReactElement } from "react";
+import { Children, Fragment, ReactElement } from "react";
 
 function DefaultHeading(props: HeadingProps): ReactElement {
   return <Heading mt={10} mb={4} {...props} />;
@@ -49,7 +49,7 @@ const MDXComponents: MDXProviderComponents = {
     />
   ),
   wrapper: ({ children }: any) => {
-    const updatedChildren = children.map((child: any) => {
+    const updatedChildren = Children.map(children, (child: any) => {
       if (child.props.className !== "footnotes") {
         return child;
       }

@@ -22,10 +22,20 @@ export default function DefaultLayout({ data }: any) {
           </Heading>
           <Text>
             {frontmatter.publishedAt ? (
-              <Text as={"span"}>Published on {frontmatter.publishedAt}</Text>
+              <Text as={"span"}>
+                Published on{" "}
+                <Text as={"span"} fontWeight={"medium"}>
+                  {frontmatter.publishedAt}
+                </Text>
+              </Text>
             ) : null}
             {frontmatter.updatedAt ? (
-              <Text as={"span"}>, last updated on {frontmatter.updatedAt}</Text>
+              <Text as={"span"}>
+                , last updated on{" "}
+                <Text as={"span"} fontWeight={"medium"}>
+                  {frontmatter.updatedAt}
+                </Text>
+              </Text>
             ) : null}
           </Text>
 
