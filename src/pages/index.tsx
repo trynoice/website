@@ -99,6 +99,7 @@ function Hero(props: HeroProps): ReactElement {
 
         <Image
           src={HeroIllustration}
+          alt={"focused"}
           w={"full"}
           maxW={{ base: "sm", md: "2xl" }}
         />
@@ -117,6 +118,7 @@ function Features(): ReactElement {
       >
         <Image
           src={NatureOnScreenIllustration}
+          alt={"nature on screen"}
           flex={1}
           w={"full"}
           maxW={{ base: "sm", md: "2xl" }}

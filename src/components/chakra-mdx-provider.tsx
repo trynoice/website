@@ -55,10 +55,7 @@ const MDXComponents: MDXProviderComponents = {
       }
 
       return (
-        <Box mt={12} fontSize={"sm"}>
-          <Heading as={"h4"} mb={4} size={"md"}>
-            Footnotes
-          </Heading>
+        <Box mt={8} fontSize={"sm"} color={"gray.600"}>
           {child.props.children}
         </Box>
       );
