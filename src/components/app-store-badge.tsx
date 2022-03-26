@@ -5,8 +5,8 @@ import FDroidBadgeIcon from "../assets/f-droid-badge.png";
 import PlayStoreBadgeIcon from "../assets/play-store-badge.png";
 
 enum UrlKey {
-  PlayStore = "playstore_url",
-  FDroid = "fdroid_url",
+  PlayStore = "playstoreUrl",
+  FDroid = "fdroidUrl",
 }
 
 interface AppStoreBadgeProps {
@@ -20,8 +20,8 @@ function AppStoreBadge(props: AppStoreBadgeProps): ReactElement {
     {
       site {
         siteMetadata {
-          playstore_url
-          fdroid_url
+          playstoreUrl
+          fdroidUrl
         }
       }
     }

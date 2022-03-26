@@ -26,15 +26,15 @@ export default function Page(props: PageProps): ReactElement {
           tagline
           description
           twitter
-          site_url
+          siteUrl
         }
       }
     }
   `);
 
-  const { name, tagline, description, twitter, site_url } = site.siteMetadata;
+  const { name, tagline, description, twitter, siteUrl } = site.siteMetadata;
   const longName = `${name}: ${tagline}`;
-  const image = `${site_url}${props.image || DefaultIcon}`;
+  const image = `${siteUrl}${props.image || DefaultIcon}`;
 
   return (
     <VStack

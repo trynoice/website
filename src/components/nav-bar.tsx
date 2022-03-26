@@ -35,7 +35,7 @@ export default function NavBar(): ReactElement {
         siteMetadata {
           name
           tagline
-          playstore_url
+          playstoreUrl
         }
       }
     }
@@ -73,7 +73,7 @@ export default function NavBar(): ReactElement {
           as={"a"}
           size={useBreakpointValue({ base: "sm", md: "md" })}
           colorScheme={"primary"}
-          href={site.siteMetadata.playstore_url}
+          href={site.siteMetadata.playstoreUrl}
           target={"_blank"}
           textTransform={"capitalize"}
         >

@@ -9,10 +9,10 @@ module.exports = {
     tagline: tagline,
     description: "Relax and boost productivity with natural calming noise.",
     twitter: "@trynoice",
-    site_url: "https://trynoice.com",
-    playstore_url:
+    siteUrl: "https://trynoice.com",
+    playstoreUrl:
       "https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice",
-    fdroid_url:
+    fdroidUrl:
       "https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/",
   },
   plugins: [
@@ -63,6 +63,17 @@ module.exports = {
           },
           "gatsby-remark-copy-linked-files",
         ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        serialize: ({ path }) => {
+          return {
+            url: path,
+            priority: 1,
+          };
+        },
       },
     },
   ],
