@@ -12,6 +12,8 @@ const systemMonoFonts = `"SF Mono", "Menlo", "Monaco", "Cascadia Mono",
 
 export default extendTheme({
   colors: {
+    black: "#1d1d26",
+    white: "#fefefe",
     primary: {
       50: "#9befd0",
       100: "#6fe8bb",

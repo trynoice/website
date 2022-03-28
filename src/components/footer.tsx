@@ -13,7 +13,7 @@ import Section from "./section";
 
 export default function Footer() {
   const fgColor = "gray.300";
-  const bgColor = "gray.900";
+  const bgColor = "black";
   const year = new Date().getFullYear();
 
   return (

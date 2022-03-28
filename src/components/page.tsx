@@ -40,7 +40,7 @@ export default function Page(props: PageProps): ReactElement {
     <VStack
       maxW={"full"}
       minH={"100vh"}
-      bg={"gray.50"}
+      bg={"white"}
       align={"stretch"}
       spacing={0}
     >

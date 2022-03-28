@@ -1,5 +1,6 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Divider,
   Flex,
   Heading,
@@ -25,7 +26,7 @@ import { FDroidBadge, PlayStoreBadge } from "../components/app-store-badge";
 import Page from "../components/page";
 import Section from "../components/section";
 
-const sectionPadding = { base: 16, md: 28 };
+const sectionPadding = { base: 24, md: 32 };
 
 export default function Home(): ReactElement {
   const { site, allPremiumPlan } = useStaticQuery(graphql`
@@ -70,6 +71,7 @@ function Hero(props: HeroProps): ReactElement {
       <SimpleGrid
         columns={{ base: 1, md: 2 }}
         alignItems={"center"}
+        justifyItems={"center"}
         spacing={24}
       >
         <VStack
@@ -124,7 +126,7 @@ function Features(): ReactElement {
           maxW={{ base: "sm", md: "2xl" }}
         />
 
-        <VStack flex={1} spacing={4} align={"flex-start"}>
+        <VStack flex={1} spacing={8} align={"flex-start"}>
           <Heading size={"xl"} color={"yellow.600"}>
             An immersive sound experience
           </Heading>
@@ -215,9 +217,20 @@ const reviews: Array<Review> = [
 
 function Reviews(): ReactElement {
   return (
-    <Section py={sectionPadding}>
-      <VStack w={"full"} spacing={16} alignItems={"center"}>
-        <Heading color={"purple.500"}>Loved by people</Heading>
+    <Section
+      py={sectionPadding}
+      bgGradient={
+        "linear(112.5deg, black 55%, black .4em, primary.500 .5em, primary.500)"
+      }
+    >
+      <VStack
+        w={"full"}
+        maxW={"3xl"}
+        mx={"auto"}
+        spacing={16}
+        alignItems={"flex-start"}
+      >
+        <Heading color={"white"}>Loved by people</Heading>
         {reviews.map((r) => (
           <ReviewCard review={r} />
         ))}
@@ -231,11 +244,8 @@ interface ReviewCardProps {
 }
 
 function ReviewCard(props: ReviewCardProps) {
-  const cardWidth = "3xl";
-
   return (
     <VStack
-      maxW={cardWidth}
       w={"full"}
       p={8}
       rounded={"xl"}
@@ -245,17 +255,28 @@ function ReviewCard(props: ReviewCardProps) {
     >
       <Text
         position={"absolute"}
-        left={8}
-        top={-3}
-        fontSize={"2xl"}
-        color={"purple.500"}
+        left={6}
+        top={-5}
+        fontSize={"4xl"}
+        color={"primary.500"}
       >
-        <FaQuoteLeft />
+        <Box
+          as={FaQuoteLeft}
+          filter={
+            "drop-shadow(0px 5px 7.5px rgba(0, 0, 0, 0.2)) drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.1))"
+          }
+        />
       </Text>
       <Text pb={4} textAlign={"start"}>
         {props.review.content}
       </Text>
-      <Text w={"full"} fontWeight={"medium"} fontSize={"sm"} textAlign={"end"}>
+      <Text
+        w={"full"}
+        fontWeight={"medium"}
+        fontSize={"sm"}
+        textAlign={"end"}
+        color={"primary.500"}
+      >
         &mdash; {props.review.reviewer}
         <Link
           href={`https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice&reviewId=${props.review.googlePlayId}`}
@@ -371,7 +392,7 @@ function TierInfo(props: TierInfoProps): ReactElement {
       <Heading flex={1} fontSize={{ base: "xl", md: "2xl" }}>
         {props.tier}
       </Heading>
-      <List flex={1} spacing={2}>
+      <List flex={1} spacing={3}>
         {props.benefits.map((b) => (
           <ListItem>
             <ListIcon
@@ -400,7 +421,7 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
   );
 
   return (
-    <VStack py={{ base: 12, md: 16 }}>
+    <VStack pt={{ base: 16, md: 20 }}>
       <Heading mb={8} color={"pink.500"} size={"lg"} textAlign={"center"}>
         Premium Plans
       </Heading>
@@ -420,8 +441,8 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
             alignItems={"center"}
             textAlign={"center"}
             bg={"white"}
-            shadow={"lg"}
-            borderRadius={"lg"}
+            shadow={"xl"}
+            borderRadius={"xl"}
           >
             <Text fontSize={"2xl"}>
               {plan.billingPeriodMonths == 1
@@ -441,7 +462,8 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
                 )}
               </Text>
               /month
-              <br />
+            </Text>
+            <Text lineHeight={"taller"}>
               for{" "}
               <Text as={"span"} fontWeight={"medium"}>
                 {numberFormatter.format(plan.priceInIndianPaise / 100)}
