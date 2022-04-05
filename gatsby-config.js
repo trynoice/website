@@ -7,8 +7,7 @@ module.exports = {
   siteMetadata: {
     name: name,
     tagline: tagline,
-    description:
-      "Relax, improve focus, and boost productivity with natural calming noise.",
+    description: "Relax and improve focus with natural calming noise.",
     twitter: "@trynoice",
     siteUrl:
       (process.env.CONTEXT === "production"
