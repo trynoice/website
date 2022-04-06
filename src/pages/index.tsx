@@ -125,6 +125,8 @@ function Benefits(): ReactElement {
         align={"center"}
         spacing={12}
         bg={"#fff"}
+        border={"1px"}
+        borderColor={"gray.50"}
         borderRadius={"lg"}
         shadow={"lg"}
       >
@@ -445,7 +447,7 @@ function TierInfo(props: TierInfoProps): ReactElement {
       direction={{ base: "column", md: "row" }}
       justifyContent={{ base: "flex-start", md: "space-around" }}
       align={"center"}
-      spacing={6}
+      spacing={12}
     >
       <Heading flex={1} fontSize={{ base: "xl", md: "2xl" }}>
         {props.tier}
@@ -479,8 +481,8 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
   );
 
   return (
-    <VStack pt={sectionPadding}>
-      <Heading mb={8} color={"pink.500"} size={"lg"} textAlign={"center"}>
+    <VStack pt={sectionPadding} spacing={12}>
+      <Heading color={"pink.500"} size={"lg"} textAlign={"center"}>
         Premium Plans
       </Heading>
       <SimpleGrid
@@ -500,6 +502,8 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
             textAlign={"center"}
             bg={"#fff"}
             shadow={"lg"}
+            border={"1px"}
+            borderColor={"gray.50"}
             borderRadius={"xl"}
           >
             <Text fontSize={"2xl"}>
