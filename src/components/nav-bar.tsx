@@ -1,16 +1,17 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
+  DrawerHeader,
   DrawerOverlay,
-  Hide,
   HStack,
   IconButton,
-  Image,
   Link as ChakraLink,
+  Show,
   Spacer,
   useBreakpointValue,
   useDisclosure,
@@ -25,7 +26,7 @@ import {
   ReactNode,
   useRef,
 } from "react";
-import AppIcon from "../assets/icon.svg";
+import AppIcon from "../assets/icon.inline.svg";
 import Section from "./section";
 
 export default function NavBar(): ReactElement {
@@ -44,9 +45,9 @@ export default function NavBar(): ReactElement {
   return (
     <Section as="header" py={6}>
       <HStack align={"center"} spacing={2}>
-        <Hide above={"md"}>
+        <Show below={"md"}>
           <HamburgerNavMenu />
-        </Hide>
+        </Show>
 
         <IconButton
           as={GatsbyLink}
@@ -54,20 +55,17 @@ export default function NavBar(): ReactElement {
           variant={"link"}
           _focus={{ boxShadow: "none" }}
           aria-label={"Go to homepage"}
+          title={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
           icon={
-            <Image
-              src={AppIcon}
-              alt={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
-              boxSize={{ base: 10, md: 12 }}
-            />
+            <Box as={AppIcon} boxSize={{ base: 12, md: 16 }} fill={"black"} />
           }
         />
 
         <Spacer />
 
-        <Hide below={"md"}>
+        <Show above={"md"}>
           <HorizontalNavMenu />
-        </Hide>
+        </Show>
 
         <Button
           as={"a"}
@@ -119,23 +117,37 @@ function HamburgerNavMenu(): ReactElement {
       />
 
       <Drawer
-        size={"xs"}
+        size={"full"}
         isOpen={isOpen}
         onClose={onClose}
         placement={"left"}
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerBody py={8}>
-            <VStack align={"stretch"} spacing={2}>
-              {menuItems.map((item) => (
-                <NavMenuItem href={item.href} onClick={onClose}>
-                  {item.title}
-                </NavMenuItem>
-              ))}
-            </VStack>
+        <DrawerContent bg={"primary.500"} color={"white"}>
+          <DrawerHeader alignItems={"flex-start"} px={8} py={6}>
+            <Box as={AppIcon} boxSize={{ base: 12, md: 16 }} fill={"white"} />
+            <DrawerCloseButton />
+          </DrawerHeader>
+
+          <DrawerBody as={VStack} py={12} spacing={2} alignItems={"stretch"}>
+            {menuItems.map((item) => (
+              <NavMenuItem
+                href={item.href}
+                onClick={() => {
+                  console.log("clicked");
+                  onClose();
+                }}
+                color={"white"}
+                hoverColor={"gray.200"}
+                activeBg={
+                  "linear-gradient(90deg, transparent 5%, rgba(0,0,0,0.1) 40%)"
+                }
+                fontSize={"xl"}
+              >
+                {item.title}
+              </NavMenuItem>
+            ))}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
@@ -147,7 +159,14 @@ function HorizontalNavMenu(): ReactElement {
   return (
     <HStack spacing={8} px={8}>
       {menuItems.map((item) => (
-        <NavMenuItem href={item.href}>{item.title}</NavMenuItem>
+        <NavMenuItem
+          href={item.href}
+          color={"gray.500"}
+          hoverColor={"gray.900"}
+          activeColor={"primary.500"}
+        >
+          {item.title}
+        </NavMenuItem>
       ))}
     </HStack>
   );
@@ -157,25 +176,35 @@ interface NavMenuItemProps {
   href: string;
   children: ReactNode;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
+  color: string;
+  hoverColor: string;
+  activeColor?: string;
+  activeBg?: string;
+  fontSize?: string;
 }
 
 function NavMenuItem(props: NavMenuItemProps): ReactElement {
+  const isAnchorLink = props.href.indexOf("#") > -1;
   return (
     <ChakraLink
-      as={props.href.indexOf("#") > 0 ? AnchorLink : GatsbyLink}
+      as={isAnchorLink ? AnchorLink : GatsbyLink}
       // @ts-ignore: Ignore the following error because of AnchorLink
       activeClassName={"active"}
       to={props.href}
-      onClick={props.onClick}
+      onClick={isAnchorLink ? undefined : props.onClick}
+      onAnchorLinkClick={isAnchorLink ? props.onClick : null}
       p={2}
-      color={"gray.500"}
+      fontSize={props.fontSize}
+      color={props.color}
+      borderRadius={"lg"}
       _hover={{
         textDecoration: "none",
-        color: "gray.900",
+        color: props.hoverColor,
       }}
       sx={{
         "&.active": {
-          color: "primary.500",
+          color: props.activeColor,
+          background: props.activeBg,
         },
       }}
     >

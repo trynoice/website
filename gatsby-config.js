@@ -41,12 +41,7 @@ module.exports = {
         resetCSS: true,
       },
     },
-    {
-      resolve: "gatsby-plugin-anchor-links",
-      options: {
-        duration: 500,
-      },
-    },
+    "gatsby-plugin-anchor-links",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -80,5 +75,13 @@ module.exports = {
       },
     },
     "gatsby-plugin-netlify",
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /\.inline\.svg$/,
+        },
+      },
+    },
   ],
 };
