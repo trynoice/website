@@ -32,7 +32,7 @@ import { FDroidBadge, PlayStoreBadge } from "../components/app-store-badge";
 import Page from "../components/page";
 import Section from "../components/section";
 
-const sectionPadding = { base: 24, md: 32 };
+const sectionPadding = { base: 28, md: 40 };
 
 export default function Home(): ReactElement {
   const { site, allPremiumPlan } = useStaticQuery(graphql`
@@ -86,7 +86,7 @@ function Hero(props: HeroProps): ReactElement {
         >
           <Heading
             maxW={{ base: "lg", md: "4xl" }}
-            lineHeight={1.33}
+            lineHeight={"base"}
             fontWeight={600}
             fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
             textAlign={{ base: "center", md: "left" }}
@@ -130,7 +130,7 @@ function Benefits(): ReactElement {
         borderRadius={"lg"}
         shadow={"lg"}
       >
-        <Image src={icon} alt={iconDesc} maxW={36} />
+        <Image src={icon} alt={iconDesc} maxW={{ base: 36, sm: 44, md: 36 }} />
         <Text
           fontSize={{ base: "md", md: "lg" }}
           textAlign={{ base: "center", md: "left" }}
@@ -142,8 +142,8 @@ function Benefits(): ReactElement {
   }
 
   return (
-    <Section bg={"white"} pt={sectionPadding}>
-      <VStack justifyItems={"center"} spacing={12}>
+    <Section bg={"white"} pt={{ base: 36, md: 48 }}>
+      <VStack justifyItems={"center"} spacing={16}>
         <Benefit
           description={
             "Reduce your stress or anxiety, and allow yourself to relax and unwind."
@@ -413,8 +413,8 @@ function Pricing(props: PricingProps): ReactElement {
         tier={"Free"}
         benefits={[
           "28 high-fidelity sounds",
-          "Customised sound mixing",
           "LQ/MQ audio streaming",
+          "Stream audio with Chromecast",
           "Sleep/Wake timers on Android",
         ]}
       />
