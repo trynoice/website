@@ -66,6 +66,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-sitemap",
       options: {
+        excludes: ["/redirect"],
         serialize: ({ path }) => {
           return {
             url: path,

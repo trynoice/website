@@ -47,7 +47,7 @@ export default function News(): ReactElement {
         <Heading as={"h1"} size={"2xl"} color={"primary.500"}>
           Latest News
         </Heading>
-        <Divider mt={2} mb={10} />
+        <Divider mt={4} mb={10} />
         <UnorderedList>
           {posts.map((p) => (
             <ListItem>
