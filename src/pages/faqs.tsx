@@ -3,31 +3,28 @@ import {
   Heading,
   Link as ChakraLink,
   ListItem,
-  Text,
-  UnorderedList,
+  OrderedList,
 } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
 import Page from "../components/page";
 import Section from "../components/section";
 
-interface NewsItem {
+interface FAQItem {
   title: string;
-  date: string;
   slug: string;
 }
 
-export default function News(): ReactElement {
+export default function FAQs(): ReactElement {
   const { allMdx } = useStaticQuery(graphql`
     {
       allMdx(
-        filter: { slug: { glob: "news/**" } }
-        sort: { fields: frontmatter___publishedAt, order: DESC }
+        filter: { slug: { glob: "faqs/**" } }
+        sort: { fields: frontmatter___title }
       ) {
         nodes {
           slug
           frontmatter {
-            publishedAt(formatString: "MMMM DD, YYYY")
             title
           }
         }
@@ -35,34 +32,32 @@ export default function News(): ReactElement {
     }
   `);
 
-  const posts: Array<NewsItem> = allMdx.nodes.map((n: any) => ({
+  const posts: Array<FAQItem> = allMdx.nodes.map((n: any) => ({
     title: n.frontmatter.title,
-    date: n.frontmatter.publishedAt,
     slug: n.slug,
   }));
 
   return (
     <Page
-      title={"News"}
-      description={"Latest updates on Noice"}
+      title={"FAQs"}
+      description={"Frequently asked questions about Noice."}
       fontSize={{ base: "md", md: "lg" }}
       lineHeight={"tall"}
     >
       <Section maxW={"4xl"} py={{ base: 12, md: 16 }}>
         <Heading as={"h1"} size={"2xl"} color={"primary.500"}>
-          Latest News
+          Frequently Asked Questions
         </Heading>
         <Divider mt={4} mb={10} />
-        <UnorderedList>
+        <OrderedList lineHeight={"taller"}>
           {posts.map((p) => (
             <ListItem>
               <ChakraLink as={GatsbyLink} to={`/${p.slug}`}>
                 {p.title}
               </ChakraLink>{" "}
-              &mdash; <Text as={"small"}>{p.date}</Text>
             </ListItem>
           ))}
-        </UnorderedList>
+        </OrderedList>
       </Section>
     </Page>
   );

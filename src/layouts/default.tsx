@@ -9,7 +9,12 @@ export default function DefaultLayout({ data }: any) {
   const { mdx } = data;
   const { frontmatter, body, excerpt } = mdx;
   return (
-    <Page title={frontmatter.title} description={excerpt}>
+    <Page
+      title={frontmatter.title}
+      description={excerpt}
+      fontSize={{ base: "md", md: "lg" }}
+      lineHeight={"tall"}
+    >
       <Section as={"article"} maxW={"4xl"} py={{ base: 12, md: 16 }}>
         <VStack as={"header"} mb={10} spacing={2} align={"flex-start"}>
           <Heading

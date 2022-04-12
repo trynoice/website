@@ -41,26 +41,29 @@ export default function Footer() {
         </Stack>
 
         <Stack align={"flex-start"}>
-          <ListHeader>Community</ListHeader>
-          <ChakraLink href={"https://hosted.weblate.org/engage/noice/"}>
-            Translations
-          </ChakraLink>
-          <ChakraLink href={"https://github.com/trynoice"}>GitHub</ChakraLink>
-          <ChakraLink href={"https://opencollective.com/noice"}>
-            Open Collective
-          </ChakraLink>
-        </Stack>
-
-        <Stack align={"flex-start"}>
-          <ListHeader>Policies</ListHeader>
-          <ChakraLink as={GatsbyLink} to={"/code-of-conduct"}>
-            Community Guidelines
+          <ListHeader>Resources</ListHeader>
+          <ChakraLink as={GatsbyLink} to={"/faqs"}>
+            FAQs
           </ChakraLink>
           <ChakraLink as={GatsbyLink} to={"/privacy-policy"}>
             Privacy Policy
           </ChakraLink>
           <ChakraLink href={"https://www.gnu.org/licenses/gpl-3.0.html"}>
             License
+          </ChakraLink>
+        </Stack>
+
+        <Stack align={"flex-start"}>
+          <ListHeader>Community</ListHeader>
+          <ChakraLink as={GatsbyLink} to={"/code-of-conduct"}>
+            Guidelines
+          </ChakraLink>
+          <ChakraLink href={"https://hosted.weblate.org/engage/noice/"}>
+            Translations
+          </ChakraLink>
+          <ChakraLink href={"https://github.com/trynoice"}>GitHub</ChakraLink>
+          <ChakraLink href={"https://opencollective.com/noice"}>
+            Open Collective
           </ChakraLink>
         </Stack>
 

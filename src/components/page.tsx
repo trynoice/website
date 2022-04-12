@@ -1,4 +1,4 @@
-import { Box, Spacer, VStack } from "@chakra-ui/react";
+import { Box, ResponsiveValue, Spacer, VStack } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
 import React, { ReactElement, ReactNode } from "react";
 import Helmet from "react-helmet";
@@ -15,6 +15,8 @@ interface PageProps {
   title?: string;
   image?: any;
   children?: ReactNode;
+  fontSize?: ResponsiveValue<string>;
+  lineHeight?: string;
 }
 
 export default function Page(props: PageProps): ReactElement {
@@ -45,7 +47,9 @@ export default function Page(props: PageProps): ReactElement {
       spacing={0}
     >
       <NavBar />
-      <Box as={"main"}>{props.children}</Box>
+      <Box as={"main"} fontSize={props.fontSize} lineHeight={props.lineHeight}>
+        {props.children}
+      </Box>
       <Spacer />
       <Footer />
       <Helmet
