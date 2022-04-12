@@ -5,6 +5,7 @@ import {
   Divider,
   Heading,
   HeadingProps,
+  Image,
   Link,
   ListItem,
   OrderedList,
@@ -32,6 +33,7 @@ const MDXComponents: MDXProviderComponents = {
     <Text as={"strong"} fontWeight={"semibold"} {...props} />
   ),
   inlineCode: (props: any) => <Code {...props} />,
+  img: (props: any) => <Image maxW={"full"} mx={"auto"} my={16} {...props} />,
   a: (props: any) => <Link color={"primary.500"} {...props} />,
   ul: (props: any) => <UnorderedList my={8} {...props} />,
   ol: (props: any) => <OrderedList my={8} {...props} />,

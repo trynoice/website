@@ -13,3 +13,6 @@ be because of battery optimisations enforced by the OS. You can disable battery
 optimisation for Noice by navigating to **Device Settings > Apps > Noice >
 Battery**. The exact steps may vary depending on the Android version and device
 manufacturer.
+
+If turning off battery optimisation for Noice doesn't mitigate the issue, please
+inform us at [trynoiceapp@gmail.com](mailto:trynoiceapp@gmail.com).

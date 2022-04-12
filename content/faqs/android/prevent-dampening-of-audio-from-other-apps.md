@@ -16,7 +16,7 @@ the steps below.
 1. Navigate to the **Account** tab from the bottom bar.
 2. Click the **Settings** option in the **App** category from the **Account**
    screen.
-3. Enable the "Ignore audio focus change" option under the **Behaviour**
+3. Enable the **Ignore audio focus change** option under the **Behaviour**
    category.
 
 After enabling this option, Noice plays audio without requesting audio focus
