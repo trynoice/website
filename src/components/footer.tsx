@@ -20,13 +20,12 @@ export default function Footer() {
     <Section as={"footer"} bg={bgColor} color={fgColor} fontSize={"sm"}>
       <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8} py={10}>
         <Stack align={"flex-start"}>
-          <ListHeader>Get in touch</ListHeader>
-          <ChakraLink
-            href={
-              "https://docs.google.com/forms/d/e/1FAIpQLSdEfOCyWfQ4QFMnLqlLj3BF27VKS1C-CQIokbmkXFchf6QZ6g/viewform"
-            }
-          >
-            Submit Feedback
+          <ListHeader>Support</ListHeader>
+          <ChakraLink as={GatsbyLink} to={"/faqs"}>
+            FAQs
+          </ChakraLink>
+          <ChakraLink href={"mailto:trynoiceapp@gmail.com"}>
+            Contact Us
           </ChakraLink>
           <ChakraLink
             href={
@@ -35,21 +34,12 @@ export default function Footer() {
           >
             Report Issues
           </ChakraLink>
-          <ChakraLink href={"mailto:trynoiceapp@gmail.com"}>
-            Contact Us
-          </ChakraLink>
-        </Stack>
-
-        <Stack align={"flex-start"}>
-          <ListHeader>Resources</ListHeader>
-          <ChakraLink as={GatsbyLink} to={"/faqs"}>
-            FAQs
-          </ChakraLink>
-          <ChakraLink as={GatsbyLink} to={"/privacy-policy"}>
-            Privacy Policy
-          </ChakraLink>
-          <ChakraLink href={"https://www.gnu.org/licenses/gpl-3.0.html"}>
-            License
+          <ChakraLink
+            href={
+              "https://docs.google.com/forms/d/e/1FAIpQLSdEfOCyWfQ4QFMnLqlLj3BF27VKS1C-CQIokbmkXFchf6QZ6g/viewform"
+            }
+          >
+            Submit Feedback
           </ChakraLink>
         </Stack>
 
@@ -61,13 +51,31 @@ export default function Footer() {
           <ChakraLink href={"https://hosted.weblate.org/engage/noice/"}>
             Translations
           </ChakraLink>
-          <ChakraLink href={"https://github.com/trynoice"}>GitHub</ChakraLink>
           <ChakraLink href={"https://opencollective.com/noice"}>
             Open Collective
           </ChakraLink>
+          <ChakraLink href={"https://github.com/trynoice"}>GitHub</ChakraLink>
         </Stack>
 
-        <Stack id={"install-app"} align={"flex-start"}>
+        <Stack align={"flex-start"}>
+          <ListHeader>Policies</ListHeader>
+          <ChakraLink as={GatsbyLink} to={"/privacy-policy"}>
+            Privacy Policy
+          </ChakraLink>
+          <ChakraLink href={"https://www.gnu.org/licenses/gpl-3.0.html"}>
+            License
+          </ChakraLink>
+          <ChakraLink as={GatsbyLink} to={"/tos"}>
+            Terms of Service
+          </ChakraLink>
+        </Stack>
+
+        <Stack
+          id={"install-app"}
+          align={"flex-start"}
+          justify={"center"}
+          spacing={4}
+        >
           <PlayStoreBadge />
           <FDroidBadge />
         </Stack>

@@ -1,6 +1,4 @@
 import {
-  Divider,
-  Heading,
   Link as ChakraLink,
   ListItem,
   Text,
@@ -8,8 +6,7 @@ import {
 } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
-import Page from "../components/page";
-import Section from "../components/section";
+import DocumentPage from "../components/document-page";
 
 interface NewsItem {
   title: string;
@@ -42,28 +39,17 @@ export default function News(): ReactElement {
   }));
 
   return (
-    <Page
-      title={"News"}
-      description={"Latest updates on Noice"}
-      fontSize={{ base: "md", md: "lg" }}
-      lineHeight={"tall"}
-    >
-      <Section maxW={"4xl"} py={{ base: 12, md: 16 }}>
-        <Heading as={"h1"} size={"2xl"} color={"primary.500"}>
-          Latest News
-        </Heading>
-        <Divider mt={4} mb={10} />
-        <UnorderedList>
-          {posts.map((p) => (
-            <ListItem>
-              <ChakraLink as={GatsbyLink} to={`/${p.slug}`}>
-                {p.title}
-              </ChakraLink>{" "}
-              &mdash; <Text as={"small"}>{p.date}</Text>
-            </ListItem>
-          ))}
-        </UnorderedList>
-      </Section>
-    </Page>
+    <DocumentPage title={"News"} description={"Latest updates on Noice"}>
+      <UnorderedList spacing={2}>
+        {posts.map((p) => (
+          <ListItem>
+            <ChakraLink as={GatsbyLink} to={`/${p.slug}`}>
+              {p.title}
+            </ChakraLink>{" "}
+            &mdash; <Text as={"small"}>{p.date}</Text>
+          </ListItem>
+        ))}
+      </UnorderedList>
+    </DocumentPage>
   );
 }
