@@ -100,6 +100,10 @@ const menuItems: Array<MenuItem> = [
     title: "News",
     href: "/news",
   },
+  {
+    title: "FAQs",
+    href: "/faqs",
+  },
 ];
 
 function HamburgerNavMenu(): ReactElement {
@@ -190,6 +194,7 @@ function NavMenuItem(props: NavMenuItemProps): ReactElement {
       as={isAnchorLink ? AnchorLink : GatsbyLink}
       // @ts-ignore: Ignore the following error because of AnchorLink
       activeClassName={"active"}
+      partiallyActive={true}
       to={props.href}
       onClick={isAnchorLink ? undefined : props.onClick}
       onAnchorLinkClick={isAnchorLink ? props.onClick : null}

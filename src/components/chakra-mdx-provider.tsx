@@ -16,7 +16,7 @@ import { MDXProvider, MDXProviderComponents } from "@mdx-js/react";
 import { Children, Fragment, ReactElement } from "react";
 
 function DefaultHeading(props: HeadingProps): ReactElement {
-  return <Heading mt={10} mb={4} {...props} />;
+  return <Heading mt={12} mb={6} {...props} />;
 }
 
 const MDXComponents: MDXProviderComponents = {
@@ -28,7 +28,7 @@ const MDXComponents: MDXProviderComponents = {
   h4: (props: any) => <DefaultHeading as={"h4"} size={"md"} {...props} />,
   h5: (props: any) => <DefaultHeading as={"h5"} size={"sm"} {...props} />,
   h6: (props: any) => <DefaultHeading as={"h6"} size={"xs"} {...props} />,
-  p: (props: any) => <Text my={8} {...props} />,
+  p: (props: any) => <Text mt={4} mb={8} {...props} />,
   strong: (props: any) => (
     <Text as={"strong"} fontWeight={"semibold"} {...props} />
   ),
@@ -41,12 +41,18 @@ const MDXComponents: MDXProviderComponents = {
   hr: (props: any) => <Divider {...props} />,
   blockquote: (props: unknown) => (
     <Alert
-      my="4"
-      role="none"
-      status="warning"
-      variant="left-accent"
-      as="blockquote"
-      rounded="4px"
+      my={8}
+      role={"none"}
+      status={"warning"}
+      variant={"left-accent"}
+      as={"blockquote"}
+      rounded={"xl"}
+      fontSize={{ base: "sm", md: "md" }}
+      sx={{
+        "& > p": {
+          my: 4,
+        },
+      }}
       {...props}
     />
   ),
