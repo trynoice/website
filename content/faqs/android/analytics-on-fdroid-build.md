@@ -1,4 +1,5 @@
 ---
+layout: faq
 title: Does the F-Droid build collect and share analytics data?
 ---
 

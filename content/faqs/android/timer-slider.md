@@ -1,4 +1,5 @@
 ---
+layout: faq
 title: What does the timer slider do?
 ---
 

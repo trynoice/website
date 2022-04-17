@@ -1,1 +1,1 @@
-# trynoice.github.io
+# trynoice.com

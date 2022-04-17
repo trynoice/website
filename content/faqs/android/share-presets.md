@@ -1,4 +1,5 @@
 ---
+layout: faq
 title: How do I share a preset with my friends?
 ---
 

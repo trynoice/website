@@ -1,4 +1,5 @@
 ---
+layout: faq
 title: How do I prevent Noice from dampening the audio volume of other apps?
 ---
 
