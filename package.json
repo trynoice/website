@@ -31,7 +31,7 @@
     "gatsby-plugin-sitemap": "^5.13.0",
     "gatsby-remark-autolink-headers": "^5.13.0",
     "gatsby-remark-copy-linked-files": "^5.11.0",
-    "gatsby-source-filesystem": "^4.11.1",
+    "gatsby-source-filesystem": "^4.13.0",
     "react": "^18.1.0",
     "react-dom": "^18.0.0",
     "react-helmet": "^6.1.0",
