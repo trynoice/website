@@ -33,7 +33,6 @@ module.exports = {
         crossOrigin: "anonymous",
       },
     },
-    "gatsby-plugin-offline",
     "gatsby-plugin-emotion",
     {
       resolve: "@chakra-ui/gatsby-plugin",

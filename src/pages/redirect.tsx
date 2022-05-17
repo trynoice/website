@@ -1,8 +1,6 @@
-import { Divider, Heading, Link, Text } from "@chakra-ui/react";
+import { Link, Text } from "@chakra-ui/react";
 import { ReactElement, useEffect } from "react";
 import DocumentPage from "../components/document-page";
-import Page from "../components/page";
-import Section from "../components/section";
 
 export default function RedirectPage({ location }: any): ReactElement {
   const params = new URLSearchParams(location.search);
