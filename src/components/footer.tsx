@@ -65,7 +65,7 @@ export default function Footer() {
           <ChakraLink href={"https://www.gnu.org/licenses/gpl-3.0.html"}>
             License
           </ChakraLink>
-          <ChakraLink as={GatsbyLink} to={"/tos"}>
+          <ChakraLink as={GatsbyLink} to={"/terms-of-service"}>
             Terms of Service
           </ChakraLink>
         </Stack>
