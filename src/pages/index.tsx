@@ -413,9 +413,9 @@ function Pricing(props: PricingProps): ReactElement {
         tier={"Free"}
         benefits={[
           "28 high-fidelity sounds",
-          "LQ/MQ audio streaming",
           "Stream audio with Chromecast",
           "Sleep/Wake timers on Android",
+          "Average quality audio streaming",
         ]}
       />
       <Divider />
@@ -424,8 +424,8 @@ function Pricing(props: PricingProps): ReactElement {
         benefits={[
           "Everything in free-tier",
           "Natural variations in sounds",
-          "HQ/UHQ audio streaming",
           "Offline Playback on Android",
+          "Ultra high quality audio streaming",
         ]}
         pricing={`Starts at ${minMonthlyPrice}/month`}
       />
