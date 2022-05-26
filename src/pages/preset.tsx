@@ -9,7 +9,7 @@ interface PresetPageProps {
 export default function Preset(props: PresetPageProps): ReactElement {
   const queryParams = new URLSearchParams(props.location.search);
   const presetName = queryParams.get("n");
-  const presetUri = `noice://preset${location.search}`;
+  const presetUri = `noice://preset${props.location.search}`;
   return (
     <DocumentPage title={`Play "${presetName}"`}>
       <Text textAlign={"center"}>
