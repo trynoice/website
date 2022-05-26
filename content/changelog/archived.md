@@ -1,9 +1,11 @@
 ---
 layout: default
-title: Changelog
+title: Archived Changelog (v0 & v1)
+publishedAt: 2019-06-13T15:57:09+05:30
+updatedAt: 2021-09-23T16:52:59+05:30
 ---
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project during v0 and v1 releases.
 
 ## v1.3.3
 

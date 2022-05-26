@@ -97,10 +97,6 @@ const menuItems: Array<MenuItem> = [
     href: "/changelog",
   },
   {
-    title: "News",
-    href: "/news",
-  },
-  {
     title: "FAQs",
     href: "/faqs",
   },

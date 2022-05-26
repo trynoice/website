@@ -8,17 +8,17 @@ import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
 import DocumentPage from "../components/document-page";
 
-interface NewsItem {
+interface ChangelogItem {
   title: string;
   date: string;
   slug: string;
 }
 
-export default function News(): ReactElement {
+export default function Changelog(): ReactElement {
   const { allMdx } = useStaticQuery(graphql`
     {
       allMdx(
-        filter: { slug: { glob: "news/**" } }
+        filter: { slug: { glob: "changelog/**" } }
         sort: { fields: frontmatter___publishedAt, order: DESC }
       ) {
         nodes {
@@ -32,14 +32,17 @@ export default function News(): ReactElement {
     }
   `);
 
-  const posts: Array<NewsItem> = allMdx.nodes.map((n: any) => ({
+  const posts: Array<ChangelogItem> = allMdx.nodes.map((n: any) => ({
     title: n.frontmatter.title,
     date: n.frontmatter.publishedAt,
     slug: n.slug,
   }));
 
   return (
-    <DocumentPage title={"News"} description={"Latest updates on Noice"}>
+    <DocumentPage
+      title={"Changelog"}
+      description={"Latest product updates about Noice"}
+    >
       <UnorderedList spacing={2}>
         {posts.map((p) => (
           <ListItem>
