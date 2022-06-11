@@ -54,9 +54,9 @@ active subscription.
       varying lengths from longer clips, e.g. 40 secs and 45 secs. When played
       in parallel, the listener perceived that the sound was longer (around 5-6
       minutes). Read more about it on the [GitHub
-      issue](https://github.com/ashutoshgngwr/noice/issues/62)!
+      issue](https://github.com/trynoice/android-app/issues/62)!
 
 [^2]: Sources like
       [F-Droid](https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/)
-      and [GitHub releases](https://github.com/ashutoshgngwr/noice/releases)
+      and [GitHub releases](https://github.com/trynoice/android-app/releases)
       that don't track user metrics.

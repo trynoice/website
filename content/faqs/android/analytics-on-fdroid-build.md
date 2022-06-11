@@ -15,14 +15,14 @@ sections of the source code. _The code permalinks are pinned to a specific
 commit. Please find their latest versions._
 
 1. [Analytics Provider implementation for the free APK
-   variant](https://github.com/ashutoshgngwr/noice/blob/c44e3250392fb6463deb6b76e577c6f1c9679d3d/app/src/main/java/com/github/ashutoshgngwr/noice/provider/AnalyticsProvider.kt#L55-L63)
+   variant](https://github.com/trynoice/android-app/blob/c44e3250392fb6463deb6b76e577c6f1c9679d3d/app/src/main/java/com/github/trynoice/android-app/provider/AnalyticsProvider.kt#L55-L63)
 2. [Analytics Provider implementation for the full APK
-   variant](https://github.com/ashutoshgngwr/noice/blob/main/app/src/full/java/com/github/ashutoshgngwr/noice/provider/RealAnalyticsProvider.kt)
+   variant](https://github.com/trynoice/android-app/blob/main/app/src/full/java/com/github/trynoice/android-app/provider/RealAnalyticsProvider.kt)
 3. [Android Manifest for full APK
-   variant](https://github.com/ashutoshgngwr/noice/blob/main/app/src/full/AndroidManifest.xml)
+   variant](https://github.com/trynoice/android-app/blob/main/app/src/full/AndroidManifest.xml)
    that disables analytics data sharing by default. It also permanently disables
    the collection of Advertising IDs and Secure Settings Android IDs.
 4. [Consent
-   Notice](https://github.com/ashutoshgngwr/noice/blob/0b8ed7b0ef0c0de5068259dfee79f81f553a6f06/app/src/main/java/com/github/ashutoshgngwr/noice/activity/MainActivity.kt#L77-L102)
+   Notice](https://github.com/trynoice/android-app/blob/0b8ed7b0ef0c0de5068259dfee79f81f553a6f06/app/src/main/java/com/github/trynoice/android-app/activity/MainActivity.kt#L77-L102)
    that users see on the first launch, which only enables data sharing if you
    click "Accept".
