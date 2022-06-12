@@ -2,4 +2,4 @@
 title: Terms of Service
 ---
 
-Sorry folks! We're still working on these.
+> _Sorry folks! We're still working on these._

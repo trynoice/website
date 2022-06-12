@@ -5,6 +5,9 @@ publishedAt: 2021-07-13T00:00:00+00:00
 updatedAt: 2021-08-18T00:00:00+00:00
 ---
 
+> _Our privacy policy is not currently up-to-date v2.0.0 release of our Android
+> app. Please bear with us while we work on it._
+
 Noice is open-source software. It is provided at no cost and is intended for use
 as is.
 
