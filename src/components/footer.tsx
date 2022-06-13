@@ -91,12 +91,19 @@ export default function Footer() {
         borderStyle={"solid"}
         borderColor={fgColor}
       >
-        <Text textAlign={"center"}>
+        <Text textAlign={{ base: "center", md: "left" }}>
           &copy; {year}, all rights reserved.
           <Text as="span" fontWeight={"500"}>
             {" "}
             Made with &hearts; in India.
           </Text>
+          <br />
+          <ChakraLink
+            as={"a"}
+            href={"https://thenounproject.com/icon/white-noise-1287855/"}
+          >
+            White Noise icon by Juraj Sedlák
+          </ChakraLink>
         </Text>
         <Stack direction={"row"} spacing={4}>
           <SocialIcon
