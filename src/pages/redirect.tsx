@@ -1,12 +1,14 @@
 import { Link, Text } from "@chakra-ui/react";
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import DocumentPage from "../components/document-page";
 
-export default function RedirectPage({ location }: any): ReactElement {
-  const params = new URLSearchParams(location.search);
-  const redirectTo = params.get("uri") || "/";
+export default function RedirectPage(): ReactElement {
+  const [redirectTo, setRedirectTo] = useState<string>();
   useEffect(() => {
-    window.location.href = redirectTo;
+    const params = new URLSearchParams(window.location.search);
+    const uri = params.get("uri") || "/";
+    window.location.href = uri;
+    setRedirectTo(uri);
   });
 
   return (

@@ -1,10 +1,13 @@
 import { Link, Text } from "@chakra-ui/react";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import DocumentPage from "../components/document-page";
 
-export default function RedirectPage({ location }: any): ReactElement {
-  const params = new URLSearchParams(location.search);
-  const token = params.get("token");
+export default function SignInPage(): ReactElement {
+  const [token, setToken] = useState<string>();
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setToken(params.get("token") || "null");
+  });
 
   return (
     <DocumentPage

@@ -1,15 +1,16 @@
 import { Link, Text } from "@chakra-ui/react";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import DocumentPage from "../components/document-page";
 
-interface PresetPageProps {
-  location: Location;
-}
+export default function Preset(): ReactElement {
+  const [presetName, setPresetName] = useState<string>("");
+  const [presetUri, setPresetUri] = useState<string>("");
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    setPresetName(queryParams.get("n") || "");
+    setPresetUri(`noice://preset${window.location.search}`);
+  });
 
-export default function Preset(props: PresetPageProps): ReactElement {
-  const queryParams = new URLSearchParams(props.location.search);
-  const presetName = queryParams.get("n");
-  const presetUri = `noice://preset${props.location.search}`;
   return (
     <DocumentPage title={`Play "${presetName}"`}>
       <Text textAlign={"center"}>
