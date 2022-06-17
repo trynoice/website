@@ -18,6 +18,8 @@ face any issues, please report them to us immediately at
 - We now host the sound library on the Internet. It has significantly decreased
   the APK size. The Android app caches sound on the first playback to reduce
   data usage. But you'll need an Internet connection for playback.
+- You can stream sounds at up to 320 kbps. Previously, the maximum audio quality
+  was 128 kbps.
 - You can now configure sound fade-in and fade-out durations individually for up
   to 30 seconds.
 
