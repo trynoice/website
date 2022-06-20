@@ -41,6 +41,9 @@ export default function Footer() {
           >
             Submit Feedback
           </ChakraLink>
+          <ChakraLink href={"https://status.trynoice.com"}>
+            Service Status
+          </ChakraLink>
         </Stack>
 
         <Stack align={"flex-start"}>
