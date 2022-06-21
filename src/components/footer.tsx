@@ -19,10 +19,10 @@ export default function Footer() {
   return (
     <Section as={"footer"} bg={bgColor} color={fgColor} fontSize={"sm"}>
       <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8} py={10}>
-        <Stack align={"flex-start"}>
+        <Stack align={"flex-start"} spacing={3}>
           <ListHeader>Support</ListHeader>
           <ChakraLink as={GatsbyLink} to={"/faqs"}>
-            FAQs
+            Frequently Asked Questions
           </ChakraLink>
           <ChakraLink href={"mailto:trynoiceapp@gmail.com"}>
             Contact Us
@@ -42,34 +42,36 @@ export default function Footer() {
             Submit Feedback
           </ChakraLink>
           <ChakraLink href={"https://status.trynoice.com"}>
-            Service Status
+            Operational Status
           </ChakraLink>
         </Stack>
 
-        <Stack align={"flex-start"}>
-          <ListHeader>Community</ListHeader>
-          <ChakraLink as={GatsbyLink} to={"/code-of-conduct"}>
-            Guidelines
-          </ChakraLink>
-          <ChakraLink href={"https://hosted.weblate.org/engage/noice/"}>
-            Translations
-          </ChakraLink>
-          <ChakraLink href={"https://opencollective.com/noice"}>
-            Open Collective
-          </ChakraLink>
-          <ChakraLink href={"https://github.com/trynoice"}>GitHub</ChakraLink>
-        </Stack>
-
-        <Stack align={"flex-start"}>
-          <ListHeader>Policies</ListHeader>
-          <ChakraLink as={GatsbyLink} to={"/privacy-policy"}>
-            Privacy Policy
+        <Stack align={"flex-start"} spacing={3}>
+          <ListHeader>Resources</ListHeader>
+          <ChakraLink as={GatsbyLink} to={"/changelog"}>
+            Changelog
           </ChakraLink>
           <ChakraLink href={"https://www.gnu.org/licenses/gpl-3.0.html"}>
             License
           </ChakraLink>
+          <ChakraLink as={GatsbyLink} to={"/privacy-policy"}>
+            Privacy Policy
+          </ChakraLink>
           <ChakraLink as={GatsbyLink} to={"/terms-of-service"}>
             Terms of Service
+          </ChakraLink>
+        </Stack>
+
+        <Stack align={"flex-start"} spacing={3}>
+          <ListHeader>Community</ListHeader>
+          <ChakraLink href={"https://hosted.weblate.org/engage/noice/"}>
+            Translations
+          </ChakraLink>
+          <ChakraLink href={"https://github.com/trynoice"}>
+            Open Source
+          </ChakraLink>
+          <ChakraLink href={"https://opencollective.com/noice"}>
+            Open Collective
           </ChakraLink>
         </Stack>
 
