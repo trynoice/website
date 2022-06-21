@@ -60,7 +60,7 @@ export default function DocumentPage(props: DocumentPageProps): ReactElement {
             </Text>
           ) : null}
         </Section>
-        <Container maxW={"4xl"} py={{ base: 8, md: 12 }}>
+        <Container maxW={"4xl"} p={{ base: 8, md: 12 }}>
           {props.children}
         </Container>
       </Box>

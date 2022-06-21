@@ -180,6 +180,7 @@ function HorizontalNavMenu(props: NavMenuProps): ReactElement | null {
           color={"gray.500"}
           hoverColor={"gray.900"}
           activeColor={"primary.500"}
+          fontSize={"lg"}
         >
           {item.title}
         </NavMenuItem>
