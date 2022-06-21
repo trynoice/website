@@ -17,6 +17,7 @@ interface PageProps {
   children?: ReactNode;
   fontSize?: ResponsiveValue<string>;
   lineHeight?: string;
+  hideNavMenu?: boolean;
 }
 
 export default function Page(props: PageProps): ReactElement {
@@ -46,7 +47,7 @@ export default function Page(props: PageProps): ReactElement {
       align={"stretch"}
       spacing={0}
     >
-      <NavBar />
+      <NavBar hideMenu={props.hideNavMenu} />
       <Box as={"main"} fontSize={props.fontSize} lineHeight={props.lineHeight}>
         {props.children}
       </Box>

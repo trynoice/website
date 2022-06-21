@@ -29,7 +29,11 @@ import {
 import AppIcon from "../assets/icon.inline.svg";
 import Section from "./section";
 
-export default function NavBar(): ReactElement {
+interface NavBarProps {
+  hideMenu?: boolean;
+}
+
+export default function NavBar(props: NavBarProps): ReactElement {
   const { site } = useStaticQuery(graphql`
     {
       site {
@@ -46,7 +50,7 @@ export default function NavBar(): ReactElement {
     <Section as="header" py={6}>
       <HStack align={"center"} spacing={2}>
         <Show below={"md"}>
-          <HamburgerNavMenu />
+          <HamburgerNavMenu isVisible={!props.hideMenu} />
         </Show>
 
         <IconButton
@@ -64,7 +68,7 @@ export default function NavBar(): ReactElement {
         <Spacer />
 
         <Show above={"md"}>
-          <HorizontalNavMenu />
+          <HorizontalNavMenu isVisible={!props.hideMenu} />
         </Show>
 
         <Button
@@ -102,9 +106,17 @@ const menuItems: Array<MenuItem> = [
   },
 ];
 
-function HamburgerNavMenu(): ReactElement {
+interface NavMenuProps {
+  isVisible: boolean;
+}
+
+function HamburgerNavMenu(props: NavMenuProps): ReactElement | null {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  if (!props.isVisible) {
+    return null;
+  }
 
   return (
     <Fragment>
@@ -155,7 +167,11 @@ function HamburgerNavMenu(): ReactElement {
   );
 }
 
-function HorizontalNavMenu(): ReactElement {
+function HorizontalNavMenu(props: NavMenuProps): ReactElement | null {
+  if (!props.isVisible) {
+    return null;
+  }
+
   return (
     <HStack spacing={8} px={8}>
       {menuItems.map((item) => (

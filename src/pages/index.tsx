@@ -55,7 +55,7 @@ export default function Home(): ReactElement {
 
   const plans: PremiumPlan[] = allPremiumPlan.nodes;
   return (
-    <Page>
+    <Page hideNavMenu={true}>
       <Hero description={site.siteMetadata.description} />
       <Features />
       <Reviews />
