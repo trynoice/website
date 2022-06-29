@@ -28,7 +28,7 @@ import MeditatingIllustration from "../assets/meditating.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import PercentagesIllustration from "../assets/percentages.svg";
 import ReadingTimeIllustration from "../assets/reading-time.svg";
-import { FDroidBadge, PlayStoreBadge } from "../components/app-store-badge";
+import GooglePlayBadge from "../components/google-play-badge";
 import Page from "../components/page";
 import Section from "../components/section";
 
@@ -96,10 +96,7 @@ function Hero(props: HeroProps): ReactElement {
               {` ${descriptionEnd.join(" ")}`}
             </Text>
           </Heading>
-          <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={{ base: 4, md: 8 }}>
-            <PlayStoreBadge />
-            <FDroidBadge />
-          </SimpleGrid>
+          <GooglePlayBadge />
         </VStack>
 
         <Image

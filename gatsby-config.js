@@ -13,10 +13,8 @@ module.exports = {
       (process.env.CONTEXT === "production"
         ? process.env.URL
         : process.env.DEPLOY_PRIME_URL) || "http://localhost:8000",
-    playstoreUrl:
+    googlePlayUrl:
       "https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice",
-    fdroidUrl:
-      "https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/",
   },
   plugins: [
     "gatsby-plugin-react-helmet",

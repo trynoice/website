@@ -8,7 +8,7 @@ import {
 import { Link as GatsbyLink } from "gatsby";
 import { ReactElement } from "react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { FDroidBadge, PlayStoreBadge } from "./app-store-badge";
+import GooglePlayBadge from "./google-play-badge";
 import Section from "./section";
 
 export default function Footer() {
@@ -21,9 +21,6 @@ export default function Footer() {
       <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8} py={10}>
         <Stack align={"flex-start"} spacing={3}>
           <ListHeader>Support</ListHeader>
-          <ChakraLink as={GatsbyLink} to={"/faqs"}>
-            Frequently Asked Questions
-          </ChakraLink>
           <ChakraLink href={"mailto:trynoiceapp@gmail.com"}>
             Contact Us
           </ChakraLink>
@@ -48,6 +45,9 @@ export default function Footer() {
 
         <Stack align={"flex-start"} spacing={3}>
           <ListHeader>Resources</ListHeader>
+          <ChakraLink as={GatsbyLink} to={"/faqs"}>
+            Frequently Asked Questions
+          </ChakraLink>
           <ChakraLink as={GatsbyLink} to={"/changelog"}>
             Changelog
           </ChakraLink>
@@ -79,10 +79,35 @@ export default function Footer() {
           id={"install-app"}
           align={"flex-start"}
           justify={"center"}
-          spacing={4}
+          spacing={6}
         >
-          <PlayStoreBadge />
-          <FDroidBadge />
+          <Stack direction={"row"} spacing={4}>
+            <SocialIcon
+              icon={<FaTwitter />}
+              label={"Twitter"}
+              href={"https://twitter.com/trynoice"}
+              brandColor={"#1DA1F2"}
+            />
+            <SocialIcon
+              icon={<FaLinkedin />}
+              label={"LinkedIn"}
+              href={"https://linkedin.com/company/trynoice"}
+              brandColor={"#0A66C2"}
+            />
+            <SocialIcon
+              icon={<FaInstagram />}
+              label={"Instagram"}
+              href={"https://instagram.com/trynoice"}
+              brandColor={"#E1306C"}
+            />
+            <SocialIcon
+              icon={<FaGithub />}
+              label={"GitHub"}
+              href={"https://github.com/trynoice"}
+              brandColor={"gray.50"}
+            />
+          </Stack>
+          <GooglePlayBadge />
         </Stack>
       </SimpleGrid>
 
@@ -103,38 +128,18 @@ export default function Footer() {
             Made with &hearts; in India.
           </Text>
           <br />
+        </Text>
+        <Stack direction="row" spacing={2}>
+          <ChakraLink as={GatsbyLink} to={"/sitemap/sitemap-index.xml"}>
+            Sitemap
+          </ChakraLink>
+          <Text>|</Text>
           <ChakraLink
             as={"a"}
             href={"https://thenounproject.com/icon/white-noise-1287855/"}
           >
             White Noise icon by Juraj Sedlák
           </ChakraLink>
-        </Text>
-        <Stack direction={"row"} spacing={4}>
-          <SocialIcon
-            icon={<FaTwitter />}
-            label={"Twitter"}
-            href={"https://twitter.com/trynoice"}
-            brandColor={"#1DA1F2"}
-          />
-          <SocialIcon
-            icon={<FaLinkedin />}
-            label={"LinkedIn"}
-            href={"https://linkedin.com/company/trynoice"}
-            brandColor={"#0A66C2"}
-          />
-          <SocialIcon
-            icon={<FaInstagram />}
-            label={"Instagram"}
-            href={"https://instagram.com/trynoice"}
-            brandColor={"#E1306C"}
-          />
-          <SocialIcon
-            icon={<FaGithub />}
-            label={"GitHub"}
-            href={"https://github.com/trynoice"}
-            brandColor={"gray.50"}
-          />
         </Stack>
       </Stack>
     </Section>
