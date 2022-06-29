@@ -73,22 +73,22 @@ function Hero(props: HeroProps): ReactElement {
   const descriptionEnd = descriptionStart.splice(-3);
 
   return (
-    <Section py={sectionPadding}>
-      <SimpleGrid
-        columns={{ base: 1, md: 2 }}
+    <Section py={{ base: 24, md: 32 }}>
+      <Stack
+        direction={{ base: "column", md: "row" }}
         alignItems={"center"}
         justifyItems={"center"}
-        spacing={24}
+        spacing={{ base: 24, md: 4, lg: 8, xl: 12 }}
       >
         <VStack
-          spacing={{ base: 6, md: 10 }}
+          spacing={{ base: 6, md: 8 }}
+          w={"full"}
           align={{ base: "center", md: "flex-start" }}
         >
           <Heading
-            maxW={{ base: "lg", md: "4xl" }}
-            lineHeight={"base"}
+            lineHeight={"short"}
             fontWeight={600}
-            fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+            fontSize={{ base: "4xl", lg: "5xl" }}
             textAlign={{ base: "center", md: "left" }}
           >
             <Text as={"span"}>{descriptionStart.join(" ")}</Text>
@@ -103,9 +103,9 @@ function Hero(props: HeroProps): ReactElement {
           src={MeditatingIllustration}
           alt={"focused"}
           w={"full"}
-          maxW={{ base: "sm", md: "xl" }}
+          maxW={{ base: "xs", md: "md", lg: "lg" }}
         />
-      </SimpleGrid>
+      </Stack>
       <Benefits />
     </Section>
   );
@@ -168,11 +168,6 @@ function Benefits(): ReactElement {
 }
 
 function Features(): ReactElement {
-  const viewBoxSize = useBreakpointValue({
-    base: "0 0 128 8",
-    md: "0 0 256 8",
-  });
-
   return (
     <Fragment>
       <WavyEdge from={"white"} to={"indigo.50"} />
