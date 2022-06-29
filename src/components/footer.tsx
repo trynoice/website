@@ -114,14 +114,13 @@ export default function Footer() {
       <Stack
         py={4}
         direction={{ base: "column", md: "row" }}
-        justify={{ md: "space-between" }}
         align={"center"}
-        spacing={4}
+        spacing={{ base: 4, md: 24 }}
         borderTopWidth={1}
         borderStyle={"solid"}
         borderColor={fgColor}
       >
-        <Text textAlign={{ base: "center", md: "left" }}>
+        <Text w={"full"} textAlign={{ base: "center", md: "left" }}>
           &copy; {year}, all rights reserved.
           <Text as="span" fontWeight={"500"}>
             {" "}
@@ -129,18 +128,27 @@ export default function Footer() {
           </Text>
           <br />
         </Text>
-        <Stack direction="row" spacing={2}>
+        <Text
+          w={"full"}
+          textAlign={{ base: "center", md: "right" }}
+          fontSize={"xs"}
+        >
           <ChakraLink as={GatsbyLink} to={"/sitemap/sitemap-index.xml"}>
             Sitemap
           </ChakraLink>
-          <Text>|</Text>
+          {" | "}
           <ChakraLink
             as={"a"}
             href={"https://thenounproject.com/icon/white-noise-1287855/"}
+            isExternal
           >
             White Noise icon by Juraj Sedlák
           </ChakraLink>
-        </Stack>
+          {" | "}
+          <ChakraLink as={"a"} href={"https://undraw.co"} isExternal>
+            Illustrations from undraw.co
+          </ChakraLink>
+        </Text>
       </Stack>
     </Section>
   );
