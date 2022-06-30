@@ -1,5 +1,9 @@
 const name = "Noice";
 const tagline = "Natural calming noise";
+const siteUrl =
+  (process.env.CONTEXT === "production"
+    ? process.env.URL
+    : process.env.DEPLOY_PRIME_URL) || "http://localhost:8000";
 
 /** @type {import('gatsby').GatsbyConfig} */
 module.exports = {
@@ -9,10 +13,7 @@ module.exports = {
     tagline: tagline,
     description: "Relax and improve focus with natural calming noise.",
     twitter: "@trynoice",
-    siteUrl:
-      (process.env.CONTEXT === "production"
-        ? process.env.URL
-        : process.env.DEPLOY_PRIME_URL) || "http://localhost:8000",
+    siteUrl: siteUrl,
     googlePlayUrl:
       "https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice",
   },
@@ -79,6 +80,12 @@ module.exports = {
         rule: {
           include: /\.inline\.svg$/,
         },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-canonical-urls",
+      options: {
+        siteUrl: siteUrl,
       },
     },
   ],
