@@ -33,7 +33,7 @@
     "gatsby-remark-copy-linked-files": "^5.15.0",
     "gatsby-source-filesystem": "^4.15.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.4.0",
     "sass": "^1.52.1"
