@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@chakra-ui/gatsby-plugin": "^3.0.0",
+    "@chakra-ui/gatsby-plugin": "^3.0.1",
     "@chakra-ui/icons": "^2.0.1",
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11.9.3",
