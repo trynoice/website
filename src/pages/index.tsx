@@ -19,9 +19,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
-import { Fragment, ReactElement } from "react";
+import LocaleCurrency from "locale-currency";
+import { Fragment, ReactElement, useEffect, useState } from "react";
 import { FaCheckCircle, FaMixer, FaQuoteLeft } from "react-icons/fa";
 import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
+import { listPlans, SubscriptionPlan } from "../api/subscriptions";
 import DreamerIllustration from "../assets/dreamer.svg";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
@@ -53,13 +55,13 @@ export default function Home(): ReactElement {
     }
   `);
 
-  const plans: PremiumPlan[] = allPremiumPlan.nodes;
+  const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
     <Page hideNavMenu={true}>
       <Hero description={site.siteMetadata.description} />
       <Features />
       <Reviews />
-      <Pricing premiumPlans={plans} />
+      <Pricing subscriptionPlans={plans} />
     </Page>
   );
 }
@@ -341,33 +343,68 @@ function ReviewCard(props: ReviewCardProps) {
   );
 }
 
-interface PremiumPlan {
+interface PricingProps {
+  subscriptionPlans: SubscriptionPlan[];
+}
+
+interface PlanInfo {
   billingPeriodMonths: number;
-  priceInIndianPaise: number;
+  monthlyPriceRaw: number;
+  monthlyPrice: string;
+  totalPrice: string;
   trialPeriodDays: number;
 }
 
-interface PricingProps {
-  premiumPlans: PremiumPlan[];
+function subscriptionPlanToPlanInfo(
+  p: SubscriptionPlan,
+  locale?: string
+): PlanInfo {
+  const format = new Intl.NumberFormat(locale || "en-US", {
+    style: "currency",
+    currency: p.requestedCurrencyCode || "INR",
+  });
+
+  const total = p.priceInRequestedCurrency || p.priceInIndianPaise / 100.0;
+  const monthly = total / p.billingPeriodMonths;
+  return {
+    billingPeriodMonths: p.billingPeriodMonths,
+    monthlyPriceRaw: monthly,
+    monthlyPrice: format.format(monthly),
+    totalPrice: format.format(total),
+    trialPeriodDays: p.trialPeriodDays,
+  };
 }
 
-const numberFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "INR",
-  minimumFractionDigits: 0,
-});
-
 function Pricing(props: PricingProps): ReactElement {
-  const maxTrialPeriod = Math.max(
-    ...props.premiumPlans.map((p) => p.trialPeriodDays)
+  const [planInfos, setPlanInfos] = useState(
+    props.subscriptionPlans.map((p) => subscriptionPlanToPlanInfo(p, "en-US"))
   );
 
-  const minMonthlyPrice = numberFormatter.format(
-    Math.min(
-      ...props.premiumPlans.map(
-        (p) => p.priceInIndianPaise / 100 / p.billingPeriodMonths
-      )
-    )
+  useEffect(() => {
+    async function fetchPremiumPlans() {
+      const locale = window.navigator.language;
+      if (!locale) {
+        return;
+      }
+
+      const currencyCode = LocaleCurrency.getCurrency(locale);
+      if (!currencyCode) {
+        return;
+      }
+
+      const plans = await listPlans("stripe", currencyCode);
+      setPlanInfos(plans.map((p) => subscriptionPlanToPlanInfo(p, locale)));
+    }
+
+    fetchPremiumPlans();
+  }, []);
+
+  const { trialPeriodDays: maxTrialPeriod } = planInfos.reduce((p, n) =>
+    p.trialPeriodDays > n.trialPeriodDays ? p : n
+  );
+
+  const { monthlyPrice: minMonthlyPrice } = planInfos.reduce((p, n) =>
+    p.monthlyPriceRaw < n.monthlyPriceRaw ? p : n
   );
 
   return (
@@ -421,7 +458,7 @@ function Pricing(props: PricingProps): ReactElement {
         ]}
         pricing={`Starts at ${minMonthlyPrice}/month`}
       />
-      <PremiumPlanPricing plans={props.premiumPlans} />
+      <PremiumTierPricing planInfos={planInfos} />
     </Section>
   );
 }
@@ -463,12 +500,12 @@ function TierInfo(props: TierInfoProps): ReactElement {
   );
 }
 
-interface PremiumPlanPricingProps {
-  plans: PremiumPlan[];
+interface PremiumTierPricingProps {
+  planInfos: PlanInfo[];
 }
 
-function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
-  props.plans.sort((a, b) =>
+function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
+  props.planInfos.sort((a, b) =>
     a.billingPeriodMonths > b.billingPeriodMonths ? -1 : 1
   );
 
@@ -484,7 +521,7 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
         alignItems={"center"}
         justifyItems={"center"}
       >
-        {props.plans.map((plan) => (
+        {props.planInfos.map((info) => (
           <VStack
             w={"full"}
             maxW={"xs"}
@@ -499,35 +536,33 @@ function PremiumPlanPricing(props: PremiumPlanPricingProps): ReactElement {
             borderRadius={"xl"}
           >
             <Text fontSize={"2xl"}>
-              {plan.billingPeriodMonths == 1
+              {info.billingPeriodMonths == 1
                 ? "Monthly"
-                : plan.billingPeriodMonths == 3
+                : info.billingPeriodMonths == 3
                 ? "Quarterly"
-                : plan.billingPeriodMonths == 6
+                : info.billingPeriodMonths == 6
                 ? "Bi-yearly"
-                : plan.billingPeriodMonths == 12
+                : info.billingPeriodMonths == 12
                 ? "Yearly"
-                : `Every ${plan.billingPeriodMonths} months`}
+                : `Every ${info.billingPeriodMonths} months`}
             </Text>
             <Text>
-              <Text as="span" fontSize={"5xl"}>
-                {numberFormatter.format(
-                  plan.priceInIndianPaise / plan.billingPeriodMonths / 100
-                )}
+              <Text as="span" fontSize={"3xl"}>
+                {info.monthlyPrice}
               </Text>
               /month
             </Text>
             <Text lineHeight={"taller"}>
               for{" "}
               <Text as={"span"} fontWeight={"medium"}>
-                {numberFormatter.format(plan.priceInIndianPaise / 100)}
+                {info.totalPrice}
               </Text>
               <br />
               every{" "}
               <Text as={"span"} fontWeight={"medium"}>
-                {plan.billingPeriodMonths == 1
+                {info.billingPeriodMonths == 1
                   ? "month"
-                  : `${plan.billingPeriodMonths} months`}
+                  : `${info.billingPeriodMonths} months`}
               </Text>
             </Text>
           </VStack>
