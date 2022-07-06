@@ -40,15 +40,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return;
   }
 
-  result.data.allMdx.nodes.forEach((node) => {
-    createPage({
-      path: node.slug,
-      component: path.resolve(
-        `src/layouts/${node.frontmatter.layout || "default"}.tsx`
-      ),
-      context: {
-        id: node.id,
-      },
+  result.data.allMdx.nodes
+    // only render markdown pages that specify a layout.
+    .filter((node) => node.frontmatter && node.frontmatter.layout)
+    .forEach((node) => {
+      createPage({
+        path: node.slug,
+        component: path.resolve(`src/layouts/${node.frontmatter.layout}.tsx`),
+        context: {
+          id: node.id,
+        },
+      });
     });
-  });
 };
