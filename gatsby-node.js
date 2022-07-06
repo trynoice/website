@@ -1,16 +1,12 @@
-const fetch = require("node-fetch");
 const path = require("path");
+const { listPlans } = require("./src/api/subscriptions");
 
 exports.sourceNodes = async ({
   actions: { createNode },
   createContentDigest,
 }) => {
-  const plansResponse = await fetch(
-    // Both Stripe and Google Play plans should be identical.
-    "https://api.trynoice.com/v1/subscriptions/plans?provider=stripe"
-  );
-
-  (await plansResponse.json()).forEach((plan) => {
+  // Both Stripe and Google Play plans should be identical.
+  (await listPlans("stripe")).forEach((plan) => {
     createNode({
       ...plan,
       id: `${plan.id}`,
