@@ -20,7 +20,7 @@ interface PageProps {
   hideNavMenu?: boolean;
 }
 
-export default function Page(props: PageProps): ReactElement {
+export default function ShellPage(props: PageProps): ReactElement {
   const { site } = useStaticQuery(graphql`
     {
       site {

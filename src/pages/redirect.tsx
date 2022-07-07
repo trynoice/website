@@ -1,6 +1,6 @@
 import { Link, Text } from "@chakra-ui/react";
 import { ReactElement, useEffect, useState } from "react";
-import DocumentPage from "../components/document-page";
+import ContentfulPage from "../components/contentful-page";
 
 export default function RedirectPage(): ReactElement {
   const [redirectTo, setRedirectTo] = useState<string>();
@@ -12,7 +12,7 @@ export default function RedirectPage(): ReactElement {
   });
 
   return (
-    <DocumentPage
+    <ContentfulPage
       title="Redirecting"
       meta={[
         {
@@ -28,6 +28,6 @@ export default function RedirectPage(): ReactElement {
         </Link>
         .
       </Text>
-    </DocumentPage>
+    </ContentfulPage>
   );
 }

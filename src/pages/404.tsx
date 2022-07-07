@@ -1,11 +1,11 @@
 import { Heading, Link as ChakraLink, Text } from "@chakra-ui/react";
 import { Link as GatsbyLink } from "gatsby";
 import { ReactElement } from "react";
-import DocumentPage from "../components/document-page";
+import ContentfulPage from "../components/contentful-page";
 
 export default function NotFound(): ReactElement {
   return (
-    <DocumentPage title={"Page Not Found"}>
+    <ContentfulPage title={"Page Not Found"}>
       <Text textAlign={"center"}>
         You seem to have clicked on a broken link. Please return to the{" "}
         <ChakraLink as={GatsbyLink} to={"/"} color={"primary.500"}>
@@ -26,6 +26,6 @@ export default function NotFound(): ReactElement {
       >
         (&#x2299;.&#x2609;)
       </Heading>
-    </DocumentPage>
+    </ContentfulPage>
   );
 }

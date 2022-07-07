@@ -1,6 +1,6 @@
 import { Link, Text } from "@chakra-ui/react";
 import { ReactElement, useEffect, useState } from "react";
-import DocumentPage from "../components/document-page";
+import ContentfulPage from "../components/contentful-page";
 
 export default function SignInPage(): ReactElement {
   const [token, setToken] = useState<string>();
@@ -10,7 +10,7 @@ export default function SignInPage(): ReactElement {
   });
 
   return (
-    <DocumentPage
+    <ContentfulPage
       title="Sign In"
       meta={[
         {
@@ -42,6 +42,6 @@ export default function SignInPage(): ReactElement {
         </Link>
         .
       </Text>
-    </DocumentPage>
+    </ContentfulPage>
   );
 }

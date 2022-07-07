@@ -2,7 +2,7 @@ import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import { ReactElement } from "react";
 import ChakraMDXProvider from "../components/chakra-mdx-provider";
-import DocumentPage from "../components/document-page";
+import ContentfulPage from "../components/contentful-page";
 
 export default function DefaultLayout(props: any): ReactElement {
   const {
@@ -16,7 +16,7 @@ export default function DefaultLayout(props: any): ReactElement {
   } = props;
 
   return (
-    <DocumentPage
+    <ContentfulPage
       title={title}
       description={excerpt}
       publishedAt={publishedAt}
@@ -25,7 +25,7 @@ export default function DefaultLayout(props: any): ReactElement {
       <ChakraMDXProvider>
         <MDXRenderer>{body}</MDXRenderer>
       </ChakraMDXProvider>
-    </DocumentPage>
+    </ContentfulPage>
   );
 }
 

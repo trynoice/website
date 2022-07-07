@@ -31,7 +31,7 @@ import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import PercentagesIllustration from "../assets/percentages.svg";
 import ReadingTimeIllustration from "../assets/reading-time.svg";
 import GooglePlayBadge from "../components/google-play-badge";
-import Page from "../components/page";
+import ShellPage from "../components/shell-page";
 import Section from "../components/section";
 
 const sectionPadding = { base: 28, md: 40 };
@@ -57,12 +57,12 @@ export default function Home(): ReactElement {
 
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
-    <Page hideNavMenu={true}>
+    <ShellPage hideNavMenu={true}>
       <Hero description={site.siteMetadata.description} />
       <Features />
       <Reviews />
       <Pricing subscriptionPlans={plans} />
-    </Page>
+    </ShellPage>
   );
 }
 

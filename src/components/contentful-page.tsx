@@ -1,7 +1,7 @@
 import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import { ReactElement, ReactNode } from "react";
 import Breadcrumbs from "./breadcrumbs";
-import Page from "./page";
+import ShellPage from "./shell-page";
 
 interface DocumentPageProps {
   meta?: React.DetailedHTMLProps<
@@ -15,7 +15,7 @@ interface DocumentPageProps {
   children?: ReactNode;
 }
 
-export default function DocumentPage(props: DocumentPageProps): ReactElement {
+export default function ContentfulPage(props: DocumentPageProps): ReactElement {
   const contentProps = {
     maxW: "4xl",
     mx: "auto",
@@ -23,7 +23,7 @@ export default function DocumentPage(props: DocumentPageProps): ReactElement {
   };
 
   return (
-    <Page
+    <ShellPage
       meta={props.meta}
       title={props.title}
       description={props.description}
@@ -81,6 +81,6 @@ export default function DocumentPage(props: DocumentPageProps): ReactElement {
           {props.children}
         </Container>
       </Box>
-    </Page>
+    </ShellPage>
   );
 }

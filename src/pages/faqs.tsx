@@ -1,7 +1,7 @@
 import { Link as ChakraLink, ListItem, OrderedList } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
-import DocumentPage from "../components/document-page";
+import ContentfulPage from "../components/contentful-page";
 
 interface FAQItem {
   title: string;
@@ -31,7 +31,7 @@ export default function FAQs(): ReactElement {
   }));
 
   return (
-    <DocumentPage
+    <ContentfulPage
       title={"Frequently Asked Questions"}
       description={"Frequently asked questions about Noice."}
     >
@@ -44,6 +44,6 @@ export default function FAQs(): ReactElement {
           </ListItem>
         ))}
       </OrderedList>
-    </DocumentPage>
+    </ContentfulPage>
   );
 }
