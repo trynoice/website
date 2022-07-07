@@ -39,7 +39,7 @@ const MDXComponents: MDXProviderComponents = {
   ol: (props: any) => <OrderedList my={8} {...props} />,
   li: (props: any) => <ListItem {...props} />,
   hr: (props: any) => <Divider {...props} />,
-  blockquote: (props: unknown) => (
+  blockquote: (props: any) => (
     <Alert
       my={8}
       role={"none"}
@@ -63,7 +63,7 @@ const MDXComponents: MDXProviderComponents = {
       }
 
       return (
-        <Box mt={8} fontSize={"0.877em"} color={"gray.600"}>
+        <Box mt={8} fontSize={"0.877em"} color={"gray.700"}>
           {child.props.children}
         </Box>
       );
