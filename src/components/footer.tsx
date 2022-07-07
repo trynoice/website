@@ -48,8 +48,8 @@ export default function Footer() {
           <ChakraLink as={GatsbyLink} to={"/faqs"}>
             Frequently Asked Questions
           </ChakraLink>
-          <ChakraLink as={GatsbyLink} to={"/changelog"}>
-            Changelog
+          <ChakraLink href={"https://github.com/trynoice/android-app/releases"}>
+            Android App Release Notes
           </ChakraLink>
           <ChakraLink href={"https://www.gnu.org/licenses/gpl-3.0.html"}>
             License

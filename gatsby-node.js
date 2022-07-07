@@ -19,7 +19,7 @@ exports.sourceNodes = async ({
 };
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
   const result = await graphql(`
     {
       allMdx {
@@ -29,6 +29,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
           frontmatter {
             layout
+            redirect {
+              url
+              permanent
+            }
           }
         }
       }
@@ -50,6 +54,16 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         context: {
           id: node.id,
         },
+      });
+    });
+
+  result.data.allMdx.nodes
+    .filter((node) => node.frontmatter && node.frontmatter.redirect)
+    .forEach((node) => {
+      createRedirect({
+        fromPath: node.slug,
+        toPath: node.frontmatter.redirect.url,
+        isPermanent: node.frontmatter.redirect.permanent,
       });
     });
 };

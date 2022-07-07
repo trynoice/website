@@ -97,10 +97,6 @@ const menuItems: Array<MenuItem> = [
     href: "/#pricing",
   },
   {
-    title: "Changelog",
-    href: "/changelog",
-  },
-  {
     title: "FAQs",
     href: "/faqs",
   },
