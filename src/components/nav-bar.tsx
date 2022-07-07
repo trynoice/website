@@ -1,6 +1,5 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -26,7 +25,7 @@ import {
   ReactNode,
   useRef,
 } from "react";
-import AppIcon from "../assets/icon.inline.svg";
+import AppIcon from "../assets/app-icon";
 import Section from "./section";
 
 interface NavBarProps {
@@ -60,9 +59,7 @@ export default function NavBar(props: NavBarProps): ReactElement {
           _focus={{ boxShadow: "none" }}
           aria-label={"Go to homepage"}
           title={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
-          icon={
-            <Box as={AppIcon} boxSize={{ base: 12, md: 16 }} fill={"black"} />
-          }
+          icon={<AppIcon boxSize={{ base: 12, md: 16 }} fill={"black"} />}
         />
 
         <Spacer />
@@ -134,7 +131,7 @@ function HamburgerNavMenu(props: NavMenuProps): ReactElement | null {
         <DrawerOverlay />
         <DrawerContent bg={"primary.500"} color={"white"}>
           <DrawerHeader alignItems={"flex-start"} px={8} py={6}>
-            <Box as={AppIcon} boxSize={{ base: 12, md: 16 }} fill={"white"} />
+            <AppIcon boxSize={{ base: 12, md: 16 }} fill={"white"} />
             <DrawerCloseButton />
           </DrawerHeader>
 

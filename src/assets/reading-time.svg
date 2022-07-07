@@ -1,6 +1,4 @@
-<svg data-name="Layer 1"
-  width="320"
-  height="240"
+<svg viewBox="0 0 320 240"
   xmlns="http://www.w3.org/2000/svg">
   <path d="M289.76 237.425h-67.85v-2.082a6.816 6.816 0 0 1 6.816-6.816h54.218a6.816 6.816 0 0 1 6.817 6.816v2.082z"
     fill="#e6e6e6"

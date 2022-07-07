@@ -31,8 +31,8 @@ import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import PercentagesIllustration from "../assets/percentages.svg";
 import ReadingTimeIllustration from "../assets/reading-time.svg";
 import GooglePlayBadge from "../components/google-play-badge";
-import ShellPage from "../components/shell-page";
 import Section from "../components/section";
+import ShellPage from "../components/shell-page";
 
 const sectionPadding = { base: 28, md: 40 };
 
