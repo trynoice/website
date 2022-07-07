@@ -142,10 +142,7 @@ function HamburgerNavMenu(props: NavMenuProps): ReactElement | null {
             {menuItems.map((item) => (
               <NavMenuItem
                 href={item.href}
-                onClick={() => {
-                  console.log("clicked");
-                  onClose();
-                }}
+                onClick={() => onClose()}
                 color={"white"}
                 hoverColor={"gray.200"}
                 activeBg={

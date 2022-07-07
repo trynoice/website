@@ -1,17 +1,26 @@
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
+import { ReactElement } from "react";
 import ChakraMDXProvider from "../components/chakra-mdx-provider";
 import DocumentPage from "../components/document-page";
 
-export default function DefaultLayout({ data }: any) {
-  const { mdx } = data;
-  const { frontmatter, body, excerpt } = mdx;
+export default function DefaultLayout(props: any): ReactElement {
+  const {
+    data: {
+      mdx: {
+        frontmatter: { title, publishedAt, updatedAt },
+        body,
+        excerpt,
+      },
+    },
+  } = props;
+
   return (
     <DocumentPage
-      title={frontmatter.title}
+      title={title}
       description={excerpt}
-      publishedAt={frontmatter.publishedAt}
-      updatedAt={frontmatter.updatedAt}
+      publishedAt={publishedAt}
+      updatedAt={updatedAt}
     >
       <ChakraMDXProvider>
         <MDXRenderer>{body}</MDXRenderer>

@@ -1,5 +1,5 @@
 ---
-layout: faq
+layout: default
 title: Can I add custom sounds to the Noice Android app?
 ---
 

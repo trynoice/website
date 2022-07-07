@@ -1,5 +1,5 @@
 ---
-layout: faq
+layout: default
 title: How do I create home screen shortcuts to play presets in the Android app?
 ---
 

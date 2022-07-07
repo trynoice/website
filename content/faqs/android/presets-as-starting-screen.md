@@ -1,5 +1,5 @@
 ---
-layout: faq
+layout: default
 title: How do I set Presets as the app's starting screen?
 ---
 

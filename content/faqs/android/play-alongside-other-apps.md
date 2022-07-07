@@ -1,5 +1,5 @@
 ---
-layout: faq
+layout: default
 title: How do I play Noice alongside other audio apps?
 ---
 

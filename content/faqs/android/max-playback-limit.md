@@ -1,5 +1,5 @@
 ---
-layout: faq
+layout: default
 title: Is there a maximum time limit to the playback on Android?
 ---
 

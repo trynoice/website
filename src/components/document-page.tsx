@@ -1,5 +1,6 @@
-import { Box, Container, Heading, Text } from "@chakra-ui/react";
+import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import { ReactElement, ReactNode } from "react";
+import Breadcrumbs from "./breadcrumbs";
 import Page from "./page";
 
 interface DocumentPageProps {
@@ -33,45 +34,48 @@ export default function DocumentPage(props: DocumentPageProps): ReactElement {
         <Container
           as={"header"}
           maxW={"full"}
-          bg={"gray.100"}
+          bg={"blackAlpha.50"}
           py={{ base: 8, md: 12 }}
+          px={0}
         >
-          <Heading
-            as={"h1"}
-            size={"2xl"}
-            textAlign={"center"}
-            lineHeight={"shorter"}
-            color={"primary.500"}
+          <VStack
             {...contentProps}
+            spacing={{ base: 4, lg: 6 }}
+            alignItems={"stretch"}
+            fontSize={{ base: "sm", md: "md" }}
           >
-            {props.title}
-          </Heading>
-          {props.publishedAt || props.updatedAt ? (
-            <Text
-              mt={6}
-              fontSize={{ base: "sm", md: "md" }}
-              textAlign={"center"}
-              color={"black"}
-              {...contentProps}
+            <Breadcrumbs />
+
+            <Heading
+              as={"h1"}
+              size={"2xl"}
+              lineHeight={"shorter"}
+              color={"primary.500"}
             >
-              {props.publishedAt ? (
-                <Text as={"span"}>
-                  Published on{" "}
-                  <Text as={"span"} fontWeight={"medium"}>
-                    {props.publishedAt}
+              {props.title}
+            </Heading>
+
+            {props.publishedAt || props.updatedAt ? (
+              <Text fontSize={{ base: "sm", md: "md" }} color={"black"}>
+                {props.publishedAt ? (
+                  <Text as={"span"}>
+                    Published on{" "}
+                    <Text as={"span"} fontWeight={"medium"}>
+                      {props.publishedAt}
+                    </Text>
                   </Text>
-                </Text>
-              ) : null}
-              {props.updatedAt ? (
-                <Text as={"span"}>
-                  , last updated on{" "}
-                  <Text as={"span"} fontWeight={"medium"}>
-                    {props.updatedAt}
+                ) : null}
+                {props.updatedAt ? (
+                  <Text as={"span"}>
+                    , last updated on{" "}
+                    <Text as={"span"} fontWeight={"medium"}>
+                      {props.updatedAt}
+                    </Text>
                   </Text>
-                </Text>
-              ) : null}
-            </Text>
-          ) : null}
+                ) : null}
+              </Text>
+            ) : null}
+          </VStack>
         </Container>
         <Container py={{ base: 8, md: 12 }} {...contentProps}>
           {props.children}
