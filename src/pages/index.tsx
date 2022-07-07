@@ -355,22 +355,28 @@ interface PlanInfo {
   trialPeriodDays: number;
 }
 
-function subscriptionPlanToPlanInfo(
-  p: SubscriptionPlan,
-  locale?: string
-): PlanInfo {
+function formatPrice(price: number, locale: string, currency: string): string {
   const format = new Intl.NumberFormat(locale || "en-US", {
     style: "currency",
-    currency: p.requestedCurrencyCode || "INR",
+    currency: currency,
+    minimumFractionDigits: Number.isInteger(price) ? 0 : 2,
   });
 
+  return format.format(price);
+}
+
+function subscriptionPlanToPlanInfo(
+  p: SubscriptionPlan,
+  locale: string
+): PlanInfo {
   const total = p.priceInRequestedCurrency || p.priceInIndianPaise / 100.0;
   const monthly = total / p.billingPeriodMonths;
+  const currency = p.requestedCurrencyCode || "INR";
   return {
     billingPeriodMonths: p.billingPeriodMonths,
     monthlyPriceRaw: monthly,
-    monthlyPrice: format.format(monthly),
-    totalPrice: format.format(total),
+    monthlyPrice: formatPrice(monthly, locale, currency),
+    totalPrice: formatPrice(total, locale, currency),
     trialPeriodDays: p.trialPeriodDays,
   };
 }
