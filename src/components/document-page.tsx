@@ -1,7 +1,6 @@
 import { Box, Container, Heading, Text } from "@chakra-ui/react";
 import { ReactElement, ReactNode } from "react";
 import Page from "./page";
-import Section from "./section";
 
 interface DocumentPageProps {
   meta?: React.DetailedHTMLProps<
@@ -16,6 +15,12 @@ interface DocumentPageProps {
 }
 
 export default function DocumentPage(props: DocumentPageProps): ReactElement {
+  const contentProps = {
+    maxW: "4xl",
+    mx: "auto",
+    px: { base: 6, lg: 0 },
+  };
+
   return (
     <Page
       meta={props.meta}
@@ -25,22 +30,30 @@ export default function DocumentPage(props: DocumentPageProps): ReactElement {
       lineHeight={"tall"}
     >
       <Box as={"article"} py={{ base: 8, md: 12 }}>
-        <Section
+        <Container
           as={"header"}
+          maxW={"full"}
           bg={"gray.100"}
           py={{ base: 8, md: 12 }}
-          textAlign={"center"}
         >
           <Heading
             as={"h1"}
             size={"2xl"}
+            textAlign={"center"}
             lineHeight={"shorter"}
             color={"primary.500"}
+            {...contentProps}
           >
             {props.title}
           </Heading>
           {props.publishedAt || props.updatedAt ? (
-            <Text fontSize={{ base: "sm", md: "md" }} color={"black"} mt={6}>
+            <Text
+              mt={6}
+              fontSize={{ base: "sm", md: "md" }}
+              textAlign={"center"}
+              color={"black"}
+              {...contentProps}
+            >
               {props.publishedAt ? (
                 <Text as={"span"}>
                   Published on{" "}
@@ -59,8 +72,8 @@ export default function DocumentPage(props: DocumentPageProps): ReactElement {
               ) : null}
             </Text>
           ) : null}
-        </Section>
-        <Container maxW={"4xl"} p={{ base: 8, md: 12 }}>
+        </Container>
+        <Container py={{ base: 8, md: 12 }} {...contentProps}>
           {props.children}
         </Container>
       </Box>
