@@ -145,8 +145,19 @@ export default function Footer() {
             White Noise icon by Juraj Sedlák
           </ChakraLink>
           {" | "}
+          Illustrations from{" "}
           <ChakraLink as={"a"} href={"https://undraw.co"} isExternal>
-            Illustrations from undraw.co
+            undraw.co
+          </ChakraLink>{" "}
+          and{" "}
+          <ChakraLink
+            as={"a"}
+            href={
+              "https://www.freepik.com/free-vector/flat-geometric-background_13900618.htm"
+            }
+            isExternal
+          >
+            freepik.com
           </ChakraLink>
         </Text>
       </Stack>

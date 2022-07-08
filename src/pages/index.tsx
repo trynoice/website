@@ -26,11 +26,13 @@ import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
 import { listPlans, SubscriptionPlan } from "../api/subscriptions";
 import DreamerIllustration from "../assets/dreamer.svg";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
+import GeometricBG from "../assets/geometric-bg.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import PercentagesIllustration from "../assets/percentages.svg";
 import ReadingTimeIllustration from "../assets/reading-time.svg";
 import GooglePlayBadge from "../components/google-play-badge";
+import NavBar from "../components/nav-bar";
 import Section from "../components/section";
 import ShellPage from "../components/shell-page";
 
@@ -57,10 +59,22 @@ export default function Home(): ReactElement {
 
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
-    <ShellPage hideNavMenu={true}>
-      <Hero description={site.siteMetadata.description} />
+    <ShellPage>
+      <VStack
+        bgImg={GeometricBG}
+        bgPos={"center top"}
+        bgRepeat={"no-repeat"}
+        bgSize={"cover"}
+        bgAttachment={"fixed"}
+      >
+        <NavBar hideMenu={true} />
+        <Hero description={site.siteMetadata.description} />
+        <WavyEdge from={"transparent"} to={"indigo.50"} />
+      </VStack>
       <Features />
+      <Image src={FishBowlIllustration} w={"full"} bg={"indigo.50"} />
       <Reviews />
+      <WavyEdge from={"orange.100"} to={"white"} />
       <Pricing subscriptionPlans={plans} />
     </ShellPage>
   );
@@ -141,7 +155,7 @@ function Benefits(): ReactElement {
   }
 
   return (
-    <Section bg={"white"} pt={{ base: 36, md: 48 }}>
+    <Section pt={{ base: 36, md: 48 }}>
       <VStack justifyItems={"center"} spacing={16}>
         <Benefit
           description={
@@ -171,59 +185,51 @@ function Benefits(): ReactElement {
 
 function Features(): ReactElement {
   return (
-    <Fragment>
-      <WavyEdge from={"white"} to={"indigo.50"} />
-      <Section bg={"indigo.50"} py={sectionPadding}>
-        <Stack
-          direction={{ base: "column", md: "row" }}
-          align={"center"}
-          spacing={24}
-        >
-          <Image
-            src={NatureOnScreenIllustration}
-            alt={"nature on screen"}
-            flex={1}
-            w={"full"}
-            maxW={{ base: "sm", md: "xl" }}
-          />
+    <Section bg={"indigo.50"} py={sectionPadding}>
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        align={"center"}
+        spacing={24}
+      >
+        <Image
+          src={NatureOnScreenIllustration}
+          alt={"nature on screen"}
+          flex={1}
+          w={"full"}
+          maxW={{ base: "sm", md: "xl" }}
+        />
 
-          <VStack flex={1} spacing={8} align={"flex-start"}>
-            <Heading size={"xl"} color={"indigo.400"}>
-              Enjoy an immersive sound experience
-            </Heading>
+        <VStack flex={1} spacing={8} align={"flex-start"}>
+          <Heading size={"xl"} color={"indigo.400"}>
+            Enjoy an immersive sound experience
+          </Heading>
 
-            <Text>
-              Our 3rd generation sound engine brings randomised variability to
-              sounds, thus generating more natural-sounding ambient atmospheres.
-            </Text>
+          <Text>
+            Our 3rd generation sound engine brings randomised variability to
+            sounds, thus generating more natural-sounding ambient atmospheres.
+          </Text>
 
-            <VStack
-              spacing={4}
-              align={"flex-start"}
-              divider={<StackDivider borderColor={"indigo.100"} />}
-            >
-              <FeatureItem
-                icon={<MdLibraryMusic />}
-                title={"Diverse sound library"}
-              />
-              <FeatureItem
-                icon={<FaMixer />}
-                title={"Naturally varying sounds"}
-              />
-              <FeatureItem
-                icon={<MdCastConnected />}
-                title={"Chromecast enabled"}
-              />
-            </VStack>
+          <VStack
+            spacing={4}
+            align={"flex-start"}
+            divider={<StackDivider borderColor={"indigo.100"} />}
+          >
+            <FeatureItem
+              icon={<MdLibraryMusic />}
+              title={"Diverse sound library"}
+            />
+            <FeatureItem
+              icon={<FaMixer />}
+              title={"Naturally varying sounds"}
+            />
+            <FeatureItem
+              icon={<MdCastConnected />}
+              title={"Chromecast enabled"}
+            />
           </VStack>
-        </Stack>
-      </Section>
-      <Image
-        w={"full"}
-        bgGradient={"linear(0deg, orange.100 5%, indigo.50 5%)"} // to prevent color tear at the edges.
-        src={FishBowlIllustration}
-      />
-    </Fragment>
+        </VStack>
+      </Stack>
+    </Section>
   );
 }
 
@@ -284,17 +290,14 @@ const reviews: Array<Review> = [
 
 function Reviews(): ReactElement {
   return (
-    <Fragment>
-      <Section py={sectionPadding} bg={"orange.100"}>
-        <VStack w={"full"} maxW={"3xl"} mx={"auto"} spacing={24}>
-          <Heading color={"orange.500"}>Loved by people</Heading>
-          {reviews.map((r) => (
-            <ReviewCard review={r} />
-          ))}
-        </VStack>
-      </Section>
-      <WavyEdge from={"orange.100"} to={"white"} />
-    </Fragment>
+    <Section py={sectionPadding} bg={"orange.100"}>
+      <VStack w={"full"} maxW={"3xl"} mx={"auto"} spacing={24}>
+        <Heading color={"orange.500"}>Loved by people</Heading>
+        {reviews.map((r) => (
+          <ReviewCard review={r} />
+        ))}
+      </VStack>
+    </Section>
   );
 }
 
@@ -598,7 +601,7 @@ function WavyEdge(props: WavyEdgeProps): ReactElement {
     <Box
       as={"svg"}
       viewBox={`0 0 ${viewBoxHeight} 8`}
-      bgGradient={`linear(0deg, ${fg} 5%, ${bg} 5%)`} // to prevent color tear at the edges.
+      bg={bg}
       xmlns={"http://www.w3.org/2000/svg"}
     >
       <defs>

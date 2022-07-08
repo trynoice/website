@@ -4,7 +4,6 @@ import React, { ReactElement, ReactNode } from "react";
 import Helmet from "react-helmet";
 import DefaultIcon from "../assets/icon-square.png";
 import Footer from "./footer";
-import NavBar from "./nav-bar";
 
 interface PageProps {
   description?: string;
@@ -17,7 +16,6 @@ interface PageProps {
   children?: ReactNode;
   fontSize?: ResponsiveValue<string>;
   lineHeight?: string;
-  hideNavMenu?: boolean;
 }
 
 export default function ShellPage(props: PageProps): ReactElement {
@@ -47,7 +45,6 @@ export default function ShellPage(props: PageProps): ReactElement {
       align={"stretch"}
       spacing={0}
     >
-      <NavBar hideMenu={props.hideNavMenu} />
       <Box as={"main"} fontSize={props.fontSize} lineHeight={props.lineHeight}>
         {props.children}
       </Box>

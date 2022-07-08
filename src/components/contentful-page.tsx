@@ -1,6 +1,7 @@
 import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import { ReactElement, ReactNode } from "react";
 import Breadcrumbs from "./breadcrumbs";
+import NavBar from "./nav-bar";
 import ShellPage from "./shell-page";
 
 interface DocumentPageProps {
@@ -30,6 +31,7 @@ export default function ContentfulPage(props: DocumentPageProps): ReactElement {
       fontSize={{ base: "md", md: "lg" }}
       lineHeight={"tall"}
     >
+      <NavBar />
       <Box as={"article"} py={{ base: 8, md: 12 }}>
         <Container
           as={"header"}
