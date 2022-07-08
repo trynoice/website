@@ -62,12 +62,14 @@ export default function Home(): ReactElement {
     <ShellPage>
       <VStack
         bgImg={GeometricBG}
-        bgSize={"cover"}
+        bgPos={"center top"}
         bgRepeat={"no-repeat"}
-        bgPos={"right"}
+        bgSize={"cover"}
+        bgAttachment={"fixed"}
       >
         <NavBar hideMenu={true} />
         <Hero description={site.siteMetadata.description} />
+        <WavyEdge from={"transparent"} to={"indigo.50"} />
       </VStack>
       <Features />
       <Reviews />
@@ -182,7 +184,6 @@ function Benefits(): ReactElement {
 function Features(): ReactElement {
   return (
     <Fragment>
-      <WavyEdge from={"white"} to={"indigo.50"} />
       <Section bg={"indigo.50"} py={sectionPadding}>
         <Stack
           direction={{ base: "column", md: "row" }}
