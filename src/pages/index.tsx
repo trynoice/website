@@ -26,11 +26,13 @@ import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
 import { listPlans, SubscriptionPlan } from "../api/subscriptions";
 import DreamerIllustration from "../assets/dreamer.svg";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
+import GeometricBG from "../assets/geometric-bg.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import PercentagesIllustration from "../assets/percentages.svg";
 import ReadingTimeIllustration from "../assets/reading-time.svg";
 import GooglePlayBadge from "../components/google-play-badge";
+import NavBar from "../components/nav-bar";
 import Section from "../components/section";
 import ShellPage from "../components/shell-page";
 
@@ -57,8 +59,11 @@ export default function Home(): ReactElement {
 
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
-    <ShellPage hideNavMenu={true}>
-      <Hero description={site.siteMetadata.description} />
+    <ShellPage>
+      <VStack bgImage={GeometricBG} bgSize={"cover"} bgRepeat={"no-repeat"}>
+        <NavBar hideMenu={true} />
+        <Hero description={site.siteMetadata.description} />
+      </VStack>
       <Features />
       <Reviews />
       <Pricing subscriptionPlans={plans} />
@@ -141,7 +146,7 @@ function Benefits(): ReactElement {
   }
 
   return (
-    <Section bg={"white"} pt={{ base: 36, md: 48 }}>
+    <Section pt={{ base: 36, md: 48 }}>
       <VStack justifyItems={"center"} spacing={16}>
         <Benefit
           description={
