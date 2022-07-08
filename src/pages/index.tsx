@@ -60,7 +60,12 @@ export default function Home(): ReactElement {
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
     <ShellPage>
-      <VStack bgImage={GeometricBG} bgSize={"cover"} bgRepeat={"no-repeat"}>
+      <VStack
+        bgImg={GeometricBG}
+        bgSize={"cover"}
+        bgRepeat={"no-repeat"}
+        bgPos={"right"}
+      >
         <NavBar hideMenu={true} />
         <Hero description={site.siteMetadata.description} />
       </VStack>
