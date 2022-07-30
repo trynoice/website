@@ -142,22 +142,12 @@ export default function Footer() {
             href={"https://thenounproject.com/icon/white-noise-1287855/"}
             isExternal
           >
-            White Noise icon by Juraj Sedlák
+            Logo by Juraj Sedlák
           </ChakraLink>
           {" | "}
           Illustrations from{" "}
           <ChakraLink as={"a"} href={"https://undraw.co"} isExternal>
             undraw.co
-          </ChakraLink>{" "}
-          and{" "}
-          <ChakraLink
-            as={"a"}
-            href={
-              "https://www.freepik.com/free-vector/flat-geometric-background_13900618.htm"
-            }
-            isExternal
-          >
-            freepik.com
           </ChakraLink>
         </Text>
       </Stack>

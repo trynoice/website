@@ -20,13 +20,12 @@ import {
 } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
-import { Fragment, ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { FaCheckCircle, FaMixer, FaQuoteLeft } from "react-icons/fa";
 import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
 import { listPlans, SubscriptionPlan } from "../api/subscriptions";
 import DreamerIllustration from "../assets/dreamer.svg";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
-import GeometricBG from "../assets/geometric-bg.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import PercentagesIllustration from "../assets/percentages.svg";
@@ -36,7 +35,7 @@ import NavBar from "../components/nav-bar";
 import Section from "../components/section";
 import ShellPage from "../components/shell-page";
 
-const sectionPadding = { base: 28, md: 40 };
+const sectionPadding = { base: 28, md: 36 };
 
 export default function Home(): ReactElement {
   const { site, allPremiumPlan } = useStaticQuery(graphql`
@@ -60,13 +59,7 @@ export default function Home(): ReactElement {
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
     <ShellPage>
-      <VStack
-        bgImg={GeometricBG}
-        bgPos={"center top"}
-        bgRepeat={"no-repeat"}
-        bgSize={"cover"}
-        bgAttachment={"fixed"}
-      >
+      <VStack bgColor={"gray.50"}>
         <NavBar hideMenu={true} />
         <Hero description={site.siteMetadata.description} />
         <WavyEdge from={"transparent"} to={"indigo.50"} />
@@ -89,7 +82,7 @@ function Hero(props: HeroProps): ReactElement {
   const descriptionEnd = descriptionStart.splice(-3);
 
   return (
-    <Section py={{ base: 24, md: 32 }}>
+    <Section py={{ base: 16, md: 24 }}>
       <Stack
         direction={{ base: "column", md: "row" }}
         alignItems={"center"}
@@ -136,7 +129,7 @@ function Benefits(): ReactElement {
         p={8}
         direction={{ base: "column", md: "row" }}
         align={"center"}
-        spacing={12}
+        spacing={8}
         bg={"#fff"}
         border={"1px"}
         borderColor={"gray.50"}
@@ -155,8 +148,8 @@ function Benefits(): ReactElement {
   }
 
   return (
-    <Section pt={{ base: 36, md: 48 }}>
-      <VStack justifyItems={"center"} spacing={16}>
+    <Section pt={{ base: 24, md: 32 }}>
+      <VStack justifyItems={"center"} spacing={12}>
         <Benefit
           description={
             "Reduce your stress or anxiety, and allow yourself to relax and unwind."
