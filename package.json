@@ -30,7 +30,7 @@
     "gatsby-plugin-sitemap": "^5.17.0",
     "gatsby-remark-autolink-headers": "^5.19.0",
     "gatsby-remark-copy-linked-files": "^5.19.0",
-    "gatsby-source-filesystem": "^4.17.0",
+    "gatsby-source-filesystem": "^4.19.0",
     "locale-currency": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
