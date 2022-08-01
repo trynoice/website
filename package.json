@@ -22,7 +22,7 @@
     "gatsby": "^4.19.2",
     "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-canonical-urls": "^4.19.0",
-    "gatsby-plugin-emotion": "^7.17.0",
+    "gatsby-plugin-emotion": "^7.19.0",
     "gatsby-plugin-manifest": "^4.17.0",
     "gatsby-plugin-mdx": "^3.17.0",
     "gatsby-plugin-netlify": "^5.0.1",
