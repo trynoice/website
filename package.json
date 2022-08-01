@@ -19,7 +19,7 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "framer-motion": "^6.3.16",
-    "gatsby": "^4.15.2",
+    "gatsby": "^4.19.2",
     "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-canonical-urls": "^4.17.0",
     "gatsby-plugin-emotion": "^7.17.0",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@types/mdx-js__react": "^1.5.5",
     "@types/node": "^18.0.0",
-    "@types/react": "^18.0.14",
+    "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.5",
     "@types/react-helmet": "^6.1.5",
     "prettier": "^2.7.1",
