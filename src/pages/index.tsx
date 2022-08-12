@@ -394,8 +394,12 @@ function Pricing(props: PricingProps): ReactElement {
         return;
       }
 
-      const plans = await listPlans("stripe", currencyCode);
-      setPlanInfos(plans.map((p) => subscriptionPlanToPlanInfo(p, locale)));
+      try {
+        const plans = await listPlans("stripe", currencyCode);
+        setPlanInfos(plans.map((p) => subscriptionPlanToPlanInfo(p, locale)));
+      } catch (e) {
+        console.warn("failed to retrieve premium plans in local currency", e);
+      }
     }
 
     fetchPremiumPlans();
