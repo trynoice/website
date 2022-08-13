@@ -28,15 +28,15 @@ const MDXComponents: MDXProviderComponents = {
   h4: (props: any) => <DefaultHeading as={"h4"} size={"md"} {...props} />,
   h5: (props: any) => <DefaultHeading as={"h5"} size={"sm"} {...props} />,
   h6: (props: any) => <DefaultHeading as={"h6"} size={"xs"} {...props} />,
-  p: (props: any) => <Text mt={4} mb={8} {...props} />,
+  p: (props: any) => <Text mt={8} mb={4} {...props} />,
   strong: (props: any) => (
     <Text as={"strong"} fontWeight={"semibold"} {...props} />
   ),
   inlineCode: (props: any) => <Code {...props} />,
   img: (props: any) => <Image maxW={"full"} mx={"auto"} my={16} {...props} />,
   a: (props: any) => <Link color={"primary.500"} {...props} />,
-  ul: (props: any) => <UnorderedList my={8} {...props} />,
-  ol: (props: any) => <OrderedList my={8} {...props} />,
+  ul: (props: any) => <UnorderedList mt={4} mb={8} {...props} />,
+  ol: (props: any) => <OrderedList mt={4} mb={8} {...props} />,
   li: (props: any) => <ListItem {...props} />,
   hr: (props: any) => <Divider {...props} />,
   blockquote: (props: any) => (
