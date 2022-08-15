@@ -2,7 +2,7 @@ import { Box, ResponsiveValue, Spacer, VStack } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
 import React, { ReactElement, ReactNode } from "react";
 import Helmet from "react-helmet";
-import DefaultIcon from "../assets/icon-square.png";
+import DefaultSocialCardImage from "../assets/social-card-image.png";
 import Footer from "./footer";
 
 interface PageProps {
@@ -35,7 +35,7 @@ export default function ShellPage(props: PageProps): ReactElement {
 
   const { name, tagline, description, twitter, siteUrl } = site.siteMetadata;
   const longName = `${name}: ${tagline}`;
-  const image = `${siteUrl}${props.image || DefaultIcon}`;
+  const image = `${siteUrl}${props.image || DefaultSocialCardImage}`;
 
   return (
     <VStack
@@ -82,7 +82,7 @@ export default function ShellPage(props: PageProps): ReactElement {
           },
           {
             name: "twitter:card",
-            content: props.image ? "summary_large_image" : "summary",
+            content: "summary_large_image",
           },
           {
             name: "twitter:creator",
