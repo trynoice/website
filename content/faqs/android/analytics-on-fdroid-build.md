@@ -24,5 +24,5 @@ commit. Please find their latest versions._
    the collection of Advertising IDs and Secure Settings Android IDs.
 4. [Consent
    Notice](https://github.com/trynoice/android-app/blob/0b8ed7b0ef0c0de5068259dfee79f81f553a6f06/app/src/main/java/com/github/trynoice/android-app/activity/MainActivity.kt#L77-L102)
-   that users see on the first launch, which only enables data sharing if you
-   click "Accept".
+   users see on the first launch that only enables data sharing if you click
+   "Accept".

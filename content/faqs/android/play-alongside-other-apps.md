@@ -41,9 +41,9 @@ option to play Noice alongside other apps without lowering their volume.
 Enabling this option prevents Noice from requesting audio focus from the Android
 System. The Android System still allows Noice to play audio, but it will not
 notify Noice when other apps play audio. Hence, other apps can play their audio
-completely unaware of Noice and vice versa. This behaviour may be undesirable in
-some cases. Therefore, **we do not recommend it**. To enable it, follow the
-steps below.
+unaware of Noice and vice versa. This behaviour may be undesirable in some
+cases. Therefore, **we do not recommend it**. To enable it, follow the steps
+below.
 
 1. Navigate to the **Account** tab from the bottom bar.
 2. Click the **Settings** option in the **App** category from the **Account**
