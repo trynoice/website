@@ -50,7 +50,7 @@ const MDXComponents: MDXProviderComponents = {
       fontSize={{ base: "sm", md: "md" }}
       sx={{
         "& > p": {
-          my: 4,
+          my: 2,
         },
       }}
       {...props}
