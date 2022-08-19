@@ -8,6 +8,7 @@ import {
 import { Link as GatsbyLink } from "gatsby";
 import { ReactElement } from "react";
 import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import FDroidBadge from "./f-droid-badge";
 import GooglePlayBadge from "./google-play-badge";
 import Section from "./section";
 
@@ -75,12 +76,7 @@ export default function Footer() {
           </ChakraLink>
         </Stack>
 
-        <Stack
-          id={"install-app"}
-          align={"flex-start"}
-          justify={"center"}
-          spacing={6}
-        >
+        <Stack align={"flex-start"} spacing={6}>
           <Stack direction={"row"} spacing={4}>
             <SocialIcon
               icon={<FaTwitter />}
@@ -108,6 +104,7 @@ export default function Footer() {
             />
           </Stack>
           <GooglePlayBadge />
+          <FDroidBadge />
         </Stack>
       </SimpleGrid>
 

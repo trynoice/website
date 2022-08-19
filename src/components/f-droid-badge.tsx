@@ -1,18 +1,18 @@
 import { Image, Link } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
-import GooglePlayBadgeIcon from "../assets/google-play-badge.png";
+import FDroidBadgeIcon from "../assets/f-droid-badge.png";
 
-export default function GooglePlayBadge(): ReactElement {
+export default function FDroidBadge(): ReactElement {
   const {
     site: {
-      siteMetadata: { googlePlayUrl },
+      siteMetadata: { fDroidUrl },
     },
   } = useStaticQuery(graphql`
     {
       site {
         siteMetadata {
-          googlePlayUrl
+          fDroidUrl
         }
       }
     }
@@ -22,10 +22,10 @@ export default function GooglePlayBadge(): ReactElement {
     <Link
       w={"full"}
       maxW={48}
-      href={googlePlayUrl}
-      aria-label={"Get it on Google Play"}
+      href={fDroidUrl}
+      aria-label={"Get it on F-Droid"}
     >
-      <Image src={GooglePlayBadgeIcon} alt={"Get it on Google Play"} />
+      <Image src={FDroidBadgeIcon} alt={"Get it on F-Droid"} />
     </Link>
   );
 }

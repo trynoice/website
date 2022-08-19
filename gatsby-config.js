@@ -16,6 +16,8 @@ module.exports = {
     siteUrl: siteUrl,
     googlePlayUrl:
       "https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice",
+    fDroidUrl:
+      "https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
