@@ -59,7 +59,11 @@ export default function Home(): ReactElement {
 
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
-    <ShellPage>
+    <ShellPage
+      description={
+        "Noice is an app that allows you to create personalised sound environments. Combine different sounds at different volume levels to create perfect ambient atmospheres."
+      }
+    >
       <VStack bgColor={"gray.50"}>
         <NavBar hideMenu={true} />
         <Hero description={site.siteMetadata.description} />
