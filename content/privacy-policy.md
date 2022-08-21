@@ -2,7 +2,7 @@
 layout: default
 title: Privacy Policy
 publishedAt: 2021-07-13T00:00:00+00:00
-updatedAt: 2022-08-18T19:45:00+05:30
+updatedAt: 2022-08-21T13:57:39+05:30
 ---
 
 This Privacy Policy describes how **Noice: Natural calming noise** (Noice, "we",
@@ -29,6 +29,15 @@ to a Noice account.
 
 > We periodically purge all log entries older than 30 days and expired session
 > tokens from our servers.
+
+On the Noice Android app, the constructed user-agent string looks like `Noice/2.2.1
+(Android 11; Xiaomi Mi A3) OkHttp/4.10.0`, where:
+
+- `2.2.1` is the Noice Android app version
+- `11` is your Android version
+- `Xiaomi` is your device manufacturer
+- `Mi A3` is your device model
+- `4.10.0` is the OkHttp version that the Noice app is using
 
 ## Subscriptions and Payments Data
 
@@ -115,6 +124,10 @@ section.
 
 - Update privacy policy to reflect the changes from the v2 release of the
   Android app.
+
+### August 21, 2022
+
+- Add details about the user-agent string on the Noice Android app.
 
 If you have any questions or concerns regarding this policy, contact us at
 [trynoiceapp@gmail.com](mailto:trynoiceapp@gmail.com).
