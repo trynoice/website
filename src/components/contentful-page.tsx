@@ -4,7 +4,7 @@ import Breadcrumbs from "./breadcrumbs";
 import NavBar from "./nav-bar";
 import ShellPage from "./shell-page";
 
-interface DocumentPageProps {
+interface ContentfulPageProps {
   meta?: React.DetailedHTMLProps<
     React.MetaHTMLAttributes<HTMLMetaElement>,
     HTMLMetaElement
@@ -16,7 +16,9 @@ interface DocumentPageProps {
   children?: ReactNode;
 }
 
-export default function ContentfulPage(props: DocumentPageProps): ReactElement {
+export default function ContentfulPage(
+  props: ContentfulPageProps
+): ReactElement {
   const contentProps = {
     maxW: "4xl",
     mx: "auto",
@@ -51,32 +53,15 @@ export default function ContentfulPage(props: DocumentPageProps): ReactElement {
             <Heading
               as={"h1"}
               size={"2xl"}
-              lineHeight={"shorter"}
+              lineHeight={"base"}
               color={"primary.500"}
             >
               {props.title}
             </Heading>
-
-            {props.publishedAt || props.updatedAt ? (
-              <Text fontSize={{ base: "sm", md: "md" }} color={"black"}>
-                {props.publishedAt ? (
-                  <Text as={"span"}>
-                    Published on{" "}
-                    <Text as={"span"} fontWeight={"medium"}>
-                      {props.publishedAt}
-                    </Text>
-                  </Text>
-                ) : null}
-                {props.updatedAt ? (
-                  <Text as={"span"}>
-                    , last updated on{" "}
-                    <Text as={"span"} fontWeight={"medium"}>
-                      {props.updatedAt}
-                    </Text>
-                  </Text>
-                ) : null}
-              </Text>
-            ) : null}
+            <ContentTimestamps
+              publishedAt={props.publishedAt}
+              updatedAt={props.updatedAt}
+            />
           </VStack>
         </Container>
         <Container py={{ base: 8, md: 12 }} {...contentProps}>
@@ -85,4 +70,53 @@ export default function ContentfulPage(props: DocumentPageProps): ReactElement {
       </Box>
     </ShellPage>
   );
+}
+
+interface ContentTimestampsProps {
+  publishedAt?: string;
+  updatedAt?: string;
+}
+
+function ContentTimestamps(props: ContentTimestampsProps): ReactElement | null {
+  if (!props.publishedAt && !props.updatedAt) {
+    return null;
+  }
+
+  return (
+    <VStack
+      align={"start"}
+      spacing={1}
+      fontSize={{ base: "sm", md: "md" }}
+      color={"black"}
+    >
+      <PublishedAt timestamp={props.publishedAt} />
+      <UpdatedAt timestamp={props.updatedAt} />
+    </VStack>
+  );
+}
+
+function PublishedAt(props: {
+  timestamp: string | undefined;
+}): ReactElement | null {
+  return props.timestamp ? (
+    <Text as={"span"}>
+      Published on{" "}
+      <Text as={"span"} fontWeight={"medium"}>
+        {props.timestamp}
+      </Text>
+    </Text>
+  ) : null;
+}
+
+function UpdatedAt(props: {
+  timestamp: string | undefined;
+}): ReactElement | null {
+  return props.timestamp ? (
+    <Text as={"span"}>
+      Last updated on{" "}
+      <Text as={"span"} fontWeight={"medium"}>
+        {props.timestamp}
+      </Text>
+    </Text>
+  ) : null;
 }

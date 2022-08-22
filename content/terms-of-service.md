@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Terms of Service
-publishedAt: 2022-08-13T15:00:00+05:30
+updatedAt: 2022-08-13T15:00:00+05:30
 ---
 
 By using or signing up for **Noice: Natural calming noise** (Noice, "we", "us",

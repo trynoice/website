@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Privacy Policy
-publishedAt: 2021-07-13T00:00:00+00:00
 updatedAt: 2022-08-21T13:57:39+05:30
 ---
 
