@@ -94,26 +94,21 @@ function Hero(props: HeroProps): ReactElement {
         justifyItems={"center"}
         spacing={{ base: 24, md: 4, lg: 8, xl: 12 }}
       >
-        <VStack
-          spacing={{ base: 6, md: 8 }}
-          w={"full"}
-          align={{ base: "center", md: "flex-start" }}
-        >
+        <VStack spacing={12} w={"full"} align={"start"}>
           <Heading
             lineHeight={"short"}
             fontWeight={600}
-            fontSize={{ base: "4xl", lg: "5xl" }}
-            textAlign={{ base: "center", md: "left" }}
+            fontSize={{ base: "4xl", md: "5xl", xl: "6xl" }}
           >
             <Text as={"span"}>{descriptionStart.join(" ")}</Text>
             <Text as={"span"} textColor={"primary.500"}>
               {` ${descriptionEnd.join(" ")}`}
             </Text>
           </Heading>
-          <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={{ base: 4, md: 8 }}>
+          <HStack spacing={6}>
             <GooglePlayBadge />
             <FDroidBadge />
-          </SimpleGrid>
+          </HStack>
         </VStack>
 
         <Image
@@ -466,6 +461,7 @@ function Pricing(props: PricingProps): ReactElement {
         tier={"Premium"}
         benefits={[
           "Everything in free-tier",
+          "Longer sound with more variants",
           "Natural variations in sounds",
           "Offline Playback on Android",
           "Ultra high quality audio streaming",
