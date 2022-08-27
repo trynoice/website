@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Privacy Policy
-updatedAt: 2022-08-21T13:57:39+05:30
+updatedAt: 2022-08-27T20:50:00+05:30
 ---
 
 This Privacy Policy describes how **Noice: Natural calming noise** (Noice, "we",
@@ -23,20 +23,20 @@ identify the currently signed-in Noice account on an app.
 ### User Agent and IP Address
 
 Noice collects your user agent and IP address in server access logs.
-Additionally, we associate your user agent to a session token when you sign in
+Additionally, we associate your user agent with a session token when you sign in
 to a Noice account.
 
 > We periodically purge all log entries older than 30 days and expired session
 > tokens from our servers.
 
-On the Noice Android app, the constructed user-agent string looks like `Noice/2.2.1
-(Android 11; Xiaomi Mi A3) OkHttp/4.10.0`, where:
+On the Noice Android app, the constructed user-agent string looks like
+`Noice/2.2.1 (Android 11; Xiaomi Mi A3) OkHttp/4.10.0`, where:
 
-- `2.2.1` is the Noice Android app version
-- `11` is your Android version
-- `Xiaomi` is your device manufacturer
-- `Mi A3` is your device model
-- `4.10.0` is the OkHttp version that the Noice app is using
+- `2.2.1` is the Noice Android app version.
+- `11` is the Android version.
+- `Xiaomi` is the device manufacturer.
+- `Mi A3` is the device model.
+- `4.10.0` is the OkHttp version that the Noice app is using.
 
 ## Subscriptions and Payments Data
 
@@ -94,7 +94,8 @@ You can delete your Noice account and associated data by going to the account
 section of the app(s). However, we retain your data for up to 14 days on our
 servers post account deletion, and the following exceptions apply.
 
-- We do not delete the Stripe billing data associated with your email address.
+- We retain your Noice Premium purchase history and billing data. However, we
+  strip your personal information from this data.
 - We do not immediately delete your IP address and user agent from our server
   access logs. We purge these access logs on their regular timelines.
 - We do not delete the Android App Performance Data since we can not identify
@@ -127,6 +128,10 @@ section.
 ### August 21, 2022
 
 - Add details about the user-agent string on the Noice Android app.
+
+### August 27, 2022
+
+- Update how we delete data upon account deletion.
 
 If you have any questions or concerns regarding this policy, contact us at
 [trynoiceapp@gmail.com](mailto:trynoiceapp@gmail.com).
