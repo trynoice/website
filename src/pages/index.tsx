@@ -461,7 +461,7 @@ function Pricing(props: PricingProps): ReactElement {
         tier={"Premium"}
         benefits={[
           "Everything in free-tier",
-          "Longer sound with more variants",
+          "Longer sounds with more variants",
           "Natural variations in sounds",
           "Offline Playback on Android",
           "Ultra high quality audio streaming",
