@@ -24,7 +24,7 @@
     "gatsby-plugin-canonical-urls": "^4.22.0",
     "gatsby-plugin-emotion": "^7.22.0",
     "gatsby-plugin-manifest": "^4.22.0",
-    "gatsby-plugin-mdx": "^3.19.0",
+    "gatsby-plugin-mdx": "^4.1.0",
     "gatsby-plugin-netlify": "^5.0.1",
     "gatsby-plugin-react-helmet": "^5.22.0",
     "gatsby-plugin-sitemap": "^5.22.0",
