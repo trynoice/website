@@ -1,5 +1,4 @@
 import { graphql } from "gatsby";
-import { MDXRenderer } from "gatsby-plugin-mdx";
 import { ReactElement } from "react";
 import ChakraMDXProvider from "../components/chakra-mdx-provider";
 import ContentfulPage from "../components/contentful-page";
@@ -9,10 +8,10 @@ export default function DefaultLayout(props: any): ReactElement {
     data: {
       mdx: {
         frontmatter: { title, publishedAt, updatedAt },
-        body,
         excerpt,
       },
     },
+    children,
   } = props;
 
   return (
@@ -22,17 +21,14 @@ export default function DefaultLayout(props: any): ReactElement {
       publishedAt={publishedAt}
       updatedAt={updatedAt}
     >
-      <ChakraMDXProvider>
-        <MDXRenderer>{body}</MDXRenderer>
-      </ChakraMDXProvider>
+      <ChakraMDXProvider>{children}</ChakraMDXProvider>
     </ContentfulPage>
   );
 }
 
-export const pageQuery = graphql`
+export const query = graphql`
   query ($id: String!) {
     mdx(id: { eq: $id }) {
-      body
       excerpt(pruneLength: 160)
       frontmatter {
         title

@@ -59,7 +59,6 @@ module.exports = {
               isIconAfterHeader: true,
             },
           },
-          "gatsby-remark-copy-linked-files",
         ],
       },
     },
