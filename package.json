@@ -21,7 +21,7 @@
     "framer-motion": "^7.5.1",
     "gatsby": "^4.24.1",
     "gatsby-plugin-anchor-links": "^1.2.1",
-    "gatsby-plugin-canonical-urls": "^4.22.0",
+    "gatsby-plugin-canonical-urls": "^4.24.0",
     "gatsby-plugin-emotion": "^7.24.0",
     "gatsby-plugin-manifest": "^4.22.0",
     "gatsby-plugin-mdx": "^3.19.0",
