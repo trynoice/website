@@ -28,7 +28,7 @@
     "gatsby-plugin-netlify": "^5.0.1",
     "gatsby-plugin-react-helmet": "^5.24.0",
     "gatsby-plugin-sitemap": "^5.22.0",
-    "gatsby-remark-autolink-headers": "^5.22.0",
+    "gatsby-remark-autolink-headers": "^5.24.0",
     "gatsby-remark-copy-linked-files": "^5.22.0",
     "gatsby-source-filesystem": "^4.22.0",
     "locale-currency": "^0.0.2",
