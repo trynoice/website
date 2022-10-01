@@ -18,7 +18,7 @@
     "@emotion/styled": "^11.10.4",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "framer-motion": "^7.2.1",
+    "framer-motion": "^7.5.1",
     "gatsby": "^4.22.0",
     "gatsby-plugin-anchor-links": "^1.2.1",
     "gatsby-plugin-canonical-urls": "^4.22.0",
