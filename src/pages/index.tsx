@@ -87,18 +87,18 @@ function Hero(props: HeroProps): ReactElement {
   const descriptionEnd = descriptionStart.splice(-3);
 
   return (
-    <Section py={{ base: 16, md: 24 }}>
+    <Section py={{ base: 16 }}>
       <Stack
         direction={{ base: "column", md: "row" }}
         alignItems={"center"}
         justifyItems={"center"}
         spacing={{ base: 24, md: 4, lg: 8, xl: 12 }}
       >
-        <VStack spacing={12} w={"full"} align={"start"}>
+        <VStack spacing={10} w={"full"} align={"start"}>
           <Heading
             lineHeight={"short"}
             fontWeight={600}
-            fontSize={{ base: "4xl", md: "5xl", xl: "6xl" }}
+            fontSize={{ base: "4xl", md: "5xl" }}
           >
             <Text as={"span"}>{descriptionStart.join(" ")}</Text>
             <Text as={"span"} textColor={"primary.500"}>
@@ -115,7 +115,7 @@ function Hero(props: HeroProps): ReactElement {
           src={MeditatingIllustration}
           alt={"focused"}
           w={"full"}
-          maxW={{ base: "xs", md: "md", lg: "lg" }}
+          maxW={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
         />
       </Stack>
       <Benefits />
