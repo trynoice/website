@@ -34,12 +34,12 @@ export default function ContentfulPage(
       lineHeight={"tall"}
     >
       <NavBar />
-      <Box as={"article"} py={{ base: 8, md: 12 }}>
+      <Box as={"article"} py={{ base: 8 }}>
         <Container
           as={"header"}
           maxW={"full"}
           bg={"blackAlpha.50"}
-          py={{ base: 8, md: 12 }}
+          py={{ base: 8, md: 10 }}
           px={0}
         >
           <VStack
