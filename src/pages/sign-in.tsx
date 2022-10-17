@@ -1,5 +1,6 @@
-import { Link, Text } from "@chakra-ui/react";
+import { Button, ButtonGroup, Link, Text, VStack } from "@chakra-ui/react";
 import { ReactElement, useEffect, useState } from "react";
+import { FaAndroid } from "react-icons/fa";
 import ContentfulPage from "../components/contentful-page";
 
 export default function SignInPage(): ReactElement {
@@ -19,29 +20,34 @@ export default function SignInPage(): ReactElement {
         },
       ]}
     >
-      <Text textAlign={"center"}>
-        Please open the sign-in link using the Noice Android app. If you're
-        already on the same device as the Noice app, please follow{" "}
-        <Link
-          as={"a"}
-          href={`noice://sign-in?token=${token}`}
-          color={"primary.500"}
-        >
-          this link
-        </Link>{" "}
-        to complete the sign-in process.
-        <br />
-        <br />
-        If this link doesn't work on your device, please inform us at{" "}
-        <Link
-          as={"a"}
-          href={"mailto:trynoiceapp@gmail.com"}
-          color={"primary.500"}
-        >
-          trynoiceapp@gmail.com
-        </Link>
-        .
-      </Text>
+      <VStack spacing={10} textAlign={"center"}>
+        <Text>
+          To complete the sign in process, please proceed to the appropriate
+          app.
+        </Text>
+        <ButtonGroup gap={"4"} size={"lg"}>
+          <Button
+            as={"a"}
+            href={`noice://sign-in?token=${token}`}
+            colorScheme={"primary"}
+            leftIcon={<FaAndroid />}
+          >
+            Android app
+          </Button>
+        </ButtonGroup>
+
+        <Text fontSize={{ base: "sm", md: "md" }} pt={8}>
+          If this link doesn't work on your device, please inform us at{" "}
+          <Link
+            as={"a"}
+            href={"mailto:trynoiceapp@gmail.com"}
+            color={"primary.500"}
+          >
+            trynoiceapp@gmail.com
+          </Link>
+          .
+        </Text>
+      </VStack>
     </ContentfulPage>
   );
 }
