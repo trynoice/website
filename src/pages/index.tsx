@@ -257,7 +257,6 @@ function FeatureItem(props: FeatureItemProps): ReactElement {
 interface Review {
   content: string;
   reviewer: string;
-  googlePlayId: string;
 }
 
 const reviews: Array<Review> = [
@@ -265,22 +264,16 @@ const reviews: Array<Review> = [
     content:
       "Very nicely done app. I have tinnitus and this app helps me concentrate and sleep. In my opinion the UI is great and straight forward to use and the sounds are nice.",
     reviewer: "Miika Vuorio",
-    googlePlayId:
-      "gp%3AAOqpTOExQCoof8Y2-Pk0kAwTNWmzSiT5X1aEyRRL1-soj0j-PBQ4kocjE4Dw_s06C_kw3c3TCdm2e04ldyaqfQ",
   },
   {
     content:
       "Great little app, just what I needed. I love mixing sounds and it's easy to use. I like the different themes and think the sleep timer is a nice touch. The recorded sounds are all great quality and loop very smoothly and I love that you can change their frequency and volume individually. No more using YouTube white noise videos for me! One thing I would like would be the option to record or add your own sounds.",
     reviewer: "Polly F",
-    googlePlayId:
-      "gp%3AAOqpTOHYxIkRO7lmuat42icbdfJw9wvmHWT6yGiGL0tX4_bGU8Klx7qk14MyLg2EpZbrZVPsUDUD8oDaNk7E9Q",
   },
   {
     content:
       "Noice is the perfect background noise app. I use it for reading, sleeping, or just relaxing after a long day. No ads, infinite loops, and excellent sample quality. I couldn't have asked for anything more!",
     reviewer: "Will Burton-Edwards",
-    googlePlayId:
-      "gp%3AAOqpTOEW5jVEsjbvOxNTHRYujcei9EDeAvpNy7lDa_9UxUX5VrMjpFxglUp53_tiq9U4XXAsoUQMnQhQE4dbVA",
   },
 ];
 
@@ -331,12 +324,6 @@ function ReviewCard(props: ReviewCardProps) {
         color={"orange.500"}
       >
         &mdash; {props.review.reviewer}
-        <Link
-          href={`https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice&reviewId=${props.review.googlePlayId}`}
-          isExternal
-        >
-          <ExternalLinkIcon verticalAlign={"top"} mx={2} />
-        </Link>
       </Text>
     </VStack>
   );
