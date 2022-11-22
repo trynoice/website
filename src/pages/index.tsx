@@ -452,7 +452,8 @@ function Pricing(props: PricingProps): ReactElement {
         benefits={[
           "28 high-fidelity sounds",
           "Stream audio with Chromecast",
-          "Sleep/Wake timers on Android",
+          "2 active alarms on Android",
+          "Sleep timer on Android",
           "Average quality audio streaming",
         ]}
       />
@@ -465,6 +466,7 @@ function Pricing(props: PricingProps): ReactElement {
           "Natural variations in sounds",
           "Offline Playback on Android",
           "Ultra high quality audio streaming",
+          "Unlimited active alarms on Android",
         ]}
         pricing={`Starts at ${minMonthlyPrice}/month`}
       />
