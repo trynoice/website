@@ -13,7 +13,7 @@ export default function FAQs(): ReactElement {
     {
       allMdx(
         filter: { fields: { slug: { glob: "faqs/**" } } }
-        sort: { fields: frontmatter___title }
+        sort: { frontmatter: { title: ASC } }
       ) {
         nodes {
           frontmatter {
