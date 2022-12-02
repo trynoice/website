@@ -23,7 +23,7 @@ Noice provides streaming of all sounds at 128 kbps and other features without
 charge. Some additional features offering improved functionality are part of
 Noice Premium and are available for purchase on a subscription basis.
 
-By purchasing Noice Premium, you agree to authorize recurring payments as
+By purchasing Noice Premium, you agree to authorise recurring payments as
 specified by the selected plan. These payments will be made to us using the
 selected payment method until you or we cancel the subscription. We use
 third-party services to process all payments securely. You can manage your Noice
