@@ -27,7 +27,7 @@ export default extendTheme({
       900: "#1a237e",
     },
     primary: {
-      50: "#9befd0",
+      50: "#fbfdf8",
       100: "#6fe8bb",
       200: "#59e4b1",
       300: "#43e1a7",

@@ -58,7 +58,7 @@ export default function Home(): ReactElement {
         "Noice is an app that allows you to create personalised sound environments. Combine different sounds at different volume levels to create perfect ambient atmospheres."
       }
     >
-      <VStack bgColor={"gray.50"}>
+      <VStack bgColor={"primary.50"}>
         <NavBar hideMenu={true} />
         <Hero />
         <WavyEdge from={"transparent"} to={"indigo.50"} />
@@ -74,23 +74,34 @@ export default function Home(): ReactElement {
 
 function Hero(): ReactElement {
   return (
-    <Section py={{ base: 16 }}>
+    <Section py={{ base: 0, lg: 16 }}>
       <Stack
-        direction={{ base: "column", md: "row" }}
-        alignItems={"center"}
-        justifyItems={"center"}
-        spacing={{ base: 24, md: 4, lg: 8, xl: 12 }}
+        direction={{ base: "column", lg: "row" }}
+        align={"center"}
+        justify={"center"}
+        spacing={{ base: 8, md: 12, lg: 16, xl: 20 }}
       >
-        <VStack spacing={10} w={"full"} align={"start"}>
-          <VStack spacing={2} align={"start"}>
+        <Image
+          src={MeditatingIllustration}
+          alt={"focused and meditating"}
+          w={"full"}
+          maxW={{ base: "3xs", md: "2xs", lg: "xs", xl: "sm" }}
+        />
+
+        <VStack spacing={10} align={{ base: "center", lg: "start" }}>
+          <VStack
+            spacing={2}
+            align={{ base: "center", lg: "start" }}
+            textAlign={{ base: "center", lg: "start" }}
+          >
             <Heading
               lineHeight={"short"}
-              fontSize={{ base: "4xl", md: "5xl", xl: "6xl" }}
+              fontSize={{ base: "3xl", md: "4xl", lg: "5xl", xl: "6xl" }}
               fontWeight={"normal"}
             >
               Focus. Meditate. Relax.
             </Heading>
-            <Text fontSize={{ base: "2xl", md: "3xl", xl: "4xl" }}>
+            <Text fontSize={{ base: "xl", md: "2xl", lg: "3xl", xl: "4xl" }}>
               With{" "}
               <Text as={"span"} color={"primary.500"} fontWeight={"medium"}>
                 natural calming noise
@@ -103,13 +114,6 @@ function Hero(): ReactElement {
             <FDroidBadge />
           </HStack>
         </VStack>
-
-        <Image
-          src={MeditatingIllustration}
-          alt={"focused"}
-          w={"full"}
-          maxW={{ base: "xs", md: "sm", lg: "md", xl: "lg" }}
-        />
       </Stack>
       <Benefits />
     </Section>
@@ -121,21 +125,21 @@ function Benefits(): ReactElement {
     return (
       <Stack
         w={"full"}
-        maxW={"3xl"}
+        maxW={{ base: "lg", md: "xl", lg: "2xl", xl: "3xl" }}
         p={8}
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "column", sm: "row" }}
         align={"center"}
         spacing={8}
         bg={"#fff"}
         border={"1px"}
-        borderColor={"gray.50"}
+        borderColor={"primary.50"}
         borderRadius={"lg"}
         shadow={"lg"}
       >
-        <Image src={icon} alt={iconDesc} maxW={{ base: 36, sm: 44, md: 36 }} />
+        <Image src={icon} alt={iconDesc} maxW={{ base: 32, lg: 36 }} />
         <Text
-          fontSize={{ base: "md", md: "lg" }}
-          textAlign={{ base: "center", md: "left" }}
+          fontSize={{ base: "md", lg: "lg" }}
+          textAlign={{ base: "center", sm: "left" }}
         >
           {description}
         </Text>
@@ -176,19 +180,22 @@ function Features(): ReactElement {
   return (
     <Section bg={"indigo.50"} py={sectionPadding}>
       <Stack
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "column", lg: "row-reverse" }}
         align={"center"}
         spacing={24}
       >
         <Image
           src={NatureOnScreenIllustration}
           alt={"nature on screen"}
-          flex={1}
           w={"full"}
-          maxW={{ base: "sm", md: "xl" }}
+          maxW={{ base: "2xs", md: "xs", lg: "sm", xl: "md" }}
         />
 
-        <VStack flex={1} spacing={8} align={"flex-start"}>
+        <VStack
+          spacing={8}
+          align={{ base: "center", lg: "start" }}
+          textAlign={{ base: "center", lg: "left" }}
+        >
           <Heading size={"xl"} color={"indigo.400"}>
             Enjoy an immersive sound experience
           </Heading>
