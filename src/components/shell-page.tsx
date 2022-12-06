@@ -5,7 +5,7 @@ import Helmet from "react-helmet";
 import DefaultSocialCardImage from "../assets/social-card-image.png";
 import Footer from "./footer";
 
-interface PageProps {
+interface ShellPageProps {
   description?: string;
   meta?: React.DetailedHTMLProps<
     React.MetaHTMLAttributes<HTMLMetaElement>,
@@ -18,7 +18,7 @@ interface PageProps {
   lineHeight?: string;
 }
 
-export default function ShellPage(props: PageProps): ReactElement {
+export default function ShellPage(props: ShellPageProps): ReactElement {
   const { site } = useStaticQuery(graphql`
     {
       site {

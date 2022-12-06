@@ -11,7 +11,6 @@ module.exports = {
   siteMetadata: {
     name: name,
     tagline: tagline,
-    description: "Relax and improve focus with natural calming noise.",
     twitter: "@trynoice",
     siteUrl: siteUrl,
     googlePlayUrl:

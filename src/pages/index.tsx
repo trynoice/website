@@ -39,14 +39,8 @@ import ShellPage from "../components/shell-page";
 const sectionPadding = { base: 28, md: 36 };
 
 export default function Home(): ReactElement {
-  const { site, allPremiumPlan } = useStaticQuery(graphql`
+  const { allPremiumPlan } = useStaticQuery(graphql`
     {
-      site {
-        siteMetadata {
-          description
-        }
-      }
-
       allPremiumPlan {
         nodes {
           billingPeriodMonths
@@ -66,7 +60,7 @@ export default function Home(): ReactElement {
     >
       <VStack bgColor={"gray.50"}>
         <NavBar hideMenu={true} />
-        <Hero description={site.siteMetadata.description} />
+        <Hero />
         <WavyEdge from={"transparent"} to={"indigo.50"} />
       </VStack>
       <Features />
@@ -78,14 +72,7 @@ export default function Home(): ReactElement {
   );
 }
 
-interface HeroProps {
-  description: string;
-}
-
-function Hero(props: HeroProps): ReactElement {
-  const descriptionStart = props.description.split(" ");
-  const descriptionEnd = descriptionStart.splice(-3);
-
+function Hero(): ReactElement {
   return (
     <Section py={{ base: 16 }}>
       <Stack
@@ -95,16 +82,22 @@ function Hero(props: HeroProps): ReactElement {
         spacing={{ base: 24, md: 4, lg: 8, xl: 12 }}
       >
         <VStack spacing={10} w={"full"} align={"start"}>
-          <Heading
-            lineHeight={"short"}
-            fontWeight={600}
-            fontSize={{ base: "4xl", md: "5xl" }}
-          >
-            <Text as={"span"}>{descriptionStart.join(" ")}</Text>
-            <Text as={"span"} textColor={"primary.500"}>
-              {` ${descriptionEnd.join(" ")}`}
+          <VStack spacing={2} align={"start"}>
+            <Heading
+              lineHeight={"short"}
+              fontSize={{ base: "4xl", md: "5xl", xl: "6xl" }}
+              fontWeight={"normal"}
+            >
+              Focus. Meditate. Relax.
+            </Heading>
+            <Text fontSize={{ base: "2xl", md: "3xl", xl: "4xl" }}>
+              With{" "}
+              <Text as={"span"} color={"primary.500"} fontWeight={"medium"}>
+                natural calming noise
+              </Text>
+              .
             </Text>
-          </Heading>
+          </VStack>
           <HStack spacing={6}>
             <GooglePlayBadge />
             <FDroidBadge />
