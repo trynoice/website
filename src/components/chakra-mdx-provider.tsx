@@ -12,14 +12,15 @@ import {
   Text,
   UnorderedList,
 } from "@chakra-ui/react";
-import { MDXProvider, MDXProviderComponents } from "@mdx-js/react";
+import { MDXProvider } from "@mdx-js/react";
+import { Components } from "@mdx-js/react/lib";
 import { Children, Fragment, ReactElement } from "react";
 
 function DefaultHeading(props: HeadingProps): ReactElement {
   return <Heading mt={12} mb={6} {...props} />;
 }
 
-const MDXComponents: MDXProviderComponents = {
+const MDXComponents: Components = {
   h1: (props: any) => (
     <DefaultHeading as={"h1"} size={"2xl"} color={"primary.500"} {...props} />
   ),
