@@ -578,7 +578,14 @@ let lastWavyEdgePatternId = 0;
 
 function WavyEdge(props: WavyEdgeProps): ReactElement {
   const patternId = `bg-${++lastWavyEdgePatternId}`;
-  const viewBoxHeight = useBreakpointValue({ base: 128, md: 256 });
+  const baseW = 128;
+  const viewBoxW = useBreakpointValue({
+    base: baseW,
+    sm: baseW * 1.5,
+    md: baseW * 2,
+    lg: baseW * 2.5,
+    xl: baseW * 3,
+  });
 
   const [bg, fg] = useToken("colors", [
     props.from || "white",
@@ -588,17 +595,17 @@ function WavyEdge(props: WavyEdgeProps): ReactElement {
   return (
     <Box
       as={"svg"}
-      viewBox={`0 0 ${viewBoxHeight} 8`}
-      bg={bg}
+      viewBox={`0 0 ${viewBoxW} 8`}
       xmlns={"http://www.w3.org/2000/svg"}
     >
       <defs>
         <pattern
           id={patternId}
           patternUnits={"userSpaceOnUse"}
-          width={"128"}
-          height={"8"}
+          width={baseW}
+          height={8}
         >
+          <rect width={baseW} height={8} fill={bg} />
           <path fill={fg} d={"M0 2c42-8 71 12 128 0V8H0Z"} />
         </pattern>
       </defs>
