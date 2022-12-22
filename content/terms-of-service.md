@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Terms of Service
-updatedAt: 2022-08-13T15:00:00+05:30
+updatedAt: 2022-12-22T19:27:19+05:30
 ---
 
 By using or signing up for **Noice: Natural calming noise** (Noice, "we", "us",
@@ -36,12 +36,16 @@ Premium subscription in the account section of the app(s).
   subscription active.
 - Payment providers may apply their conversion rates to transactions in
   different currencies.
+- We may display plan pricing in your local currency for your convenience.
+  However, we will charge your payment method in [Indian
+  Rupees](https://en.wikipedia.org/wiki/Indian_rupee) at the time of checkout.
+  Therefore, the actual charge may be slightly different.
 - In certain regions, you may need to pay additional local taxes, added to the
   total cost of purchase.
 
 ### Cancellation and Refunds
 
-- You can cancel your Noice Premium subscription at any time. But, your
+- You can cancel your Noice Premium subscription at any time. However, your
   subscription will remain active from the time of cancellation until the end of
   the current billing period.
 - We do not issue refunds or credits for the remaining duration of your current
@@ -50,8 +54,8 @@ Premium subscription in the account section of the app(s).
   your subscription ends.
 - Deleting your Noice account will automatically cancel your subscription.
 - In case of a temporary or permanent ban from Noice, we will cancel your
-  subscription. But, we will not compensate you for the remaining duration of
-  your current billing period.
+  subscription. However, we will not compensate you for the remaining duration
+  of your current billing period.
 - We reserve the right to stop offering Noice Premium subscriptions at any time.
   In this case, we will cancel your subscription and refund the prorated amount
   for the remaining duration of your current billing period.
