@@ -15,6 +15,7 @@ jobs:
           node-version-file: ".node-version"
           cache: npm
       - run: npx npm-check-updates -u
+      - run: rm -rf node_modules package-lock.json
       - run: npm install
       - uses: peter-evans/create-pull-request@v4
         with:
