@@ -53,7 +53,7 @@ export default function Home(): ReactElement {
   return (
     <ShellPage
       description={
-        "Noice is an app that allows you to create personalised sound environments. Combine different sounds at different volume levels to create perfect ambient atmospheres."
+        "Customisable soundscapes with Noice - Create personalised ambient atmospheres by blending various sounds and adjusting volume levels."
       }
     >
       <VStack bgColor={"primary.50"}>
@@ -150,21 +150,21 @@ function Benefits(): ReactElement {
       <VStack justifyItems={"center"} spacing={12}>
         <Benefit
           description={
-            "Reduce your stress or anxiety, and allow yourself to relax and unwind."
+            "Achieve a state of relaxation and reduce stress or anxiety with soothing sounds."
           }
           icon={DreamerIllustration}
           iconDesc={"relax"}
         />
         <Benefit
           description={
-            "Drown out the distracting noise or the deafening silence so you can focus on what's important."
+            "Block out distractions and improve focus with a personalised soundscape tailored to your needs."
           }
           icon={PercentagesIllustration}
           iconDesc={"work"}
         />
         <Benefit
           description={
-            "Improve your reading or meditation experience, mask your tinnitus, calm your infants, or just lay back and fall asleep."
+            "Enhance your reading, meditation, or sleep experience, alleviate tinnitus symptoms, and even calm infants with ambient noise."
           }
           icon={ReadingTimeIllustration}
           iconDesc={"misc"}
@@ -195,12 +195,12 @@ function Features(): ReactElement {
           textAlign={{ base: "center", lg: "left" }}
         >
           <Heading size={"xl"} color={"indigo.400"}>
-            Enjoy an immersive sound experience
+            Dive into a world of natural sounds
           </Heading>
 
           <Text>
-            Our 3rd generation sound engine brings randomised variability to
-            sounds, thus generating more natural-sounding ambient atmospheres.
+            Experience the ultimate sound quality with our advanced, randomised
+            sound technology, creating truly natural ambient sounds.
           </Text>
 
           <VStack
@@ -210,15 +210,12 @@ function Features(): ReactElement {
           >
             <FeatureItem
               icon={<MdLibraryMusic />}
-              title={"Diverse sound library"}
+              title={"A diverse range of sounds"}
             />
-            <FeatureItem
-              icon={<FaMixer />}
-              title={"Naturally varying sounds"}
-            />
+            <FeatureItem icon={<FaMixer />} title={"Dynamic sound synthesis"} />
             <FeatureItem
               icon={<MdCastConnected />}
-              title={"Chromecast enabled"}
+              title={"Stream with Chromecast"}
             />
           </VStack>
         </VStack>
@@ -427,8 +424,8 @@ function Pricing(props: PricingProps): ReactElement {
           fontSize={"lg"}
           mb={8}
         >
-          Use the free tier or get an improved experience with a premium plan.
-          You can try a premium plan for free for up to {maxTrialPeriod} days.
+          Unlock the full potential of the app with a premium plan. Try it free
+          for up to {maxTrialPeriod} days.
         </Text>
       </Stack>
       <Divider />
