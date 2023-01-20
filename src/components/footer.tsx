@@ -7,7 +7,13 @@ import {
 } from "@chakra-ui/react";
 import { Link as GatsbyLink } from "gatsby";
 import { ReactElement } from "react";
-import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa";
 import FDroidBadge from "./f-droid-badge";
 import GooglePlayBadge from "./google-play-badge";
 import Section from "./section";
@@ -82,16 +88,22 @@ export default function Footer() {
               brandColor={"#1DA1F2"}
             />
             <SocialIcon
-              icon={<FaLinkedin />}
-              label={"LinkedIn"}
-              href={"https://linkedin.com/company/trynoice"}
-              brandColor={"#0A66C2"}
-            />
-            <SocialIcon
               icon={<FaInstagram />}
               label={"Instagram"}
               href={"https://instagram.com/trynoice"}
               brandColor={"#E1306C"}
+            />
+            <SocialIcon
+              icon={<FaFacebook />}
+              label={"Facebook"}
+              href={"https://facebook.com/trynoice"}
+              brandColor={"#3B5998"}
+            />
+            <SocialIcon
+              icon={<FaLinkedin />}
+              label={"LinkedIn"}
+              href={"https://linkedin.com/company/trynoice"}
+              brandColor={"#0A66C2"}
             />
             <SocialIcon
               icon={<FaGithub />}
