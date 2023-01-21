@@ -1,4 +1,11 @@
-import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Divider,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { ReactElement, ReactNode } from "react";
 import Breadcrumbs from "./breadcrumbs";
 import NavBar from "./nav-bar";
@@ -34,37 +41,31 @@ export default function ContentfulPage(
       lineHeight={"tall"}
     >
       <NavBar />
-      <Box as={"article"} py={{ base: 8 }}>
-        <Container
+      <Box as={"article"} py={8}>
+        <VStack
+          {...contentProps}
           as={"header"}
-          maxW={"full"}
-          bg={"blackAlpha.50"}
-          py={{ base: 8, md: 10 }}
-          px={0}
+          py={10}
+          spacing={2}
+          alignItems={"stretch"}
+          fontSize={{ base: "sm", md: "md" }}
         >
-          <VStack
-            {...contentProps}
-            spacing={{ base: 4, lg: 6 }}
-            alignItems={"stretch"}
-            fontSize={{ base: "sm", md: "md" }}
+          <Breadcrumbs />
+          <Heading
+            as={"h1"}
+            size={"2xl"}
+            lineHeight={"base"}
+            color={"primary.500"}
           >
-            <Breadcrumbs />
-
-            <Heading
-              as={"h1"}
-              size={"2xl"}
-              lineHeight={"base"}
-              color={"primary.500"}
-            >
-              {props.title}
-            </Heading>
-            <ContentTimestamps
-              publishedAt={props.publishedAt}
-              updatedAt={props.updatedAt}
-            />
-          </VStack>
-        </Container>
-        <Container py={{ base: 8, md: 12 }} {...contentProps}>
+            {props.title}
+          </Heading>
+          <ContentTimestamps
+            publishedAt={props.publishedAt}
+            updatedAt={props.updatedAt}
+          />
+        </VStack>
+        <Divider />
+        <Container py={10} {...contentProps}>
           {props.children}
         </Container>
       </Box>

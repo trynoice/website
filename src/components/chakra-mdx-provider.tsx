@@ -29,7 +29,16 @@ const MDXComponents: Components = {
   h4: (props: any) => <DefaultHeading as={"h4"} size={"md"} {...props} />,
   h5: (props: any) => <DefaultHeading as={"h5"} size={"sm"} {...props} />,
   h6: (props: any) => <DefaultHeading as={"h6"} size={"xs"} {...props} />,
-  p: (props: any) => <Text mt={8} mb={4} {...props} />,
+  p: (props: any) => (
+    <Text
+      mt={8}
+      mb={4}
+      css={{
+        ":first-child": { marginTop: 0 },
+      }}
+      {...props}
+    />
+  ),
   strong: (props: any) => (
     <Text as={"strong"} fontWeight={"semibold"} {...props} />
   ),
