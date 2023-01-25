@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { FaCheckCircle, FaMixer, FaQuoteLeft } from "react-icons/fa";
 import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
 import {
@@ -238,78 +238,83 @@ function FeatureItem(props: FeatureItemProps): ReactElement {
   );
 }
 
-interface Review {
-  content: string;
-  reviewer: string;
-}
-
-const reviews: Array<Review> = [
-  {
-    content:
-      "Very nicely done app. I have tinnitus and this app helps me concentrate and sleep. In my opinion the UI is great and straight forward to use and the sounds are nice.",
-    reviewer: "Miika Vuorio",
-  },
-  {
-    content:
-      "Great little app, just what I needed. I love mixing sounds and it's easy to use. I like the different themes and think the sleep timer is a nice touch. The recorded sounds are all great quality and loop very smoothly and I love that you can change their frequency and volume individually. No more using YouTube white noise videos for me! One thing I would like would be the option to record or add your own sounds.",
-    reviewer: "Polly F",
-  },
-  {
-    content:
-      "Noice is the perfect background noise app. I use it for reading, sleeping, or just relaxing after a long day. No ads, infinite loops, and excellent sample quality. I couldn't have asked for anything more!",
-    reviewer: "Will Burton-Edwards",
-  },
-];
-
 function Reviews(): ReactElement {
+  interface ReviewCardProps {
+    children?: ReactNode;
+    author: string;
+    alignSelf?: string | object;
+  }
+
+  function ReviewCard(props: ReviewCardProps) {
+    return (
+      <VStack
+        w={"full"}
+        maxW={"2xl"}
+        p={8}
+        rounded={"xl"}
+        bg={"white"}
+        boxShadow={"lg"}
+        position={"relative"}
+        alignSelf={props.alignSelf}
+      >
+        <Icon
+          as={FaQuoteLeft}
+          position={"absolute"}
+          left={6}
+          top={-4}
+          boxSize={8}
+          color={"orange.500"}
+        />
+        <Text pb={4}>{props.children}</Text>
+        <Text
+          w={"full"}
+          fontWeight={"medium"}
+          fontSize={"sm"}
+          textAlign={"end"}
+          color={"orange.500"}
+        >
+          &mdash; {props.author}
+        </Text>
+      </VStack>
+    );
+  }
+
   return (
     <Section py={sectionPadding} bg={"orange.100"}>
-      <VStack w={"full"} maxW={"3xl"} mx={"auto"} spacing={24}>
-        <Heading color={"orange.500"}>Loved by people</Heading>
-        {reviews.map((r) => (
-          <ReviewCard review={r} />
-        ))}
-      </VStack>
+      <Heading color={"orange.500"} textAlign={"center"} mb={16}>
+        Loved by people
+      </Heading>
+      <Stack
+        direction={{ base: "column", lg: "row" }}
+        spacing={{ base: 24, lg: 12 }}
+      >
+        <ReviewCard
+          author={"Polly F"}
+          alignSelf={{ base: "center", lg: "flex-start" }}
+        >
+          Great little app, just what I needed. I love mixing sounds and it's
+          easy to use. I like the different themes and think the sleep timer is
+          a nice touch. The recorded sounds are all great quality and loop very
+          smoothly and I love that you can change their frequency and volume
+          individually. No more using YouTube white noise videos for me! One
+          thing I would like would be the option to record or add your own
+          sounds.
+        </ReviewCard>
+        <ReviewCard author={"Will Burton-Edwards"} alignSelf={"center"}>
+          Noice is the perfect background noise app. I use it for reading,
+          sleeping, or just relaxing after a long day. No ads, infinite loops,
+          and excellent sample quality. I couldn't have asked for anything more!
+        </ReviewCard>
+        <ReviewCard
+          author={"Miika Vuorio"}
+          alignSelf={{ base: "center", lg: "flex-end" }}
+        >
+          Very nicely done app. I have tinnitus and this app helps me
+          concentrate and sleep. In my opinion the UI is great and straight
+          forward to use and the sounds are nice.
+        </ReviewCard>
+      </Stack>
     </Section>
-  );
-}
-
-interface ReviewCardProps {
-  review: Review;
-}
-
-function ReviewCard(props: ReviewCardProps) {
-  return (
-    <VStack
-      w={"full"}
-      p={8}
-      rounded={"xl"}
-      bg={"white"}
-      boxShadow={"lg"}
-      position={"relative"}
-    >
-      <Text
-        position={"absolute"}
-        left={6}
-        top={-5}
-        fontSize={"4xl"}
-        color={"orange.500"}
-      >
-        <FaQuoteLeft />
-      </Text>
-      <Text pb={4} textAlign={"start"}>
-        {props.review.content}
-      </Text>
-      <Text
-        w={"full"}
-        fontWeight={"medium"}
-        fontSize={"sm"}
-        textAlign={"end"}
-        color={"orange.500"}
-      >
-        &mdash; {props.review.reviewer}
-      </Text>
-    </VStack>
   );
 }
 
