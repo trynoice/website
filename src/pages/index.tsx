@@ -580,6 +580,7 @@ function WavyEdge(props: WavyEdgeProps): ReactElement {
 
   return (
     <Box
+      bgGradient={`linear(${bg} 97%, ${fg} 97%)`} // gradient solves the bleeding edge issue in firefox.
       as={"svg"}
       viewBox={`0 0 ${viewBoxW} 8`}
       xmlns={"http://www.w3.org/2000/svg"}
@@ -591,7 +592,6 @@ function WavyEdge(props: WavyEdgeProps): ReactElement {
           width={baseW}
           height={8}
         >
-          <rect width={baseW} height={8} fill={bg} />
           <path fill={fg} d={"M0 2c42-8 71 12 128 0V8H0Z"} />
         </pattern>
       </defs>
