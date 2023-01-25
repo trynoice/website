@@ -69,7 +69,11 @@ export default function Home(): ReactElement {
         <WavyEdge from={"transparent"} to={"indigo.50"} />
       </VStack>
       <Features />
-      <Image src={FishBowlIllustration} w={"full"} bg={"indigo.50"} />
+      <Image
+        src={FishBowlIllustration}
+        w={"full"}
+        bgGradient={"linear(indigo.50 97%, orange.100 97%)"} // gradient solves the bleeding edge issue in firefox.
+      />
       <Reviews />
       <WavyEdge from={"orange.100"} to={"white"} />
       <Pricing subscriptionPlans={plans} />
