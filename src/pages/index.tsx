@@ -20,6 +20,7 @@ import {
 import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { IconType } from "react-icons";
 import { FaCheckCircle, FaMixer, FaQuoteLeft } from "react-icons/fa";
 import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
 import {
@@ -125,11 +126,16 @@ function Hero(): ReactElement {
 }
 
 function Benefits(): ReactElement {
-  function Benefit({ children, icon }: any): ReactElement {
+  interface BenefitProps {
+    children?: ReactNode;
+    icon: IconType;
+  }
+
+  function Benefit(props: BenefitProps): ReactElement {
     return (
       <HStack w={"full"} maxW={"sm"} spacing={6}>
-        <Icon as={icon} boxSize={9} color={"primary.500"} />
-        <Text fontSize={"md"}>{children}</Text>
+        <Icon as={props.icon} boxSize={9} color={"primary.500"} />
+        <Text fontSize={"md"}>{props.children}</Text>
       </HStack>
     );
   }

@@ -1,4 +1,5 @@
 import {
+  Icon,
   Link as ChakraLink,
   SimpleGrid,
   Stack,
@@ -7,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { Link as GatsbyLink } from "gatsby";
 import { ReactElement } from "react";
+import { IconType } from "react-icons";
 import {
   FaFacebook,
   FaGithub,
@@ -82,31 +84,31 @@ export default function Footer() {
         <Stack align={"flex-start"} spacing={6}>
           <Stack direction={"row"} spacing={4}>
             <SocialIcon
-              icon={<FaTwitter />}
+              icon={FaTwitter}
               label={"Twitter"}
               href={"https://twitter.com/trynoice"}
               brandColor={"#1DA1F2"}
             />
             <SocialIcon
-              icon={<FaInstagram />}
+              icon={FaInstagram}
               label={"Instagram"}
               href={"https://instagram.com/trynoice"}
               brandColor={"#E1306C"}
             />
             <SocialIcon
-              icon={<FaFacebook />}
+              icon={FaFacebook}
               label={"Facebook"}
               href={"https://facebook.com/trynoice"}
               brandColor={"#3B5998"}
             />
             <SocialIcon
-              icon={<FaLinkedin />}
+              icon={FaLinkedin}
               label={"LinkedIn"}
               href={"https://linkedin.com/company/trynoice"}
               brandColor={"#0A66C2"}
             />
             <SocialIcon
-              icon={<FaGithub />}
+              icon={FaGithub}
               label={"GitHub"}
               href={"https://github.com/trynoice"}
               brandColor={"gray.50"}
@@ -166,7 +168,7 @@ function ListHeader(props: TextProps) {
 }
 
 interface SocialIconProps {
-  icon: ReactElement;
+  icon: IconType;
   href: string;
   label: string;
   brandColor: string;
@@ -177,13 +179,12 @@ function SocialIcon(props: SocialIconProps): ReactElement {
     <ChakraLink
       href={props.href}
       aria-label={props.label}
-      fontSize={"2xl"}
       textColor={"inherit"}
       _hover={{
         textColor: props.brandColor,
       }}
     >
-      {props.icon}
+      <Icon as={props.icon} boxSize={6} />
     </ChakraLink>
   );
 }
