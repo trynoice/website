@@ -4,6 +4,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Icon,
   Image,
   List,
   ListIcon,
@@ -21,13 +22,18 @@ import LocaleCurrency from "locale-currency";
 import { ReactElement, useEffect, useState } from "react";
 import { FaCheckCircle, FaMixer, FaQuoteLeft } from "react-icons/fa";
 import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
+import {
+  TbBabyCarriage,
+  TbBed,
+  TbEarOff,
+  TbRocket,
+  TbTrees,
+  TbWaveSawTool,
+} from "react-icons/tb";
 import { listPlans, SubscriptionPlan } from "../api/subscriptions";
-import DreamerIllustration from "../assets/dreamer.svg";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
-import PercentagesIllustration from "../assets/percentages.svg";
-import ReadingTimeIllustration from "../assets/reading-time.svg";
 import FDroidBadge from "../components/f-droid-badge";
 import GooglePlayBadge from "../components/google-play-badge";
 import NavBar from "../components/nav-bar";
@@ -119,58 +125,41 @@ function Hero(): ReactElement {
 }
 
 function Benefits(): ReactElement {
-  function Benefit({ description, icon, iconDesc }: any): ReactElement {
+  function Benefit({ children, icon }: any): ReactElement {
     return (
-      <Stack
-        w={"full"}
-        maxW={{ base: "lg", md: "xl", lg: "2xl", xl: "3xl" }}
-        p={8}
-        direction={{ base: "column", sm: "row" }}
-        align={"center"}
-        spacing={8}
-        bg={"#fff"}
-        border={"1px"}
-        borderColor={"primary.50"}
-        borderRadius={"lg"}
-        shadow={"lg"}
-      >
-        <Image src={icon} alt={iconDesc} maxW={{ base: 32, lg: 36 }} />
-        <Text
-          fontSize={{ base: "md", lg: "lg" }}
-          textAlign={{ base: "center", sm: "left" }}
-        >
-          {description}
-        </Text>
-      </Stack>
+      <HStack w={"full"} maxW={"sm"} spacing={6}>
+        <Icon as={icon} boxSize={9} color={"primary.500"} />
+        <Text fontSize={"md"}>{children}</Text>
+      </HStack>
     );
   }
 
   return (
-    <Section pt={{ base: 24, md: 32 }}>
-      <VStack justifyItems={"center"} spacing={12}>
-        <Benefit
-          description={
-            "Achieve a state of relaxation and reduce stress or anxiety with soothing sounds."
-          }
-          icon={DreamerIllustration}
-          iconDesc={"relax"}
-        />
-        <Benefit
-          description={
-            "Block out distractions and improve focus with a personalised soundscape tailored to your needs."
-          }
-          icon={PercentagesIllustration}
-          iconDesc={"work"}
-        />
-        <Benefit
-          description={
-            "Enhance your reading, meditation, or sleep experience, alleviate tinnitus symptoms, and even calm infants with ambient noise."
-          }
-          icon={ReadingTimeIllustration}
-          iconDesc={"misc"}
-        />
-      </VStack>
-    </Section>
+    <SimpleGrid
+      columns={{ base: 1, md: 2, xl: 3 }}
+      alignItems={"center"}
+      justifyItems={"center"}
+      spacingX={16}
+      spacingY={8}
+      py={sectionPadding}
+    >
+      <Benefit icon={TbRocket}>
+        Increase efficiency through heightened concentration
+      </Benefit>
+      <Benefit icon={TbWaveSawTool}>
+        Reduce stress and anxiety through deep relaxation
+      </Benefit>
+      <Benefit icon={TbTrees}>
+        Enhance your meditation and reading experience
+      </Benefit>
+      <Benefit icon={TbBed}>
+        Revolutionise the way you fall asleep and wake up
+      </Benefit>
+      <Benefit icon={TbEarOff}>Alleviate your tinnitus symptoms</Benefit>
+      <Benefit icon={TbBabyCarriage}>
+        Ease your little one into a restful sleep
+      </Benefit>
+    </SimpleGrid>
   );
 }
 
