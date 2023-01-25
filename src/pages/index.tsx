@@ -66,7 +66,7 @@ export default function Home(): ReactElement {
       <VStack bgColor={"primary.50"}>
         <NavBar hideMenu={true} />
         <Hero />
-        <WavyEdge from={"transparent"} to={"indigo.50"} />
+        <WavyHorizontalSeparator from={"transparent"} to={"indigo.50"} />
       </VStack>
       <Features />
       <Image
@@ -75,7 +75,7 @@ export default function Home(): ReactElement {
         bgGradient={"linear(indigo.50 97%, orange.100 97%)"} // gradient solves the bleeding edge issue in firefox.
       />
       <Reviews />
-      <WavyEdge from={"orange.100"} to={"white"} />
+      <SlantedHorizontalSeparator from={"orange.100"} to={"white"} />
       <Pricing subscriptionPlans={plans} />
     </ShellPage>
   );
@@ -570,14 +570,14 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
   );
 }
 
-interface WavyEdgeProps {
+interface HorizontalSeparator {
   from?: string;
   to?: string;
 }
 
 let lastWavyEdgePatternId = 0;
 
-function WavyEdge(props: WavyEdgeProps): ReactElement {
+function WavyHorizontalSeparator(props: HorizontalSeparator): ReactElement {
   const patternId = `bg-${++lastWavyEdgePatternId}`;
   const baseW = 128;
   const viewBoxW = useBreakpointValue({
@@ -611,6 +611,24 @@ function WavyEdge(props: WavyEdgeProps): ReactElement {
         </pattern>
       </defs>
       <rect width={"100%"} height={"100%"} fill={`url(#${patternId})`} />
+    </Box>
+  );
+}
+
+function SlantedHorizontalSeparator(props: HorizontalSeparator): ReactElement {
+  const [bg, fg] = useToken("colors", [
+    props.from || "white",
+    props.to || "black",
+  ]);
+
+  return (
+    <Box
+      bg={fg}
+      as={"svg"}
+      viewBox={"0 0 100 7.5"}
+      xmlns={"http://www.w3.org/2000/svg"}
+    >
+      <polyline points={"0,7.5 100,0 0,0"} fill={bg} />
     </Box>
   );
 }
