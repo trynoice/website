@@ -260,7 +260,7 @@ function Reviews(): ReactElement {
         p={8}
         rounded={"xl"}
         bg={"white"}
-        boxShadow={"lg"}
+        boxShadow={"xl"}
         position={"relative"}
         alignSelf={props.alignSelf}
       >
@@ -291,10 +291,7 @@ function Reviews(): ReactElement {
       <Heading color={"orange.500"} textAlign={"center"} mb={16}>
         Loved by people
       </Heading>
-      <Stack
-        direction={{ base: "column", lg: "row" }}
-        spacing={{ base: 24, lg: 12 }}
-      >
+      <Stack direction={{ base: "column", lg: "row" }} spacing={16}>
         <ReviewCard
           author={"Polly F"}
           alignSelf={{ base: "center", lg: "flex-start" }}
