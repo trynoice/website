@@ -1,7 +1,6 @@
 import {
   Box,
   Divider,
-  Flex,
   Heading,
   HStack,
   Icon,
@@ -21,11 +20,13 @@ import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { IconType } from "react-icons";
-import { FaCheckCircle, FaMixer, FaQuoteLeft } from "react-icons/fa";
-import { MdCastConnected, MdLibraryMusic } from "react-icons/md";
+import { FaCheckCircle, FaQuoteLeft } from "react-icons/fa";
 import {
+  TbAdjustments,
+  TbArrowsRandom,
   TbBabyCarriage,
   TbBed,
+  TbCast,
   TbEarOff,
   TbRocket,
   TbTrees,
@@ -68,7 +69,7 @@ export default function Home(): ReactElement {
         <Hero />
         <WavyHorizontalSeparator from={"transparent"} to={"indigo.50"} />
       </VStack>
-      <Features />
+      <KeyFeatures />
       <Image
         src={FishBowlIllustration}
         w={"full"}
@@ -173,7 +174,28 @@ function Benefits(): ReactElement {
   );
 }
 
-function Features(): ReactElement {
+function KeyFeatures(): ReactElement {
+  interface FeatureItemProps {
+    children?: ReactNode;
+    icon: IconType;
+  }
+
+  function FeatureItem(props: FeatureItemProps): ReactElement {
+    return (
+      <HStack justifyContent={"center"} spacing={5}>
+        <Icon
+          as={props.icon}
+          boxSize={10}
+          p={2}
+          rounded={"full"}
+          bg={"white"}
+          color={"indigo.400"}
+        />
+        <Text fontWeight={500}>{props.children}</Text>
+      </HStack>
+    );
+  }
+
   return (
     <Section bg={"indigo.50"} py={sectionPadding}>
       <Stack
@@ -188,16 +210,16 @@ function Features(): ReactElement {
           maxW={{ base: "2xs", md: "xs", lg: "sm", xl: "md" }}
         />
 
-        <VStack
-          spacing={8}
-          align={{ base: "center", lg: "start" }}
-          textAlign={{ base: "center", lg: "left" }}
-        >
-          <Heading size={"xl"} color={"indigo.400"}>
+        <VStack spacing={8} align={{ base: "center", lg: "start" }}>
+          <Heading
+            size={"xl"}
+            color={"indigo.400"}
+            textAlign={{ base: "center", lg: "left" }}
+          >
             Dive into a world of natural sounds
           </Heading>
 
-          <Text>
+          <Text textAlign={{ base: "center", lg: "left" }}>
             Experience the ultimate sound quality with our advanced, randomised
             sound technology, creating truly natural ambient sounds.
           </Text>
@@ -207,44 +229,19 @@ function Features(): ReactElement {
             align={"flex-start"}
             divider={<StackDivider borderColor={"indigo.100"} />}
           >
-            <FeatureItem
-              icon={<MdLibraryMusic />}
-              title={"A diverse range of sounds"}
-            />
-            <FeatureItem icon={<FaMixer />} title={"Dynamic sound synthesis"} />
-            <FeatureItem
-              icon={<MdCastConnected />}
-              title={"Stream with Chromecast"}
-            />
+            <FeatureItem icon={TbAdjustments}>
+              Effortlessly mix and match sounds
+            </FeatureItem>
+            <FeatureItem icon={TbArrowsRandom}>
+              Advanced audio generation technology
+            </FeatureItem>
+            <FeatureItem icon={TbCast}>
+              Stream seamlessly with Chromecast integration
+            </FeatureItem>
           </VStack>
         </VStack>
       </Stack>
     </Section>
-  );
-}
-
-interface FeatureItemProps {
-  title: string;
-  icon: ReactElement;
-}
-
-function FeatureItem(props: FeatureItemProps): ReactElement {
-  return (
-    <HStack align={"center"} spacing={2}>
-      <Flex
-        w={8}
-        h={8}
-        align={"center"}
-        justify={"center"}
-        rounded={"full"}
-        bg={"indigo.100"}
-        color={"indigo.400"}
-        fontSize={"xl"}
-      >
-        {props.icon}
-      </Flex>
-      <Text fontWeight={500}>{props.title}</Text>
-    </HStack>
   );
 }
 
