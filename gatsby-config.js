@@ -20,7 +20,6 @@ module.exports = {
       "https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/",
   },
   plugins: [
-    "gatsby-plugin-react-helmet",
     {
       resolve: "gatsby-plugin-manifest",
       options: {

@@ -1,5 +1,7 @@
 import {
   Box,
+  Container,
+  ContainerProps,
   Divider,
   Heading,
   HStack,
@@ -36,13 +38,23 @@ import { listPlans, SubscriptionPlan } from "../api/subscriptions";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
+import BasicPageHead from "../components/basic-page-head";
 import FDroidBadge from "../components/f-droid-badge";
+import Footer from "../components/footer";
 import GooglePlayBadge from "../components/google-play-badge";
 import NavBar from "../components/nav-bar";
-import Section from "../components/section";
-import ShellPage from "../components/shell-page";
 
 const sectionPadding = { base: 28, md: 36 };
+
+export function Head(): ReactElement {
+  return (
+    <BasicPageHead
+      description={
+        "Customisable soundscapes with Noice - Create personalised ambient atmospheres by blending various sounds and adjusting volume levels."
+      }
+    />
+  );
+}
 
 export default function Home(): ReactElement {
   const { allPremiumPlan } = useStaticQuery(graphql`
@@ -59,16 +71,12 @@ export default function Home(): ReactElement {
 
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
-    <ShellPage
-      description={
-        "Customisable soundscapes with Noice - Create personalised ambient atmospheres by blending various sounds and adjusting volume levels."
-      }
-    >
-      <VStack bgColor={"primary.50"}>
-        <NavBar hideMenu={true} />
+    <VStack spacing={0} bgColor={"white"}>
+      <Box w={"full"} bg={"primary.50"}>
+        <NavBar />
         <Hero />
         <WavyHorizontalSeparator from={"transparent"} to={"indigo.50"} />
-      </VStack>
+      </Box>
       <KeyFeatures />
       <Image
         src={FishBowlIllustration}
@@ -78,13 +86,14 @@ export default function Home(): ReactElement {
       <Reviews />
       <SlantedHorizontalSeparator from={"orange.100"} to={"white"} />
       <Pricing subscriptionPlans={plans} />
-    </ShellPage>
+      <Footer />
+    </VStack>
   );
 }
 
 function Hero(): ReactElement {
   return (
-    <Section py={{ base: 0, lg: 16 }}>
+    <Section py={{ base: 0, lg: 16 }} bg={"primary.50"}>
       <Stack
         direction={{ base: "column", lg: "row" }}
         align={"center"}
@@ -263,6 +272,7 @@ function Reviews(): ReactElement {
         boxShadow={"xl"}
         position={"relative"}
         alignSelf={props.alignSelf}
+        spacing={2}
       >
         <Icon
           as={FaQuoteLeft}
@@ -272,7 +282,7 @@ function Reviews(): ReactElement {
           boxSize={8}
           color={"orange.500"}
         />
-        <Text pb={4}>{props.children}</Text>
+        <Text pb={2}>{props.children}</Text>
         <Text
           w={"full"}
           fontWeight={"medium"}
@@ -624,5 +634,23 @@ function SlantedHorizontalSeparator(props: HorizontalSeparator): ReactElement {
     >
       <polyline points={"0,7.5 100,0 0,0"} fill={bg} />
     </Box>
+  );
+}
+
+function Section(props: ContainerProps): ReactElement {
+  return (
+    <Container maxW={"full"} {...props}>
+      <Container
+        maxW={"maxContentWidth"}
+        px={{
+          base: "contentPaddingXDefault",
+          md: "contentPaddingXMd",
+          lg: "contentPaddingXLg",
+          xl: "contentPaddingXXl",
+        }}
+      >
+        {props.children}
+      </Container>
+    </Container>
   );
 }

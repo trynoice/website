@@ -26,13 +26,8 @@ import {
   useRef,
 } from "react";
 import AppIcon from "../assets/app-icon";
-import Section from "./section";
 
-interface NavBarProps {
-  hideMenu?: boolean;
-}
-
-export default function NavBar(props: NavBarProps): ReactElement {
+export default function NavBar(): ReactElement {
   const { site } = useStaticQuery(graphql`
     {
       site {
@@ -46,40 +41,51 @@ export default function NavBar(props: NavBarProps): ReactElement {
   `);
 
   return (
-    <Section as="header" py={6}>
-      <HStack align={"center"} spacing={2}>
-        <Show below={"md"}>
-          <HamburgerNavMenu isVisible={!props.hideMenu} />
-        </Show>
+    <HStack
+      as={"header"}
+      w={"full"}
+      maxW={"maxContentWidth"}
+      mx={"auto"}
+      px={{
+        base: "contentPaddingXDefault",
+        md: "contentPaddingXMd",
+        lg: "contentPaddingXLg",
+        xl: "contentPaddingXXl",
+      }}
+      py={6}
+      spacing={2}
+    >
+      <Show below={"md"}>
+        <HamburgerNavMenu />
+      </Show>
 
-        <IconButton
-          as={GatsbyLink}
-          to="/"
-          variant={"link"}
-          _focus={{ boxShadow: "none" }}
-          aria-label={"Go to homepage"}
-          title={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
-          icon={<AppIcon boxSize={{ base: 12, md: 16 }} fill={"black"} />}
-        />
+      <IconButton
+        as={GatsbyLink}
+        to="/"
+        variant={"link"}
+        _focus={{ boxShadow: "none" }}
+        aria-label={"Go to homepage"}
+        title={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
+        icon={<AppIcon boxSize={{ base: 12, md: 16 }} fill={"black"} />}
+      />
 
-        <Spacer />
+      <Spacer />
 
-        <Show above={"md"}>
-          <HorizontalNavMenu isVisible={!props.hideMenu} />
-        </Show>
+      <Show above={"md"}>
+        <HorizontalNavMenu />
+      </Show>
 
-        <Button
-          as={"a"}
-          size={useBreakpointValue({ base: "sm", md: "md" })}
-          colorScheme={"primary"}
-          href={site.siteMetadata.googlePlayUrl}
-          target={"_blank"}
-          textTransform={"capitalize"}
-        >
-          {`Try ${site.siteMetadata.name}`}
-        </Button>
-      </HStack>
-    </Section>
+      <Button
+        as={"a"}
+        size={useBreakpointValue({ base: "sm", md: "md" })}
+        colorScheme={"primary"}
+        href={site.siteMetadata.googlePlayUrl}
+        target={"_blank"}
+        textTransform={"capitalize"}
+      >
+        {`Try ${site.siteMetadata.name}`}
+      </Button>
+    </HStack>
   );
 }
 
@@ -99,17 +105,9 @@ const menuItems: Array<MenuItem> = [
   },
 ];
 
-interface NavMenuProps {
-  isVisible: boolean;
-}
-
-function HamburgerNavMenu(props: NavMenuProps): ReactElement | null {
+function HamburgerNavMenu(): ReactElement {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
-
-  if (!props.isVisible) {
-    return null;
-  }
 
   return (
     <Fragment>
@@ -157,11 +155,7 @@ function HamburgerNavMenu(props: NavMenuProps): ReactElement | null {
   );
 }
 
-function HorizontalNavMenu(props: NavMenuProps): ReactElement | null {
-  if (!props.isVisible) {
-    return null;
-  }
-
+function HorizontalNavMenu(): ReactElement {
   return (
     <HStack spacing={8} px={8}>
       {menuItems.map((item) => (

@@ -44,4 +44,15 @@ export default extendTheme({
     heading: systemSansSerifFonts,
     mono: systemMonoFonts,
   },
+  semanticTokens: {
+    sizes: {
+      maxContentWidth: "7xl",
+    },
+    space: {
+      contentPaddingXDefault: 6,
+      contentPaddingXMd: 8,
+      contentPaddingXLg: 10,
+      contentPaddingXXl: 12,
+    },
+  },
 });

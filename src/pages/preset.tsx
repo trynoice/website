@@ -1,6 +1,15 @@
 import { Link, Text } from "@chakra-ui/react";
 import { ReactElement, useEffect, useState } from "react";
-import ContentfulPage from "../components/contentful-page";
+import BasicPage from "../components/basic-page";
+import BasicPageHead from "../components/basic-page-head";
+
+export function Head(): ReactElement {
+  return (
+    <BasicPageHead title={"Play Preset"}>
+      <meta name={"robots"} content={"noindex"} />
+    </BasicPageHead>
+  );
+}
 
 export default function Preset(): ReactElement {
   const [presetName, setPresetName] = useState<string>("");
@@ -12,7 +21,7 @@ export default function Preset(): ReactElement {
   });
 
   return (
-    <ContentfulPage title={`Play "${presetName}"`}>
+    <BasicPage title={`Play "${presetName}"`}>
       <Text textAlign={"center"}>
         To play the preset "{presetName}" using the Noice app, please follow{" "}
         <Link as={"a"} color={"primary.500"} href={presetUri}>
@@ -20,6 +29,6 @@ export default function Preset(): ReactElement {
         </Link>
         .
       </Text>
-    </ContentfulPage>
+    </BasicPage>
   );
 }

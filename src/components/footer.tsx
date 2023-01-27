@@ -1,10 +1,13 @@
 import {
+  Divider,
+  HStack,
   Icon,
   Link as ChakraLink,
   SimpleGrid,
   Stack,
   Text,
   TextProps,
+  VStack,
 } from "@chakra-ui/react";
 import { Link as GatsbyLink } from "gatsby";
 import { ReactElement } from "react";
@@ -18,17 +21,37 @@ import {
 } from "react-icons/fa";
 import FDroidBadge from "./f-droid-badge";
 import GooglePlayBadge from "./google-play-badge";
-import Section from "./section";
 
 export default function Footer() {
   const fgColor = "gray.300";
   const bgColor = "black";
   const year = new Date().getFullYear();
+  const contentPaddingX = {
+    base: "contentPaddingXDefault",
+    md: "contentPaddingXMd",
+    lg: "contentPaddingXLg",
+    xl: "contentPaddingXXl",
+  };
 
   return (
-    <Section as={"footer"} bg={bgColor} color={fgColor} fontSize={"sm"}>
-      <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8} py={10}>
-        <Stack align={"flex-start"} spacing={3}>
+    <VStack
+      as={"footer"}
+      w={"full"}
+      pt={16}
+      pb={6}
+      spacing={4}
+      bg={bgColor}
+      color={fgColor}
+      fontSize={"sm"}
+    >
+      <SimpleGrid
+        w={"full"}
+        maxW={"maxContentWidth"}
+        px={contentPaddingX}
+        columns={{ base: 1, sm: 2, md: 4 }}
+        spacing={8}
+      >
+        <VStack align={"flex-start"} spacing={3}>
           <ListHeader>Support</ListHeader>
           <ChakraLink href={"mailto:trynoiceapp@gmail.com"}>
             Contact Us
@@ -50,9 +73,9 @@ export default function Footer() {
           <ChakraLink href={"https://status.trynoice.com"}>
             Operational Status
           </ChakraLink>
-        </Stack>
+        </VStack>
 
-        <Stack align={"flex-start"} spacing={3}>
+        <VStack align={"flex-start"} spacing={3}>
           <ListHeader>Resources</ListHeader>
           <ChakraLink as={GatsbyLink} to={"/faqs"}>
             Frequently Asked Questions
@@ -66,9 +89,9 @@ export default function Footer() {
           <ChakraLink as={GatsbyLink} to={"/terms-of-service"}>
             Terms of Service
           </ChakraLink>
-        </Stack>
+        </VStack>
 
-        <Stack align={"flex-start"} spacing={3}>
+        <VStack align={"flex-start"} spacing={3}>
           <ListHeader>Community</ListHeader>
           <ChakraLink href={"https://hosted.weblate.org/engage/noice/"}>
             Translations
@@ -79,10 +102,10 @@ export default function Footer() {
           <ChakraLink href={"https://opencollective.com/noice"}>
             Open Collective
           </ChakraLink>
-        </Stack>
+        </VStack>
 
-        <Stack align={"flex-start"} spacing={6}>
-          <Stack direction={"row"} spacing={4}>
+        <VStack align={"flex-start"} spacing={6}>
+          <HStack spacing={4}>
             <SocialIcon
               icon={FaTwitter}
               label={"Twitter"}
@@ -113,20 +136,21 @@ export default function Footer() {
               href={"https://github.com/trynoice"}
               brandColor={"gray.50"}
             />
-          </Stack>
+          </HStack>
           <GooglePlayBadge />
           <FDroidBadge />
-        </Stack>
+        </VStack>
       </SimpleGrid>
 
+      <Divider pt={8} />
+
       <Stack
-        py={4}
+        w={"full"}
+        maxW={"maxContentWidth"}
+        px={contentPaddingX}
         direction={{ base: "column", md: "row" }}
         align={"center"}
         spacing={{ base: 4, md: 24 }}
-        borderTopWidth={1}
-        borderStyle={"solid"}
-        borderColor={fgColor}
       >
         <Text w={"full"} textAlign={{ base: "center", md: "left" }}>
           &copy; {year}, all rights reserved.
@@ -159,7 +183,7 @@ export default function Footer() {
           </ChakraLink>
         </Text>
       </Stack>
-    </Section>
+    </VStack>
   );
 }
 

@@ -1,7 +1,16 @@
 import { Button, ButtonGroup, Link, Text, VStack } from "@chakra-ui/react";
 import { ReactElement, useEffect, useState } from "react";
 import { FaAndroid } from "react-icons/fa";
-import ContentfulPage from "../components/contentful-page";
+import BasicPage from "../components/basic-page";
+import BasicPageHead from "../components/basic-page-head";
+
+export function Head(): ReactElement {
+  return (
+    <BasicPageHead title={"Sign In"}>
+      <meta name={"robots"} content={"noindex"} />
+    </BasicPageHead>
+  );
+}
 
 export default function SignInPage(): ReactElement {
   const [token, setToken] = useState<string>();
@@ -11,15 +20,7 @@ export default function SignInPage(): ReactElement {
   });
 
   return (
-    <ContentfulPage
-      title="Sign In"
-      meta={[
-        {
-          name: "robots",
-          content: "noindex",
-        },
-      ]}
-    >
+    <BasicPage title={"Sign In"}>
       <VStack spacing={10} textAlign={"center"}>
         <Text>
           To complete the sign in process, please proceed to the appropriate
@@ -48,6 +49,6 @@ export default function SignInPage(): ReactElement {
           .
         </Text>
       </VStack>
-    </ContentfulPage>
+    </BasicPage>
   );
 }

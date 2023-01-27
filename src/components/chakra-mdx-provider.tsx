@@ -33,8 +33,9 @@ const MDXComponents: Components = {
     <Text
       mt={8}
       mb={4}
-      css={{
-        ":first-child": { marginTop: 0 },
+      sx={{
+        ":first-child": { mt: 0 },
+        ":last-child": { mb: 0 },
       }}
       {...props}
     />
@@ -60,7 +61,7 @@ const MDXComponents: Components = {
       fontSize={{ base: "sm", md: "md" }}
       sx={{
         "& > p": {
-          my: 2,
+          p: { base: 2, md: 3, lg: 4 },
         },
       }}
       {...props}

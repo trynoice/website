@@ -1,8 +1,17 @@
 import { Link as ChakraLink, ListItem, OrderedList } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
-import ContentfulPage from "../components/contentful-page";
+import BasicPage from "../components/basic-page";
+import BasicPageHead from "../components/basic-page-head";
 
+export function Head(): ReactElement {
+  return (
+    <BasicPageHead
+      title={"Frequently Asked Questions"}
+      description={"Frequently asked questions about Noice."}
+    />
+  );
+}
 interface FAQItem {
   title: string;
   slug: string;
@@ -34,10 +43,7 @@ export default function FAQs(): ReactElement {
   }));
 
   return (
-    <ContentfulPage
-      title={"Frequently Asked Questions"}
-      description={"Frequently asked questions about Noice."}
-    >
+    <BasicPage title={"Frequently Asked Questions"}>
       <OrderedList spacing={2}>
         {posts.map((p) => (
           <ListItem>
@@ -47,6 +53,6 @@ export default function FAQs(): ReactElement {
           </ListItem>
         ))}
       </OrderedList>
-    </ContentfulPage>
+    </BasicPage>
   );
 }

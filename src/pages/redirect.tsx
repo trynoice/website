@@ -1,6 +1,15 @@
 import { Link, Text } from "@chakra-ui/react";
 import { ReactElement, useEffect, useState } from "react";
-import ContentfulPage from "../components/contentful-page";
+import BasicPage from "../components/basic-page";
+import BasicPageHead from "../components/basic-page-head";
+
+export function Head(): ReactElement {
+  return (
+    <BasicPageHead title={"Redirecting"}>
+      <meta name={"robots"} content={"noindex"} />
+    </BasicPageHead>
+  );
+}
 
 export default function RedirectPage(): ReactElement {
   const [redirectTo, setRedirectTo] = useState<string>();
@@ -12,15 +21,7 @@ export default function RedirectPage(): ReactElement {
   });
 
   return (
-    <ContentfulPage
-      title="Redirecting"
-      meta={[
-        {
-          name: "robots",
-          content: "noindex",
-        },
-      ]}
-    >
+    <BasicPage title="Redirecting">
       <Text textAlign={"center"}>
         If you are not redirected automatically, please follow{" "}
         <Link as={"a"} href={redirectTo} color={"primary.500"}>
@@ -28,6 +29,6 @@ export default function RedirectPage(): ReactElement {
         </Link>
         .
       </Text>
-    </ContentfulPage>
+    </BasicPage>
   );
 }
