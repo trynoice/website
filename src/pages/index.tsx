@@ -1,7 +1,5 @@
 import {
   Box,
-  Container,
-  ContainerProps,
   Divider,
   Heading,
   HStack,
@@ -44,8 +42,6 @@ import Footer from "../components/footer";
 import GooglePlayBadge from "../components/google-play-badge";
 import NavBar from "../components/nav-bar";
 
-const sectionPadding = { base: 28, md: 36 };
-
 export function Head(): ReactElement {
   return (
     <BasicPageHead
@@ -55,6 +51,13 @@ export function Head(): ReactElement {
     />
   );
 }
+
+const contentPaddingX = {
+  base: "contentPaddingXDefault",
+  md: "contentPaddingXMd",
+  lg: "contentPaddingXLg",
+  xl: "contentPaddingXXl",
+};
 
 export default function Home(): ReactElement {
   const { allPremiumPlan } = useStaticQuery(graphql`
@@ -71,17 +74,17 @@ export default function Home(): ReactElement {
 
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
-    <VStack spacing={0} bgColor={"white"}>
-      <Box w={"full"} bg={"primary.50"}>
+    <VStack w={"full"} spacing={0} bgColor={"white"}>
+      <VStack w={"full"} spacing={0} bgGradient={"linear(primary.50, white)"}>
         <NavBar />
         <Hero />
-        <WavyHorizontalSeparator from={"transparent"} to={"indigo.50"} />
-      </Box>
-      <KeyFeatures />
+        <Benefits />
+        <KeyFeatures />
+      </VStack>
       <Image
         src={FishBowlIllustration}
         w={"full"}
-        bgGradient={"linear(indigo.50 97%, orange.100 97%)"} // gradient solves the bleeding edge issue in firefox.
+        bgGradient={"linear(white 97%, orange.100 97%)"} // gradient solves the bleeding edge issue in firefox.
       />
       <Reviews />
       <SlantedHorizontalSeparator from={"orange.100"} to={"white"} />
@@ -93,49 +96,51 @@ export default function Home(): ReactElement {
 
 function Hero(): ReactElement {
   return (
-    <Section py={{ base: 0, lg: 16 }} bg={"primary.50"}>
-      <Stack
-        direction={{ base: "column", lg: "row" }}
-        align={"center"}
-        justify={"center"}
-        spacing={{ base: 8, md: 12, lg: 16, xl: 20 }}
-      >
-        <Image
-          src={MeditatingIllustration}
-          alt={"focused and meditating"}
-          w={"full"}
-          maxW={{ base: "3xs", md: "2xs", lg: "xs", xl: "sm" }}
-        />
+    <Stack
+      w={"full"}
+      maxW={"maxContentWidth"}
+      px={contentPaddingX}
+      pt={{ base: 0, lg: 12 }}
+      pb={12}
+      direction={{ base: "column", lg: "row" }}
+      align={"center"}
+      justify={"center"}
+      spacing={{ base: 8, md: 12, lg: 16, xl: 20 }}
+    >
+      <Image
+        src={MeditatingIllustration}
+        alt={"focused and meditating"}
+        w={"full"}
+        maxW={{ base: "3xs", md: "2xs", lg: "xs", xl: "sm" }}
+      />
 
-        <VStack spacing={10} align={{ base: "center", lg: "start" }}>
-          <VStack
-            spacing={2}
-            align={{ base: "center", lg: "start" }}
-            textAlign={{ base: "center", lg: "start" }}
+      <VStack spacing={10} align={{ base: "center", lg: "start" }}>
+        <VStack
+          spacing={2}
+          align={{ base: "center", lg: "start" }}
+          textAlign={{ base: "center", lg: "start" }}
+        >
+          <Heading
+            lineHeight={"short"}
+            fontSize={{ base: "3xl", md: "4xl", lg: "5xl", xl: "6xl" }}
+            fontWeight={"normal"}
           >
-            <Heading
-              lineHeight={"short"}
-              fontSize={{ base: "3xl", md: "4xl", lg: "5xl", xl: "6xl" }}
-              fontWeight={"normal"}
-            >
-              Focus. Meditate. Relax.
-            </Heading>
-            <Text fontSize={{ base: "xl", md: "2xl", lg: "3xl", xl: "4xl" }}>
-              With{" "}
-              <Text as={"span"} color={"primary.500"} fontWeight={"medium"}>
-                natural calming noise
-              </Text>
-              .
+            Focus. Meditate. Relax.
+          </Heading>
+          <Text fontSize={{ base: "xl", md: "2xl", lg: "3xl", xl: "4xl" }}>
+            With{" "}
+            <Text as={"span"} color={"primary.500"} fontWeight={"medium"}>
+              natural calming noise
             </Text>
-          </VStack>
-          <HStack spacing={6}>
-            <GooglePlayBadge />
-            <FDroidBadge />
-          </HStack>
+            .
+          </Text>
         </VStack>
-      </Stack>
-      <Benefits />
-    </Section>
+        <HStack spacing={6}>
+          <GooglePlayBadge />
+          <FDroidBadge />
+        </HStack>
+      </VStack>
+    </Stack>
   );
 }
 
@@ -156,12 +161,15 @@ function Benefits(): ReactElement {
 
   return (
     <SimpleGrid
+      w={"full"}
+      maxW={"maxContentWidth"}
+      px={contentPaddingX}
+      py={12}
       columns={{ base: 1, md: 2, xl: 3 }}
       alignItems={"center"}
       justifyItems={"center"}
       spacingX={16}
-      spacingY={8}
-      py={sectionPadding}
+      spacingY={6}
     >
       <Benefit icon={TbRocket}>
         Increase efficiency through heightened concentration
@@ -197,7 +205,7 @@ function KeyFeatures(): ReactElement {
           boxSize={10}
           p={2}
           rounded={"full"}
-          bg={"white"}
+          bg={"indigo.50"}
           color={"indigo.400"}
         />
         <Text fontWeight={500}>{props.children}</Text>
@@ -206,51 +214,53 @@ function KeyFeatures(): ReactElement {
   }
 
   return (
-    <Section bg={"indigo.50"} py={sectionPadding}>
-      <Stack
-        direction={{ base: "column", lg: "row-reverse" }}
-        align={"center"}
-        spacing={24}
-      >
-        <Image
-          src={NatureOnScreenIllustration}
-          alt={"nature on screen"}
-          w={"full"}
-          maxW={{ base: "2xs", md: "xs", lg: "sm", xl: "md" }}
-        />
+    <Stack
+      w={"full"}
+      maxW={"maxContentWidth"}
+      px={contentPaddingX}
+      py={24}
+      direction={{ base: "column", lg: "row-reverse" }}
+      align={"center"}
+      spacing={{ base: 12, lg: 24 }}
+    >
+      <Image
+        src={NatureOnScreenIllustration}
+        alt={"nature on screen"}
+        w={"full"}
+        maxW={{ base: "2xs", md: "xs", lg: "sm", xl: "md" }}
+      />
 
-        <VStack spacing={8} align={{ base: "center", lg: "start" }}>
-          <Heading
-            size={"xl"}
-            color={"indigo.400"}
-            textAlign={{ base: "center", lg: "left" }}
-          >
-            Dive into a world of natural sounds
-          </Heading>
+      <VStack spacing={8} align={{ base: "center", lg: "start" }}>
+        <Heading
+          size={"xl"}
+          color={"indigo.400"}
+          textAlign={{ base: "center", lg: "left" }}
+        >
+          Dive into a world of natural sounds
+        </Heading>
 
-          <Text textAlign={{ base: "center", lg: "left" }}>
-            Experience the ultimate sound quality with our advanced, randomised
-            sound technology, creating truly natural ambient sounds.
-          </Text>
+        <Text textAlign={{ base: "center", lg: "left" }}>
+          Experience the ultimate sound quality with our advanced, randomised
+          sound technology, creating truly natural ambient sounds.
+        </Text>
 
-          <VStack
-            spacing={4}
-            align={"flex-start"}
-            divider={<StackDivider borderColor={"indigo.100"} />}
-          >
-            <FeatureItem icon={TbAdjustments}>
-              Effortlessly mix and match sounds
-            </FeatureItem>
-            <FeatureItem icon={TbArrowsRandom}>
-              Advanced audio generation technology
-            </FeatureItem>
-            <FeatureItem icon={TbCast}>
-              Stream seamlessly with Chromecast integration
-            </FeatureItem>
-          </VStack>
+        <VStack
+          spacing={4}
+          align={"flex-start"}
+          divider={<StackDivider borderColor={"indigo.100"} />}
+        >
+          <FeatureItem icon={TbAdjustments}>
+            Effortlessly mix and match sounds
+          </FeatureItem>
+          <FeatureItem icon={TbArrowsRandom}>
+            Advanced audio generation technology
+          </FeatureItem>
+          <FeatureItem icon={TbCast}>
+            Stream seamlessly with Chromecast integration
+          </FeatureItem>
         </VStack>
-      </Stack>
-    </Section>
+      </VStack>
+    </Stack>
   );
 }
 
@@ -297,11 +307,21 @@ function Reviews(): ReactElement {
   }
 
   return (
-    <Section py={sectionPadding} bg={"orange.100"}>
-      <Heading color={"orange.500"} textAlign={"center"} mb={16}>
+    <VStack w={"full"} spacing={16} py={{ base: 24 }} bg={"orange.100"}>
+      <Heading
+        maxW={"maxContentWidth"}
+        px={contentPaddingX}
+        color={"orange.500"}
+        textAlign={"center"}
+      >
         Loved by people
       </Heading>
-      <Stack direction={{ base: "column", lg: "row" }} spacing={16}>
+      <Stack
+        maxW={"maxContentWidth"}
+        px={contentPaddingX}
+        direction={{ base: "column", lg: "row" }}
+        spacing={16}
+      >
         <ReviewCard
           author={"Polly F"}
           alignSelf={{ base: "center", lg: "flex-start" }}
@@ -328,7 +348,7 @@ function Reviews(): ReactElement {
           forward to use and the sounds are nice.
         </ReviewCard>
       </Stack>
-    </Section>
+    </VStack>
   );
 }
 
@@ -407,11 +427,19 @@ function Pricing(props: PricingProps): ReactElement {
   );
 
   return (
-    <Section id={"pricing"} py={sectionPadding}>
+    <VStack
+      id={"pricing"}
+      w={"full"}
+      spacing={8}
+      align={"center"}
+      py={{ base: 28, md: 36 }}
+    >
       <Stack
-        mb={8}
+        w={"full"}
+        maxW={"maxContentWidth"}
+        px={contentPaddingX}
         direction={{ base: "column", md: "row" }}
-        alignItems={"center"}
+        align={"center"}
         justifyContent={{ base: "flex-start", md: "space-around" }}
         spacing={4}
       >
@@ -461,7 +489,7 @@ function Pricing(props: PricingProps): ReactElement {
         pricing={`Starts at ${minMonthlyPrice}/month`}
       />
       <PremiumTierPricing planInfos={planInfos} />
-    </Section>
+    </VStack>
   );
 }
 
@@ -474,7 +502,9 @@ interface TierInfoProps {
 function TierInfo(props: TierInfoProps): ReactElement {
   return (
     <Stack
-      my={8}
+      w={"full"}
+      maxW={"maxContentWidth"}
+      px={contentPaddingX}
       direction={{ base: "column", md: "row" }}
       justifyContent={{ base: "flex-start", md: "space-around" }}
       align={"center"}
@@ -512,7 +542,13 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
   );
 
   return (
-    <VStack pt={sectionPadding} spacing={12}>
+    <VStack
+      w={"full"}
+      maxW={"maxContentWidth"}
+      px={contentPaddingX}
+      pt={{ base: 28, md: 36 }}
+      spacing={12}
+    >
       <Heading color={"pink.500"} size={"lg"} textAlign={"center"}>
         Premium Plans
       </Heading>
@@ -634,23 +670,5 @@ function SlantedHorizontalSeparator(props: HorizontalSeparator): ReactElement {
     >
       <polyline points={"0,7.5 100,0 0,0"} fill={bg} />
     </Box>
-  );
-}
-
-function Section(props: ContainerProps): ReactElement {
-  return (
-    <Container maxW={"full"} {...props}>
-      <Container
-        maxW={"maxContentWidth"}
-        px={{
-          base: "contentPaddingXDefault",
-          md: "contentPaddingXMd",
-          lg: "contentPaddingXLg",
-          xl: "contentPaddingXXl",
-        }}
-      >
-        {props.children}
-      </Container>
-    </Container>
   );
 }
