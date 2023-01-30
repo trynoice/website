@@ -45,6 +45,11 @@ export default extendTheme({
         fontWeight: "medium",
       },
     },
+    Button: {
+      baseStyle: {
+        fontWeight: "medium",
+      },
+    },
   },
   fonts: {
     body: `"Poppins", sans-serif`,

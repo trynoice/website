@@ -74,9 +74,9 @@ export default function Home(): ReactElement {
 
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
-    <VStack w={"full"} spacing={0} bgColor={"white"}>
+    <VStack as={"main"} w={"full"} spacing={0} bgColor={"white"}>
+      <NavBar />
       <VStack w={"full"} spacing={0} bgGradient={"linear(primary.50, white)"}>
-        <NavBar />
         <Hero />
         <Benefits />
         <KeyFeatures />

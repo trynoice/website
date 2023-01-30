@@ -40,7 +40,6 @@ module.exports = {
         resetCSS: true,
       },
     },
-    "gatsby-plugin-anchor-links",
     {
       resolve: "gatsby-source-filesystem",
       options: {

@@ -1,5 +1,6 @@
 import { HamburgerIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -12,19 +13,11 @@ import {
   Link as ChakraLink,
   Show,
   Spacer,
-  useBreakpointValue,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
-import {
-  Fragment,
-  MouseEventHandler,
-  ReactElement,
-  ReactNode,
-  useRef,
-} from "react";
+import { Fragment, ReactElement, useEffect, useRef, useState } from "react";
 import AppIcon from "../assets/app-icon";
 
 export default function NavBar(): ReactElement {
@@ -40,52 +33,73 @@ export default function NavBar(): ReactElement {
     }
   `);
 
+  const [isScrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const listener = () => setScrolled(window.pageYOffset > 0);
+    window.addEventListener("scroll", listener);
+    return () => window.removeEventListener("scroll", listener);
+  }, []);
+
   return (
-    <HStack
-      as={"header"}
+    <Box
+      pos={"sticky"}
+      top={0}
+      zIndex={"1"}
       w={"full"}
-      maxW={"maxContentWidth"}
-      mx={"auto"}
-      px={{
-        base: "contentPaddingXDefault",
-        md: "contentPaddingXMd",
-        lg: "contentPaddingXLg",
-        xl: "contentPaddingXXl",
-      }}
-      py={6}
-      spacing={2}
+      py={isScrolled ? 0 : 4}
+      bg={isScrolled ? "whiteAlpha.600" : "transparent"}
+      backdropFilter={isScrolled ? "auto" : "none"}
+      backdropBlur={"md"}
+      boxShadow={isScrolled ? "sm" : "none"}
+      transition={"all 0.5s cubic-bezier(.17,.67,.83,.67)"}
     >
-      <Show below={"md"}>
-        <HamburgerNavMenu />
-      </Show>
-
-      <IconButton
-        as={GatsbyLink}
-        to="/"
-        variant={"link"}
-        _focus={{ boxShadow: "none" }}
-        aria-label={"Go to homepage"}
-        title={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
-        icon={<AppIcon boxSize={{ base: 12, md: 16 }} fill={"black"} />}
-      />
-
-      <Spacer />
-
-      <Show above={"md"}>
-        <HorizontalNavMenu />
-      </Show>
-
-      <Button
-        as={"a"}
-        size={useBreakpointValue({ base: "sm", md: "md" })}
-        colorScheme={"primary"}
-        href={site.siteMetadata.googlePlayUrl}
-        target={"_blank"}
-        textTransform={"capitalize"}
+      <HStack
+        as={"header"}
+        w={"full"}
+        maxW={"maxContentWidth"}
+        mx={"auto"}
+        px={{
+          base: "contentPaddingXDefault",
+          md: "contentPaddingXMd",
+          lg: "contentPaddingXLg",
+          xl: "contentPaddingXXl",
+        }}
+        py={4}
+        spacing={{ base: 4, md: 8 }}
       >
-        {`Try ${site.siteMetadata.name}`}
-      </Button>
-    </HStack>
+        <IconButton
+          as={GatsbyLink}
+          to="/"
+          variant={"link"}
+          _focus={{ boxShadow: "none" }}
+          aria-label={"Go to homepage"}
+          title={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
+          icon={<AppIcon w={{ base: 28, md: 36 }} h={"auto"} fill={"black"} />}
+        />
+
+        <Spacer />
+
+        <Show above={"md"}>
+          <HorizontalNavMenu />
+        </Show>
+
+        <Button
+          as={"a"}
+          size={"sm"}
+          px={4}
+          colorScheme={"primary"}
+          href={site.siteMetadata.googlePlayUrl}
+          target={"_blank"}
+          rounded={"full"}
+        >
+          Try for Free
+        </Button>
+
+        <Show below={"md"}>
+          <HamburgerNavMenu />
+        </Show>
+      </HStack>
+    </Box>
   );
 }
 
@@ -114,7 +128,9 @@ function HamburgerNavMenu(): ReactElement {
       <IconButton
         icon={<HamburgerIcon boxSize={5} />}
         onClick={onOpen}
-        variant={"ghost"}
+        size={"sm"}
+        variant={"outline"}
+        colorScheme={"blackAlpha"}
         ref={btnRef}
         aria-label={"Toggle navigation menu"}
       />
@@ -123,30 +139,42 @@ function HamburgerNavMenu(): ReactElement {
         size={"full"}
         isOpen={isOpen}
         onClose={onClose}
-        placement={"left"}
+        placement={"right"}
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
         <DrawerContent bg={"primary.500"} color={"white"}>
-          <DrawerHeader alignItems={"flex-start"} px={8} py={6}>
-            <AppIcon boxSize={{ base: 12, md: 16 }} fill={"white"} />
+          <DrawerHeader px={8} py={6}>
+            <AppIcon w={{ base: 28, md: 36 }} h={"auto"} fill={"white"} />
             <DrawerCloseButton />
           </DrawerHeader>
 
           <DrawerBody as={VStack} py={12} spacing={2} alignItems={"stretch"}>
             {menuItems.map((item) => (
-              <NavMenuItem
-                href={item.href}
+              <ChakraLink
+                as={GatsbyLink}
+                activeClassName={"active"}
+                partiallyActive={true}
+                to={item.href}
                 onClick={() => onClose()}
+                px={4}
+                py={2}
+                fontSize={"lg"}
                 color={"white"}
-                hoverColor={"gray.200"}
-                activeBg={
-                  "linear-gradient(90deg, transparent 5%, rgba(0,0,0,0.1) 40%)"
-                }
-                fontSize={"xl"}
+                borderRadius={"lg"}
+                _hover={{
+                  textDecoration: "none",
+                  color: "gray.200",
+                }}
+                sx={{
+                  "&.active": {
+                    bgGradient:
+                      "linear-gradient(90deg, rgba(0,0,0,0.1) 40%, transparent 95%)",
+                  },
+                }}
               >
                 {item.title}
-              </NavMenuItem>
+              </ChakraLink>
             ))}
           </DrawerBody>
         </DrawerContent>
@@ -157,60 +185,27 @@ function HamburgerNavMenu(): ReactElement {
 
 function HorizontalNavMenu(): ReactElement {
   return (
-    <HStack spacing={8} px={8}>
+    <HStack spacing={4}>
       {menuItems.map((item) => (
-        <NavMenuItem
-          href={item.href}
-          color={"gray.500"}
-          hoverColor={"gray.900"}
-          activeColor={"primary.500"}
-          fontSize={"lg"}
+        <Button
+          as={GatsbyLink}
+          to={item.href}
+          activeClassName={"active"}
+          size={"sm"}
+          px={4}
+          variant={"ghost"}
+          partiallyActive={true}
+          rounded={"full"}
+          colorScheme={"blackAlpha"}
+          sx={{
+            "&.active": {
+              color: "primary.500",
+            },
+          }}
         >
           {item.title}
-        </NavMenuItem>
+        </Button>
       ))}
     </HStack>
-  );
-}
-
-interface NavMenuItemProps {
-  href: string;
-  children: ReactNode;
-  onClick?: MouseEventHandler<HTMLAnchorElement>;
-  color: string;
-  hoverColor: string;
-  activeColor?: string;
-  activeBg?: string;
-  fontSize?: string;
-}
-
-function NavMenuItem(props: NavMenuItemProps): ReactElement {
-  const isAnchorLink = props.href.indexOf("#") > -1;
-  return (
-    <ChakraLink
-      as={isAnchorLink ? AnchorLink : GatsbyLink}
-      // @ts-ignore: Ignore the following error because of AnchorLink
-      activeClassName={"active"}
-      partiallyActive={true}
-      to={props.href}
-      onClick={isAnchorLink ? undefined : props.onClick}
-      onAnchorLinkClick={isAnchorLink ? props.onClick : null}
-      p={2}
-      fontSize={props.fontSize}
-      color={props.color}
-      borderRadius={"lg"}
-      _hover={{
-        textDecoration: "none",
-        color: props.hoverColor,
-      }}
-      sx={{
-        "&.active": {
-          color: props.activeColor,
-          background: props.activeBg,
-        },
-      }}
-    >
-      {props.children}
-    </ChakraLink>
   );
 }
