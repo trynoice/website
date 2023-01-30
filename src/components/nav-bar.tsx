@@ -146,7 +146,7 @@ function HamburgerNavMenu(): ReactElement {
         <DrawerOverlay />
         <DrawerContent bg={"primary.500"} color={"white"}>
           <DrawerHeader px={8} py={6}>
-            <AppIcon w={{ base: 28, md: 36 }} h={"auto"} fill={"white"} />
+            <AppIcon w={{ base: 24, md: 32 }} h={"auto"} fill={"white"} />
             <DrawerCloseButton />
           </DrawerHeader>
 
