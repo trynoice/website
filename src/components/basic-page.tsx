@@ -56,11 +56,7 @@ export default function BasicPage(props: BasicPageProps): ReactElement {
             />
           </VStack>
           <Divider />
-          <Container
-            maxW={"4xl"}
-            px={contentPaddingX}
-            fontSize={{ base: "md", lg: "lg" }}
-          >
+          <Container maxW={"4xl"} px={contentPaddingX}>
             {props.children}
           </Container>
         </VStack>

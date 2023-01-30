@@ -1,12 +1,13 @@
 import {
   Divider,
+  Heading,
+  HeadingProps,
   HStack,
   Icon,
   Link as ChakraLink,
   SimpleGrid,
   Stack,
   Text,
-  TextProps,
   VStack,
 } from "@chakra-ui/react";
 import { Link as GatsbyLink } from "gatsby";
@@ -154,7 +155,7 @@ export default function Footer() {
       >
         <Text w={"full"} textAlign={{ base: "center", md: "left" }}>
           &copy; {year}, all rights reserved.
-          <Text as="span" fontWeight={"500"}>
+          <Text as="span" fontWeight={"medium"}>
             {" "}
             Made with &hearts; in India.
           </Text>
@@ -187,8 +188,8 @@ export default function Footer() {
   );
 }
 
-function ListHeader(props: TextProps) {
-  return <Text {...props} fontWeight={"500"} fontSize={"md"} mb={2} />;
+function ListHeader(props: HeadingProps) {
+  return <Heading size={"md"} {...props} />;
 }
 
 interface SocialIconProps {

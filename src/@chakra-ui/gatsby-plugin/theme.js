@@ -1,14 +1,14 @@
 import { extendTheme } from "@chakra-ui/react";
-
-const systemSansSerifFonts = `-apple-system, BlinkMacSystemFont, "Segoe UI",
-  "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-  "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-  "Segoe UI Symbol"`;
-
-const systemMonoFonts = `"SF Mono", "Menlo", "Monaco", "Cascadia Mono",
-  "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
-  "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", "Consolas",
-  "Liberation Mono", "Courier New", monospace`;
+import "@fontsource/poppins/latin-400.css";
+import "@fontsource/poppins/latin-400-italic.css";
+import "@fontsource/poppins/latin-500.css";
+import "@fontsource/poppins/latin-500-italic.css";
+import "@fontsource/poppins/latin-600.css";
+import "@fontsource/poppins/latin-600-italic.css";
+import "@fontsource/poppins/latin-700.css";
+import "@fontsource/poppins/latin-700-italic.css";
+import "@fontsource/urbanist/latin-500.css";
+import "@fontsource/urbanist/latin-500-italic.css";
 
 export default extendTheme({
   colors: {
@@ -39,10 +39,28 @@ export default extendTheme({
       900: "#093525",
     },
   },
+  components: {
+    Heading: {
+      baseStyle: {
+        fontWeight: "medium",
+      },
+    },
+  },
   fonts: {
-    body: systemSansSerifFonts,
-    heading: systemSansSerifFonts,
-    mono: systemMonoFonts,
+    body: `"Poppins", sans-serif`,
+    heading: `"Urbanist", sans-serif`,
+    mono: `"SF Mono", "Menlo", "Monaco", "Cascadia Mono",
+      "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+      "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", "Consolas",
+      "Liberation Mono", "Courier New", monospace`,
+  },
+  styles: {
+    global: {
+      body: {
+        WebkitFontSmoothing: "antialiased",
+        MozOsxFontSmoothing: "grayscale",
+      },
+    },
   },
   semanticTokens: {
     sizes: {

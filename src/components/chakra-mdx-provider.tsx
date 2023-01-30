@@ -48,7 +48,7 @@ const MDXComponents: Components = {
   a: (props: any) => <Link color={"primary.500"} {...props} />,
   ul: (props: any) => <UnorderedList mt={4} mb={8} {...props} />,
   ol: (props: any) => <OrderedList mt={4} mb={8} {...props} />,
-  li: (props: any) => <ListItem {...props} />,
+  li: (props: any) => <ListItem {...props} my={1} />,
   hr: (props: any) => <Divider {...props} />,
   blockquote: (props: any) => (
     <Alert

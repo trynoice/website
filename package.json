@@ -16,6 +16,8 @@
     "@chakra-ui/react": "^2.4.9",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@fontsource/poppins": "^4.5.10",
+    "@fontsource/urbanist": "^4.5.17",
     "@mdx-js/react": "^2.2.1",
     "framer-motion": "^8.5.4",
     "gatsby": "^5.5.0",
