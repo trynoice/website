@@ -67,15 +67,16 @@ export default function NavBar(): ReactElement {
         py={4}
         spacing={{ base: 4, md: 8 }}
       >
-        <IconButton
+        <ChakraLink
           as={GatsbyLink}
-          to="/"
-          variant={"link"}
-          _focus={{ boxShadow: "none" }}
+          to={"/"}
           aria-label={"Go to homepage"}
           title={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
-          icon={<AppIcon w={{ base: 28, md: 36 }} h={"auto"} fill={"black"} />}
-        />
+          color={"black"}
+          _hover={{ color: "primary.500" }}
+        >
+          <AppIcon w={{ base: 28, md: 36 }} h={"auto"} fill={"currentColor"} />
+        </ChakraLink>
 
         <Spacer />
 
@@ -150,7 +151,7 @@ function HamburgerNavMenu(): ReactElement {
           </DrawerHeader>
 
           <DrawerBody as={VStack} py={12} spacing={2} alignItems={"stretch"}>
-            {menuItems.map((item) => (
+            {[{ title: "Home", href: "/" }].concat(menuItems).map((item) => (
               <ChakraLink
                 as={GatsbyLink}
                 activeClassName={"active"}
