@@ -38,14 +38,15 @@ export default function BasicPage(props: BasicPageProps): ReactElement {
             maxW={"maxContentWidth"}
             px={contentPaddingX}
             spacing={2}
-            alignItems={"stretch"}
+            alignItems={"center"}
             fontSize={{ base: "sm", lg: "md" }}
           >
-            <Breadcrumbs />
+            <Breadcrumbs showIfAtLeast={2} />
             <Heading
               as={"h1"}
               size={"2xl"}
               lineHeight={"base"}
+              textAlign={"center"}
               color={"primary.500"}
             >
               {props.title}
