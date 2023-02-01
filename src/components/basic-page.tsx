@@ -8,6 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { ReactElement, ReactNode } from "react";
+import Analytics from "./analytics";
 import Breadcrumbs from "./breadcrumbs";
 import Footer from "./footer";
 import NavBar from "./nav-bar";
@@ -64,6 +65,7 @@ export default function BasicPage(props: BasicPageProps): ReactElement {
       </Box>
       <Spacer />
       <Footer />
+      <Analytics />
     </VStack>
   );
 }

@@ -36,6 +36,7 @@ import { listPlans, SubscriptionPlan } from "../api/subscriptions";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
+import Analytics from "../components/analytics";
 import BasicPageHead from "../components/basic-page-head";
 import FDroidBadge from "../components/f-droid-badge";
 import Footer from "../components/footer";
@@ -90,6 +91,7 @@ export default function Home(): ReactElement {
       <SlantedHorizontalSeparator from={"orange.100"} to={"white"} />
       <Pricing subscriptionPlans={plans} />
       <Footer />
+      <Analytics />
     </VStack>
   );
 }

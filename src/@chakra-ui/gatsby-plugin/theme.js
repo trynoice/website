@@ -1,14 +1,14 @@
 import { extendTheme } from "@chakra-ui/react";
-import "@fontsource/poppins/latin-400.css";
 import "@fontsource/poppins/latin-400-italic.css";
-import "@fontsource/poppins/latin-500.css";
+import "@fontsource/poppins/latin-400.css";
 import "@fontsource/poppins/latin-500-italic.css";
-import "@fontsource/poppins/latin-600.css";
+import "@fontsource/poppins/latin-500.css";
 import "@fontsource/poppins/latin-600-italic.css";
-import "@fontsource/poppins/latin-700.css";
+import "@fontsource/poppins/latin-600.css";
 import "@fontsource/poppins/latin-700-italic.css";
-import "@fontsource/urbanist/latin-500.css";
+import "@fontsource/poppins/latin-700.css";
 import "@fontsource/urbanist/latin-500-italic.css";
+import "@fontsource/urbanist/latin-500.css";
 
 export default extendTheme({
   colors: {
