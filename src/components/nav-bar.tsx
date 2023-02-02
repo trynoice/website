@@ -17,7 +17,14 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
-import { Fragment, ReactElement, useEffect, useRef, useState } from "react";
+import {
+  Fragment,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import AppIcon from "../assets/app-icon";
 
 export default function NavBar(): ReactElement {
@@ -121,6 +128,42 @@ const menuItems: Array<MenuItem> = [
 ];
 
 function HamburgerNavMenu(): ReactElement {
+  interface MenuItemProps {
+    href: string;
+    partiallyActive: boolean;
+    onClick: () => void;
+    children?: ReactNode;
+  }
+
+  function MenuItem(props: MenuItemProps): ReactElement {
+    return (
+      <ChakraLink
+        as={GatsbyLink}
+        partiallyActive={props.partiallyActive}
+        to={props.href}
+        onClick={props.onClick}
+        px={4}
+        py={2}
+        fontSize={"lg"}
+        color={"white"}
+        borderRadius={"lg"}
+        _hover={{
+          textDecoration: "none",
+          color: "gray.200",
+        }}
+        activeClassName={"active"}
+        sx={{
+          "&.active": {
+            bgGradient:
+              "linear-gradient(90deg, rgba(0,0,0,0.1) 40%, transparent 95%)",
+          },
+        }}
+      >
+        {props.children}
+      </ChakraLink>
+    );
+  }
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
 
@@ -151,31 +194,17 @@ function HamburgerNavMenu(): ReactElement {
           </DrawerHeader>
 
           <DrawerBody as={VStack} py={12} spacing={2} alignItems={"stretch"}>
-            {[{ title: "Home", href: "/" }].concat(menuItems).map((item) => (
-              <ChakraLink
-                as={GatsbyLink}
-                activeClassName={"active"}
+            <MenuItem href={"/"} partiallyActive={false} onClick={onClose}>
+              Home
+            </MenuItem>
+            {menuItems.map((item) => (
+              <MenuItem
+                href={item.href}
                 partiallyActive={true}
-                to={item.href}
-                onClick={() => onClose()}
-                px={4}
-                py={2}
-                fontSize={"lg"}
-                color={"white"}
-                borderRadius={"lg"}
-                _hover={{
-                  textDecoration: "none",
-                  color: "gray.200",
-                }}
-                sx={{
-                  "&.active": {
-                    bgGradient:
-                      "linear-gradient(90deg, rgba(0,0,0,0.1) 40%, transparent 95%)",
-                  },
-                }}
+                onClick={onClose}
               >
                 {item.title}
-              </ChakraLink>
+              </MenuItem>
             ))}
           </DrawerBody>
         </DrawerContent>
