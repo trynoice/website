@@ -1,5 +1,4 @@
 import {
-  Box,
   Container,
   Divider,
   Heading,
@@ -29,40 +28,44 @@ export default function BasicPage(props: BasicPageProps): ReactElement {
   };
 
   return (
-    <VStack w={"full"} minH={"100vh"} bg={"white"} spacing={0}>
+    <VStack as={"main"} w={"full"} minH={"100vh"} bg={"white"} spacing={0}>
       <NavBar />
-      <Box as={"main"} w={"full"} pt={12} pb={24}>
-        <VStack as={"article"} w={"full"} spacing={{ base: 12, lg: 16 }}>
-          <VStack
-            as={"header"}
-            w={"full"}
-            maxW={"maxContentWidth"}
-            px={contentPaddingX}
-            spacing={2}
-            alignItems={"center"}
-            fontSize={{ base: "sm", lg: "md" }}
+      <VStack
+        as={"article"}
+        w={"full"}
+        pt={12}
+        pb={24}
+        spacing={{ base: 12, lg: 16 }}
+      >
+        <VStack
+          as={"header"}
+          w={"full"}
+          maxW={"maxContentWidth"}
+          px={contentPaddingX}
+          spacing={4}
+          alignItems={"center"}
+          textAlign={"center"}
+          fontSize={{ base: "sm", lg: "md" }}
+        >
+          <Breadcrumbs showIfAtLeast={2} />
+          <Heading
+            as={"h1"}
+            size={"2xl"}
+            lineHeight={"base"}
+            color={"primary.500"}
           >
-            <Breadcrumbs showIfAtLeast={2} />
-            <Heading
-              as={"h1"}
-              size={"2xl"}
-              lineHeight={"base"}
-              textAlign={"center"}
-              color={"primary.500"}
-            >
-              {props.title}
-            </Heading>
-            <ContentTimestamps
-              publishedAt={props.publishedAt}
-              updatedAt={props.updatedAt}
-            />
-          </VStack>
-          <Divider />
-          <Container maxW={"4xl"} px={contentPaddingX}>
-            {props.children}
-          </Container>
+            {props.title}
+          </Heading>
+          <ContentTimestamps
+            publishedAt={props.publishedAt}
+            updatedAt={props.updatedAt}
+          />
         </VStack>
-      </Box>
+        <Divider />
+        <Container maxW={"4xl"} px={contentPaddingX}>
+          {props.children}
+        </Container>
+      </VStack>
       <Spacer />
       <Footer />
       <Analytics />
