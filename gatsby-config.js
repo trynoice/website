@@ -40,6 +40,9 @@ module.exports = {
         resetCSS: true,
       },
     },
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-image",
     {
       resolve: "gatsby-source-filesystem",
       options: {

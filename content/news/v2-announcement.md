@@ -1,6 +1,8 @@
 ---
-layout: default
+layout: post
+image: pok-rie.jpg
 title: v2 Announcement
+category: Product
 publishedAt: 2021-09-21T18:16:00+05:30
 ---
 

@@ -45,13 +45,13 @@ export default function BasicPage(props: BasicPageProps): ReactElement {
           spacing={4}
           alignItems={"center"}
           textAlign={"center"}
-          fontSize={{ base: "sm", lg: "md" }}
+          fontSize={"sm"}
         >
           <Breadcrumbs showIfAtLeast={2} />
           <Heading
             as={"h1"}
             size={"2xl"}
-            lineHeight={"base"}
+            lineHeight={"shorter"}
             color={"primary.500"}
           >
             {props.title}
