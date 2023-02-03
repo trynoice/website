@@ -4,11 +4,12 @@ title: v2 Announcement
 publishedAt: 2021-09-21T18:16:00+05:30
 ---
 
-When we began in 2019, Noice was just under 3 MBs packed with tiny and
-low-quality sounds. It has grown a lot since then. Last year, we introduced an
-advanced dual-sampled sound engine, an idea offered by a user.[^1] It allowed
+When we began in 2019, Noice was just under 3 MBs packed with tiny, low-quality
+sounds. It has grown a lot since then. Last year, we introduced an advanced
+dual-sampled sound engine, an idea offered by a user. Most of the sounds played
+two audio in parallel to create an illusion of a single long audio. It allowed
 Noice to work fully offline while maintaining comparable audio quality and
-surpassing performance than its peers.
+surpassing the performance of its peers.
 
 ## It's time to rethink our priorities
 
@@ -16,7 +17,7 @@ Over time, we have gathered ample feedback from our users. While we promptly
 acted on the most, some of it requires changes at a basic level. Starting
 v2.0.0, we will begin phased releases incorporating these changes.
 
-### State of the art sound engine
+### State-of-the-art sound engine
 
 The dual-sampled sound engine works well, but it's time for the next best thing.
 The operating principle for our peers is looping a 5-30 mins sound indefinitely.
@@ -26,14 +27,14 @@ soundscapes that feel more natural.
 ### Remote sound library
 
 With growing requirements, we no longer think it best to pack sounds with the
-APK. It raises the APK size and hence, doesn't allow for longer or many sounds.
-To remove these constraints, we'll start serving the library over the internet.
+APK. It raises the APK size and doesn't allow for longer or many sounds. We'll
+start serving the library over the internet to remove these constraints.
 
 ### Cross-platform service
 
-The cross-platform operation has always been a concern. In the future versions,
-we'll begin shipping a web interface along with the hosted library. It will make
-Noice available to virtually every device with an Internet browser.
+Cross-platform operation has always been a concern. Therefore, we'll begin
+shipping a web interface along with the hosted library in the coming releases.
+It will make Noice available to virtually every device with an Internet browser.
 
 ### For creators
 
@@ -44,19 +45,8 @@ on both the software and the audio licensing levels.
 ### A freemium model to sustain future development
 
 We found the "pay what you want" model unsustainable for Noice. It has barely
-generated any revenue in the past year, although Noice has upwards of 6k active
-users from Google Play and some more from untrackable sources[^2]. Hence, we've
-decided to offer paid subscriptions. Noice will remain open-source, and whatever
-was free before will be free forever, but many new features will require an
-active subscription.
-
-[^1]: Essentially, for each sound, we took two small but different samples of
-      varying lengths from longer clips, e.g. 40 secs and 45 secs. When played
-      in parallel, the listener perceived that the sound was longer (around 5-6
-      minutes). Read more about it on the [GitHub
-      issue](https://github.com/trynoice/android-app/issues/62)!
-
-[^2]: Sources like
-      [F-Droid](https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/)
-      and [GitHub releases](https://github.com/trynoice/android-app/releases)
-      that don't track user metrics.
+generated any revenue in the past year. Noice has upwards of 6k active users
+from Google Play and some more from untrackable sources. Hence, we've decided to
+offer paid subscriptions. Noice will remain open-source, and whatever was free
+before will be free forever. However, many new features will require an active
+subscription.

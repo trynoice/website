@@ -132,20 +132,22 @@ We may update this policy occasionally. We advise you to review this page
 periodically for changes. We will also maintain a summary of changes in this
 section.
 
-### August 18, 2022
+### Change History
+
+#### August 18, 2022
 
 - Update privacy policy to reflect the changes from the v2 release of the
   Android app.
 
-### August 21, 2022
+#### August 21, 2022
 
 - Add details about the user-agent string on the Noice Android app.
 
-### August 27, 2022
+#### August 27, 2022
 
 - Update how we delete data upon account deletion.
 
-### February 1, 2023
+#### February 1, 2023
 
 - Restructure policy for more clarification.
 - Add Google Analytics as a third-party service provider.
