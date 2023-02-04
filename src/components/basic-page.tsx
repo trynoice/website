@@ -29,6 +29,7 @@ export default function BasicPage(props: BasicPageProps): ReactElement {
 
   return (
     <VStack as={"main"} w={"full"} minH={"100vh"} bg={"white"} spacing={0}>
+      <Analytics />
       <NavBar />
       <VStack
         as={"article"}
@@ -68,7 +69,6 @@ export default function BasicPage(props: BasicPageProps): ReactElement {
       </VStack>
       <Spacer />
       <Footer />
-      <Analytics />
     </VStack>
   );
 }

@@ -76,6 +76,7 @@ export default function Home(): ReactElement {
   const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
     <VStack as={"main"} w={"full"} spacing={0} bgColor={"white"}>
+      <Analytics />
       <NavBar />
       <VStack w={"full"} spacing={0} bgGradient={"linear(primary.50, white)"}>
         <Hero />
@@ -91,7 +92,6 @@ export default function Home(): ReactElement {
       <SlantedHorizontalSeparator from={"orange.100"} to={"white"} />
       <Pricing subscriptionPlans={plans} />
       <Footer />
-      <Analytics />
     </VStack>
   );
 }

@@ -62,6 +62,7 @@ export default function PostLayout(props: any): ReactElement {
 
   return (
     <VStack as={"main"} w={"full"} minH={"100vh"} bg={"white"} spacing={0}>
+      <Analytics />
       <NavBar />
       <VStack as={"article"} w={"full"} spacing={0}>
         <VStack
@@ -140,7 +141,6 @@ export default function PostLayout(props: any): ReactElement {
       </VStack>
       <Spacer />
       <Footer />
-      <Analytics />
     </VStack>
   );
 }

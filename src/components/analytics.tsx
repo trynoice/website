@@ -71,11 +71,8 @@ function AnalyticsConsent(props: AnalyticsConsentProps): ReactElement {
       as={Collapse}
       in={props.isOpen}
       animateOpacity
-      pos={"sticky"}
-      bottom={0}
       w={"full"}
       bg={"gray.50"}
-      shadow={"0 -2px 4px rgba(0,0,0,0.066)"}
     >
       <Stack
         maxW={"maxContentWidth"}
@@ -86,11 +83,11 @@ function AnalyticsConsent(props: AnalyticsConsentProps): ReactElement {
           lg: "contentPaddingXLg",
           xl: "contentPaddingXXl",
         }}
-        py={{ base: 6, lg: 4 }}
+        py={4}
         direction={{ base: "column", lg: "row" }}
         align={{ base: "flex-end", lg: "center" }}
         justifyContent={"center"}
-        spacing={{ base: 6, lg: 8 }}
+        spacing={{ base: 2, lg: 8 }}
         fontSize={"sm"}
       >
         <Text>
@@ -107,11 +104,18 @@ function AnalyticsConsent(props: AnalyticsConsentProps): ReactElement {
           .
         </Text>
         <HStack spacing={4}>
-          <Button size={"sm"} onClick={() => props.onDenied()}>
+          <Button
+            size={"sm"}
+            px={4}
+            rounded={"full"}
+            onClick={() => props.onDenied()}
+          >
             Reject
           </Button>
           <Button
             size={"sm"}
+            px={4}
+            rounded={"full"}
             colorScheme={"primary"}
             onClick={() => props.onGranted()}
           >

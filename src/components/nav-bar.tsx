@@ -40,24 +40,33 @@ export default function NavBar(): ReactElement {
     }
   `);
 
-  const [isScrolled, setScrolled] = useState(false);
+  const [isPinned, setPinned] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const listener = () => setScrolled(window.pageYOffset > 0);
+    function listener() {
+      setPinned(
+        window.scrollY > 0 && ref.current?.getBoundingClientRect().top === 0
+      );
+    }
+
     window.addEventListener("scroll", listener);
-    return () => window.removeEventListener("scroll", listener);
-  }, []);
+    return function cleaup() {
+      window.removeEventListener("scroll", listener);
+    };
+  });
 
   return (
     <Box
+      ref={ref}
       pos={"sticky"}
       top={0}
       zIndex={"1"}
       w={"full"}
-      py={isScrolled ? 0 : 4}
-      bg={isScrolled ? "whiteAlpha.600" : "transparent"}
-      backdropFilter={isScrolled ? "auto" : "none"}
+      py={isPinned ? 0 : 4}
+      bg={isPinned ? "whiteAlpha.600" : "transparent"}
+      backdropFilter={isPinned ? "auto" : "none"}
       backdropBlur={"md"}
-      boxShadow={isScrolled ? "sm" : "none"}
+      boxShadow={isPinned ? "sm" : "none"}
       transition={"all 0.5s cubic-bezier(.17,.67,.83,.67)"}
     >
       <HStack
