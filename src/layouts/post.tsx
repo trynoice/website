@@ -1,18 +1,18 @@
 import {
   Box,
-  Button,
   Container,
   Divider,
   Heading,
   Icon,
+  IconButton,
   Spacer,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink } from "gatsby";
 import { GatsbyImage, getImage, getSrc } from "gatsby-plugin-image";
-import { ReactElement, ReactNode } from "react";
-import { FaFacebook, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { ReactElement } from "react";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
 import Analytics from "../components/analytics";
 import BasicPageHead from "../components/basic-page-head";
@@ -116,27 +116,24 @@ export default function PostLayout(props: any): ReactElement {
             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
               postUrl + "?ref=Twitter+Share"
             )}&text=${encodeURIComponent(title)}&via=trynoice&related=trynoice`}
-          >
-            Twitter
-          </ShareButton>{" "}
+            label={"Twitter"}
+          />{" "}
           <ShareButton
             colorScheme={"facebook"}
-            icon={FaFacebook}
+            icon={FaFacebookF}
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
               postUrl + "?ref=Twitter+Share"
             )}`}
-          >
-            Facebook
-          </ShareButton>{" "}
+            label={"Facebook"}
+          />{" "}
           <ShareButton
             colorScheme={"linkedin"}
             icon={FaLinkedinIn}
             href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
               postUrl + "?ref=LinkedIn+Share"
             )}`}
-          >
-            LinkedIn
-          </ShareButton>
+            label={"LinkedIn"}
+          />
         </Text>
       </VStack>
       <Spacer />
@@ -159,21 +156,21 @@ interface ShareButtonProps {
   colorScheme: string;
   icon: IconType;
   href: string;
-  children?: ReactNode;
+  label: string;
 }
 
 function ShareButton(props: ShareButtonProps): ReactElement {
   return (
-    <Button
+    <IconButton
       as={GatsbyLink}
       to={props.href}
       m={1}
       size={"sm"}
+      rounded={"full"}
       colorScheme={props.colorScheme}
-      leftIcon={<Icon as={props.icon} />}
-    >
-      {props.children}
-    </Button>
+      icon={<Icon as={props.icon} />}
+      aria-label={props.label}
+    />
   );
 }
 
