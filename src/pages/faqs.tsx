@@ -1,14 +1,18 @@
 import { Link as ChakraLink, ListItem, OrderedList } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
+import FAQBanner from "../assets/faq.png";
 import BasicPage from "../components/basic-page";
 import BasicPageHead from "../components/basic-page-head";
 
 export function Head(): ReactElement {
   return (
     <BasicPageHead
+      image={FAQBanner}
       title={"Frequently Asked Questions"}
-      description={"Frequently asked questions about Noice."}
+      description={
+        "Find answers to all your questions about the Noice app on our FAQ page. Enhance meditation, work environments and relaxation with our comprehensive information."
+      }
     />
   );
 }
