@@ -6,6 +6,7 @@ import {
   LinkOverlay,
   ResponsiveValue,
   SimpleGrid,
+  Spacer,
   Stack,
   Text,
   VStack,
@@ -123,6 +124,7 @@ export default function BlogListLayout(props: any): ReactElement {
           Next Posts
         </Button>
       </Stack>
+      <Spacer />
       <Footer />
     </VStack>
   );
