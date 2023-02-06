@@ -131,6 +131,10 @@ const menuItems: Array<MenuItem> = [
     href: "/#pricing",
   },
   {
+    title: "Blog",
+    href: "/blog",
+  },
+  {
     title: "FAQs",
     href: "/faqs",
   },

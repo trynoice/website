@@ -78,6 +78,9 @@ export default function Footer() {
 
         <VStack align={"flex-start"} spacing={3}>
           <ListHeader>Resources</ListHeader>
+          <ChakraLink as={GatsbyLink} to={"/blog"}>
+            Blog
+          </ChakraLink>
           <ChakraLink as={GatsbyLink} to={"/faqs"}>
             Frequently Asked Questions
           </ChakraLink>

@@ -90,7 +90,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   result.data.allMdx.nodes
     // only render markdown pages that specify a layout.
-    .filter((node) => node.frontmatter && node.frontmatter.layout)
+    .filter((node) => node.frontmatter?.layout)
     .forEach((node) => {
       const layout = path.resolve(`src/layouts/${node.frontmatter.layout}.tsx`);
       createPage({
@@ -101,6 +101,29 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         },
       });
     });
+
+  // render blog list
+  const blogPostCount = result.data.allMdx.nodes.filter((node) =>
+    node.fields?.slug?.startsWith("blog/")
+  ).length;
+
+  const blogPostsPerPage = 6;
+  const blogListPageCount = Math.ceil(blogPostCount / blogPostsPerPage);
+
+  for (let i = 0; i < blogListPageCount; i += 1) {
+    createPage({
+      path: i === 0 ? "/blog" : `/blog/page/${i + 1}`,
+      component: path.resolve("src/layouts/blog-list.tsx"),
+      context: {
+        limit: blogPostsPerPage,
+        skip: i * blogPostsPerPage,
+        currentPage: i + 1,
+        totalPageCount: blogListPageCount,
+        prevPageHref: i === 0 ? null : i > 1 ? `/blog/page/${i}` : "/blog",
+        nextPageHref: i + 2 > blogListPageCount ? null : `/blog/page/${i + 2}`,
+      },
+    });
+  }
 
   result.data.allMdx.nodes
     .filter((node) => node.frontmatter && node.frontmatter.redirect)
