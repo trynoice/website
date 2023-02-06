@@ -96,7 +96,7 @@ export default function PostLayout(props: any): ReactElement {
           <Box
             as={GatsbyImage}
             w={"full"}
-            maxHeight={"md"}
+            maxH={"lg"}
             image={imageData}
             alt={""}
             aria-hidden={true}
@@ -104,7 +104,7 @@ export default function PostLayout(props: any): ReactElement {
         ) : (
           <Divider />
         )}
-        <Container maxW={"4xl"} px={contentPaddingX} py={{ base: 12, md: 16 }}>
+        <Container maxW={"4xl"} px={contentPaddingX} py={12}>
           <ChakraMDXProvider>{children}</ChakraMDXProvider>
         </Container>
         <Divider />
