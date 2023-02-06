@@ -27,19 +27,12 @@ export default function Analytics(): ReactElement {
       return;
     }
 
+    gtag("config", tag, { debug_mode: debugMode });
+
     const script = document.createElement("script");
     script.src = `https://www.googletagmanager.com/gtag/js?id=${tag}`;
     script.async = true;
     document.body.appendChild(script);
-
-    window.dataLayer = window.dataLayer || [];
-    const gtag: Gtag.Gtag = function () {
-      window.dataLayer.push(arguments);
-    };
-
-    gtag("js", new Date());
-    gtag("consent", "default", { ad_storage: "denied" });
-    gtag("config", tag, { debug_mode: debugMode });
 
     return function cleanup() {
       script.remove();
