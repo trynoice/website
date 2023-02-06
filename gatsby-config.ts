@@ -1,3 +1,5 @@
+import type { GatsbyConfig } from "gatsby";
+
 const name = "Noice";
 const tagline = "Natural calming noise";
 const siteUrl =
@@ -5,8 +7,7 @@ const siteUrl =
     ? process.env.URL
     : process.env.DEPLOY_PRIME_URL) || "http://localhost:8000";
 
-/** @type {import('gatsby').GatsbyConfig} */
-module.exports = {
+const config: GatsbyConfig = {
   trailingSlash: "never",
   siteMetadata: {
     name: name,
@@ -91,3 +92,5 @@ module.exports = {
     },
   ],
 };
+
+export default config;

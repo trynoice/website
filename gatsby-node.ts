@@ -1,8 +1,9 @@
-const path = require("path");
-const { createFilePath } = require("gatsby-source-filesystem");
-const { listPlans } = require("./src/api/subscriptions");
+import type { GatsbyNode } from "gatsby";
+import { createFilePath } from "gatsby-source-filesystem";
+import path from "path";
+import { listPlans } from "./src/api/subscriptions";
 
-exports.sourceNodes = async ({
+export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
   actions: { createNode },
   createContentDigest,
 }) => {
@@ -19,10 +20,14 @@ exports.sourceNodes = async ({
   });
 };
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({
+  node,
+  actions,
+  getNode,
+}) => {
   const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
-    const { permalink } = node.frontmatter;
+    const { permalink }: any = node.frontmatter;
     const slug = (permalink || createFilePath({ node, getNode }))
       .replace(/\/$/, "") // remove trailing slash
       .replace(/^\//, ""); // remove leading slash
@@ -35,28 +40,30 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 };
 
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions;
-  createTypes(`
-    type Mdx implements Node {
-      frontmatter: Frontmatter
-    }
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
+  ({ actions: { createTypes } }) =>
+    createTypes(`
+      type Mdx implements Node {
+        frontmatter: Frontmatter
+      }
 
-    type Frontmatter {
-      redirect: Redirect
-      publishedAt: Date @dateformat
-      updatedAt: Date @dateformat
-    }
+      type Frontmatter {
+        redirect: Redirect
+        publishedAt: Date @dateformat
+        updatedAt: Date @dateformat
+      }
 
-    type Redirect {
-      url: String!
-      permanent: Boolean
-    }
+      type Redirect {
+        url: String!
+        permanent: Boolean
+      }
   `);
-};
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage, createRedirect } = actions;
+export const createPages: GatsbyNode["createPages"] = async ({
+  actions: { createPage, createRedirect },
+  graphql,
+  reporter,
+}) => {
   const result = await graphql(`
     {
       allMdx {
@@ -88,10 +95,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return;
   }
 
-  result.data.allMdx.nodes
+  const {
+    allMdx: { nodes },
+  }: any = result.data;
+
+  nodes
     // only render markdown pages that specify a layout.
-    .filter((node) => node.frontmatter?.layout)
-    .forEach((node) => {
+    .filter((node: any) => node.frontmatter?.layout)
+    .forEach((node: any) => {
       const layout = path.resolve(`src/layouts/${node.frontmatter.layout}.tsx`);
       createPage({
         path: node.fields.slug,
@@ -103,7 +114,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     });
 
   // render blog list
-  const blogPostCount = result.data.allMdx.nodes.filter((node) =>
+  const blogPostCount = nodes.filter((node: any) =>
     node.fields?.slug?.startsWith("blog/")
   ).length;
 
@@ -125,9 +136,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     });
   }
 
-  result.data.allMdx.nodes
-    .filter((node) => node.frontmatter && node.frontmatter.redirect)
-    .forEach((node) => {
+  nodes
+    .filter((node: any) => node.frontmatter?.redirect)
+    .forEach((node: any) => {
       createRedirect({
         fromPath: node.fields.slug,
         toPath: node.frontmatter.redirect.url,
