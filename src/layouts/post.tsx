@@ -41,6 +41,7 @@ export default function PostLayout(props: any): ReactElement {
   const {
     data: {
       mdx: {
+        fields: { slug },
         frontmatter: { image, title, category, publishedAt },
       },
       site: {
@@ -48,10 +49,9 @@ export default function PostLayout(props: any): ReactElement {
       },
     },
     children,
-    path,
   } = props;
 
-  const postUrl = `${siteUrl}${path}`;
+  const postUrl = `${siteUrl}/${slug}`;
   const imageData = getImage(image);
   const contentPaddingX = {
     base: "contentPaddingXDefault",
@@ -178,6 +178,10 @@ export const query = graphql`
   query ($id: String!) {
     mdx(id: { eq: $id }) {
       excerpt(pruneLength: 160)
+      fields {
+        slug
+      }
+
       frontmatter {
         image {
           childImageSharp {
