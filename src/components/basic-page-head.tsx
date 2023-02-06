@@ -27,7 +27,7 @@ export default function BasicPageHead(props: BasicPageHeadProps): ReactElement {
   const { name, tagline, description, twitter, siteUrl } = site.siteMetadata;
   const longName = `${name}: ${tagline}`;
   const image = `${siteUrl}${props.image || DefaultSocialCardImage}`;
-  const title = props.title ? `${props.title} – ${name}` : longName;
+  const title = props.title ? `${props.title} • ${name}` : longName;
 
   return (
     <Fragment>
