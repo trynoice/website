@@ -11,7 +11,6 @@ export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
   (await listPlans("stripe")).forEach((plan) => {
     createNode({
       ...plan,
-      id: `${plan.id}`,
       internal: {
         type: "PremiumPlan",
         contentDigest: createContentDigest(plan),

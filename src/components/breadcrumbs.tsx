@@ -66,7 +66,7 @@ function BreadcrumbsInternal(
       fontSize={"sm"}
     >
       {crumbs.map((crumb) => (
-        <BreadcrumbItem>
+        <BreadcrumbItem key={`Breadcrumbs-${crumb.path}`}>
           <BreadcrumbLink as={GatsbyLink} to={crumb.path} color={"gray.500"}>
             {crumb.label}
           </BreadcrumbLink>

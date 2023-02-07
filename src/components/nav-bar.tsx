@@ -212,6 +212,7 @@ function HamburgerNavMenu(): ReactElement {
             </MenuItem>
             {menuItems.map((item) => (
               <MenuItem
+                key={`HamburgerNavMenu-${item.href}`}
                 href={item.href}
                 partiallyActive={true}
                 onClick={onClose}
@@ -231,6 +232,7 @@ function HorizontalNavMenu(): ReactElement {
     <HStack spacing={4}>
       {menuItems.map((item) => (
         <Button
+          key={`HorizontalNavMenu-${item.href}`}
           as={GatsbyLink}
           to={item.href}
           activeClassName={"active"}

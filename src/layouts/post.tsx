@@ -5,11 +5,12 @@ import {
   Heading,
   Icon,
   IconButton,
+  Link as ChakraLink,
   Spacer,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { graphql, Link as GatsbyLink } from "gatsby";
+import { graphql } from "gatsby";
 import { GatsbyImage, getImage, getSrc } from "gatsby-plugin-image";
 import { ReactElement } from "react";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
@@ -162,8 +163,8 @@ interface ShareButtonProps {
 function ShareButton(props: ShareButtonProps): ReactElement {
   return (
     <IconButton
-      as={GatsbyLink}
-      to={props.href}
+      as={ChakraLink}
+      href={props.href}
       m={1}
       size={"sm"}
       rounded={"full"}

@@ -34,8 +34,8 @@ const MDXComponents: Components = {
       mt={8}
       mb={4}
       sx={{
-        ":first-child": { mt: 0 },
-        ":last-child": { mb: 0 },
+        ":first-of-type": { mt: 0 },
+        ":last-of-type": { mb: 0 },
       }}
       {...props}
     />

@@ -65,6 +65,7 @@ export default function Home(): ReactElement {
     {
       allPremiumPlan {
         nodes {
+          id
           billingPeriodMonths
           priceInIndianPaise
           trialPeriodDays
@@ -359,6 +360,7 @@ interface PricingProps {
 }
 
 interface PlanInfo {
+  id: string;
   billingPeriodMonths: number;
   monthlyPriceRaw: number;
   monthlyPrice: string;
@@ -384,6 +386,7 @@ function subscriptionPlanToPlanInfo(
   const monthly = total / p.billingPeriodMonths;
   const currency = p.requestedCurrencyCode || "INR";
   return {
+    id: p.id,
     billingPeriodMonths: p.billingPeriodMonths,
     monthlyPriceRaw: monthly,
     monthlyPrice: formatPrice(monthly, locale, currency),
@@ -517,7 +520,7 @@ function TierInfo(props: TierInfoProps): ReactElement {
       </Heading>
       <List flex={1} spacing={3}>
         {props.benefits.map((b) => (
-          <ListItem>
+          <ListItem key={`Benefits-${b}`}>
             <ListIcon
               as={FaCheckCircle}
               verticalAlign={"middle"}
@@ -563,6 +566,7 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
       >
         {props.planInfos.map((info) => (
           <VStack
+            key={`PremiumPlans-${info.id}`}
             w={"full"}
             maxW={"xs"}
             p={8}

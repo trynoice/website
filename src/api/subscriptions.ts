@@ -1,5 +1,5 @@
 export interface SubscriptionPlan {
-  id: number;
+  id: string;
   billingPeriodMonths: number;
   priceInIndianPaise: number;
   trialPeriodDays: number;
@@ -24,5 +24,13 @@ export async function listPlans(
   }
 
   const response = await fetch(endpoint);
-  return await response.json();
+
+  // convert plan id from a number to a string because we use this API call to
+  // source GraphQL nodes for Gatsby and they only accept string ids.
+  return (await response.json()).map(
+    (plan: any): SubscriptionPlan => ({
+      ...plan,
+      id: plan.id.toString(),
+    })
+  );
 }

@@ -50,7 +50,7 @@ export default function FAQs(): ReactElement {
     <BasicPage title={"Frequently Asked Questions"}>
       <OrderedList spacing={2}>
         {posts.map((p) => (
-          <ListItem>
+          <ListItem key={`FAQs-${p.slug}`}>
             <ChakraLink as={GatsbyLink} to={`/${p.slug}`}>
               {p.title}
             </ChakraLink>

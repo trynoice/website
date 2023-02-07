@@ -1,4 +1,12 @@
-import { Button, HStack, Image, Spacer, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Image,
+  Link as ChakraLink,
+  Spacer,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { ReactElement } from "react";
 import { FaGooglePlay, FaHome } from "react-icons/fa";
@@ -53,7 +61,7 @@ export default function NotFound(): ReactElement {
         </Text>
         <HStack spacing={4}>
           <Button
-            as={GatsbyLink}
+            as={ChakraLink}
             to={googlePlayUrl}
             colorScheme={"primary"}
             leftIcon={<FaGooglePlay />}

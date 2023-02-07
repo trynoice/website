@@ -63,6 +63,7 @@ export default function BlogListLayout(props: any): ReactElement {
       >
         {posts.map((post: any, i: number) => (
           <GridItem
+            key={`Blog-${post.fields.slug}`}
             colSpan={{
               base: 1,
               md: currentPage === 1 ? (i === 0 ? 6 : 3) : 3,
@@ -106,7 +107,7 @@ export default function BlogListLayout(props: any): ReactElement {
           variant={"outline"}
           rounded={"full"}
           as={GatsbyLink}
-          to={prevPageHref}
+          to={prevPageHref || "/blog"} // default to suppress null link error
           hidden={!prevPageHref}
         >
           Previous Posts
@@ -118,7 +119,7 @@ export default function BlogListLayout(props: any): ReactElement {
           variant={"outline"}
           rounded={"full"}
           as={GatsbyLink}
-          to={nextPageHref}
+          to={nextPageHref || "/blog"} // default to suppress null link error
           hidden={!nextPageHref}
         >
           Next Posts
