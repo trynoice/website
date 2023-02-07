@@ -8,8 +8,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
-import { ReactElement, useEffect } from "react";
-import { useCookies } from "react-cookie";
+import { ReactElement, useEffect, useState } from "react";
+import Cookies from "universal-cookie";
 
 enum AnalyticsConsentStatus {
   granted = "granted",
@@ -31,33 +31,37 @@ export default function Analytics(): ReactElement {
     }
   `);
 
-  const cookieName = "analytics-consent";
-  const [cookies, setCookie] = useCookies([cookieName]);
+  const consentCookieName = "analytics-consent";
+  const [isConsentVisible, setConsentVisible] = useState(false);
+  const cookies = new Cookies();
 
   useEffect(() => {
-    if (cookies[cookieName] !== AnalyticsConsentStatus.granted) {
-      return;
+    const consentStatus = cookies.get(consentCookieName);
+    setConsentVisible(!consentStatus);
+
+    const scriptElementId = "gtag.js";
+    if (
+      consentStatus === AnalyticsConsentStatus.granted &&
+      document.getElementById(scriptElementId) == null
+    ) {
+      const tag = "G-59BXEC9WPX";
+      gtag("config", tag, { debug_mode: debug });
+      const script = document.createElement("script");
+      script.id = scriptElementId;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${tag}`;
+      script.async = true;
+      document.body.appendChild(script);
     }
-
-    const tag = "G-59BXEC9WPX";
-    gtag("config", tag, { debug_mode: debug });
-    const script = document.createElement("script");
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${tag}`;
-    script.async = true;
-    document.body.appendChild(script);
-
-    return function cleanup() {
-      script.remove();
-    };
   });
 
   function setConsentCookie(value: AnalyticsConsentStatus) {
-    setCookie(cookieName, value, { maxAge: 3 * 30 * 24 * 60 * 60 });
+    cookies.set(consentCookieName, value, { maxAge: 3 * 30 * 24 * 60 * 60 });
+    setConsentVisible(false);
   }
 
   return (
     <AnalyticsConsent
-      isOpen={!cookies[cookieName]}
+      isOpen={isConsentVisible}
       onDenied={() => setConsentCookie(AnalyticsConsentStatus.denied)}
       onGranted={() => setConsentCookie(AnalyticsConsentStatus.granted)}
     />
