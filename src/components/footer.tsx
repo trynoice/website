@@ -169,7 +169,7 @@ export default function Footer() {
           textAlign={{ base: "center", md: "right" }}
           fontSize={"xs"}
         >
-          <ChakraLink as={GatsbyLink} to={"/sitemap/sitemap-index.xml"}>
+          <ChakraLink as={GatsbyLink} to={"/sitemap-index.xml"}>
             Sitemap
           </ChakraLink>
           {" | "}
