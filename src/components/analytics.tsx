@@ -7,7 +7,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { Link as GatsbyLink } from "gatsby";
+import { graphql, Link as GatsbyLink, useStaticQuery } from "gatsby";
 import { ReactElement, useEffect } from "react";
 import { useCookies } from "react-cookie";
 
@@ -17,18 +17,30 @@ enum AnalyticsConsentStatus {
 }
 
 export default function Analytics(): ReactElement {
+  const {
+    site: {
+      siteMetadata: { debug },
+    },
+  }: any = useStaticQuery(graphql`
+    {
+      site {
+        siteMetadata {
+          debug
+        }
+      }
+    }
+  `);
+
   const cookieName = "analytics-consent";
   const [cookies, setCookie] = useCookies([cookieName]);
 
-  const tag = "G-59BXEC9WPX";
-  const debugMode = process.env.CONTEXT === "production";
   useEffect(() => {
     if (cookies[cookieName] !== AnalyticsConsentStatus.granted) {
       return;
     }
 
-    gtag("config", tag, { debug_mode: debugMode });
-
+    const tag = "G-59BXEC9WPX";
+    gtag("config", tag, { debug_mode: debug });
     const script = document.createElement("script");
     script.src = `https://www.googletagmanager.com/gtag/js?id=${tag}`;
     script.async = true;
