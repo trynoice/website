@@ -21,10 +21,9 @@ export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = ({
   node,
-  actions,
+  actions: { createNodeField },
   getNode,
 }) => {
-  const { createNodeField } = actions;
   if (node.internal.type === `Mdx`) {
     const { permalink }: any = node.frontmatter;
     const slug = (permalink || createFilePath({ node, getNode }))

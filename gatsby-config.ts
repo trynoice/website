@@ -1,3 +1,4 @@
+import { execSync } from "child_process";
 import type { GatsbyConfig } from "gatsby";
 
 const name = "Noice";
@@ -89,6 +90,9 @@ const config: GatsbyConfig = {
           }
           allMdx {
             nodes {
+              internal {
+                contentFilePath
+              }
               fields {
                 slug
               }
@@ -103,14 +107,36 @@ const config: GatsbyConfig = {
           allSitePage: { nodes: sitePages },
           allMdx: { nodes: mdxPages },
         }: any) => {
-          const mdxLastMod: { [path: string]: any } = {};
+          const pageLastMods: { [path: string]: string | null } = {};
+          let blogLastMod: string | null = null;
+          let faqsLastMod: string | null = null;
           mdxPages.forEach((page: any) => {
-            mdxLastMod[`/${page.fields.slug}`] =
-              page.frontmatter.updatedAt || page.frontmatter.publishedAt;
+            let lastMod = page.fields.updatedAt || page.fields.publishedAt;
+            const filePath = page.internal.contentFilePath;
+            if (filePath) {
+              lastMod = getLastModifiedTime(filePath) || lastMod;
+            }
+
+            pageLastMods[`/${page.fields.slug}`] = lastMod;
+            if (page.fields.slug.startsWith("blog/")) {
+              blogLastMod =
+                blogLastMod && blogLastMod > lastMod ? blogLastMod : lastMod;
+            }
+
+            if (page.fields.slug.startsWith("faqs/")) {
+              faqsLastMod =
+                faqsLastMod && faqsLastMod > lastMod ? faqsLastMod : lastMod;
+            }
           });
 
+          pageLastMods["/blog"] = blogLastMod;
+          pageLastMods["/faqs"] = faqsLastMod;
+          pageLastMods["/"] = getLastModifiedTime(
+            `${__dirname}/src/pages/index.tsx`
+          );
+
           return sitePages.map((page: any) => {
-            return { path: page.path, lastMod: mdxLastMod[page.path] };
+            return { path: page.path, lastMod: pageLastMods[page.path] };
           });
         },
         serialize: ({ path, lastMod }: any) => {
@@ -143,3 +169,11 @@ const config: GatsbyConfig = {
 };
 
 export default config;
+
+function getLastModifiedTime(path: string): string | null {
+  try {
+    return execSync(`git log -1 --pretty=format:%aI -- ${path}`).toString();
+  } catch (error) {
+    return null;
+  }
+}
