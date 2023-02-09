@@ -7,6 +7,7 @@ import {
   Icon,
   IconButton,
   Link as ChakraLink,
+  SimpleGrid,
   Spacer,
   Text,
   VStack,
@@ -18,6 +19,7 @@ import { FaFacebookF, FaLinkedinIn, FaShare, FaTwitter } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
 import Analytics from "../components/analytics";
 import BasicPageHead from "../components/basic-page-head";
+import BlogPostListItem from "../components/blog-post-list-item";
 import ChakraMDXProvider from "../components/chakra-mdx-provider";
 import Footer from "../components/footer";
 import NavBar from "../components/nav-bar";
@@ -46,6 +48,7 @@ export default function PostLayout(props: any): ReactElement {
         fields: { slug },
         frontmatter: { image, title, category, publishedAt },
       },
+      allMdx: { nodes: recentPosts },
       site: {
         siteMetadata: { siteUrl },
       },
@@ -112,7 +115,7 @@ export default function PostLayout(props: any): ReactElement {
           w={"full"}
           maxW={"4xl"}
           px={contentPaddingX}
-          pb={24}
+          pb={12}
           spacing={2}
           justifyContent={"flex-end"}
         >
@@ -142,6 +145,37 @@ export default function PostLayout(props: any): ReactElement {
             label={"LinkedIn"}
           />
         </HStack>
+      </VStack>
+      <Divider />
+      <VStack
+        maxW={"maxContentWidth"}
+        px={contentPaddingX}
+        pt={12}
+        pb={24}
+        align={"flex-start"}
+        spacing={8}
+      >
+        <Heading as={"h2"} size={"lg"}>
+          Recent Posts
+        </Heading>
+        <SimpleGrid
+          columns={{ base: 1, md: 2, lg: 3 }}
+          spacingX={8}
+          spacingY={16}
+        >
+          {recentPosts.map((post: any) => (
+            <BlogPostListItem
+              key={`RecentBlogPosts-${post.id}`}
+              title={post.frontmatter.title}
+              excerpt={post.excerpt}
+              category={post.frontmatter.category}
+              publishedAt={post.frontmatter.publishedAt}
+              href={`/${post.fields.slug}`}
+              imageData={getImage(post.frontmatter.image)}
+              size={"sm"}
+            />
+          ))}
+        </SimpleGrid>
       </VStack>
       <Spacer />
       <Footer />
@@ -198,6 +232,32 @@ export const query = graphql`
         title
         category
         publishedAt
+      }
+    }
+
+    allMdx(
+      filter: { id: { ne: $id }, fields: { slug: { glob: "blog/**" } } }
+      limit: 2
+      sort: { frontmatter: { publishedAt: DESC } }
+    ) {
+      nodes {
+        id
+        excerpt(pruneLength: 160)
+        fields {
+          slug
+        }
+
+        frontmatter {
+          image {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+            }
+          }
+
+          title
+          category
+          publishedAt(formatString: "MMMM DD, YYYY")
+        }
       }
     }
 

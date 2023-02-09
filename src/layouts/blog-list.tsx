@@ -1,10 +1,6 @@
 import {
   Button,
   GridItem,
-  Heading,
-  LinkBox,
-  LinkOverlay,
-  ResponsiveValue,
   SimpleGrid,
   Spacer,
   Stack,
@@ -12,11 +8,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { graphql, Link as GatsbyLink } from "gatsby";
-import { GatsbyImage, getImage, IGatsbyImageData } from "gatsby-plugin-image";
+import { getImage } from "gatsby-plugin-image";
 import { ReactElement } from "react";
 import ReadingBanner from "../assets/reading.png";
 import Analytics from "../components/analytics";
 import BasicPageHead from "../components/basic-page-head";
+import BlogPostListItem from "../components/blog-post-list-item";
 import Footer from "../components/footer";
 import NavBar from "../components/nav-bar";
 
@@ -54,11 +51,7 @@ export default function BlogListLayout(props: any): ReactElement {
         px={contentPaddingX}
         py={12}
         columns={{ base: 1, md: 6 }}
-        spacingX={{
-          base: 8,
-          md: 12,
-          lg: 16,
-        }}
+        spacingX={{ base: 8, md: 12 }}
         spacingY={{
           base: 12,
           md: currentPage === 1 ? 16 : 12,
@@ -75,25 +68,24 @@ export default function BlogListLayout(props: any): ReactElement {
                 currentPage === 1 ? (i === 0 ? 6 : i > 0 && i < 3 ? 3 : 2) : 2,
             }}
           >
-            <Post
+            <BlogPostListItem
               title={post.frontmatter.title}
               excerpt={post.excerpt}
               category={post.frontmatter.category}
               publishedAt={post.frontmatter.publishedAt}
               href={`/${post.fields.slug}`}
-              isFeatured={currentPage === 1 && i === 0}
               imageData={getImage(post.frontmatter.image)}
-              imageHeight={{
-                base: "3xs",
-                md: currentPage === 1 ? (i === 0 ? "xs" : "3xs") : "3xs",
+              size={{
+                base: "sm",
+                md: currentPage === 1 && i === 0 ? "lg" : "sm",
                 lg:
                   currentPage === 1
                     ? i === 0
-                      ? "xs"
+                      ? "lg"
                       : i > 0 && i < 3
-                      ? "2xs"
-                      : "3xs"
-                    : "3xs",
+                      ? "md"
+                      : "sm"
+                    : "sm",
               }}
             />
           </GridItem>
@@ -132,64 +124,6 @@ export default function BlogListLayout(props: any): ReactElement {
       <Spacer />
       <Footer />
     </VStack>
-  );
-}
-
-interface PostProps {
-  title: string;
-  excerpt: string;
-  category: string;
-  publishedAt: string;
-  href: string;
-  isFeatured: boolean;
-  imageData?: IGatsbyImageData;
-  imageHeight: ResponsiveValue<"xs" | "2xs" | "3xs">;
-}
-
-function Post(props: PostProps): ReactElement {
-  return (
-    <SimpleGrid
-      as={(props: any) => <LinkBox as={"article"} {...props} />}
-      w={"full"}
-      columns={{ base: 1, md: props.isFeatured ? 5 : 1 }}
-      spacingX={8}
-      spacingY={6}
-    >
-      <GridItem
-        colSpan={{ base: 1, md: props.isFeatured ? 3 : 1 }}
-        h={props.imageHeight}
-        rounded={"lg"}
-        as={GatsbyImage}
-        image={props.imageData || ReadingBanner}
-        alt={""}
-        aria-hidden={true}
-      />
-      <GridItem
-        colSpan={{ base: 1, md: props.isFeatured ? 2 : 1 }}
-        my={"auto"}
-        as={VStack}
-        align={"flex-start"}
-        spacing={2}
-      >
-        <Text color={"gray.500"} fontSize={"sm"}>
-          <Text as={"span"} fontWeight={"medium"}>
-            {props.category}
-          </Text>{" "}
-          &#x2022; {props.publishedAt}
-        </Text>
-        <Heading
-          as={"h1"}
-          size={"lg"}
-          transition={"all 0.3s cubic-bezier(.17,.67,.83,.67)"}
-          _hover={{ color: "primary.500" }}
-        >
-          <LinkOverlay as={GatsbyLink} to={props.href}>
-            {props.title}
-          </LinkOverlay>
-        </Heading>
-        <Text>{props.excerpt}</Text>
-      </GridItem>
-    </SimpleGrid>
   );
 }
 
