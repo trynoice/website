@@ -1,6 +1,7 @@
 import type { GatsbyNode } from "gatsby";
 import { createFilePath } from "gatsby-source-filesystem";
 import path from "path";
+import { getLibraryManifest } from "./src/api/cdn";
 import { listPlans } from "./src/api/subscriptions";
 
 export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
@@ -16,6 +17,33 @@ export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
         contentDigest: createContentDigest(plan),
       },
     });
+  });
+
+  const sounds = (await getLibraryManifest()).sounds;
+  const premiumSoundCount = sounds.filter((sound) =>
+    sound.segments.every((segment) => !segment.isFree)
+  ).length;
+
+  const freeSoundWithPremiumSegmentsCount = sounds.filter(
+    (sound) =>
+      sound.segments.some((segment) => segment.isFree) &&
+      sound.segments.some((segment) => !segment.isFree)
+  ).length;
+
+  const libraryInfo = {
+    totalSoundCount: sounds.length,
+    premiumSoundCount: premiumSoundCount,
+    freeSoundCount: sounds.length - premiumSoundCount,
+    freeSoundWithPremiumSegmentsCount: freeSoundWithPremiumSegmentsCount,
+  };
+
+  createNode({
+    id: createContentDigest(libraryInfo),
+    ...libraryInfo,
+    internal: {
+      type: "SoundLibraryInfo",
+      contentDigest: createContentDigest(libraryInfo),
+    },
   });
 };
 
