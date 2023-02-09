@@ -37,6 +37,7 @@ const MDXComponents: Components = {
         ":first-of-type": { mt: 0 },
         ":last-of-type": { mb: 0 },
       }}
+      lineHeight={7}
       {...props}
     />
   ),

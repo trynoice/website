@@ -33,7 +33,7 @@ export function Head(): ReactElement {
 }
 
 export default function BlogListLayout(props: any): ReactElement {
-  const posts = props.data.allMdx.nodes;
+  const posts: any[] = props.data.allMdx.nodes;
   const { currentPage, totalPageCount, prevPageHref, nextPageHref } =
     props.pageContext;
 
@@ -54,7 +54,11 @@ export default function BlogListLayout(props: any): ReactElement {
         px={contentPaddingX}
         py={12}
         columns={{ base: 1, md: 6 }}
-        spacingX={8}
+        spacingX={{
+          base: 8,
+          md: 12,
+          lg: 16,
+        }}
         spacingY={{
           base: 12,
           md: currentPage === 1 ? 16 : 12,
@@ -148,7 +152,7 @@ function Post(props: PostProps): ReactElement {
       as={(props: any) => <LinkBox as={"article"} {...props} />}
       w={"full"}
       columns={{ base: 1, md: props.isFeatured ? 5 : 1 }}
-      spacingX={12}
+      spacingX={8}
       spacingY={6}
     >
       <GridItem
