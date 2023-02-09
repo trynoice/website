@@ -3,6 +3,7 @@ import {
   Container,
   Divider,
   Heading,
+  HStack,
   Icon,
   IconButton,
   Link as ChakraLink,
@@ -13,7 +14,7 @@ import {
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage, getSrc } from "gatsby-plugin-image";
 import { ReactElement } from "react";
-import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaShare, FaTwitter } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
 import Analytics from "../components/analytics";
 import BasicPageHead from "../components/basic-page-head";
@@ -71,8 +72,7 @@ export default function PostLayout(props: any): ReactElement {
           w={"full"}
           maxW={"4xl"}
           px={contentPaddingX}
-          pt={{ base: 8, md: 12 }}
-          pb={{ base: 4, md: 6 }}
+          py={{ base: 8, md: 12 }}
           spacing={2}
           alignItems={"flex-start"}
           textAlign={"left"}
@@ -108,9 +108,15 @@ export default function PostLayout(props: any): ReactElement {
         <Container maxW={"4xl"} px={contentPaddingX} py={12}>
           <ChakraMDXProvider>{children}</ChakraMDXProvider>
         </Container>
-        <Divider />
-        <Text w={"full"} maxW={"4xl"} px={contentPaddingX} pt={8} pb={24}>
-          Share:{" "}
+        <HStack
+          w={"full"}
+          maxW={"4xl"}
+          px={contentPaddingX}
+          pb={24}
+          spacing={2}
+          justifyContent={"flex-end"}
+        >
+          <Icon as={FaShare} color={"gray.400"} boxSize={5} mr={4} />
           <ShareButton
             colorScheme={"twitter"}
             icon={FaTwitter}
@@ -118,7 +124,7 @@ export default function PostLayout(props: any): ReactElement {
               postUrl + "?ref=Twitter+Share"
             )}&text=${encodeURIComponent(title)}&via=trynoice&related=trynoice`}
             label={"Twitter"}
-          />{" "}
+          />
           <ShareButton
             colorScheme={"facebook"}
             icon={FaFacebookF}
@@ -126,7 +132,7 @@ export default function PostLayout(props: any): ReactElement {
               postUrl + "?ref=Twitter+Share"
             )}`}
             label={"Facebook"}
-          />{" "}
+          />
           <ShareButton
             colorScheme={"linkedin"}
             icon={FaLinkedinIn}
@@ -135,7 +141,7 @@ export default function PostLayout(props: any): ReactElement {
             )}`}
             label={"LinkedIn"}
           />
-        </Text>
+        </HStack>
       </VStack>
       <Spacer />
       <Footer />
@@ -165,8 +171,7 @@ function ShareButton(props: ShareButtonProps): ReactElement {
     <IconButton
       as={ChakraLink}
       href={props.href}
-      m={1}
-      size={"sm"}
+      size={"md"}
       rounded={"full"}
       colorScheme={props.colorScheme}
       icon={<Icon as={props.icon} />}
