@@ -91,7 +91,11 @@ export default function NavBar(): ReactElement {
           color={"black"}
           _hover={{ color: "primary.500" }}
         >
-          <AppIcon w={{ base: 28, md: 36 }} h={"auto"} fill={"currentColor"} />
+          <AppIcon
+            w={{ base: 28, md: 32, lg: 36 }}
+            h={"auto"}
+            fill={"currentColor"}
+          />
         </ChakraLink>
 
         <Spacer />

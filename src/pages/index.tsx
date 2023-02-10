@@ -97,6 +97,7 @@ export default function Home(): ReactElement {
         src={FishBowlIllustration}
         w={"full"}
         bgGradient={"linear(white 97%, orange.50 97%)"} // gradient solves the bleeding edge issue in firefox.
+        aria-hidden={true}
       />
       <Reviews />
       <SlantedHorizontalSeparator from={"orange.50"} to={"white"} />
@@ -289,6 +290,7 @@ function SoundLibraryShowcase(): ReactElement {
         aria-label={props.label}
         hasArrow={true}
         closeDelay={500}
+        closeOnClick={false}
       >
         {/* https://github.com/chakra-ui/chakra-ui/issues/2869 */}
         <span>

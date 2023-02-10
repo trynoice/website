@@ -20,6 +20,7 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
+import AppIcon from "../assets/app-icon";
 import FDroidBadge from "./f-droid-badge";
 import GooglePlayBadge from "./google-play-badge";
 
@@ -146,7 +147,21 @@ export default function Footer() {
         </VStack>
       </SimpleGrid>
 
-      <Divider pt={8} />
+      <HStack
+        w={"full"}
+        pt={12}
+        pb={2}
+        spacing={{ base: 4, md: 8, lg: 12 }}
+        aria-hidden={true}
+      >
+        <Divider flexGrow={1} />
+        <AppIcon
+          w={{ base: 24, md: 28, lg: 32 }}
+          h={"auto"}
+          fill={"currentColor"}
+        />
+        <Divider flexGrow={1} />
+      </HStack>
 
       <Stack
         w={"full"}
