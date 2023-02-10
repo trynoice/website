@@ -12,6 +12,7 @@ import {
   Stack,
   StackDivider,
   Text,
+  Tooltip,
   useBreakpointValue,
   useToken,
   VStack,
@@ -21,16 +22,23 @@ import LocaleCurrency from "locale-currency";
 import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { FaCheckCircle, FaQuoteLeft } from "react-icons/fa";
+import { GiCampfire, GiRiver } from "react-icons/gi";
 import {
   TbAdjustments,
   TbArrowsRandom,
   TbBabyCarriage,
   TbBed,
+  TbBooks,
   TbCast,
+  TbCloudRain,
+  TbCoffee,
   TbEarOff,
   TbRocket,
+  TbScubaMask,
   TbTrees,
   TbWaveSawTool,
+  TbWaveSine,
+  TbWind,
 } from "react-icons/tb";
 import { listPlans, SubscriptionPlan } from "../api/subscriptions";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
@@ -83,14 +91,15 @@ export default function Home(): ReactElement {
         <Hero />
         <Benefits />
         <KeyFeatures />
+        <SoundLibraryShowcase />
       </VStack>
       <Image
         src={FishBowlIllustration}
         w={"full"}
-        bgGradient={"linear(white 97%, orange.100 97%)"} // gradient solves the bleeding edge issue in firefox.
+        bgGradient={"linear(white 97%, orange.50 97%)"} // gradient solves the bleeding edge issue in firefox.
       />
       <Reviews />
-      <SlantedHorizontalSeparator from={"orange.100"} to={"white"} />
+      <SlantedHorizontalSeparator from={"orange.50"} to={"white"} />
       <Pricing subscriptionPlans={plans} />
       <Footer />
     </VStack>
@@ -239,12 +248,12 @@ function KeyFeatures(): ReactElement {
           color={"indigo.400"}
           textAlign={{ base: "center", lg: "left" }}
         >
-          Dive into a world of natural sounds
+          Dive Into a World of Natural Ambience
         </Heading>
 
         <Text textAlign={{ base: "center", lg: "left" }}>
           Experience the ultimate sound quality with our advanced, randomised
-          sound technology, creating truly natural ambient sounds.
+          audio generation technology, creating truly natural ambient sounds.
         </Text>
 
         <VStack
@@ -264,6 +273,71 @@ function KeyFeatures(): ReactElement {
         </VStack>
       </VStack>
     </Stack>
+  );
+}
+
+function SoundLibraryShowcase(): ReactElement {
+  interface SoundIconProps {
+    icon: IconType;
+    label: string;
+  }
+
+  function SoundIcon(props: SoundIconProps): ReactElement {
+    return (
+      <Tooltip
+        label={props.label}
+        aria-label={props.label}
+        hasArrow={true}
+        closeDelay={500}
+      >
+        {/* https://github.com/chakra-ui/chakra-ui/issues/2869 */}
+        <span>
+          <Icon
+            as={props.icon}
+            boxSize={24}
+            p={4}
+            rounded={"full"}
+            color={"orange.300"}
+            _hover={{ color: "orange.400" }}
+            transition={"color 0.5s cubic-bezier(.17,.67,.83,.67)"}
+          />
+        </span>
+      </Tooltip>
+    );
+  }
+
+  return (
+    <VStack
+      w={"full"}
+      maxW={"maxContentWidth"}
+      px={contentPaddingX}
+      pt={{ base: 12, lg: 24 }}
+      pb={{ base: 12, md: 8, lg: 4 }}
+      spacing={12}
+    >
+      <Heading size={"lg"} textAlign={"center"}>
+        Explore the Collection of{" "}
+        <Text as={"span"} color={"orange.400"}>
+          Carefully Chosen Sounds
+        </Text>
+      </Heading>
+
+      <SimpleGrid
+        columns={{ base: 2, md: 4, lg: 8 }}
+        spacing={{ base: 8, md: 12 }}
+      >
+        <SoundIcon icon={TbWaveSine} label={"Brown, Pink and White Noise"} />
+        <SoundIcon icon={TbCloudRain} label={"Rain"} />
+        <SoundIcon icon={TbWind} label={"Soft Wind"} />
+        <SoundIcon icon={GiCampfire} label={"Campfire"} />
+        <SoundIcon icon={GiRiver} label={"Water Stream"} />
+        <SoundIcon icon={TbCoffee} label={"Coffee Shop"} />
+        <SoundIcon icon={TbBooks} label={"Public Library"} />
+        <SoundIcon icon={TbScubaMask} label={"Scuba Diving"} />
+      </SimpleGrid>
+
+      <Text fontSize={"lg"}>...and more!</Text>
+    </VStack>
   );
 }
 
@@ -293,7 +367,7 @@ function Reviews(): ReactElement {
           left={6}
           top={-4}
           boxSize={8}
-          color={"orange.500"}
+          color={"orange.400"}
         />
         <Text pb={2}>{props.children}</Text>
         <Text
@@ -301,7 +375,7 @@ function Reviews(): ReactElement {
           fontWeight={"medium"}
           fontSize={"sm"}
           textAlign={"end"}
-          color={"orange.500"}
+          color={"orange.400"}
         >
           &mdash; {props.author}
         </Text>
@@ -310,11 +384,11 @@ function Reviews(): ReactElement {
   }
 
   return (
-    <VStack w={"full"} spacing={16} py={{ base: 24 }} bg={"orange.100"}>
+    <VStack w={"full"} spacing={16} py={{ base: 24 }} bg={"orange.50"}>
       <Heading
         maxW={"maxContentWidth"}
         px={contentPaddingX}
-        color={"orange.500"}
+        color={"orange.400"}
         textAlign={"center"}
       >
         Loved by people
