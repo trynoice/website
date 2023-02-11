@@ -121,14 +121,6 @@ export default function PostLayout(props: any): ReactElement {
         >
           <Icon as={FaShare} color={"gray.400"} boxSize={5} mr={4} />
           <ShareButton
-            colorScheme={"twitter"}
-            icon={FaTwitter}
-            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-              postUrl + "?ref=Twitter+Share"
-            )}&text=${encodeURIComponent(title)}&via=trynoice&related=trynoice`}
-            label={"Twitter"}
-          />
-          <ShareButton
             colorScheme={"facebook"}
             icon={FaFacebookF}
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
@@ -144,6 +136,14 @@ export default function PostLayout(props: any): ReactElement {
             )}`}
             label={"LinkedIn"}
           />
+          <ShareButton
+            colorScheme={"twitter"}
+            icon={FaTwitter}
+            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+              postUrl + "?ref=Twitter+Share"
+            )}&text=${encodeURIComponent(title)}&via=trynoice&related=trynoice`}
+            label={"Twitter"}
+          />
         </HStack>
       </VStack>
       <Divider />
@@ -156,7 +156,7 @@ export default function PostLayout(props: any): ReactElement {
         spacing={8}
       >
         <Heading as={"h2"} size={"lg"}>
-          Recent Posts
+          Explore our Latest Updates
         </Heading>
         <SimpleGrid
           columns={{ base: 1, md: 2, lg: 3 }}

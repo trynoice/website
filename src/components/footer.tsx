@@ -85,14 +85,14 @@ export default function Footer() {
           <ChakraLink as={GatsbyLink} to={"/faqs"}>
             Frequently Asked Questions
           </ChakraLink>
-          <ChakraLink href={"https://github.com/trynoice/android-app/releases"}>
-            Android App Release Notes
+          <ChakraLink as={GatsbyLink} to={"/terms-of-service"}>
+            Terms of Service
           </ChakraLink>
           <ChakraLink as={GatsbyLink} to={"/privacy-policy"}>
             Privacy Policy
           </ChakraLink>
-          <ChakraLink as={GatsbyLink} to={"/terms-of-service"}>
-            Terms of Service
+          <ChakraLink href={"https://github.com/trynoice/android-app/releases"}>
+            Android App Release Notes
           </ChakraLink>
         </VStack>
 

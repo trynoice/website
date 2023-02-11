@@ -358,10 +358,15 @@ function Reviews(): ReactElement {
         p={8}
         rounded={"xl"}
         bg={"white"}
-        boxShadow={"xl"}
+        boxShadow={"lg"}
         position={"relative"}
         alignSelf={props.alignSelf}
         spacing={2}
+        transition={"all 0.25s cubic-bezier(.17,.67,.83,.67)"}
+        _hover={{
+          boxShadow: "xl",
+          transform: "scale(1.1)",
+        }}
       >
         <Icon
           as={FaQuoteLeft}
