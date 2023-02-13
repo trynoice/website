@@ -1,13 +1,11 @@
 import {
   Box,
   Divider,
+  GridItem,
   Heading,
   HStack,
   Icon,
   Image,
-  List,
-  ListIcon,
-  ListItem,
   SimpleGrid,
   Stack,
   StackDivider,
@@ -19,23 +17,32 @@ import {
 } from "@chakra-ui/react";
 import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
-import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { Children, ReactElement, ReactNode, useEffect, useState } from "react";
 import { IconType } from "react-icons";
-import { FaCheckCircle, FaQuoteLeft } from "react-icons/fa";
+import { FaQuoteLeft } from "react-icons/fa";
 import { GiCampfire, GiRiver } from "react-icons/gi";
 import {
   TbAdjustments,
+  TbAlarm,
   TbArrowsRandom,
   TbBabyCarriage,
   TbBed,
+  TbBookmarks,
   TbBooks,
   TbCast,
   TbCloudRain,
   TbCoffee,
+  TbDownload,
   TbEarOff,
+  TbHourglass,
+  TbLego,
+  TbPlaylist,
   TbRocket,
   TbScubaMask,
+  TbStar,
   TbTrees,
+  TbVolume,
+  TbVolume2,
   TbWaveSawTool,
   TbWaveSine,
   TbWind,
@@ -69,7 +76,7 @@ const contentPaddingX = {
 };
 
 export default function Home(): ReactElement {
-  const { allPremiumPlan } = useStaticQuery(graphql`
+  const { allPremiumPlan, soundLibraryInfo } = useStaticQuery(graphql`
     {
       allPremiumPlan {
         nodes {
@@ -78,6 +85,13 @@ export default function Home(): ReactElement {
           priceInIndianPaise
           trialPeriodDays
         }
+      }
+
+      soundLibraryInfo {
+        totalSoundCount
+        premiumSoundCount
+        freeSoundCount
+        freeSoundWithPremiumSegmentsCount
       }
     }
   `);
@@ -101,7 +115,8 @@ export default function Home(): ReactElement {
       />
       <Reviews />
       <SlantedHorizontalSeparator from={"orange.50"} to={"white"} />
-      <Pricing subscriptionPlans={plans} />
+      <Pricing soundLibraryInfo={soundLibraryInfo} premiumPlans={plans} />
+      <WavyHorizontalSeparator from={"white"} to={"black"} />
       <Footer />
     </VStack>
   );
@@ -391,7 +406,7 @@ function Reviews(): ReactElement {
   }
 
   return (
-    <VStack w={"full"} spacing={16} py={{ base: 24 }} bg={"orange.50"}>
+    <VStack w={"full"} spacing={16} py={24} bg={"orange.50"}>
       <Heading
         maxW={"maxContentWidth"}
         px={contentPaddingX}
@@ -437,7 +452,14 @@ function Reviews(): ReactElement {
 }
 
 interface PricingProps {
-  subscriptionPlans: SubscriptionPlan[];
+  soundLibraryInfo: {
+    totalSoundCount: number;
+    premiumSoundCount: number;
+    freeSoundCount: number;
+    freeSoundWithPremiumSegmentsCount: number;
+  };
+
+  premiumPlans: SubscriptionPlan[];
 }
 
 interface PlanInfo {
@@ -449,36 +471,9 @@ interface PlanInfo {
   trialPeriodDays: number;
 }
 
-function formatPrice(price: number, locale: string, currency: string): string {
-  const format = new Intl.NumberFormat(locale || "en-US", {
-    style: "currency",
-    currency: currency,
-    minimumFractionDigits: Number.isInteger(price) ? 0 : 2,
-  });
-
-  return format.format(price);
-}
-
-function subscriptionPlanToPlanInfo(
-  p: SubscriptionPlan,
-  locale: string
-): PlanInfo {
-  const total = p.priceInRequestedCurrency || p.priceInIndianPaise / 100.0;
-  const monthly = total / p.billingPeriodMonths;
-  const currency = p.requestedCurrencyCode || "INR";
-  return {
-    id: p.id,
-    billingPeriodMonths: p.billingPeriodMonths,
-    monthlyPriceRaw: monthly,
-    monthlyPrice: formatPrice(monthly, locale, currency),
-    totalPrice: formatPrice(total, locale, currency),
-    trialPeriodDays: p.trialPeriodDays,
-  };
-}
-
 function Pricing(props: PricingProps): ReactElement {
   const [planInfos, setPlanInfos] = useState(
-    props.subscriptionPlans.map((p) => subscriptionPlanToPlanInfo(p, "en-US"))
+    props.premiumPlans.map((p) => subscriptionPlanToPlanInfo(p, "en-US"))
   );
 
   useEffect(() => {
@@ -516,105 +511,174 @@ function Pricing(props: PricingProps): ReactElement {
     <VStack
       id={"pricing"}
       w={"full"}
-      spacing={8}
-      align={"center"}
+      maxW={"maxContentWidth"}
+      px={contentPaddingX}
       py={{ base: 28, md: 36 }}
+      align={"flex-start"}
+      spacing={12}
+      lineHeight={"tall"}
     >
-      <Stack
-        w={"full"}
-        maxW={"maxContentWidth"}
-        px={contentPaddingX}
-        direction={{ base: "column", md: "row" }}
-        align={"center"}
-        justifyContent={{ base: "flex-start", md: "space-around" }}
-        spacing={4}
-      >
-        <Heading
-          width={{ base: "100%", md: "40%" }}
-          size={"xl"}
-          lineHeight={1.33}
-          textAlign={"center"}
-        >
-          Flexible Plans for{" "}
-          <Text as={"span"} color={"pink.500"}>
-            Your Needs
-          </Text>
-        </Heading>
-        <Text
-          width={{ base: "100%", md: "60%" }}
-          textAlign={"center"}
-          fontSize={"lg"}
-          mb={8}
-        >
-          Unlock the full potential of the app with a premium plan. Try it free
-          for up to {maxTrialPeriod} days.
+      <Heading>
+        Find the Right Plan for{" "}
+        <Text as={"span"} color={"pink.500"}>
+          Yourself
         </Text>
-      </Stack>
+      </Heading>
+
       <Divider />
-      <TierInfo
-        tier={"Free"}
-        benefits={[
-          "28 high-fidelity sounds",
-          "Stream audio with Chromecast",
-          "2 active alarms on Android",
-          "Sleep timer on Android",
-          "Average quality audio streaming",
-        ]}
-      />
+
+      <PricingTier
+        title={"Basic"}
+        description={
+          "Start for free with our Basic plan with the option to upgrade to Premium anytime."
+        }
+        pricingInfo={"Forever Free"}
+      >
+        <PricingTierFeature icon={TbPlaylist} title={"Rich Sound Library"}>
+          Find the perfect background noise for any situation, from soothing
+          seashore to peaceful chirping crickets - with{" "}
+          {props.soundLibraryInfo.freeSoundCount} free sounds.
+        </PricingTierFeature>
+
+        <PricingTierFeature
+          icon={TbAdjustments}
+          title={"Craft Perfect Soundscapes"}
+        >
+          Mix and match sounds to create unique soundscapes tailored to your
+          needs for enhancing focus, relaxation, or sleep.
+        </PricingTierFeature>
+
+        <PricingTierFeature
+          icon={TbBookmarks}
+          title={"Save & Reuse Your Favourite Mixes"}
+        >
+          Effortlessly revisit your favourite soundscapes by saving multiple
+          custom mixes for easy access whenever you need them.
+        </PricingTierFeature>
+
+        <PricingTierFeature icon={TbVolume2} title={"Standard Audio"}>
+          Listen to your preferred sounds with ease, as our base quality audio
+          starts at 128 kbps in MP3 format.
+        </PricingTierFeature>
+
+        <PricingTierFeature icon={TbAlarm} title={"Alarm Clock on Android"}>
+          Wake up with a boost of energy to ambient noise with our mindful
+          alarms, featuring up to two active alarms for a worry-free morning.
+        </PricingTierFeature>
+
+        <PricingTierFeature icon={TbHourglass} title={"Sleep Timer on Android"}>
+          Ensure an ideal bedtime routine with the auto sleep timer that
+          automatically turns off the app after a set duration.
+        </PricingTierFeature>
+      </PricingTier>
+
       <Divider />
-      <TierInfo
-        tier={"Premium"}
-        benefits={[
-          "Everything in free-tier",
-          "Longer sounds with more variants",
-          "Natural variations in sounds",
-          "Offline Playback on Android",
-          "Ultra high quality audio streaming",
-          "Unlimited active alarms on Android",
-        ]}
-        pricing={`Starts at ${minMonthlyPrice}/month`}
-      />
+
+      <PricingTier
+        title={"Premium"}
+        description={`Unlock the full potential of Noice with a premium plan. Try it free for up to ${maxTrialPeriod} days!`}
+        pricingInfo={`Starts at ${minMonthlyPrice} per month`}
+      >
+        {props.soundLibraryInfo.premiumSoundCount > 0 ? (
+          <PricingTierFeature icon={TbStar} title={"More Sounds"}>
+            Unleash the full potential of your relaxation and focus experience
+            with Noice Premium - with {props.soundLibraryInfo.premiumSoundCount}{" "}
+            additional sounds.
+          </PricingTierFeature>
+        ) : null}
+
+        <PricingTierFeature icon={TbLego} title={"More Sound Clips"}>
+          Add a new dimension to your listening with additional audio clips in{" "}
+          {props.soundLibraryInfo.freeSoundWithPremiumSegmentsCount} sounds to
+          make them more unique and less monotonous.
+        </PricingTierFeature>
+
+        <PricingTierFeature icon={TbTrees} title={"Natural Variations"}>
+          Bring your soundscapes to life with real and natural sound variations
+          generated on demand with our cutting-edge sound technology.
+        </PricingTierFeature>
+
+        <PricingTierFeature icon={TbVolume} title={"HD Audio"}>
+          Experience noise like never before, with the ability to listen to
+          sounds at up to 320 kbps in MP3, rendering crystal-clear,
+          high-fidelity audio.
+        </PricingTierFeature>
+
+        <PricingTierFeature
+          icon={TbDownload}
+          title={"Offline Playback on Android"}
+        >
+          Enjoy soothing sounds anytime, anywhere, with Noice's offline sound
+          downloads - no internet connection is required.
+        </PricingTierFeature>
+
+        <PricingTierFeature
+          icon={TbAlarm}
+          title={"Unlimited Alarms on Android"}
+        >
+          Elevate your morning routine with Noice Premium - schedule an
+          unlimited number of alarms for a personalised and peaceful start to
+          your day.
+        </PricingTierFeature>
+      </PricingTier>
+
       <PremiumTierPricing planInfos={planInfos} />
     </VStack>
   );
 }
 
-interface TierInfoProps {
-  tier: string;
-  benefits: string[];
-  pricing?: string;
+interface PricingTierProps {
+  title: string;
+  description: string;
+  pricingInfo: string;
+  children?: ReactNode;
 }
 
-function TierInfo(props: TierInfoProps): ReactElement {
+function PricingTier(props: PricingTierProps): ReactElement {
   return (
-    <Stack
-      w={"full"}
-      maxW={"maxContentWidth"}
-      px={contentPaddingX}
-      direction={{ base: "column", md: "row" }}
-      justifyContent={{ base: "flex-start", md: "space-around" }}
-      align={"center"}
-      spacing={12}
-    >
-      <Heading flex={1} fontSize={{ base: "xl", md: "2xl" }}>
-        {props.tier}
-      </Heading>
-      <List flex={1} spacing={3}>
-        {props.benefits.map((b) => (
-          <ListItem key={`Benefits-${b}`}>
-            <ListIcon
-              as={FaCheckCircle}
-              verticalAlign={"middle"}
-              color={"pink.500"}
-            />
-            {b}
-          </ListItem>
-        ))}
-      </List>
-      <Text flex={1} fontSize={{ base: "lg", md: "xl" }}>
-        {props.pricing}
-      </Text>
-    </Stack>
+    <SimpleGrid w={"full"} columns={{ base: 1, md: 2, lg: 3 }} spacing={12}>
+      <GridItem
+        maxW={"sm"}
+        rowSpan={{
+          base: 1,
+          lg: Math.ceil(Children.count(props.children) / 2),
+        }}
+        colSpan={{ base: 1, md: 2, lg: 1 }}
+        justifySelf={"center"}
+        as={VStack}
+        align={{ base: "center", lg: "flex-start" }}
+        textAlign={{ base: "center", lg: "left" }}
+      >
+        <Heading as={"h3"} size={"lg"} color={"pink.500"}>
+          {props.title}
+        </Heading>
+        <Text>{props.description}</Text>
+        <Text fontSize={"sm"} fontWeight={"medium"}>
+          {props.pricingInfo}
+        </Text>
+      </GridItem>
+      {props.children}
+    </SimpleGrid>
+  );
+}
+
+interface PricingTierFeatureProps {
+  icon: IconType;
+  title: string;
+  children?: ReactNode;
+}
+
+function PricingTierFeature(props: PricingTierFeatureProps): ReactElement {
+  return (
+    <HStack w={"full"} align={"flex-start"} spacing={4}>
+      <Icon as={props.icon} boxSize={6} color={"pink.500"} />
+      <VStack align={"flex-start"}>
+        <Heading as={"h4"} size={"sm"}>
+          {props.title}
+        </Heading>
+        <Text fontSize={"sm"}>{props.children}</Text>
+      </VStack>
+    </HStack>
   );
 }
 
@@ -628,14 +692,8 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
   );
 
   return (
-    <VStack
-      w={"full"}
-      maxW={"maxContentWidth"}
-      px={contentPaddingX}
-      pt={{ base: 28, md: 36 }}
-      spacing={12}
-    >
-      <Heading color={"pink.500"} size={"lg"} textAlign={"center"}>
+    <VStack w={"full"} pt={{ base: 16, md: 20 }} spacing={12}>
+      <Heading as={"h3"} color={"pink.500"} size={"lg"} textAlign={"center"}>
         Premium Plans
       </Heading>
       <SimpleGrid
@@ -697,14 +755,43 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
   );
 }
 
-interface HorizontalSeparator {
+function formatPrice(price: number, locale: string, currency: string): string {
+  const format = new Intl.NumberFormat(locale || "en-US", {
+    style: "currency",
+    currency: currency,
+    minimumFractionDigits: Number.isInteger(price) ? 0 : 2,
+  });
+
+  return format.format(price);
+}
+
+function subscriptionPlanToPlanInfo(
+  p: SubscriptionPlan,
+  locale: string
+): PlanInfo {
+  const total = p.priceInRequestedCurrency || p.priceInIndianPaise / 100.0;
+  const monthly = total / p.billingPeriodMonths;
+  const currency = p.requestedCurrencyCode || "INR";
+  return {
+    id: p.id,
+    billingPeriodMonths: p.billingPeriodMonths,
+    monthlyPriceRaw: monthly,
+    monthlyPrice: formatPrice(monthly, locale, currency),
+    totalPrice: formatPrice(total, locale, currency),
+    trialPeriodDays: p.trialPeriodDays,
+  };
+}
+
+interface HorizontalSeparatorProps {
   from?: string;
   to?: string;
 }
 
 let lastWavyEdgePatternId = 0;
 
-function WavyHorizontalSeparator(props: HorizontalSeparator): ReactElement {
+function WavyHorizontalSeparator(
+  props: HorizontalSeparatorProps
+): ReactElement {
   const patternId = `bg-${++lastWavyEdgePatternId}`;
   const baseW = 128;
   const viewBoxW = useBreakpointValue({
@@ -742,7 +829,9 @@ function WavyHorizontalSeparator(props: HorizontalSeparator): ReactElement {
   );
 }
 
-function SlantedHorizontalSeparator(props: HorizontalSeparator): ReactElement {
+function SlantedHorizontalSeparator(
+  props: HorizontalSeparatorProps
+): ReactElement {
   const [bg, fg] = useToken("colors", [
     props.from || "white",
     props.to || "black",
@@ -750,7 +839,7 @@ function SlantedHorizontalSeparator(props: HorizontalSeparator): ReactElement {
 
   return (
     <Box
-      bg={fg}
+      bgGradient={`linear(${bg} 1%, ${fg} 1%)`} // gradient solves the bleeding edge issue in firefox.
       as={"svg"}
       viewBox={"0 0 100 7.5"}
       xmlns={"http://www.w3.org/2000/svg"}
