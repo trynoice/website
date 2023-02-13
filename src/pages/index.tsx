@@ -7,6 +7,7 @@ import {
   Icon,
   Image,
   SimpleGrid,
+  Spacer,
   Stack,
   StackDivider,
   Text,
@@ -587,7 +588,7 @@ function Pricing(props: PricingProps): ReactElement {
           </PricingTierFeature>
         ) : null}
 
-        <PricingTierFeature icon={TbLego} title={"More Sound Clips"}>
+        <PricingTierFeature icon={TbLego} title={"More Audio Clips"}>
           Add a new dimension to your listening with additional audio clips in{" "}
           {props.soundLibraryInfo.freeSoundWithPremiumSegmentsCount} sounds to
           make them more unique and less monotonous.
@@ -704,38 +705,41 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
         justifyItems={"center"}
       >
         {props.planInfos.map((info) => (
-          <SimpleGrid
+          <VStack
             key={`PremiumPlans-${info.id}`}
             w={"full"}
             maxW={"lg"}
-            px={12}
-            py={8}
+            p={6}
             bg={"pink.50"}
             rounded={"3xl"}
-            columns={2}
-            spacingX={8}
-            spacingY={2}
+            spacing={2}
           >
-            <Text fontSize={"xl"}>
-              {info.billingPeriodMonths == 1
-                ? "Monthly"
-                : info.billingPeriodMonths == 3
-                ? "Quarterly"
-                : info.billingPeriodMonths == 6
-                ? "Bi-yearly"
-                : info.billingPeriodMonths == 12
-                ? "Yearly"
-                : `Every ${info.billingPeriodMonths} months`}
-            </Text>
-            <Text textAlign={"right"} alignSelf={"flex-end"}>
-              <Text as="span" fontSize={"lg"}>
-                {info.monthlyPrice}
-              </Text>{" "}
-              per month
-            </Text>
-            <Text>Trial Period: {info.trialPeriodDays} days</Text>
-            <Text textAlign={"right"}>{info.totalPrice} total</Text>
-          </SimpleGrid>
+            <HStack w={"full"}>
+              <Text fontSize={"xl"}>
+                {info.billingPeriodMonths == 1
+                  ? "Monthly"
+                  : info.billingPeriodMonths == 3
+                  ? "Quarterly"
+                  : info.billingPeriodMonths == 6
+                  ? "Bi-yearly"
+                  : info.billingPeriodMonths == 12
+                  ? "Yearly"
+                  : `Every ${info.billingPeriodMonths} months`}
+              </Text>
+              <Spacer />
+              <Text textAlign={"right"} alignSelf={"flex-end"}>
+                <Text as="span" fontSize={"lg"}>
+                  {info.monthlyPrice}
+                </Text>{" "}
+                per month
+              </Text>
+            </HStack>
+            <HStack w={"full"} fontSize={"sm"}>
+              <Text>Trial Period: {info.trialPeriodDays} days</Text>
+              <Spacer />
+              <Text textAlign={"right"}>{info.totalPrice} total</Text>
+            </HStack>
+          </VStack>
         ))}
       </SimpleGrid>
     </VStack>
