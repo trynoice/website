@@ -698,27 +698,25 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
       </Heading>
       <SimpleGrid
         w={"full"}
-        columns={{ base: 1, md: 2, lg: 4 }}
+        columns={{ base: 1, lg: 2 }}
         spacing={8}
         alignItems={"center"}
         justifyItems={"center"}
       >
         {props.planInfos.map((info) => (
-          <VStack
+          <SimpleGrid
             key={`PremiumPlans-${info.id}`}
             w={"full"}
-            maxW={"xs"}
-            p={8}
-            spacing={6}
-            alignItems={"center"}
-            textAlign={"center"}
-            bg={"#fff"}
-            shadow={"lg"}
-            border={"1px"}
-            borderColor={"gray.50"}
-            borderRadius={"xl"}
+            maxW={"lg"}
+            px={12}
+            py={8}
+            bg={"pink.50"}
+            rounded={"3xl"}
+            columns={2}
+            spacingX={8}
+            spacingY={2}
           >
-            <Text fontSize={"2xl"}>
+            <Text fontSize={"xl"}>
               {info.billingPeriodMonths == 1
                 ? "Monthly"
                 : info.billingPeriodMonths == 3
@@ -729,26 +727,15 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
                 ? "Yearly"
                 : `Every ${info.billingPeriodMonths} months`}
             </Text>
-            <Text>
-              <Text as="span" fontSize={"3xl"}>
+            <Text textAlign={"right"} alignSelf={"flex-end"}>
+              <Text as="span" fontSize={"lg"}>
                 {info.monthlyPrice}
-              </Text>
-              /month
+              </Text>{" "}
+              per month
             </Text>
-            <Text lineHeight={"taller"}>
-              for{" "}
-              <Text as={"span"} fontWeight={"medium"}>
-                {info.totalPrice}
-              </Text>
-              <br />
-              every{" "}
-              <Text as={"span"} fontWeight={"medium"}>
-                {info.billingPeriodMonths == 1
-                  ? "month"
-                  : `${info.billingPeriodMonths} months`}
-              </Text>
-            </Text>
-          </VStack>
+            <Text>Trial Period: {info.trialPeriodDays} days</Text>
+            <Text textAlign={"right"}>{info.totalPrice} total</Text>
+          </SimpleGrid>
         ))}
       </SimpleGrid>
     </VStack>
