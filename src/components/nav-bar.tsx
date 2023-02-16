@@ -55,6 +55,9 @@ export default function NavBar(): ReactElement {
     };
   });
 
+  const transition = "all 0.5s cubic-bezier(.17,.67,.83,.67)";
+  const pinnedMargin = { base: 1, md: 2 };
+
   return (
     <Box
       ref={ref}
@@ -62,26 +65,31 @@ export default function NavBar(): ReactElement {
       top={0}
       zIndex={"1"}
       w={"full"}
-      py={isPinned ? 0 : 4}
-      bg={isPinned ? "whiteAlpha.600" : "transparent"}
-      backdropFilter={isPinned ? "auto" : "none"}
-      backdropBlur={"md"}
-      boxShadow={isPinned ? "sm" : "none"}
-      transition={"all 0.5s cubic-bezier(.17,.67,.83,.67)"}
+      px={isPinned ? pinnedMargin : 0}
+      transition={transition}
     >
       <HStack
         as={"header"}
         w={"full"}
         maxW={"maxContentWidth"}
         mx={"auto"}
+        my={isPinned ? pinnedMargin : 0}
         px={{
           base: "contentPaddingXDefault",
           md: "contentPaddingXMd",
           lg: "contentPaddingXLg",
           xl: "contentPaddingXXl",
         }}
-        py={4}
+        py={isPinned ? 4 : 8}
         spacing={{ base: 4, md: 8 }}
+        bg={isPinned ? "whiteAlpha.600" : "transparent"}
+        border={isPinned ? "1px" : "none"}
+        borderColor={"blackAlpha.100"}
+        backdropFilter={isPinned ? "auto" : "none"}
+        backdropBlur={"md"}
+        rounded={isPinned ? "2xl" : "sm"}
+        boxShadow={isPinned ? "2xl" : "none"}
+        transition={transition}
       >
         <ChakraLink
           as={GatsbyLink}
