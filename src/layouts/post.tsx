@@ -237,7 +237,7 @@ export const query = graphql`
 
     allMdx(
       filter: { id: { ne: $id }, fields: { slug: { glob: "blog/**" } } }
-      limit: 2
+      limit: 3
       sort: { frontmatter: { publishedAt: DESC } }
     ) {
       nodes {
