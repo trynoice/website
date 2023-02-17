@@ -20,7 +20,7 @@ export default function SignInPage(): ReactElement {
   });
 
   return (
-    <BasicPage title={"Sign In"}>
+    <BasicPage title={"Sign In"} disableAnalytics={true}>
       <VStack spacing={10} textAlign={"center"}>
         <Text>
           To complete the sign in process, please proceed to the appropriate

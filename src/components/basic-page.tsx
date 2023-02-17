@@ -16,6 +16,7 @@ interface BasicPageProps {
   title: string;
   publishedAt?: string;
   updatedAt?: string;
+  disableAnalytics?: boolean;
   children?: ReactNode;
 }
 
@@ -29,7 +30,7 @@ export default function BasicPage(props: BasicPageProps): ReactElement {
 
   return (
     <VStack as={"main"} w={"full"} minH={"100vh"} bg={"white"} spacing={0}>
-      <Analytics />
+      {props.disableAnalytics ? null : <Analytics />}
       <NavBar />
       <VStack
         as={"article"}
