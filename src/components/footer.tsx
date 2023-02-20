@@ -53,6 +53,44 @@ export default function Footer() {
         columns={{ base: 1, sm: 2, md: 4 }}
         spacing={8}
       >
+        <VStack align={"flex-start"} spacing={4}>
+          <AppIcon w={28} h={"auto"} pb={4} fill={"currentColor"} />
+          <HStack spacing={4} pb={4}>
+            <SocialIcon
+              icon={FaTwitter}
+              label={"Twitter"}
+              href={"https://twitter.com/trynoice"}
+              brandColor={"#1DA1F2"}
+            />
+            <SocialIcon
+              icon={FaInstagram}
+              label={"Instagram"}
+              href={"https://instagram.com/trynoice"}
+              brandColor={"#E1306C"}
+            />
+            <SocialIcon
+              icon={FaFacebook}
+              label={"Facebook"}
+              href={"https://facebook.com/trynoice"}
+              brandColor={"#3B5998"}
+            />
+            <SocialIcon
+              icon={FaLinkedin}
+              label={"LinkedIn"}
+              href={"https://linkedin.com/company/trynoice"}
+              brandColor={"#0A66C2"}
+            />
+            <SocialIcon
+              icon={FaGithub}
+              label={"GitHub"}
+              href={"https://github.com/trynoice"}
+              brandColor={"gray.50"}
+            />
+          </HStack>
+          <GooglePlayBadge />
+          <FDroidBadge />
+        </VStack>
+
         <VStack align={"flex-start"} spacing={3}>
           <ListHeader>Support</ListHeader>
           <ChakraLink href={"mailto:trynoiceapp@gmail.com"}>
@@ -108,60 +146,9 @@ export default function Footer() {
             Open Collective
           </ChakraLink>
         </VStack>
-
-        <VStack align={"flex-start"} spacing={6}>
-          <HStack spacing={4}>
-            <SocialIcon
-              icon={FaTwitter}
-              label={"Twitter"}
-              href={"https://twitter.com/trynoice"}
-              brandColor={"#1DA1F2"}
-            />
-            <SocialIcon
-              icon={FaInstagram}
-              label={"Instagram"}
-              href={"https://instagram.com/trynoice"}
-              brandColor={"#E1306C"}
-            />
-            <SocialIcon
-              icon={FaFacebook}
-              label={"Facebook"}
-              href={"https://facebook.com/trynoice"}
-              brandColor={"#3B5998"}
-            />
-            <SocialIcon
-              icon={FaLinkedin}
-              label={"LinkedIn"}
-              href={"https://linkedin.com/company/trynoice"}
-              brandColor={"#0A66C2"}
-            />
-            <SocialIcon
-              icon={FaGithub}
-              label={"GitHub"}
-              href={"https://github.com/trynoice"}
-              brandColor={"gray.50"}
-            />
-          </HStack>
-          <GooglePlayBadge />
-          <FDroidBadge />
-        </VStack>
       </SimpleGrid>
 
-      <HStack
-        w={"full"}
-        pt={12}
-        pb={2}
-        spacing={{ base: 4, md: 8, lg: 12 }}
-        aria-hidden={true}
-      >
-        <Divider flexGrow={1} />
-        <AppIcon
-          w={{ base: 24, md: 28, lg: 32 }}
-          h={"auto"}
-          fill={"currentColor"}
-        />
-        <Divider flexGrow={1} />
-      </HStack>
+      <Divider pt={12} />
 
       <Stack
         w={"full"}
