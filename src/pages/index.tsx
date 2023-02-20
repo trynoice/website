@@ -11,7 +11,6 @@ import {
   Stack,
   StackDivider,
   Text,
-  Tooltip,
   useBreakpointValue,
   useToken,
   VStack,
@@ -301,26 +300,21 @@ function SoundLibraryShowcase(): ReactElement {
 
   function SoundIcon(props: SoundIconProps): ReactElement {
     return (
-      <Tooltip
-        label={props.label}
-        aria-label={props.label}
-        hasArrow={true}
-        closeDelay={500}
-        closeOnClick={false}
-      >
-        {/* https://github.com/chakra-ui/chakra-ui/issues/2869 */}
-        <span>
-          <Icon
-            as={props.icon}
-            boxSize={24}
-            p={4}
-            rounded={"full"}
-            color={"orange.300"}
-            _hover={{ color: "orange.400" }}
-            transition={"color 0.5s cubic-bezier(.17,.67,.83,.67)"}
-          />
-        </span>
-      </Tooltip>
+      <VStack>
+        <Icon
+          as={props.icon}
+          boxSize={24}
+          p={4}
+          rounded={"full"}
+          color={"orange.300"}
+          _hover={{ color: "orange.400" }}
+          transition={"color 0.5s cubic-bezier(.17,.67,.83,.67)"}
+          aria-hidden={true}
+        />
+        <Text fontSize={"sm"} textAlign={"center"}>
+          {props.label}
+        </Text>
+      </VStack>
     );
   }
 
@@ -344,7 +338,7 @@ function SoundLibraryShowcase(): ReactElement {
         columns={{ base: 2, md: 4, lg: 8 }}
         spacing={{ base: 8, md: 12 }}
       >
-        <SoundIcon icon={TbWaveSine} label={"Brown, Pink and White Noise"} />
+        <SoundIcon icon={TbWaveSine} label={"Brown, Pink & White Noise"} />
         <SoundIcon icon={TbCloudRain} label={"Rain"} />
         <SoundIcon icon={TbWind} label={"Soft Wind"} />
         <SoundIcon icon={GiCampfire} label={"Campfire"} />
@@ -533,7 +527,7 @@ function Pricing(props: PricingProps): ReactElement {
         description={
           "Start for free with our Basic plan with the option to upgrade to Premium anytime."
         }
-        pricingInfo={"Forever Free"}
+        pricingInfo={"Free Forever!"}
       >
         <PricingTierFeature icon={TbPlaylist} title={"Rich Sound Library"}>
           Find the perfect background noise for any situation, from soothing
@@ -578,7 +572,7 @@ function Pricing(props: PricingProps): ReactElement {
       <PricingTier
         title={"Premium"}
         description={`Unlock the full potential of Noice with a premium plan. Try it free for up to ${maxTrialPeriod} days!`}
-        pricingInfo={`Starts at ${minMonthlyPrice} per month`}
+        pricingInfo={`Starts at ${minMonthlyPrice} per month!`}
       >
         {props.soundLibraryInfo.premiumSoundCount > 0 ? (
           <PricingTierFeature icon={TbStar} title={"More Sounds"}>
@@ -695,7 +689,7 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
   return (
     <VStack w={"full"} pt={{ base: 16, md: 20 }} spacing={12}>
       <Heading as={"h3"} color={"pink.500"} size={"lg"} textAlign={"center"}>
-        Premium Plans
+        Premium Pricing
       </Heading>
       <SimpleGrid
         w={"full"}
