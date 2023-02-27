@@ -903,18 +903,16 @@ const cdnClient = new JanuaryCdnClient();
 const logger = process.env.NODE_ENV === "production" ? undefined : console;
 
 function useSoundPlayer(soundId: string): SoundPlayerController {
-  const playerRef = useRef<SoundPlayer | null>(null);
-  if (playerRef.current == null) {
-    playerRef.current = new SoundPlayer(cdnClient, soundId, logger);
-  }
-
-  const player = playerRef.current;
+  // cannot use useRef hook because gatsby is attempting to SSR it!
+  const [player, setPlayer] = useState<SoundPlayer | null>(null);
   const [isBuffering, setBuffering] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(player.getVolume());
+  const [volume, setVolume] = useState(1);
 
-  useEffect(() => player.setVolume(volume), [volume]);
+  useEffect(() => player?.setVolume(volume), [player, volume]);
   useEffect(() => {
+    const player = new SoundPlayer(cdnClient, soundId, logger);
+    setPlayer(player);
     player.setFadeInSeconds(2);
     player.setFadeOutSeconds(2);
     const listener = () => {
@@ -935,7 +933,7 @@ function useSoundPlayer(soundId: string): SoundPlayerController {
     isPlaying,
     volume,
     setVolume,
-    play: () => player.play(),
-    pause: () => player.pause(false),
+    play: () => player?.play(),
+    pause: () => player?.pause(false),
   };
 }
