@@ -1,3 +1,6 @@
+import type { CdnClient } from "@trynoice/january";
+import { CDN_ENDPOINT } from "./constants";
+
 export interface LibraryManifest {
   /**
    * An UNIX timestamp with millisecond resolution of the instant when the sound library was last updated.
@@ -118,9 +121,13 @@ export interface SoundSource {
  * Retrieves the LibraryManifest from the CDN.
  */
 export async function getLibraryManifest(): Promise<LibraryManifest> {
-  const response = await fetch(
-    "https://cdn.trynoice.com/library/library-manifest.json"
-  );
+  const response = await fetch(`${CDN_ENDPOINT}/library/library-manifest.json`);
 
   return await response.json();
+}
+
+export class JanuaryCdnClient implements CdnClient {
+  getResource(path: string): Promise<Response> {
+    return fetch(`${CDN_ENDPOINT}/${path}`);
+  }
 }

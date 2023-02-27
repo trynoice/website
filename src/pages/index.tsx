@@ -5,8 +5,13 @@ import {
   Heading,
   HStack,
   Icon,
+  IconButton,
   Image,
   SimpleGrid,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
   Spacer,
   Stack,
   StackDivider,
@@ -15,9 +20,17 @@ import {
   useToken,
   VStack,
 } from "@chakra-ui/react";
+import { SoundPlayer, SoundPlayerState } from "@trynoice/january";
 import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
-import { Children, ReactElement, ReactNode, useEffect, useState } from "react";
+import {
+  Children,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { IconType } from "react-icons";
 import { FaQuoteLeft } from "react-icons/fa";
 import { GiCampfire, GiRiver } from "react-icons/gi";
@@ -28,25 +41,28 @@ import {
   TbBabyCarriage,
   TbBed,
   TbBookmarks,
-  TbBooks,
   TbCast,
   TbCloudRain,
+  TbCloudStorm,
   TbCoffee,
   TbDownload,
   TbEarOff,
   TbHourglass,
   TbLego,
+  TbPlayerPause,
+  TbPlayerPlay,
   TbPlaylist,
   TbRocket,
-  TbScubaMask,
   TbStar,
   TbTrees,
   TbVolume,
   TbVolume2,
+  TbVolume3,
   TbWaveSawTool,
   TbWaveSine,
   TbWind,
 } from "react-icons/tb";
+import { JanuaryCdnClient } from "../api/cdn";
 import { listPlans, SubscriptionPlan } from "../api/subscriptions";
 import FishBowlIllustration from "../assets/fish-bowl.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
@@ -293,17 +309,21 @@ function KeyFeatures(): ReactElement {
 }
 
 function SoundLibraryShowcase(): ReactElement {
-  interface SoundIconProps {
+  interface SoundProps {
+    id: string;
     icon: IconType;
     label: string;
   }
 
-  function SoundIcon(props: SoundIconProps): ReactElement {
+  function Sound(props: SoundProps): ReactElement {
+    const { isBuffering, isPlaying, volume, setVolume, play, pause } =
+      useSoundPlayer(props.id);
+
     return (
-      <VStack>
+      <VStack w={"full"} maxW={40} mx={"auto"}>
         <Icon
           as={props.icon}
-          boxSize={24}
+          boxSize={{ base: 20, md: 24 }}
           p={4}
           rounded={"full"}
           color={"orange.300"}
@@ -314,6 +334,40 @@ function SoundLibraryShowcase(): ReactElement {
         <Text fontSize={"sm"} textAlign={"center"}>
           {props.label}
         </Text>
+        {/* padding right is needed because otherwise, the slider thumb overflows the container */}
+        <HStack w={"full"} pt={2} pr={6} spacing={2}>
+          <IconButton
+            aria-label={`${isPlaying ? "pause" : "play"} ${props.label}`}
+            icon={isPlaying ? <TbPlayerPause /> : <TbPlayerPlay />}
+            onClick={isPlaying ? pause : play}
+            variant={"ghost"}
+            isRound={true}
+            colorScheme={"orange"}
+            isLoading={isBuffering}
+          />
+          <Slider
+            aria-label={`volume slider for ${props.label}`}
+            colorScheme={"orange"}
+            min={0}
+            max={1}
+            step={0.01}
+            defaultValue={volume}
+            onChange={setVolume}
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb boxSize={5} color={"orange.600"}>
+              {volume === 0 ? (
+                <TbVolume3 />
+              ) : volume < 0.5 ? (
+                <TbVolume2 />
+              ) : (
+                <TbVolume />
+              )}
+            </SliderThumb>
+          </Slider>
+        </HStack>
       </VStack>
     );
   }
@@ -335,17 +389,19 @@ function SoundLibraryShowcase(): ReactElement {
       </Heading>
 
       <SimpleGrid
-        columns={{ base: 2, md: 4, lg: 8 }}
-        spacing={{ base: 8, md: 12 }}
+        w={"full"}
+        columns={{ base: 2, md: 4 }}
+        spacingX={{ base: 16 }}
+        spacingY={{ base: 8, md: 12 }}
       >
-        <SoundIcon icon={TbWaveSine} label={"Brown, Pink & White Noise"} />
-        <SoundIcon icon={TbCloudRain} label={"Rain"} />
-        <SoundIcon icon={TbWind} label={"Soft Wind"} />
-        <SoundIcon icon={GiCampfire} label={"Campfire"} />
-        <SoundIcon icon={GiRiver} label={"Water Stream"} />
-        <SoundIcon icon={TbCoffee} label={"Coffee Shop"} />
-        <SoundIcon icon={TbBooks} label={"Public Library"} />
-        <SoundIcon icon={TbScubaMask} label={"Scuba Diving"} />
+        <Sound id={"brownian_noise"} icon={TbWaveSine} label={"Brown Noise"} />
+        <Sound id={"white_noise"} icon={TbWaveSawTool} label={"White Noise"} />
+        <Sound id={"rain"} icon={TbCloudRain} label={"Rain"} />
+        <Sound id={"thunder"} icon={TbCloudStorm} label={"Thunder"} />
+        <Sound id={"soft_wind"} icon={TbWind} label={"Soft Wind"} />
+        <Sound id={"campfire"} icon={GiCampfire} label={"Campfire"} />
+        <Sound id={"water_stream"} icon={GiRiver} label={"Water Stream"} />
+        <Sound id={"coffee_shop"} icon={TbCoffee} label={"Coffee Shop"} />
       </SimpleGrid>
 
       <Text fontSize={"lg"}>...and more!</Text>
@@ -832,4 +888,54 @@ function SlantedHorizontalSeparator(
       <polyline points={"0,7.5 100,0 0,0"} fill={bg} />
     </Box>
   );
+}
+
+interface SoundPlayerController {
+  isBuffering: boolean;
+  isPlaying: boolean;
+  volume: number;
+  setVolume: (volume: number) => void;
+  play: () => void;
+  pause: () => void;
+}
+
+const cdnClient = new JanuaryCdnClient();
+const logger = process.env.NODE_ENV === "production" ? undefined : console;
+
+function useSoundPlayer(soundId: string): SoundPlayerController {
+  const playerRef = useRef<SoundPlayer | null>(null);
+  if (playerRef.current == null) {
+    playerRef.current = new SoundPlayer(cdnClient, soundId, logger);
+  }
+
+  const player = playerRef.current;
+  const [isBuffering, setBuffering] = useState(false);
+  const [isPlaying, setPlaying] = useState(false);
+  const [volume, setVolume] = useState(player.getVolume());
+
+  useEffect(() => player.setVolume(volume), [volume]);
+  useEffect(() => {
+    player.setFadeInSeconds(2);
+    player.setFadeOutSeconds(2);
+    const listener = () => {
+      const state = player.getState();
+      setBuffering(state === SoundPlayerState.Buffering);
+      setPlaying(state === SoundPlayerState.Playing);
+    };
+
+    player.addEventListener(SoundPlayer.EVENT_STATE_CHANGE, listener);
+    return function cleanup() {
+      player.stop(true);
+      player.removeEventListener(SoundPlayer.EVENT_STATE_CHANGE, listener);
+    };
+  }, []);
+
+  return {
+    isBuffering,
+    isPlaying,
+    volume,
+    setVolume,
+    play: () => player.play(),
+    pause: () => player.pause(false),
+  };
 }

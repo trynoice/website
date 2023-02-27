@@ -1,3 +1,5 @@
+import { API_ENDPOINT } from "./constants";
+
 export interface SubscriptionPlan {
   id: string;
   billingPeriodMonths: number;
@@ -18,7 +20,7 @@ export async function listPlans(
   provider: "stripe" | "google_play",
   currency?: string
 ): Promise<SubscriptionPlan[]> {
-  let endpoint = `https://api.trynoice.com/v1/subscriptions/plans?provider=${provider}`;
+  let endpoint = `${API_ENDPOINT}/v1/subscriptions/plans?provider=${provider}`;
   if (currency) {
     endpoint = `${endpoint}&currency=${currency}`;
   }
