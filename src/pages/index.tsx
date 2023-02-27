@@ -23,14 +23,7 @@ import {
 import { SoundPlayer, SoundPlayerState } from "@trynoice/january";
 import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
-import {
-  Children,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Children, ReactElement, ReactNode, useEffect, useState } from "react";
 import { IconType } from "react-icons";
 import { FaQuoteLeft } from "react-icons/fa";
 import { GiCampfire, GiRiver } from "react-icons/gi";

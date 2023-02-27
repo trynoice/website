@@ -63,7 +63,7 @@ export default function NavBar(): ReactElement {
       ref={ref}
       pos={"sticky"}
       top={0}
-      zIndex={"1"}
+      zIndex={isPinned ? 2 : 0}
       w={"full"}
       px={isPinned ? pinnedMargin : 0}
       transition={transition}
