@@ -20,7 +20,6 @@ const config: GatsbyConfig = {
       "https://play.google.com/store/apps/details?id=com.github.ashutoshgngwr.noice",
     fDroidUrl:
       "https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/",
-    debug: process.env.CONTEXT !== "production",
   },
   plugins: [
     {
