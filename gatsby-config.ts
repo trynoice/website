@@ -9,6 +9,8 @@ const siteUrl =
     : process.env.DEPLOY_PRIME_URL) || "http://localhost:8000";
 
 const config: GatsbyConfig = {
+  graphqlTypegen: true,
+  jsxRuntime: "automatic",
   trailingSlash: "never",
   siteMetadata: {
     name: name,
@@ -22,7 +24,6 @@ const config: GatsbyConfig = {
     fDroidUrl:
       "https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/",
   },
-  graphqlTypegen: true,
   plugins: [
     {
       resolve: "gatsby-plugin-manifest",
@@ -37,7 +38,6 @@ const config: GatsbyConfig = {
         crossOrigin: "anonymous",
       },
     },
-    "gatsby-plugin-emotion",
     {
       resolve: "@chakra-ui/gatsby-plugin",
       options: {
