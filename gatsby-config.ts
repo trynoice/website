@@ -13,7 +13,8 @@ const config: GatsbyConfig = {
   siteMetadata: {
     name: name,
     tagline: tagline,
-    description: "Focus, meditate and relax with natural calming noise.",
+    description:
+      "Customisable soundscapes with Noice - Create personalised ambient atmospheres by blending various sounds and adjusting volume levels.",
     twitter: "@trynoice",
     siteUrl: siteUrl,
     googlePlayUrl:
@@ -21,6 +22,7 @@ const config: GatsbyConfig = {
     fDroidUrl:
       "https://f-droid.org/en/packages/com.github.ashutoshgngwr.noice/",
   },
+  graphqlTypegen: true,
   plugins: [
     {
       resolve: "gatsby-plugin-manifest",

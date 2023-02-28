@@ -4,12 +4,8 @@ import { ReactElement } from "react";
 import GooglePlayBadgeIcon from "../assets/google-play-badge.png";
 
 export default function GooglePlayBadge(): ReactElement {
-  const {
-    site: {
-      siteMetadata: { googlePlayUrl },
-    },
-  } = useStaticQuery(graphql`
-    {
+  const { site }: Queries.GooglePlayBadgeQuery = useStaticQuery(graphql`
+    query GooglePlayBadge {
       site {
         siteMetadata {
           googlePlayUrl
@@ -22,7 +18,7 @@ export default function GooglePlayBadge(): ReactElement {
     <Link
       w={"full"}
       maxW={48}
-      href={googlePlayUrl}
+      href={site!.siteMetadata.googlePlayUrl}
       aria-label={"Get it on Google Play"}
     >
       <Image src={GooglePlayBadgeIcon} alt={"Get it on Google Play"} />

@@ -1,12 +1,12 @@
 import { API_ENDPOINT } from "./constants";
 
 export interface SubscriptionPlan {
-  id: string;
-  billingPeriodMonths: number;
-  priceInIndianPaise: number;
-  trialPeriodDays: number;
-  priceInRequestedCurrency?: number;
-  requestedCurrencyCode?: string;
+  readonly id: string;
+  readonly billingPeriodMonths: number;
+  readonly priceInIndianPaise: number;
+  readonly trialPeriodDays: number;
+  readonly priceInRequestedCurrency?: number;
+  readonly requestedCurrencyCode?: string;
 }
 
 /**

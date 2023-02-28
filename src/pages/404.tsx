@@ -21,12 +21,8 @@ export function Head(): ReactElement {
 }
 
 export default function NotFound(): ReactElement {
-  const {
-    site: {
-      siteMetadata: { googlePlayUrl },
-    },
-  } = useStaticQuery(graphql`
-    {
+  const { site }: Queries.NotFoundQuery = useStaticQuery(graphql`
+    query NotFound {
       site {
         siteMetadata {
           googlePlayUrl
@@ -62,7 +58,7 @@ export default function NotFound(): ReactElement {
         <HStack spacing={4}>
           <Button
             as={ChakraLink}
-            to={googlePlayUrl}
+            to={site!.siteMetadata.googlePlayUrl}
             colorScheme={"primary"}
             leftIcon={<FaGooglePlay />}
           >

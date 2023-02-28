@@ -7,8 +7,8 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { graphql, Link as GatsbyLink } from "gatsby";
-import { getImage } from "gatsby-plugin-image";
+import { graphql, Link as GatsbyLink, PageProps } from "gatsby";
+import { getImage, ImageDataLike } from "gatsby-plugin-image";
 import { ReactElement } from "react";
 import ReadingBanner from "../assets/reading.png";
 import Analytics from "../components/analytics";
@@ -16,6 +16,15 @@ import BasicPageHead from "../components/basic-page-head";
 import BlogPostListItem from "../components/blog-post-list-item";
 import Footer from "../components/footer";
 import NavBar from "../components/nav-bar";
+
+export interface BlogListLayoutPageContext {
+  readonly limit: number;
+  readonly skip: number;
+  readonly currentPage: number;
+  readonly totalPageCount: number;
+  readonly prevPageHref: string | null;
+  readonly nextPageHref: string | null;
+}
 
 export function Head(): ReactElement {
   return (
@@ -29,11 +38,15 @@ export function Head(): ReactElement {
   );
 }
 
-export default function BlogListLayout(props: any): ReactElement {
-  const posts: any[] = props.data.allMdx.nodes;
-  const { currentPage, totalPageCount, prevPageHref, nextPageHref } =
-    props.pageContext;
-
+export default function BlogListLayout({
+  data: {
+    allMdx: { nodes: posts },
+  },
+  pageContext: { currentPage, totalPageCount, prevPageHref, nextPageHref },
+}: PageProps<
+  Queries.BlogListLayoutQuery,
+  BlogListLayoutPageContext
+>): ReactElement {
   const contentPaddingX = {
     base: "contentPaddingXDefault",
     md: "contentPaddingXMd",
@@ -58,7 +71,7 @@ export default function BlogListLayout(props: any): ReactElement {
           lg: currentPage === 1 ? 24 : 16,
         }}
       >
-        {posts.map((post: any, i: number) => (
+        {posts.map((post, i) => (
           <GridItem
             key={`Blog-${post.fields.slug}`}
             colSpan={{
@@ -69,12 +82,12 @@ export default function BlogListLayout(props: any): ReactElement {
             }}
           >
             <BlogPostListItem
-              title={post.frontmatter.title}
-              excerpt={post.excerpt}
-              category={post.frontmatter.category}
-              publishedAt={post.frontmatter.publishedAt}
+              title={post.frontmatter!.title!}
+              excerpt={post.excerpt!}
+              category={post.frontmatter!.category!}
+              publishedAt={post.frontmatter!.publishedAt!}
               href={`/${post.fields.slug}`}
-              imageData={getImage(post.frontmatter.image)}
+              imageData={getImage(post.frontmatter!.image as ImageDataLike)}
               size={{
                 base: "sm",
                 md: currentPage === 1 && i === 0 ? "lg" : "sm",
@@ -128,7 +141,7 @@ export default function BlogListLayout(props: any): ReactElement {
 }
 
 export const query = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!) {
+  query BlogListLayout($skip: Int!, $limit: Int!) {
     allMdx(
       filter: { fields: { slug: { glob: "blog/**" } } }
       sort: { frontmatter: { publishedAt: DESC } }

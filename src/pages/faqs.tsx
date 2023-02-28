@@ -22,8 +22,8 @@ interface FAQItem {
 }
 
 export default function FAQs(): ReactElement {
-  const { allMdx } = useStaticQuery(graphql`
-    {
+  const { allMdx }: Queries.FAQsQuery = useStaticQuery(graphql`
+    query FAQs {
       allMdx(
         filter: { fields: { slug: { glob: "faqs/**" } } }
         sort: { frontmatter: { title: ASC } }
@@ -41,8 +41,8 @@ export default function FAQs(): ReactElement {
     }
   `);
 
-  const posts: Array<FAQItem> = allMdx.nodes.map((n: any) => ({
-    title: n.frontmatter.title,
+  const posts: Array<FAQItem> = allMdx.nodes.map((n) => ({
+    title: n.frontmatter!.title!,
     slug: n.fields.slug,
   }));
 

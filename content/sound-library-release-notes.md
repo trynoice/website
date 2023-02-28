@@ -9,7 +9,7 @@ Adds/updates translations for the following languages.
 
 - German
 - French
-- Italian  
+- Italian
 
 ## 02 December 2022
 

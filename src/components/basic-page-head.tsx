@@ -10,8 +10,8 @@ interface BasicPageHeadProps {
 }
 
 export default function BasicPageHead(props: BasicPageHeadProps): ReactElement {
-  const { site } = useStaticQuery(graphql`
-    {
+  const { site }: Queries.BasicPageHeadQuery = useStaticQuery(graphql`
+    query BasicPageHead {
       site {
         siteMetadata {
           name
@@ -24,7 +24,7 @@ export default function BasicPageHead(props: BasicPageHeadProps): ReactElement {
     }
   `);
 
-  const { name, tagline, description, twitter, siteUrl } = site.siteMetadata;
+  const { name, tagline, description, twitter, siteUrl } = site!.siteMetadata;
   const longName = `${name}: ${tagline}`;
   const image = `${siteUrl}${props.image || DefaultSocialCardImage}`;
   const title = props.title ? `${props.title} • ${name}` : longName;

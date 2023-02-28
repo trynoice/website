@@ -1,19 +1,17 @@
-import { graphql } from "gatsby";
+import { graphql, PageProps } from "gatsby";
 import { ReactElement } from "react";
 import BasicPage from "../components/basic-page";
 import BasicPageHead from "../components/basic-page-head";
 import ChakraMDXProvider from "../components/chakra-mdx-provider";
 
-export function Head({ data }: any): ReactElement {
-  const {
-    mdx: {
-      frontmatter: { title, publishedAt, updatedAt },
-      excerpt,
-    },
-  } = data;
+export function Head(
+  props: PageProps<Queries.DefaultLayoutQuery>
+): ReactElement {
+  const { title, publishedAt, updatedAt } = props.data.mdx?.frontmatter || {};
+  const { excerpt } = props.data.mdx!;
 
   return (
-    <BasicPageHead title={title} description={excerpt}>
+    <BasicPageHead title={title!} description={excerpt ?? undefined}>
       {publishedAt ? (
         <meta property={"article:published_time"} content={publishedAt} />
       ) : null}
@@ -25,28 +23,23 @@ export function Head({ data }: any): ReactElement {
   );
 }
 
-export default function DefaultLayout(props: any): ReactElement {
-  const {
-    data: {
-      mdx: {
-        frontmatter: { title, publishedAt, updatedAt },
-      },
-    },
-    children,
-  } = props;
+export default function DefaultLayout(
+  props: PageProps<Queries.DefaultLayoutQuery>
+): ReactElement {
+  const { title, publishedAt, updatedAt } = props.data.mdx?.frontmatter || {};
 
   return (
     <BasicPage
-      title={title}
+      title={title!}
       publishedAt={formatDate(publishedAt)}
       updatedAt={formatDate(updatedAt)}
     >
-      <ChakraMDXProvider>{children}</ChakraMDXProvider>
+      <ChakraMDXProvider>{props.children}</ChakraMDXProvider>
     </BasicPage>
   );
 }
 
-function formatDate(date: string): string | undefined {
+function formatDate(date?: string | null): string | undefined {
   return date
     ? new Date(date).toLocaleDateString("en-gb", {
         year: "numeric",
@@ -57,7 +50,7 @@ function formatDate(date: string): string | undefined {
 }
 
 export const query = graphql`
-  query ($id: String!) {
+  query DefaultLayout($id: String!) {
     mdx(id: { eq: $id }) {
       excerpt(pruneLength: 160)
       frontmatter {

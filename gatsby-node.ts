@@ -3,6 +3,59 @@ import { createFilePath } from "gatsby-source-filesystem";
 import path from "path";
 import { getLibraryManifest } from "./src/api/cdn";
 import { listPlans } from "./src/api/subscriptions";
+import { BlogListLayoutPageContext } from "./src/layouts/blog-list";
+
+export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
+  ({ actions: { createTypes } }) =>
+    createTypes(`
+      type Site {
+        siteMetadata: SiteMetadata!
+      }
+
+      type SiteMetadata {
+        name: String!
+        tagline: String!
+        description: String!
+        twitter: String!
+        siteUrl: String!
+        googlePlayUrl: String!
+        fDroidUrl: String!
+      }
+
+      type Mdx implements Node {
+        frontmatter: Frontmatter
+        fields: Fields!
+      }
+
+      type Frontmatter {
+        redirect: Redirect
+        publishedAt: Date @dateformat
+        updatedAt: Date @dateformat
+        permalink: String
+      }
+
+      type Redirect {
+        url: String!
+        permanent: Boolean
+      }
+
+      type Fields {
+        slug: String!
+      }
+
+      type SoundLibraryInfo implements Node {
+        totalSoundCount: Int!
+        premiumSoundCount: Int!
+        freeSoundCount: Int!
+        freeSoundWithPremiumSegmentsCount: Int!
+      }
+
+      type PremiumPlan implements Node {
+        billingPeriodMonths: Int!
+        priceInIndianPaise: Int!
+        trialPeriodDays: Int!
+      }
+  `);
 
 export const sourceNodes: GatsbyNode["sourceNodes"] = async ({
   actions: { createNode },
@@ -53,7 +106,7 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({
   getNode,
 }) => {
   if (node.internal.type === `Mdx`) {
-    const { permalink }: any = node.frontmatter;
+    const { permalink } = node.frontmatter as Queries.Frontmatter;
     const slug = (permalink || createFilePath({ node, getNode }))
       .replace(/\/$/, "") // remove trailing slash
       .replace(/^\//, ""); // remove leading slash
@@ -66,109 +119,94 @@ export const onCreateNode: GatsbyNode["onCreateNode"] = ({
   }
 };
 
-export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] =
-  ({ actions: { createTypes } }) =>
-    createTypes(`
-      type Mdx implements Node {
-        frontmatter: Frontmatter
-      }
-
-      type Frontmatter {
-        redirect: Redirect
-        publishedAt: Date @dateformat
-        updatedAt: Date @dateformat
-      }
-
-      type Redirect {
-        url: String!
-        permanent: Boolean
-      }
-  `);
-
 export const createPages: GatsbyNode["createPages"] = async ({
   actions: { createPage, createRedirect },
   graphql,
   reporter,
 }) => {
-  const result = await graphql(`
-    {
-      allMdx {
-        nodes {
-          id
+  const result: { data?: Queries.AllMdxQuery; errors?: unknown } =
+    await graphql(`
+      query AllMdx {
+        allMdx {
+          nodes {
+            id
 
-          frontmatter {
-            layout
-            redirect {
-              url
-              permanent
+            frontmatter {
+              layout
+              redirect {
+                url
+                permanent
+              }
             }
-          }
 
-          fields {
-            slug
-          }
+            fields {
+              slug
+            }
 
-          internal {
-            contentFilePath
+            internal {
+              contentFilePath
+            }
           }
         }
       }
-    }
-  `);
+    `);
 
   if (result.errors) {
     reporter.panicOnBuild("Error while running GraphQL query.");
     return;
   }
 
-  const {
-    allMdx: { nodes },
-  }: any = result.data;
-
-  nodes
+  const { allMdx: { nodes } = { nodes: [] } } = result.data || {};
+  nodes.forEach((node) => {
     // only render markdown pages that specify a layout.
-    .filter((node: any) => node.frontmatter?.layout)
-    .forEach((node: any) => {
-      const layout = path.resolve(`src/layouts/${node.frontmatter.layout}.tsx`);
-      createPage({
-        path: node.fields.slug,
-        component: `${layout}?__contentFilePath=${node.internal.contentFilePath}`,
-        context: {
-          id: node.id,
-        },
-      });
+    if (node.frontmatter?.layout == null) {
+      return;
+    }
+
+    const layout = path.resolve(`src/layouts/${node.frontmatter.layout}.tsx`);
+    createPage({
+      path: node.fields.slug,
+      component: `${layout}?__contentFilePath=${node.internal.contentFilePath}`,
+      context: {
+        id: node.id,
+      },
     });
+  });
 
   // render blog list
-  const blogPostCount = nodes.filter((node: any) =>
-    node.fields?.slug?.startsWith("blog/")
+  const blogPostCount = nodes.filter((node) =>
+    node.fields.slug.startsWith("blog/")
   ).length;
 
   const blogPostsPerPage = 6;
   const blogListPageCount = Math.ceil(blogPostCount / blogPostsPerPage);
 
   for (let i = 0; i < blogListPageCount; i += 1) {
+    const pageContext: BlogListLayoutPageContext = {
+      limit: blogPostsPerPage,
+      skip: i * blogPostsPerPage,
+      currentPage: i + 1,
+      totalPageCount: blogListPageCount,
+      prevPageHref: i === 0 ? null : i > 1 ? `/blog/page/${i}` : "/blog",
+      nextPageHref: i + 2 > blogListPageCount ? null : `/blog/page/${i + 2}`,
+    };
+
     createPage({
       path: i === 0 ? "/blog" : `/blog/page/${i + 1}`,
       component: path.resolve("src/layouts/blog-list.tsx"),
-      context: {
-        limit: blogPostsPerPage,
-        skip: i * blogPostsPerPage,
-        currentPage: i + 1,
-        totalPageCount: blogListPageCount,
-        prevPageHref: i === 0 ? null : i > 1 ? `/blog/page/${i}` : "/blog",
-        nextPageHref: i + 2 > blogListPageCount ? null : `/blog/page/${i + 2}`,
-      },
+      context: pageContext,
     });
   }
 
-  nodes
-    .filter((node: any) => node.frontmatter?.redirect)
-    .forEach((node: any) => {
-      createRedirect({
-        fromPath: node.fields.slug,
-        toPath: node.frontmatter.redirect.url,
-        isPermanent: node.frontmatter.redirect.permanent,
-      });
+  nodes.forEach((node) => {
+    if (node.frontmatter?.redirect == null) {
+      return;
+    }
+
+    createRedirect({
+      fromPath: node.fields.slug,
+      toPath: node.frontmatter.redirect.url,
+      isPermanent: node.frontmatter.redirect.permanent ?? undefined,
     });
+  });
 };

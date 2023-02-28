@@ -28,8 +28,8 @@ import {
 import AppIcon from "../assets/app-icon";
 
 export default function NavBar(): ReactElement {
-  const { site } = useStaticQuery(graphql`
-    {
+  const { site }: Queries.NavBarQuery = useStaticQuery(graphql`
+    query NavBar {
       site {
         siteMetadata {
           name
@@ -95,7 +95,7 @@ export default function NavBar(): ReactElement {
           as={GatsbyLink}
           to={"/"}
           aria-label={"Go to homepage"}
-          title={`${site.siteMetadata.name}: ${site.siteMetadata.tagline}`}
+          title={`${site!.siteMetadata.name}: ${site!.siteMetadata.tagline}`}
           color={"black"}
           _hover={{ color: "primary.500" }}
         >
@@ -117,7 +117,7 @@ export default function NavBar(): ReactElement {
           size={"sm"}
           px={4}
           colorScheme={"primary"}
-          href={site.siteMetadata.googlePlayUrl}
+          href={site!.siteMetadata.googlePlayUrl}
           target={"_blank"}
           rounded={"full"}
         >

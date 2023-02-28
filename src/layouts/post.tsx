@@ -12,8 +12,13 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { graphql } from "gatsby";
-import { GatsbyImage, getImage, getSrc } from "gatsby-plugin-image";
+import { graphql, PageProps } from "gatsby";
+import {
+  GatsbyImage,
+  getImage,
+  getSrc,
+  ImageDataLike,
+} from "gatsby-plugin-image";
 import { ReactElement } from "react";
 import { FaFacebookF, FaLinkedinIn, FaShare, FaTwitter } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
@@ -24,16 +29,16 @@ import ChakraMDXProvider from "../components/chakra-mdx-provider";
 import Footer from "../components/footer";
 import NavBar from "../components/nav-bar";
 
-export function Head({ data }: any): ReactElement {
-  const {
-    mdx: {
-      frontmatter: { image, title, publishedAt },
-      excerpt,
-    },
-  } = data;
+export function Head(props: PageProps<Queries.PostLayoutQuery>): ReactElement {
+  const { image, title, publishedAt } = props.data.mdx!.frontmatter || {};
+  const excerpt = props.data.mdx!.excerpt ?? undefined;
 
   return (
-    <BasicPageHead image={getSrc(image)} title={title} description={excerpt}>
+    <BasicPageHead
+      image={getSrc(image as ImageDataLike)}
+      title={title!}
+      description={excerpt}
+    >
       {publishedAt ? (
         <meta property={"article:published_time"} content={publishedAt} />
       ) : null}
@@ -41,23 +46,17 @@ export function Head({ data }: any): ReactElement {
   );
 }
 
-export default function PostLayout(props: any): ReactElement {
-  const {
-    data: {
-      mdx: {
-        fields: { slug },
-        frontmatter: { image, title, category, publishedAt },
-      },
-      allMdx: { nodes: recentPosts },
-      site: {
-        siteMetadata: { siteUrl },
-      },
-    },
-    children,
-  } = props;
+export default function PostLayout(
+  props: PageProps<Queries.PostLayoutQuery>
+): ReactElement {
+  const mdx = props.data.mdx!;
+  const slug = mdx.fields.slug;
+  const { image, title, category, publishedAt } = mdx.frontmatter!;
+  const recentPosts = props.data.allMdx.nodes;
+  const siteUrl = props.data.site!.siteMetadata.siteUrl;
 
   const postUrl = `${siteUrl}/${slug}`;
-  const imageData = getImage(image);
+  const imageData = getImage(image as ImageDataLike);
   const contentPaddingX = {
     base: "contentPaddingXDefault",
     md: "contentPaddingXMd",
@@ -83,9 +82,9 @@ export default function PostLayout(props: any): ReactElement {
         >
           <Text color={"gray.500"}>
             <Text as={"span"} fontWeight={"medium"}>
-              {category}
+              {category!}
             </Text>{" "}
-            &#x2022; {formatDate(publishedAt)}
+            &#x2022; {formatDate(publishedAt!)}
           </Text>
           <Heading
             as={"h1"}
@@ -93,7 +92,7 @@ export default function PostLayout(props: any): ReactElement {
             lineHeight={"shorter"}
             color={"primary.500"}
           >
-            {title}
+            {title!}
           </Heading>
         </VStack>
         {imageData ? (
@@ -109,7 +108,7 @@ export default function PostLayout(props: any): ReactElement {
           <Divider />
         )}
         <Container maxW={"4xl"} px={contentPaddingX} py={12}>
-          <ChakraMDXProvider>{children}</ChakraMDXProvider>
+          <ChakraMDXProvider>{props.children}</ChakraMDXProvider>
         </Container>
         <HStack
           w={"full"}
@@ -141,7 +140,9 @@ export default function PostLayout(props: any): ReactElement {
             icon={FaTwitter}
             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
               postUrl + "?ref=Twitter+Share"
-            )}&text=${encodeURIComponent(title)}&via=trynoice&related=trynoice`}
+            )}&text=${encodeURIComponent(
+              title!
+            )}&via=trynoice&related=trynoice`}
             label={"Twitter"}
           />
         </HStack>
@@ -163,15 +164,15 @@ export default function PostLayout(props: any): ReactElement {
           spacingX={8}
           spacingY={16}
         >
-          {recentPosts.map((post: any) => (
+          {recentPosts.map((post) => (
             <BlogPostListItem
               key={`RecentBlogPosts-${post.id}`}
-              title={post.frontmatter.title}
-              excerpt={post.excerpt}
-              category={post.frontmatter.category}
-              publishedAt={post.frontmatter.publishedAt}
+              title={post.frontmatter!.title!}
+              excerpt={post.excerpt!}
+              category={post.frontmatter!.category!}
+              publishedAt={post.frontmatter!.publishedAt!}
               href={`/${post.fields.slug}`}
-              imageData={getImage(post.frontmatter.image)}
+              imageData={getImage(post.frontmatter!.image as ImageDataLike)}
               size={"sm"}
             />
           ))}
@@ -183,14 +184,12 @@ export default function PostLayout(props: any): ReactElement {
   );
 }
 
-function formatDate(date?: string): string | undefined {
-  return date
-    ? new Date(date).toLocaleDateString("en-gb", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : undefined;
+function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString("en-gb", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 interface ShareButtonProps {
@@ -215,7 +214,7 @@ function ShareButton(props: ShareButtonProps): ReactElement {
 }
 
 export const query = graphql`
-  query ($id: String!) {
+  query PostLayout($id: String!) {
     mdx(id: { eq: $id }) {
       excerpt(pruneLength: 160)
       fields {

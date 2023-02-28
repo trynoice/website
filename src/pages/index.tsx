@@ -85,27 +85,27 @@ const contentPaddingX = {
 };
 
 export default function Home(): ReactElement {
-  const { allPremiumPlan, soundLibraryInfo } = useStaticQuery(graphql`
-    {
-      allPremiumPlan {
-        nodes {
-          id
-          billingPeriodMonths
-          priceInIndianPaise
-          trialPeriodDays
+  const { allPremiumPlan, soundLibraryInfo }: Queries.HomeQuery =
+    useStaticQuery(graphql`
+      query Home {
+        allPremiumPlan {
+          nodes {
+            id
+            billingPeriodMonths
+            priceInIndianPaise
+            trialPeriodDays
+          }
+        }
+
+        soundLibraryInfo {
+          totalSoundCount
+          premiumSoundCount
+          freeSoundCount
+          freeSoundWithPremiumSegmentsCount
         }
       }
+    `);
 
-      soundLibraryInfo {
-        totalSoundCount
-        premiumSoundCount
-        freeSoundCount
-        freeSoundWithPremiumSegmentsCount
-      }
-    }
-  `);
-
-  const plans: SubscriptionPlan[] = allPremiumPlan.nodes;
   return (
     <VStack as={"main"} w={"full"} spacing={0} bgColor={"white"}>
       <Analytics />
@@ -124,7 +124,10 @@ export default function Home(): ReactElement {
       />
       <Reviews />
       <SlantedHorizontalSeparator from={"orange.50"} to={"white"} />
-      <Pricing soundLibraryInfo={soundLibraryInfo} premiumPlans={plans} />
+      <Pricing
+        soundLibraryInfo={soundLibraryInfo!}
+        premiumPlans={allPremiumPlan.nodes as SubscriptionPlan[]}
+      />
       <WavyHorizontalSeparator from={"white"} to={"black"} />
       <Footer />
     </VStack>
@@ -497,13 +500,13 @@ function Reviews(): ReactElement {
 
 interface PricingProps {
   soundLibraryInfo: {
-    totalSoundCount: number;
-    premiumSoundCount: number;
-    freeSoundCount: number;
-    freeSoundWithPremiumSegmentsCount: number;
+    readonly totalSoundCount: number;
+    readonly premiumSoundCount: number;
+    readonly freeSoundCount: number;
+    readonly freeSoundWithPremiumSegmentsCount: number;
   };
 
-  premiumPlans: SubscriptionPlan[];
+  readonly premiumPlans: SubscriptionPlan[];
 }
 
 interface PlanInfo {
