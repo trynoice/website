@@ -316,11 +316,18 @@ function SoundLibraryShowcase(): ReactElement {
       useSoundPlayer(props.id);
 
     return (
-      <VStack w={"full"} maxW={40} mx={"auto"}>
+      <VStack
+        w={"full"}
+        maxW={56}
+        p={6}
+        spacing={4}
+        rounded={"2xl"}
+        bg={"orange.50"}
+        shadow={"sm"}
+      >
         <Icon
           as={props.icon}
-          boxSize={{ base: 20, md: 24 }}
-          p={4}
+          boxSize={{ base: 16, md: 20 }}
           rounded={"full"}
           color={"orange.300"}
           _hover={{ color: "orange.400" }}
@@ -331,12 +338,15 @@ function SoundLibraryShowcase(): ReactElement {
           {props.label}
         </Text>
         {/* padding right is needed because otherwise, the slider thumb overflows the container */}
-        <HStack w={"full"} pt={2} pr={6} spacing={2}>
+        <HStack w={"full"} pr={2} spacing={4}>
           <IconButton
             aria-label={`${isPlaying ? "pause" : "play"} ${props.label}`}
-            icon={isPlaying ? <TbPlayerPause /> : <TbPlayerPlay />}
+            icon={
+              <Icon as={isPlaying ? TbPlayerPause : TbPlayerPlay} boxSize={5} />
+            }
             onClick={isPlaying ? pause : play}
-            variant={"ghost"}
+            size={"sm"}
+            variant={"outline"}
             isRound={true}
             colorScheme={"orange"}
             isLoading={isBuffering}
@@ -387,8 +397,8 @@ function SoundLibraryShowcase(): ReactElement {
       <SimpleGrid
         w={"full"}
         columns={{ base: 2, md: 4 }}
-        spacingX={{ base: 16 }}
-        spacingY={{ base: 8, md: 12 }}
+        justifyItems={"center"}
+        spacing={{ base: 4, sm: 8 }}
       >
         <Sound id={"brownian_noise"} icon={TbWaveSine} label={"Brown Noise"} />
         <Sound id={"white_noise"} icon={TbWaveSawTool} label={"White Noise"} />
@@ -756,9 +766,10 @@ function PremiumTierPricing(props: PremiumTierPricingProps): ReactElement {
             w={"full"}
             maxW={"lg"}
             p={6}
+            spacing={2}
             bg={"pink.50"}
             rounded={"3xl"}
-            spacing={2}
+            shadow={"sm"}
           >
             <HStack w={"full"}>
               <Text fontSize={"xl"}>
