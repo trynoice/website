@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   GridItem,
   Heading,
@@ -20,7 +21,16 @@ import {
   useToken,
   VStack,
 } from "@chakra-ui/react";
-import { SoundPlayer, SoundPlayerState } from "@trynoice/january";
+import {
+  ConsoleLogger,
+  ConsoleLogLevel,
+  SoundPlayerState,
+} from "@trynoice/january";
+import {
+  SoundPlayerManagerProvider,
+  useSoundPlayer,
+  useSoundPlayerManagerFadeConfig,
+} from "@trynoice/january/react";
 import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
 import { Children, ReactElement, ReactNode, useEffect, useState } from "react";
@@ -84,6 +94,13 @@ const contentPaddingX = {
   xl: "contentPaddingXXl",
 };
 
+const cdnClient = new JanuaryCdnClient();
+const logger = new ConsoleLogger(
+  process.env.NODE_ENV === "production"
+    ? ConsoleLogLevel.Warn
+    : ConsoleLogLevel.Info
+);
+
 export default function Home(): ReactElement {
   const { allPremiumPlan, soundLibraryInfo }: Queries.HomeQuery =
     useStaticQuery(graphql`
@@ -114,7 +131,9 @@ export default function Home(): ReactElement {
         <Hero />
         <Benefits />
         <KeyFeatures />
-        <SoundLibraryShowcase />
+        <SoundPlayerManagerProvider cdnClient={cdnClient} logger={logger}>
+          <SoundLibraryShowcase />
+        </SoundPlayerManagerProvider>
       </VStack>
       <Image
         src={FishBowlIllustration}
@@ -312,8 +331,10 @@ function SoundLibraryShowcase(): ReactElement {
   }
 
   function Sound(props: SoundProps): ReactElement {
-    const { isBuffering, isPlaying, volume, setVolume, play, pause } =
-      useSoundPlayer(props.id);
+    const { state, volume, setVolume, play, stop } = useSoundPlayer(props.id);
+    const isBuffering = state === SoundPlayerState.Buffering;
+    const isStopped =
+      state === SoundPlayerState.Stopping || state === SoundPlayerState.Stopped;
 
     return (
       <VStack
@@ -340,11 +361,11 @@ function SoundLibraryShowcase(): ReactElement {
         {/* padding right is needed because otherwise, the slider thumb overflows the container */}
         <HStack w={"full"} pr={2} spacing={4}>
           <IconButton
-            aria-label={`${isPlaying ? "pause" : "play"} ${props.label}`}
+            aria-label={`${isStopped ? "Play" : "Stop"} ${props.label}`}
             icon={
-              <Icon as={isPlaying ? TbPlayerPause : TbPlayerPlay} boxSize={5} />
+              <Icon as={isStopped ? TbPlayerPlay : TbPlayerPause} boxSize={5} />
             }
-            onClick={isPlaying ? pause : play}
+            onClick={isStopped ? play : stop}
             size={"sm"}
             variant={"outline"}
             isRound={true}
@@ -357,7 +378,7 @@ function SoundLibraryShowcase(): ReactElement {
             min={0}
             max={1}
             step={0.01}
-            defaultValue={volume}
+            value={volume}
             onChange={setVolume}
           >
             <SliderTrack>
@@ -378,25 +399,48 @@ function SoundLibraryShowcase(): ReactElement {
     );
   }
 
+  const { setFadeInSeconds, setFadeOutSeconds } =
+    useSoundPlayerManagerFadeConfig();
+
+  useEffect(() => {
+    setFadeInSeconds(2);
+    setFadeOutSeconds(2);
+  }, []);
+
   return (
     <VStack
       w={"full"}
       maxW={"maxContentWidth"}
       px={contentPaddingX}
-      pt={{ base: 12, lg: 24 }}
-      pb={{ base: 12, md: 8, lg: 4 }}
-      spacing={12}
+      py={{ base: 12, lg: 24 }}
+      spacing={16}
     >
-      <Heading size={"lg"} textAlign={"center"}>
-        Explore the Collection of{" "}
-        <Text as={"span"} color={"orange.400"}>
-          Carefully Chosen Sounds
+      <VStack spacing={6} textAlign={"center"}>
+        <Heading size={"lg"}>
+          Explore the Collection of{" "}
+          <Text as={"span"} color={"orange.400"}>
+            Carefully Chosen Sounds
+          </Text>
+        </Heading>
+        <Text fontSize={"lg"} maxW={"3xl"}>
+          Explore some curated sounds here or experiment with our complete sound
+          library on the web app prototype.
         </Text>
-      </Heading>
+        <Button
+          as={"a"}
+          href={"https://app.trynoice.com"}
+          target={"_blank"}
+          px={8}
+          rounded={"full"}
+          colorScheme={"orange"}
+        >
+          Launch Web App
+        </Button>
+      </VStack>
 
       <SimpleGrid
         w={"full"}
-        columns={{ base: 2, md: 4 }}
+        columns={{ base: 1, sm: 2, md: 4 }}
         justifyItems={"center"}
         spacing={{ base: 4, sm: 8 }}
       >
@@ -409,8 +453,6 @@ function SoundLibraryShowcase(): ReactElement {
         <Sound id={"water_stream"} icon={GiRiver} label={"Water Stream"} />
         <Sound id={"coffee_shop"} icon={TbCoffee} label={"Coffee Shop"} />
       </SimpleGrid>
-
-      <Text fontSize={"lg"}>...and more!</Text>
     </VStack>
   );
 }
@@ -895,52 +937,4 @@ function SlantedHorizontalSeparator(
       <polyline points={"0,7.5 100,0 0,0"} fill={bg} />
     </Box>
   );
-}
-
-interface SoundPlayerController {
-  isBuffering: boolean;
-  isPlaying: boolean;
-  volume: number;
-  setVolume: (volume: number) => void;
-  play: () => void;
-  pause: () => void;
-}
-
-const cdnClient = new JanuaryCdnClient();
-const logger = process.env.NODE_ENV === "production" ? undefined : console;
-
-function useSoundPlayer(soundId: string): SoundPlayerController {
-  // cannot use useRef hook because gatsby is attempting to SSR it!
-  const [player, setPlayer] = useState<SoundPlayer | null>(null);
-  const [isBuffering, setBuffering] = useState(false);
-  const [isPlaying, setPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
-
-  useEffect(() => player?.setVolume(volume), [player, volume]);
-  useEffect(() => {
-    const player = new SoundPlayer(cdnClient, soundId, logger);
-    setPlayer(player);
-    player.setFadeInSeconds(2);
-    player.setFadeOutSeconds(2);
-    const listener = () => {
-      const state = player.getState();
-      setBuffering(state === SoundPlayerState.Buffering);
-      setPlaying(state === SoundPlayerState.Playing);
-    };
-
-    player.addEventListener(SoundPlayer.EVENT_STATE_CHANGE, listener);
-    return function cleanup() {
-      player.stop(true);
-      player.removeEventListener(SoundPlayer.EVENT_STATE_CHANGE, listener);
-    };
-  }, []);
-
-  return {
-    isBuffering,
-    isPlaying,
-    volume,
-    setVolume,
-    play: () => player?.play(),
-    pause: () => player?.pause(false),
-  };
 }
