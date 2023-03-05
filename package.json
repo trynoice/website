@@ -19,6 +19,7 @@
     "@fontsource/poppins": "^4.5.10",
     "@fontsource/urbanist": "^4.5.17",
     "@mdx-js/react": "^2.3.0",
+    "@rehooks/local-storage": "^2.4.4",
     "@trynoice/january": "github:trynoice/january#main",
     "framer-motion": "^10.0.1",
     "gatsby": "^5.7.0",
@@ -36,8 +37,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "sass": "^1.58.3",
-    "universal-cookie": "^4.0.4"
+    "sass": "^1.58.3"
   },
   "devDependencies": {
     "@types/gtag.js": "^0.0.12",

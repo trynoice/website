@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Link as GatsbyLink } from "gatsby";
 import { ReactElement, useEffect, useState } from "react";
-import Cookies from "universal-cookie";
+import { useLocalStorage } from "@rehooks/local-storage";
 
 enum AnalyticsConsentStatus {
   granted = "granted",
@@ -17,13 +17,14 @@ enum AnalyticsConsentStatus {
 }
 
 export default function Analytics(): ReactElement {
-  const consentCookieName = "analytics-consent";
   const [isConsentVisible, setConsentVisible] = useState(false);
-  const cookies = new Cookies();
+  const [consentStatus, setConsentStatus] =
+    useLocalStorage<AnalyticsConsentStatus | null>("analytics-consent", null);
 
   useEffect(() => {
-    const consentStatus = cookies.get(consentCookieName);
-    setConsentVisible(!consentStatus);
+    // using extra state to prevent a flash of consent on every page load
+    // regardless of its status.
+    setConsentVisible(consentStatus == null);
 
     const scriptElementId = "gtag.js";
     if (
@@ -41,18 +42,13 @@ export default function Analytics(): ReactElement {
       script.async = true;
       document.body.appendChild(script);
     }
-  });
-
-  function setConsentCookie(value: AnalyticsConsentStatus) {
-    cookies.set(consentCookieName, value, { maxAge: 3 * 30 * 24 * 60 * 60 });
-    setConsentVisible(false);
-  }
+  }, [consentStatus]);
 
   return (
     <AnalyticsConsent
       isOpen={isConsentVisible}
-      onDenied={() => setConsentCookie(AnalyticsConsentStatus.denied)}
-      onGranted={() => setConsentCookie(AnalyticsConsentStatus.granted)}
+      onDenied={() => setConsentStatus(AnalyticsConsentStatus.denied)}
+      onGranted={() => setConsentStatus(AnalyticsConsentStatus.granted)}
     />
   );
 }
