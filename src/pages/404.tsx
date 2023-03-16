@@ -1,9 +1,9 @@
 import {
   Button,
-  HStack,
   Image,
   Link as ChakraLink,
   Spacer,
+  Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -55,7 +55,7 @@ export default function NotFound(): ReactElement {
           sounds. From the sounds of nature to the hum of a city, there's
           something for everyone.
         </Text>
-        <HStack spacing={4}>
+        <Stack direction={{ base: "column", sm: "row" }} spacing={4}>
           <Button
             as={ChakraLink}
             to={site!.siteMetadata.googlePlayUrl}
@@ -67,7 +67,7 @@ export default function NotFound(): ReactElement {
           <Button as={GatsbyLink} to={"/"} leftIcon={<FaHome />}>
             Return to Home
           </Button>
-        </HStack>
+        </Stack>
       </VStack>
       <Spacer />
       <Footer />
