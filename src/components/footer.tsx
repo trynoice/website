@@ -21,8 +21,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import AppIcon from "../assets/app-icon";
-import FDroidBadge from "./f-droid-badge";
-import GooglePlayBadge from "./google-play-badge";
+import { FDroidBadge, GooglePlayBadge } from "./app-badges";
 
 export default function Footer() {
   const fgColor = "gray.300";
@@ -87,8 +86,10 @@ export default function Footer() {
               brandColor={"gray.50"}
             />
           </HStack>
-          <GooglePlayBadge />
-          <FDroidBadge />
+          <VStack maxW={44} spacing={4}>
+            <GooglePlayBadge />
+            <FDroidBadge />
+          </VStack>
         </VStack>
 
         <VStack align={"flex-start"} spacing={3}>

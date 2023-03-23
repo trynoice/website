@@ -19,7 +19,6 @@ export const createSchemaCustomization: GatsbyNode["createSchemaCustomization"] 
         twitter: String!
         siteUrl: String!
         googlePlayUrl: String!
-        fDroidUrl: String!
       }
 
       type Mdx implements Node {

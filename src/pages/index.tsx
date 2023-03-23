@@ -20,6 +20,8 @@ import {
   useBreakpointValue,
   useToken,
   VStack,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import {
   ConsoleLogger,
@@ -71,10 +73,13 @@ import FishBowlIllustration from "../assets/fish-bowl.svg";
 import MeditatingIllustration from "../assets/meditating.svg";
 import NatureOnScreenIllustration from "../assets/nature-on-screen.svg";
 import Analytics from "../components/analytics";
+import {
+  FDroidBadge,
+  GooglePlayBadge,
+  WebBrowserBadge,
+} from "../components/app-badges";
 import BasicPageHead from "../components/basic-page-head";
-import FDroidBadge from "../components/f-droid-badge";
 import Footer from "../components/footer";
-import GooglePlayBadge from "../components/google-play-badge";
 import NavBar from "../components/nav-bar";
 
 export function Head(): ReactElement {
@@ -194,10 +199,17 @@ function Hero(): ReactElement {
             .
           </Text>
         </VStack>
-        <HStack spacing={6}>
-          <GooglePlayBadge />
-          <FDroidBadge />
-        </HStack>
+        <Wrap spacing={4} justify={{ base: "center", lg: "start" }}>
+          <WrapItem>
+            <GooglePlayBadge />
+          </WrapItem>
+          <WrapItem>
+            <FDroidBadge />
+          </WrapItem>
+          <WrapItem>
+            <WebBrowserBadge />
+          </WrapItem>
+        </Wrap>
       </VStack>
     </Stack>
   );
@@ -290,12 +302,11 @@ function KeyFeatures(): ReactElement {
       />
 
       <VStack spacing={8} align={{ base: "center", lg: "start" }}>
-        <Heading
-          size={"xl"}
-          color={"indigo.400"}
-          textAlign={{ base: "center", lg: "left" }}
-        >
-          Dive Into a World of Natural Ambience
+        <Heading size={"xl"} textAlign={{ base: "center", lg: "left" }}>
+          Dive Into a{" "}
+          <Text as={"span"} color={"indigo.400"}>
+            World of Natural Ambience
+          </Text>
         </Heading>
 
         <Text textAlign={{ base: "center", lg: "left" }}>
@@ -618,7 +629,11 @@ function Pricing(props: PricingProps): ReactElement {
       lineHeight={"tall"}
     >
       <Heading>
-        Find the Right Plan for{" "}
+        Find the{" "}
+        <Text as={"span"} color={"pink.500"}>
+          Right Plan
+        </Text>{" "}
+        for{" "}
         <Text as={"span"} color={"pink.500"}>
           Yourself
         </Text>
