@@ -31,7 +31,7 @@ import {
 import {
   SoundPlayerManagerProvider,
   useSoundPlayer,
-  useSoundPlayerManagerFadeConfig,
+  useSoundPlayerManagerConfig,
 } from "@trynoice/january/react";
 import { graphql, useStaticQuery } from "gatsby";
 import LocaleCurrency from "locale-currency";
@@ -392,7 +392,7 @@ function SoundLibraryShowcase(): ReactElement {
             value={volume}
             onChange={setVolume}
           >
-            <SliderTrack>
+            <SliderTrack bg={"blackAlpha.300"}>
               <SliderFilledTrack />
             </SliderTrack>
             <SliderThumb boxSize={5} color={"orange.600"}>
@@ -410,9 +410,7 @@ function SoundLibraryShowcase(): ReactElement {
     );
   }
 
-  const { setFadeInSeconds, setFadeOutSeconds } =
-    useSoundPlayerManagerFadeConfig();
-
+  const { setFadeInSeconds, setFadeOutSeconds } = useSoundPlayerManagerConfig();
   useEffect(() => {
     setFadeInSeconds(2);
     setFadeOutSeconds(2);
