@@ -647,17 +647,9 @@ function Pricing(props: PricingProps): ReactElement {
         pricingInfo={"Free Forever!"}
       >
         <PricingTierFeature icon={TbPlaylist} title={"Rich Sound Library"}>
-          Find the perfect background noise for any situation, from soothing
-          seashore to peaceful chirping crickets - with{" "}
-          {props.soundLibraryInfo.freeSoundCount} free sounds.
-        </PricingTierFeature>
-
-        <PricingTierFeature
-          icon={TbAdjustments}
-          title={"Craft Perfect Soundscapes"}
-        >
           Mix and match sounds to create unique soundscapes tailored to your
-          needs for enhancing focus, relaxation, or sleep.
+          needs for enhancing focus, relaxation, or sleep - with{" "}
+          {props.soundLibraryInfo.freeSoundCount} free sounds.
         </PricingTierFeature>
 
         <PricingTierFeature
@@ -671,6 +663,14 @@ function Pricing(props: PricingProps): ReactElement {
         <PricingTierFeature icon={TbVolume2} title={"Standard Audio"}>
           Listen to your preferred sounds with ease, as our base quality audio
           starts at 128 kbps in MP3 format.
+        </PricingTierFeature>
+
+        <PricingTierFeature
+          icon={TbCast}
+          title={"Google Cast support on Android"}
+        >
+          Seamlessly stream your favorite sounds to any Google Cast (Chromecast)
+          supported device.
         </PricingTierFeature>
 
         <PricingTierFeature icon={TbAlarm} title={"Alarm Clock on Android"}>
