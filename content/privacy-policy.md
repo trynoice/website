@@ -9,8 +9,8 @@ This Privacy Policy describes how **Noice: Natural calming noise** (Noice, "we",
 from its users. The policy applies to all of our users and the services we
 provide. Our commitment to protecting user privacy is at the forefront of our
 operations, and we strive to ensure that all data is collected and used as
-described by this policy. By using Noice, you agree to the collection and use of
-this information as per this policy.
+described by this policy. By using Noice, you allow us to collect and use this
+information as per this policy.
 
 ## What data do we collect, and how do we use it
 
@@ -49,13 +49,13 @@ Users of **Stripe** should refer to the [Privacy Policy of
 Stripe](https://stripe.com/privacy). Please note that we share your email
 address with Stripe when you use Stripe Billing for subscriptions.
 
-We collect and process specific data that these services share with us, such as
-your plan type and price, subscription start date, billing cycle and payment
-status. We use this information to grant you access to Noice Premium and display
-a billing dashboard in our app.
+We collect and process specific data these services provide us, such as your
+plan type and price, subscription start date, billing cycle and payment status.
+We use this information to grant you access to Noice Premium and display a
+billing dashboard in our app.
 
 > We publish two variants of our Android app, Free and Full. The Free variant
-> builds on free and open-source software and relies on Stripe Billing for
+> builds on other free and open-source software and relies on Stripe Billing for
 > subscriptions. The Full variant additionally includes proprietary software and
 > uses Google Play In-App Purchases. We publish the Free variant on
 > [F-Droid](https://f-droid.org/app/com.github.ashutoshgngwr.noice) and the Full
@@ -65,18 +65,18 @@ a billing dashboard in our app.
 ### Software Usage, Performance and Behaviour Data
 
 When you use our software and services, we collect and process its usage,
-performance and behaviour data, but only with your explicit consent. We display
-consent notices in our software on the first launch asking for your approval.
-[Firebase Analytics and
-Crashlytics](https://firebase.google.com/products-engage), and [Google
-Analytics](https://marketingplatform.google.com/about/analytics/) services
-collect and process this data on our behalf. We do not share this information
-with third parties except when required by the law.
+performance and behaviour data with your explicit consent. We display consent
+notices in our software on the first launch asking for your approval. [Firebase
+Analytics and Crashlytics](https://firebase.google.com/products-engage), and
+[Google Analytics](https://marketingplatform.google.com/about/analytics/)
+services collect and process this data on our behalf. We do not share this
+information with third parties except when required by the law.
 
-To keep this data anonymised, we generate and store a random token on your
-device. We use this token to aggregate your data, and we never associate this
-token or this data with your personal information. On the browser, we store this
-token using cookies, and on the Android app, we use the app's private storage.
+We generate and store a random token on your device to keep your data
+anonymised. We use this token to aggregate your data, and we never associate
+this token or this data with your personal information. On the browser, we store
+this token using cookies, and on the Android app, we use the app's private
+storage.
 
 **Usage Data** includes your anonymised IP address to understand our general
 demography. It also contains the time you spent using the software, your user
@@ -89,9 +89,8 @@ of its use, and generated error messages. We use this information to diagnose
 and resolve technical issues and improve the performance and stability of the
 software.
 
-> The Free Android app variant is incapable of collecting software usage,
-> performance and behaviour data and thus doesn't show a consent message on its
-> first launch.
+> The Free Android app variant can not collect software usage, performance and
+> behaviour data and thus doesn't show a consent message on its first launch.
 
 ### Server Access and Error Logs
 
@@ -103,8 +102,9 @@ older than 30 days.
 ## Deleting Your Data
 
 You can delete your Noice account and its associated data by going to the
-account section of the app. However, we retain your data for up to 14 days on
-our servers after account deletion, and the following exceptions apply.
+account section of the app and selecting the Delete Account option. However, we
+retain your data for up to 14 days on our servers after account deletion, and
+the following exceptions apply.
 
 - We permanently retain your Noice Premium purchase history and billing data.
   However, we strip your personal information from this data.
@@ -151,6 +151,10 @@ section.
 
 - Restructure policy for more clarification.
 - Add Google Analytics as a third-party service provider.
+
+#### April 24, 2023
+
+- Update policy language.
 
 If you have any questions or concerns regarding this policy, contact us at
 [trynoiceapp@gmail.com](mailto:trynoiceapp@gmail.com).
