@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Privacy Policy
-updatedAt: 2023-02-01T21:55:00+05:30
+updatedAt: 2023-04-24T20:46:24+0530
 ---
 
 This Privacy Policy describes how **Noice: Natural calming noise** (Noice, "we",
