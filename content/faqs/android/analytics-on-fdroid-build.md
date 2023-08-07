@@ -14,15 +14,19 @@ Developers can further scrutinise this process by inspecting the following
 sections of the source code. _The code permalinks are pinned to a specific
 commit. Please find their latest versions._
 
-1. [Analytics Provider implementation for the free APK
-   variant](https://github.com/trynoice/android-app/blob/c44e3250392fb6463deb6b76e577c6f1c9679d3d/app/src/main/java/com/github/trynoice/android-app/provider/AnalyticsProvider.kt#L55-L63)
-2. [Analytics Provider implementation for the full APK
-   variant](https://github.com/trynoice/android-app/blob/main/app/src/full/java/com/github/trynoice/android-app/provider/RealAnalyticsProvider.kt)
-3. [Android Manifest for full APK
+1. [Analytics Provider
+   interface](https://github.com/trynoice/android-app/blob/29f78df24c4ce2939c7b633a5fb231cef19758ed/app/src/main/java/com/github/ashutoshgngwr/noice/metrics/AnalyticsProvider.kt).
+2. [Analytics Provider
+   implementation](https://github.com/trynoice/android-app/blob/29f78df24c4ce2939c7b633a5fb231cef19758ed/app/src/free/java/com/github/ashutoshgngwr/noice/di/AnalyticsProviderModule.kt)
+   used in the free APK variant.
+3. [Analytics Provider
+   implementation](https://github.com/trynoice/android-app/blob/29f78df24c4ce2939c7b633a5fb231cef19758ed/app/src/full/java/com/github/ashutoshgngwr/noice/di/AnalyticsProviderModule.kt)
+   used in the full APK variant.
+4. [Android Manifest for full APK
    variant](https://github.com/trynoice/android-app/blob/main/app/src/full/AndroidManifest.xml)
    that disables analytics data sharing by default. It also permanently disables
    the collection of Advertising IDs and Secure Settings Android IDs.
-4. [Consent
-   Notice](https://github.com/trynoice/android-app/blob/0b8ed7b0ef0c0de5068259dfee79f81f553a6f06/app/src/main/java/com/github/trynoice/android-app/activity/MainActivity.kt#L77-L102)
+5. [Consent
+   Notice](https://github.com/trynoice/android-app/blob/29f78df24c4ce2939c7b633a5fb231cef19758ed/app/src/main/java/com/github/ashutoshgngwr/noice/activity/MainActivity.kt#L128-L142)
    users see on the first launch that only enables data sharing if you click
    "Accept".
