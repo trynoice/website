@@ -111,6 +111,7 @@ function AnalyticsConsent(props: AnalyticsConsentProps): ReactElement {
             px={4}
             rounded={"full"}
             colorScheme={"primary"}
+            variant={"outline"}
             onClick={() => props.onGranted()}
           >
             Accept
