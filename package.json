@@ -21,7 +21,7 @@
     "@mdx-js/react": "^2.3.0",
     "@rehooks/local-storage": "^2.4.5",
     "@trynoice/january": "github:trynoice/january#main",
-    "framer-motion": "^10.16.16",
+    "framer-motion": "^10.17.9",
     "gatsby": "^5.13.1",
     "gatsby-plugin-canonical-urls": "^5.13.0",
     "gatsby-plugin-image": "^3.13.0",
@@ -37,13 +37,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
-    "sass": "^1.69.6"
+    "sass": "^1.69.7"
   },
   "devDependencies": {
     "@types/gtag.js": "^0.0.18",
     "@types/mdx-js__react": "^1.5.8",
     "@types/node": "^20.10.6",
-    "@types/react": "^18.2.46",
+    "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "prettier": "^3.1.1",
     "typescript": "^5.3.3"
